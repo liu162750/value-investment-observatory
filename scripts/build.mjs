@@ -1,0 +1,9 @@
+import {mkdirSync,copyFileSync,readFileSync,writeFileSync} from 'node:fs';
+mkdirSync('dist/server',{recursive:true});
+const snapshot=JSON.parse(readFileSync('worker/snapshot.json','utf8'));
+const accounts=JSON.parse(process.env.SERVER_ACCOUNTS_JSON || '[]');const backend=await import('../worker/dashboard.js?build='+Date.now());
+const accountSource=readFileSync('worker/dashboard.js','utf8').replace('const accounts = [];','const accounts = '+JSON.stringify(accounts)+';');
+const privateModule=await import('data:text/javascript;base64,'+Buffer.from(accountSource).toString('base64'));snapshot.accounts=privateModule.publicAccounts(snapshot.stocks);
+const source=readFileSync('worker/dashboard.js','utf8').replace('const initialSnapshot = null;', 'const initialSnapshot = '+JSON.stringify(snapshot)+';').replace('const accounts = [];','const accounts = '+JSON.stringify(accounts)+';').replace('const page = "__PAGE__";', 'const page = '+JSON.stringify(readFileSync('worker/page.html','utf8'))+';');
+writeFileSync('dist/server/index.js',source);
+console.log('Worker build complete');
