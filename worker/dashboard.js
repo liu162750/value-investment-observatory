@@ -31,7 +31,14 @@ async function mediaNews(stock){const rss=await get('https://news.google.com/rss
 
 async function amounts(secid){const d=await get('https://push2his.eastmoney.com/api/qt/stock/kline/get?secid='+secid+'&klt=101&fqt=0&lmt=30&end=20500101&fields1=f1,f2,f3,f4,f5,f6&fields2=f51,f52,f53,f54,f55,f56,f57');if(!d.data?.klines?.length)throw Error('成交额未返回');return d.data.klines.map(r=>{const a=r.split(',');return {date:a[0],amount:+a[6]};});}
 function amountSummary(sh,sz){const matched=sh.map(r=>({date:r.date,amount:r.amount+(sz.find(s=>s.date===r.date)?.amount||NaN)})).filter(r=>Number.isFinite(r.amount)&&r.amount>0);const rows=matched.map((r,i)=>{const prev=matched[i-1],base=matched.slice(Math.max(0,i-20),i),avg=base.length===20?base.reduce((v,s)=>v+s.amount,0)/20:null;return {...r,change:prev?(r.amount/prev.amount-1)*100:null,ratio:avg?r.amount/avg:null};});return {rows:rows.slice(-5),source:'东方财富指数日线',scope:'上证综指＋深证综指成交额（含B股，不含北交所）'};}
-async function marketImportantNews(){const rows=await mediaNews({name:'A股'});return rows.filter(n=>/证监会|国务院|央行|中国人民银行|财政部|交易所/.test(n.title)&&/降准|降息|印花税|重大|新规|改革|资本市场|暂停|重组|退市|政策/.test(n.title)).slice(0,3);}
+async function marketImportantNews(){
+ const results=await Promise.allSettled(['A股','资本市场','中国股市'].map(name=>mediaNews({name})));
+ if(results.every(r=>r.status==='rejected'))throw Error('A股热点新闻源不可用');
+ const seen=new Set();return results.flatMap(r=>r.status==='fulfilled'?r.value:[]).filter(n=>{
+  if(!/证监会|国务院|央行|中国人民银行|财政部|交易所|降准|降息|印花税|新规|改革|重大|重组|退市|政策|暴涨|暴跌|大涨|大跌|突破|成交|万亿|历史新高|监管|IPO|再融资/.test(n.title))return false;
+  const key=n.url||n.title;if(seen.has(key))return false;seen.add(key);return true;
+ }).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,20);
+}
 
 let goldCache=null,goldChecked=0;
 function parseGold(payload){
