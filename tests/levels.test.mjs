@@ -10,8 +10,16 @@ for(const stock of stocks){
   assert.equal(done.at(-1).date,'2026-09-30');
   const tech=technical(done),levels=swingCandidates(done,tech,stock.levels);
   assert.deepEqual(levels.slice(0,2),stock.levels.slice(0,2),'Preserve confirmed baseline buys: '+stock.symbol);
-  if(levels[2]){assert(levels[2][0]>=levels[0][1]*1.08);assert(levels[2][0]-levels[0][1]>=tech.atr*3);}
+  if(levels[2]){assert(levels[2][0]>=levels[0][1]*1.08);assert(levels[2][0]-levels[0][1]>=tech.atr);}
   if(levels[3])assert(levels[3][0]-levels[2][1]>=tech.atr);
+  if(stock.symbol==='sz002156')assert.deepEqual(levels[2],[65.02,66.54],'Do not skip recent Tongfu resistance because of the former 3ATR floor');
+  if(levels[2]){
+   const pivots=[];
+   for(let i=Math.max(2,done.length-60);i<done.length-2;i++)if(done.slice(i-2,i+3).every(r=>r.high<=done[i].high)&&done[i].high>done.at(-1).close)pivots.push(done[i].high);
+   const floor=Math.max(stock.levels[0][1]*1.08,stock.levels[0][1]+tech.atr);
+   const nearest=Math.min(...pivots.filter(p=>Math.floor((p-tech.atr*.25)*100)/100>=floor));
+   assert.equal(levels[2][0],Math.floor((nearest-tech.atr*.25)*100)/100,'Use nearest qualified recent resistance for every stock');
+  }
   assert.deepEqual(levels,swingCandidates(completedDailyRows(rows.map(r=>r.date==='2026-10-08'?{...r,close:r.close*2,high:r.high*2}:r),at(time)),tech,stock.levels),'Intraday movement must not change tiers');
  }
  const afterClose=completedDailyRows(rows,at('15:05:00'));
