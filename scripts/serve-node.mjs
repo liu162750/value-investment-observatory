@@ -17,4 +17,4 @@ createServer(async(req,res)=>{
  }catch(error){console.error('Request failed:',error.message);res.writeHead(500);res.end('Request failed');}
 }).listen(port,'0.0.0.0',()=>console.log('Dashboard server ready'));
 
-goldDashboard().then(g=>console.log('Gold source check:',JSON.stringify({price:g.price,quoteTime:g.quoteTime||null,levelDate:g.levelDate||g.date,quoteError:g.quoteError,source:g.source}))).catch(e=>console.warn('Gold source check failed:',e.message));
+goldDashboard().then(g=>console.log('Gold source check:',JSON.stringify({price:g.price,change:g.change,previousClose:g.previousClose,quoteTime:g.quoteTime||null,levelDate:g.levelDate||g.date,quoteError:g.quoteError,source:g.source}))).catch(e=>console.warn('Gold source check failed:',e.message));
