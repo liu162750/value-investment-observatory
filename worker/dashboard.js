@@ -92,13 +92,21 @@ function parseGoldAlternative(payload,now=Date.now()){
  if(!points.length)throw Error('备用黄金无有效已发生报价');const last=points.at(-1),previousClose=+data.preClose;
  return {price:last.price,time:last.time,previousClose:Number.isFinite(previousClose)&&previousClose>0?previousClose:null,source:'东方财富上金所Au99.99分时（备用）',sourceUrl:'https://quote.eastmoney.com/globalfuture/AU9999.html'};
 }
+function parseGoldSina(raw,now=Date.now()){
+ const contract=raw.match(/hq_str_SGE_AU9999="([^"]*)"/)?.[1]?.split(',');
+ const row=raw.match(/hq_str_gds_AU9999="([^"]*)"/)?.[1]?.split(',');
+ if(contract?.[2]!=='Au99.99'||!row||row.length<14)throw Error('新浪黄金品种未确认');
+ const price=+row[0],previousClose=+row[7],time=row[12]+' '+row[6],stamp=Date.parse(time.replace(' ','T')+'+08:00');
+ if(!/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(time)||!Number.isFinite(stamp)||stamp>now||!Number.isFinite(price)||price<=0||!Number.isFinite(previousClose)||previousClose<=0)throw Error('新浪黄金价格或时间未核验');
+ return {price,previousClose,time,source:'新浪财经上金所Au99.99报价（备用）',sourceUrl:'https://finance.sina.com.cn/futures/quotes/AU9999.shtml'};
+}
 async function goldQuote(){
  if(goldQuoteCache&&Date.now()-goldQuoteChecked<120000)return goldQuoteCache;
  if(goldQuotePending)return goldQuotePending;
  goldQuotePending=(async()=>{
   let quote;
   try{const r=await fetch('https://www.sge.com.cn/graph/quotations?instid=Au99.99',{headers:{'Referer':'https://www.sge.com.cn/','User-Agent':'Mozilla/5.0'},signal:AbortSignal.timeout(8000)});if(!r.ok)throw Error('上金所HTTP '+r.status);quote=parseGoldQuote(await r.json());}
-  catch(error){console.warn('Gold primary quote unavailable:',error.message);const r=await fetch('https://push2his.eastmoney.com/api/qt/stock/trends2/get?secid=118.AU9999&fields1=f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11&fields2=f51,f52,f53,f54,f55,f56,f57,f58&ndays=1&iscr=0',{signal:AbortSignal.timeout(8000),headers:{'User-Agent':'Mozilla/5.0'}});if(!r.ok)throw Error('备用黄金HTTP '+r.status);quote=parseGoldAlternative(await r.json());}
+  catch(error){console.warn('Gold primary quote unavailable:',error.message);try{const r=await fetch('https://push2his.eastmoney.com/api/qt/stock/trends2/get?secid=118.AU9999&fields1=f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11&fields2=f51,f52,f53,f54,f55,f56,f57,f58&ndays=1&iscr=0',{signal:AbortSignal.timeout(8000),headers:{'User-Agent':'Mozilla/5.0'}});if(!r.ok)throw Error('备用黄金HTTP '+r.status);quote=parseGoldAlternative(await r.json());}catch(error){console.warn('Gold alternative quote unavailable:',error.message);const r=await fetch('https://hq.sinajs.cn/list=gds_AU9999,SGE_AU9999',{headers:{'Referer':'https://finance.sina.com.cn/','User-Agent':'Mozilla/5.0'},signal:AbortSignal.timeout(8000)});if(!r.ok)throw Error('新浪黄金HTTP '+r.status);quote=parseGoldSina(new TextDecoder('gbk').decode(await r.arrayBuffer()));}}
   goldQuoteCache=quote;goldQuoteChecked=Date.now();return quote;
  })();try{return await goldQuotePending;}finally{goldQuotePending=null;}
 }
@@ -148,4 +156,4 @@ async function accessGate(req,env){if(env.PHONE_GATE_ENABLED!=='1')return null;c
 
 const page = "__PAGE__";
 export default {async fetch(request,env,ctx){const gate=await accessGate(request,env||{});if(gate)return gate;const url=new URL(request.url);if(request.method!=='GET')return json({error:'仅支持读取'},405);if(url.pathname==='/api/gold'){try{return json(await goldDashboard());}catch{return json({error:'黄金来源暂不可用'},503);}}if(url.pathname==='/data/dashboard.json'||url.pathname==='/api/dashboard'){try{const data=await dashboard();if(initialSnapshot?.us){data.us=usAssets.map(([symbol,name])=>data.us.find(s=>s.symbol===symbol)||{...initialSnapshot.us.find(s=>s.symbol===symbol),symbol,name,stale:true});}if(!data.turnover&&initialSnapshot?.turnover)data.turnover={...initialSnapshot.turnover,stale:true};if(!data.gold&&initialSnapshot?.gold)data.gold={...initialSnapshot.gold,stale:true};data.accounts=publicAccounts(data.stocks);const usable=data.stocks.some(s=>Number.isFinite(s.quote.price));if(!usable&&initialSnapshot)return json({...initialSnapshot,gold:data.gold||goldLatest||initialSnapshot.gold,stale:true,updateError:'线上来源暂不可用，显示最近核验数据'});return json(data);}catch(error){console.error('dashboard update failed',error?.message);if(initialSnapshot)return json({...initialSnapshot,gold:goldLatest||initialSnapshot.gold,stale:true,updateError:'更新失败，显示最近核验数据'});return json({error:'行情源暂不可用'},503);}}if(url.pathname!=='/')return new Response('Not found',{status:404});const seed=initialSnapshot?'<script>window.initialDashboard='+JSON.stringify({...initialSnapshot,gold:goldLatest||initialSnapshot.gold,stale:true}).replaceAll('<','\u003c')+';</script>':'';return new Response(page.replace('<script>',seed+'<script>'),{headers:{'content-type':'text/html; charset=utf-8','x-content-type-options':'nosniff','cache-control':'no-store'}});}};
-export {normalizeAnnouncements,parseGold,parseGoldQuote,parseGoldAlternative,goldReferenceClose,goldDashboard,accessGate,digest,publicAccounts,stocks,distance,technical,candidates,swingCandidates,completedDailyRows,parseQuotes};
+export {normalizeAnnouncements,parseGold,parseGoldQuote,parseGoldAlternative,parseGoldSina,goldReferenceClose,goldDashboard,accessGate,digest,publicAccounts,stocks,distance,technical,candidates,swingCandidates,completedDailyRows,parseQuotes};

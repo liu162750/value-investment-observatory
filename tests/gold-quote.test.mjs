@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {parseGoldQuote,parseGoldAlternative,goldReferenceClose,goldDashboard} from '../worker/dashboard.js';
+import {parseGoldQuote,parseGoldAlternative,parseGoldSina,goldReferenceClose,goldDashboard} from '../worker/dashboard.js';
 const now=Date.parse('2026-10-08T10:05:00+08:00');
 const quote=JSON.parse(readFileSync(new URL('./fixtures/gold-quote.json',import.meta.url),'utf8'));
 const actual=parseGoldQuote(quote,now);
@@ -31,3 +31,5 @@ console.log('PASS: gold current quote, future placeholders, night date rollover,
 const alt=JSON.parse(readFileSync(new URL('./fixtures/gold-alternative.json',import.meta.url),'utf8'));const alternate=parseGoldAlternative(alt,Date.parse('2026-10-08T11:00:30+08:00'));assert.equal(alternate.price,893.5);assert.equal(alternate.time,'2026-10-08 11:00:00');assert.equal(alternate.previousClose,907.32);assert.throws(()=>parseGoldAlternative({...alt,data:{...alt.data,code:'AUTD'}},now));
 
 const dayModel={rows:[{date:'2026-09-30',close:907.32},{date:'2026-10-08',close:893.5}]};assert.equal(goldReferenceClose(dayModel,{time:'2026-10-08 16:05:00'}),907.32);assert.equal(goldReferenceClose(dayModel,{time:'2026-10-08 21:00:00'}),893.5);assert.equal(goldReferenceClose(dayModel,{time:'2026-10-08 10:00:00',previousClose:910}),910);
+
+const sina=readFileSync(new URL('./fixtures/gold-sina.txt',import.meta.url),'utf8'),sinaQuote=parseGoldSina(sina,Date.parse('2026-10-08T12:00:00+08:00'));assert(sinaQuote.price>0);assert.equal(sinaQuote.previousClose,907.32);assert(sinaQuote.price<sinaQuote.previousClose);assert.throws(()=>parseGoldSina(sina.replace('Au99.99','Au(T+D)'),Date.parse('2026-10-08T12:00:00+08:00')));
