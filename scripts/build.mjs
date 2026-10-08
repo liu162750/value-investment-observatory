@@ -1,3 +1,4 @@
+import '../tests/gold-quote.test.mjs';
 import '../tests/monitor.test.mjs';
 import '../tests/account-day.test.mjs';
 import '../tests/levels.test.mjs';
