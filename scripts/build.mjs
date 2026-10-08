@@ -1,3 +1,4 @@
+import '../tests/monitor.test.mjs';
 import '../tests/account-day.test.mjs';
 import '../tests/levels.test.mjs';
 import {mkdirSync,copyFileSync,readFileSync,writeFileSync} from 'node:fs';
