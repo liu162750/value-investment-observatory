@@ -1,46 +1,74 @@
 {
-  "reportPeriod": "2026-09-30",
-  "checkedAt": "2026-10-08",
-  "events": [
-    {
-      "symbol": "sz002156",
-      "name": "通富微电",
-      "title": "三季报预约披露",
-      "date": "2026-10-28",
-      "actualDate": null,
-      "source": "东方财富预约披露汇总",
-      "sourceUrl": "https://data.eastmoney.com/bbsj/202609/yysj.html",
-      "type": "earnings"
-    },
-    {
-      "symbol": "sz002463",
-      "name": "沪电股份",
-      "title": "三季报预约披露",
-      "date": "2026-10-28",
-      "actualDate": null,
-      "source": "东方财富预约披露汇总",
-      "sourceUrl": "https://data.eastmoney.com/bbsj/202609/yysj.html",
-      "type": "earnings"
-    },
-    {
-      "symbol": "sh600312",
-      "name": "平高电气",
-      "title": "三季报预约披露",
-      "date": "2026-10-22",
-      "actualDate": null,
-      "source": "东方财富预约披露汇总",
-      "sourceUrl": "https://data.eastmoney.com/bbsj/202609/yysj.html",
-      "type": "earnings"
-    },
-    {
-      "symbol": "sh601138",
-      "name": "工业富联",
-      "title": "三季报预约披露",
-      "date": "2026-10-30",
-      "actualDate": null,
-      "source": "东方财富预约披露汇总",
-      "sourceUrl": "https://data.eastmoney.com/bbsj/202609/yysj.html",
-      "type": "earnings"
-    }
-  ]
+    "reportPeriod":  "2026-09-30",
+    "checkedAt":  "2026-10-09T07:32:19+08:00",
+    "events":  [
+                   {
+                       "symbol":  "sz002156",
+                       "name":  "通富微电",
+                       "title":  "三季报预约披露",
+                       "date":  "2026-10-28",
+                       "actualDate":  null,
+                       "source":  "东方财富预约披露汇总",
+                       "sourceUrl":  "https://data.eastmoney.com/bbsj/202609/yysj.html",
+                       "type":  "earnings"
+                   },
+                   {
+                       "symbol":  "sz002463",
+                       "name":  "沪电股份",
+                       "title":  "三季报预约披露",
+                       "date":  "2026-10-28",
+                       "actualDate":  null,
+                       "source":  "东方财富预约披露汇总",
+                       "sourceUrl":  "https://data.eastmoney.com/bbsj/202609/yysj.html",
+                       "type":  "earnings"
+                   },
+                   {
+                       "symbol":  "sh600312",
+                       "name":  "平高电气",
+                       "title":  "三季报预约披露",
+                       "date":  "2026-10-22",
+                       "actualDate":  null,
+                       "source":  "东方财富预约披露汇总",
+                       "sourceUrl":  "https://data.eastmoney.com/bbsj/202609/yysj.html",
+                       "type":  "earnings"
+                   },
+                   {
+                       "symbol":  "sh601138",
+                       "name":  "工业富联",
+                       "title":  "三季报预约披露",
+                       "date":  "2026-10-30",
+                       "actualDate":  null,
+                       "source":  "东方财富预约披露汇总",
+                       "sourceUrl":  "https://data.eastmoney.com/bbsj/202609/yysj.html",
+                       "type":  "earnings"
+                   },
+                   {
+                       "source":  "公司权益分派实施公告2026-039（东方财富存档原件）",
+                       "symbol":  "sh600312",
+                       "type":  "dividend",
+                       "announcementDate":  "2026-10-09",
+                       "date":  "2026-10-14",
+                       "publishedAt":  "2026-10-08T17:14:47+08:00",
+                       "announcementId":  "AN202610081830212364",
+                       "name":  "平高电气",
+                       "sourceUrl":  "https://pdf.dfcfw.com/pdf/H2_AN202610081830212364_1.pdf",
+                       "detectedAt":  "2026-10-08T18:23:49+08:00",
+                       "title":  "分红登记·每股0.242元含税",
+                       "actualDate":  null
+                   },
+                   {
+                       "source":  "公司权益分派实施公告2026-039（东方财富存档原件）",
+                       "symbol":  "sh600312",
+                       "type":  "dividend",
+                       "announcementDate":  "2026-10-09",
+                       "date":  "2026-10-15",
+                       "publishedAt":  "2026-10-08T17:14:47+08:00",
+                       "announcementId":  "AN202610081830212364",
+                       "name":  "平高电气",
+                       "sourceUrl":  "https://pdf.dfcfw.com/pdf/H2_AN202610081830212364_1.pdf",
+                       "detectedAt":  "2026-10-08T18:23:49+08:00",
+                       "title":  "除息及红利发放",
+                       "actualDate":  null
+                   }
+               ]
 }
