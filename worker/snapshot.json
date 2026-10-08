@@ -3687,22 +3687,10 @@
       "evidence": "2026半年报收入−5.64%、扣非利润+20.76%，经营现金流−6.89亿元。盈利改善，收入和现金回款仍需观察。",
       "report": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225483266.PDF",
       "levels": [
-        [
-          19.1,
-          19.4
-        ],
-        [
-          18.45,
-          18.75
-        ],
-        [
-          20.55,
-          20.85
-        ],
-        [
-          21.4,
-          21.7
-        ]
+        null,
+        null,
+        null,
+        null
       ],
       "rows": [
         {
@@ -4202,28 +4190,12 @@
         "volumeRatio": 1.7156645085364224
       },
       "levelDate": "2026-09-30",
-      "levelType": "沿用已讨论观察区",
+      "levelType": "宽间距档位待实时日线核验",
       "distances": [
-        {
-          "delta": -0.8900000000000006,
-          "pct": -4.386397240019717,
-          "inside": false
-        },
-        {
-          "delta": -1.5399999999999991,
-          "pct": -7.589945786101524,
-          "inside": false
-        },
-        {
-          "delta": 0.26000000000000156,
-          "pct": 1.2814194184327332,
-          "inside": false
-        },
-        {
-          "delta": 1.1099999999999994,
-          "pct": 5.4706752094627875,
-          "inside": false
-        }
+        null,
+        null,
+        null,
+        null
       ],
       "notices": [
         {
@@ -4297,22 +4269,10 @@
       "evidence": "2026半年报扣非利润+77.78%，经营现金流29.33亿元；非经常收益占净利过半。",
       "report": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-08-29/072fbc43-caef-4b31-bf0e-ee19d9fa0459.PDF",
       "levels": [
-        [
-          55.5,
-          57.1
-        ],
-        [
-          50.5,
-          52
-        ],
-        [
-          59.7,
-          61.3
-        ],
-        [
-          65.1,
-          66.7
-        ]
+        null,
+        null,
+        null,
+        null
       ],
       "rows": [
         {
@@ -4812,28 +4772,12 @@
         "volumeRatio": 1.1239747853803652
       },
       "levelDate": "2026-09-30",
-      "levelType": "沿用已讨论观察区",
+      "levelType": "宽间距档位待实时日线核验",
       "distances": [
-        {
-          "delta": 0,
-          "pct": 0,
-          "inside": true
-        },
-        {
-          "delta": -4.899999999999999,
-          "pct": -8.6115992970123,
-          "inside": false
-        },
-        {
-          "delta": 2.8000000000000043,
-          "pct": 4.920913884007037,
-          "inside": false
-        },
-        {
-          "delta": 8.199999999999996,
-          "pct": 14.411247803163437,
-          "inside": false
-        }
+        null,
+        null,
+        null,
+        null
       ],
       "notices": [
         {
@@ -4907,22 +4851,10 @@
       "evidence": "2026半年报收入+54.63%、扣非利润+96.99%，经营现金流73.91亿元。增长有经营证据；正常化盈利与合理估值仍待核验。",
       "report": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468066.PDF",
       "levels": [
-        [
-          57.3,
-          58.4
-        ],
-        [
-          53.8,
-          55
-        ],
-        [
-          59.8,
-          61
-        ],
-        [
-          64.4,
-          65.5
-        ]
+        null,
+        null,
+        null,
+        null
       ],
       "rows": [
         {
@@ -5422,28 +5354,12 @@
         "volumeRatio": 0.637749416864861
       },
       "levelDate": "2026-09-30",
-      "levelType": "沿用已讨论观察区",
+      "levelType": "宽间距档位待实时日线核验",
       "distances": [
-        {
-          "delta": 0,
-          "pct": 0,
-          "inside": true
-        },
-        {
-          "delta": -3.200000000000003,
-          "pct": -5.498281786941585,
-          "inside": false
-        },
-        {
-          "delta": 1.5999999999999943,
-          "pct": 2.7491408934707806,
-          "inside": false
-        },
-        {
-          "delta": 6.200000000000003,
-          "pct": 10.652920962199316,
-          "inside": false
-        }
+        null,
+        null,
+        null,
+        null
       ],
       "notices": [
         {
@@ -5517,22 +5433,10 @@
       "evidence": "2026半年报收入+61.17%、扣非利润+70.00%，经营现金流11.51亿元、同比−45.14%。增长较强，采购占款与扩产需要跟踪。",
       "report": "https://disc.static.szse.cn/disc/disk03/finalpage/2026-08-26/510ef2bf-102c-47af-aab9-ec715b88b306.PDF",
       "levels": [
-        [
-          110.7,
-          113.8
-        ],
-        [
-          102.6,
-          105.8
-        ],
-        [
-          118.6,
-          121.8
-        ],
-        [
-          128.4,
-          131.5
-        ]
+        null,
+        null,
+        null,
+        null
       ],
       "rows": [
         {
@@ -6032,28 +5936,12 @@
         "volumeRatio": 0.6668680841172829
       },
       "levelDate": "2026-09-30",
-      "levelType": "沿用已讨论观察区",
+      "levelType": "宽间距档位待实时日线核验",
       "distances": [
-        {
-          "delta": -2.1300000000000097,
-          "pct": -1.8373156214957382,
-          "inside": false
-        },
-        {
-          "delta": -10.13000000000001,
-          "pct": -8.738031570775476,
-          "inside": false
-        },
-        {
-          "delta": 2.6699999999999875,
-          "pct": 2.3031139480721015,
-          "inside": false
-        },
-        {
-          "delta": 12.469999999999999,
-          "pct": 10.75649098593979,
-          "inside": false
-        }
+        null,
+        null,
+        null,
+        null
       ],
       "notices": [
         {
