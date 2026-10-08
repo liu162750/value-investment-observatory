@@ -1,9 +1,10 @@
-import '../tests/events.test.mjs';
-import '../tests/position-alerts.test.mjs';
-import '../tests/gold-quote.test.mjs';
-import '../tests/monitor.test.mjs';
-import '../tests/account-day.test.mjs';
-import '../tests/levels.test.mjs';
+await import('../tests/events.test.mjs');
+await import('../tests/recovery.test.mjs');
+await import('../tests/position-alerts.test.mjs');
+await import('../tests/gold-quote.test.mjs');
+await import('../tests/monitor.test.mjs');
+await import('../tests/account-day.test.mjs');
+await import('../tests/levels.test.mjs');
 import {mkdirSync,copyFileSync,readFileSync,writeFileSync} from 'node:fs';
 mkdirSync('dist/server',{recursive:true});
 const events=JSON.parse(readFileSync('worker/event-calendar.json','utf8'));

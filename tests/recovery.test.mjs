@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const snapshot=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.meta.url),'utf8'));
+const source=readFileSync(new URL('../worker/dashboard.js',import.meta.url),'utf8').replace('const initialSnapshot = null;','const initialSnapshot = '+JSON.stringify(snapshot)+';');
+const {history,stocks,technical,swingCandidates,amountSummary}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const realFetch=globalThis.fetch,realNow=Date.now;let now=Date.parse('2026-10-08T11:40:00+08:00'),calls=0;
+try{
+ Date.now=()=>now;globalThis.fetch=async()=>{calls++;throw Error('Simulated outage');};
+ const fallback=await history(stocks[1].symbol);
+ assert.equal(calls,2,'A failed source must be retried');assert(fallback.length>=120);assert.equal(fallback.historyStale,true);
+ assert.deepEqual(swingCandidates([],null,stocks[1].levels).slice(0,2),stocks[1].levels.slice(0,2),'Outage cannot erase confirmed buys');
+ assert(swingCandidates(fallback,technical(fallback),stocks[1].levels,stocks[1].sellReference)[2]);
+ const rows=fallback.map(r=>[r.date,String(r.open),String(r.close),String(r.high),String(r.low),String(r.volume)]);
+ globalThis.fetch=async()=>{calls++;return new Response(JSON.stringify({data:{sz002156:{qfqday:rows}}}));};
+ const recovered=await history(stocks[1].symbol);assert.equal(calls,3,'Failure must not stop the next lookup');assert(!recovered.historyStale);
+ await history(stocks[1].symbol);assert.equal(calls,3,'Success is briefly cached');
+ now+=301000;globalThis.fetch=async()=>{calls++;throw Error('Second outage');};
+ const retained=await history(stocks[1].symbol);assert.equal(calls,5);assert.equal(retained.historyStale,true);assert.equal(retained.length,recovered.length);
+ globalThis.fetch=async()=>{calls++;return new Response(JSON.stringify({data:{sz002156:{qfqday:rows}}}));};
+ const before=calls;await Promise.all([history(stocks[1].symbol),history(stocks[1].symbol)]);assert.equal(calls,before+1,'Concurrent recovery requests are coalesced');
+ const amounts=[{date:'2026-09-30',amount:100},{date:'2026-10-08',amount:20},{date:'2026-10-09',amount:999}];assert.equal(amountSummary(amounts,amounts).rows.at(-1).date,'2026-09-30','Do not compare partial-day or future turnover with full days');
+}finally{globalThis.fetch=realFetch;Date.now=realNow;}
+const page=readFileSync(new URL('../worker/page.html',import.meta.url),'utf8');
+const helpers=page.slice(page.indexOf('function newerGold('),page.indexOf('let goldBusy=false;'));
+const merge=new Function(helpers+';return mergeDashboardData;')();
+const previous={gold:{quoteTime:'2026-10-08 11:42:00',price:894},stocks:[{symbol:'x',notices:[{title:'saved'}],mediaNews:[{title:'media'}]}],marketNews:[{title:'hot'}],importantEvents:{events:[]}};
+const merged=merge({gold:{quoteTime:'2026-10-08 11:40:00',price:893},stocks:[{symbol:'x',newsError:true,mediaError:true,notices:[],mediaNews:[]}],marketNewsError:true,marketNews:[]},previous);
+assert.equal(merged.gold.price,894);assert.equal(merged.stocks[0].notices[0].title,'saved');assert.equal(merged.marketNews[0].title,'hot');
+assert.deepEqual(merge({stocks:[{symbol:'x',notices:[],mediaNews:[]}],marketNews:[]},previous).stocks[0].notices,[],'Valid empty news response must replace old data');
+assert.equal(merge({gold:{quoteTime:'2026-10-08 11:43:00',price:895},stocks:[]},previous).gold.price,895);
+console.log('PASS: source retry, 120-day fallback, fixed buys, repeated recovery, concurrency, partial turnover, gold race and partial news failures');

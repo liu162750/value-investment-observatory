@@ -1,5 +1,5 @@
 ﻿import {createServer} from 'node:http';
-import worker, {goldDashboard} from '../dist/server/index.js';
+import worker, {goldDashboard,history,stocks,technical,swingCandidates} from '../dist/server/index.js';
 const port=Number(process.env.PORT||3000);
 // Never start an externally hosted server with the access gate disabled.
 if(!process.env.PHONE_ALLOWED_HASHES||!process.env.PHONE_SESSION_SECRET)throw new Error('Phone access secrets required');
@@ -18,3 +18,5 @@ createServer(async(req,res)=>{
 }).listen(port,'0.0.0.0',()=>console.log('Dashboard server ready'));
 
 goldDashboard().then(g=>console.log('Gold source check:',JSON.stringify({price:g.price,change:g.change,previousClose:g.previousClose,quoteTime:g.quoteTime||null,levelDate:g.levelDate||g.date,quoteError:g.quoteError,source:g.source}))).catch(e=>console.warn('Gold source check failed:',e.message));
+
+Promise.all(stocks.map(async s=>{try{const rows=await history(s.symbol),tech=technical(rows);console.log('Stock history check:',JSON.stringify({symbol:s.symbol,count:rows.length,date:tech?.date,fallback:rows.historyStale===true,levels:swingCandidates(rows,tech,s.levels,s.sellReference)}));}catch(e){console.warn('Stock history check failed:',s.symbol,e.message);}}));
