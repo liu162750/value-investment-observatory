@@ -96,7 +96,7 @@ async function goldDashboard(){
  const daily=results[0].status==='fulfilled'?results[0].value:goldCache||initialSnapshot?.gold;
  if(!daily)throw Error('黄金日线不可用，观察档位待核验');
  const quote=results[1].status==='fulfilled'?results[1].value:null;
- if(!quote)return {...daily,quoteError:true,levelDate:daily.date,session:'当前报价未取得 · 上次日线收盘参考'};
+ if(!quote){console.warn('Gold quote unavailable:',results[1].reason?.message);return {...daily,quoteError:true,levelDate:daily.date,session:'当前报价未取得 · 上次日线收盘参考'};}
  return {...daily,levelDate:daily.date,dailyClose:daily.price,price:quote.price,change:(quote.price/daily.price-1)*100,date:quote.time.slice(0,10),quoteTime:quote.time,quoteUpdatedAt:quote.updatedAt,session:'延时行情 · 非实时成交价',source:quote.source,sourceUrl:quote.sourceUrl,quoteError:false,dailyError:results[0].status!=='fulfilled',distances:(daily.levels||[null,null,null,null]).map(r=>distance(quote.price,r))};
 }
 

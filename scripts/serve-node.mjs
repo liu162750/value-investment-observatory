@@ -1,5 +1,5 @@
 ﻿import {createServer} from 'node:http';
-import worker from '../dist/server/index.js';
+import worker, {goldDashboard} from '../dist/server/index.js';
 const port=Number(process.env.PORT||3000);
 // Never start an externally hosted server with the access gate disabled.
 if(!process.env.PHONE_ALLOWED_HASHES||!process.env.PHONE_SESSION_SECRET)throw new Error('Phone access secrets required');
@@ -16,3 +16,5 @@ createServer(async(req,res)=>{
   res.end(Buffer.from(await response.arrayBuffer()));
  }catch(error){console.error('Request failed:',error.message);res.writeHead(500);res.end('Request failed');}
 }).listen(port,'0.0.0.0',()=>console.log('Dashboard server ready'));
+
+goldDashboard().then(g=>console.log('Gold source check:',JSON.stringify({price:g.price,quoteTime:g.quoteTime||null,levelDate:g.levelDate||g.date,quoteError:g.quoteError,source:g.source}))).catch(e=>console.warn('Gold source check failed:',e.message));
