@@ -37,20 +37,23 @@ function renderThesisAlerts(){const issues=[];for(const stock of model.stocks){c
 function accountDayChange(account,stocks,now=Date.now()){
  const today=new Date(now).toLocaleDateString('sv-SE',{timeZone:'Asia/Shanghai'});
  if(!account?.positions?.length)return null;
- let value=0;
+ let previousAssetChange=0,totalWeight=0;
  for(const position of account.positions){
   if(typeof position.weight!=='number'||!Number.isFinite(position.weight)||position.weight<0)return null;
+  totalWeight+=position.weight;
   if(position.weight===0)continue;
   const quote=stocks.find(s=>s.symbol===position.symbol)?.quote;
   const stamp=Date.parse((quote?.time||'').replace(' ','T')+'+08:00');
   if(typeof quote?.change!=='number'||!Number.isFinite(quote.change)||quote.time?.slice(0,10)!==today||!Number.isFinite(stamp)||stamp>now)return null;
-  value+=position.weight*quote.change;
+  if(quote.change<=-100)return null;
+  previousAssetChange+=position.weight*quote.change/(100+quote.change);
  }
- return value;
+ if(totalWeight>1.000001||previousAssetChange>=1)return null;
+ return previousAssetChange/(1-previousAssetChange)*100;
 }
 function renderAccountDayChanges(){
  const box=$('#account-day-changes');if(!box)return;
- box.innerHTML='<span class="tiny">今日估算</span>'+(model.accounts||[]).map(a=>{const value=model.stale?null:accountDayChange(a,model.stocks);const name=a.id==='laoliu'?'老刘':a.name.replace(/的?持仓$/,'');return '<span class="account-day-change '+(value===null?'day-unavailable':value>0?'day-gain':value<0?'day-loss':'day-flat')+'" title="按当前仓位占总资产比例加权估算；现金按0涨跌计算，非实际账户盈亏">'+esc(name)+' <strong>'+(value===null?'今日待更新':(value>0?'+':'')+num(value)+'%')+'</strong></span>';}).join('');
+ box.innerHTML='<span class="tiny">今日估算</span>'+(model.accounts||[]).map(a=>{const value=model.stale?null:accountDayChange(a,model.stocks);const name=a.id==='laoliu'?'老刘':a.name.replace(/的?持仓$/,'');return '<span class="account-day-change '+(value===null?'day-unavailable':value>0?'day-gain':value<0?'day-loss':'day-flat')+'" title="按已录入持股与现金反推昨日总资产，现金包含在总资产中；假设今日无交易或资金进出，非券商实盘收益">'+esc(name)+' <strong>'+(value===null?'今日待更新':(value>0?'+':'')+num(value)+'%')+'</strong></span>';}).join('');
 }
 function render(){renderAccountDayChanges();renderGold();renderThesisAlerts();const d=model;$('#status').textContent=(d.stale?'备用快照 · ':'')+'A股 '+(d.date||'未核验')+' · '+new Date(d.generated).toLocaleTimeString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false});const m=d.market[0],t=m.tech,p=d.pools;$('#market').innerHTML='<div class="zone-heading"><span class="zone-number">01</span><h2>A股大盘</h2><span class="tiny">行情 · 情绪 · 量能 · 新闻</span></div><section class="market-overview"><div class="title"><h2>A股大盘</h2><span class="tiny">'+esc(d.date)+'</span></div>'+d.market.map((s,i)=>'<div class="market-row"><span>'+['上证','深证','创业板'][i]+'</span><strong>'+num(s.quote?.price??s.rows.at(-1)?.close)+'</strong><span class="'+color(s.quote?.change)+'">'+pct(s.quote?.change)+'</span></div>').join('')+'<div class="counts">'+['涨停','跌停','炸板'].map((s,i)=>'<div class="count"><strong class="'+(i===0?'up':i===1?'down':'amber')+'">'+(p[i]?.count??'—')+'</strong><span>'+s+'</span></div>').join('')+'</div><div class="tiny">东方财富股池 · '+esc(d.date)+'</div><div class="spark">'+spark(m.rows.slice(-30))+'</div><p class="market-comment">'+(t?'上证日线'+esc(t.state)+'，20日 / 60日均线 '+num(t.ma20)+' / '+num(t.ma60)+'。量能为前20日均量 '+num(t.volumeRatio)+' 倍。':'日线不足，市场结构待核验。')+'</p></section>'+marketAnalysis(d);
 const combinedNews=[...(d.marketNews||[]).map(n=>({...n,type:'新闻'})),...d.stocks.flatMap(s=>[...(s.notices||[]).map(n=>({...n,type:'公告'})),...(s.mediaNews||[]).map(n=>({...n,type:'新闻'}))])];
