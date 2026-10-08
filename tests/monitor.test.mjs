@@ -16,7 +16,7 @@ console.log('PASS: unified monitor, invalidation status, evidenced replacement, 
 
 assert(!page.includes('<details')&&!page.includes('<summary>'),'All foldouts displayed directly');
 assert(page.indexOf('class="inline-candidates"')<page.indexOf('id="thesis-sh601138"'),'Pingao candidates appear inside its row');
-assert(page.indexOf('id="gold"')>page.indexOf('id="accounts"'),'Gold below holdings');
+assert(page.includes('market-gold')&&!page.includes('</aside></div><section class="stock gold-card"'),'Gold in top market panel only');
 
 assert.equal(select('#replacement-b').classList.values.get('monitor-qualified'),true);
 assert.equal(select('#replacement-c').classList.values.get('monitor-qualified'),false);
