@@ -1,3 +1,5 @@
+import '../tests/account-day.test.mjs';
+import '../tests/levels.test.mjs';
 import {mkdirSync,copyFileSync,readFileSync,writeFileSync} from 'node:fs';
 mkdirSync('dist/server',{recursive:true});
 const snapshot=JSON.parse(readFileSync('worker/snapshot.json','utf8'));

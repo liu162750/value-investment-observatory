@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const page=readFileSync(new URL('../worker/page.html',import.meta.url),'utf8');
+const source=page.slice(page.indexOf('function accountDayChange('),page.indexOf('function renderAccountDayChanges('));
+const calculate=new Function(source+';return accountDayChange;')();
+const now=Date.parse('2026-10-08T10:00:00+08:00');
+const account={positions:[{symbol:'a',weight:.3},{symbol:'b',weight:.4}]};
+const stocks=[{symbol:'a',quote:{change:2,time:'2026-10-08 09:59:00'}},{symbol:'b',quote:{change:-1,time:'2026-10-08 09:59:00'}}];
+assert(Math.abs(calculate(account,stocks,now)-.2)<1e-10);
+assert.equal(calculate({positions:[{symbol:'a',weight:.2}]},stocks,now),.4);
+assert.equal(calculate(account,stocks.map(s=>({...s,quote:{...s.quote,time:'2026-09-30 15:00:00'}})),now),null);
+assert.equal(calculate(account,[stocks[0]],now),null);
+assert.equal(calculate({positions:[{symbol:'a',weight:null}]},stocks,now),null);
+assert.equal(calculate(account,stocks.map(s=>({...s,quote:{...s.quote,time:'2026-10-08 10:01:00'}})),now),null);
+assert(page.includes('.day-gain{color:#ffd166}')&&page.includes('.day-loss{color:#6fb9ff}'));
+console.log('PASS: account weight estimate, cash contribution, missing/old/future quotes, gold/blue colors');
