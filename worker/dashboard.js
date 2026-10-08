@@ -23,7 +23,7 @@ async function history(symbol){
  const cached=historyCache.get(symbol);if(cached&&Date.now()-cached.checked<300000)return completedDailyRows(cached.rows);
  if(historyPending.has(symbol))return historyPending.get(symbol);
  const task=(async()=>{try{
-  const d=await get('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param='+symbol+',day,,,150,qfq');
+  let d;try{d=await get('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param='+symbol+',day,,,150,qfq');}catch{d=await get('https://proxy.finance.qq.com/ifzqgtimg/appstock/app/fqkline/get?param='+symbol+',day,,,150,qfq');}
   const v=d.data?.[symbol],raw=v?.qfqday||v?.day;if(!Array.isArray(raw)||raw.length<120)throw Error('日线不足');
   const rows=raw.map(r=>({date:r[0],open:+r[1],close:+r[2],high:+r[3],low:+r[4],volume:+r[5]})).filter(r=>/^\d{4}-\d{2}-\d{2}$/.test(r.date)&&[r.open,r.close,r.high,r.low].every(x=>Number.isFinite(x)&&x>0));
   if(rows.length<120)throw Error('有效日线不足');historyCache.set(symbol,{rows,checked:Date.now()});return completedDailyRows(rows);
