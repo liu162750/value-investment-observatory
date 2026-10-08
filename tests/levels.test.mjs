@@ -14,7 +14,9 @@ for(const stock of stocks){
   if(levels[3])assert(levels[3][0]-levels[2][1]>=tech.atr);
   assert.deepEqual(levels,swingCandidates(completedDailyRows(rows.map(r=>r.date==='2026-10-08'?{...r,close:r.close*2,high:r.high*2}:r),at(time)),tech,stock.levels),'Intraday movement must not change tiers');
  }
- assert.equal(completedDailyRows(rows,at('15:05:00')).at(-1).date,'2026-10-08');
+ const afterClose=completedDailyRows(rows,at('15:05:00'));
+ assert.equal(afterClose.at(-1).date,'2026-10-08');
+ assert.deepEqual(swingCandidates(afterClose,technical(afterClose),stock.levels).slice(0,2),stock.levels.slice(0,2),'Confirmed buys remain stable after new close');
  const future=[...rows,{date:'2026-10-09',close:999}];assert.equal(completedDailyRows(future,at('18:00:00')).at(-1).date,'2026-10-08');
  const done=completedDailyRows(rows,at('09:50:00')),tech=technical(done);assert.deepEqual(swingCandidates(done,tech).slice(0,2),candidates(done,tech).slice(0,2));
 }
@@ -24,3 +26,5 @@ assert.deepEqual(parseGold(goldWithFuture,at('15:59:59')).levels,goldBefore.leve
 assert.equal(parseGold(goldWithFuture,at('16:00:00')).date,'2026-10-08');
 assert.deepEqual(swingCandidates([],null),[null,null,null,null]);
 console.log('PASS: all four stocks, baseline buys, all tiers, intraday isolation, Shanghai close boundaries, future dates, gold session');
+
+assert(readFileSync(new URL('../worker/dashboard.js',import.meta.url),'utf8').includes('levels=swingCandidates(d.rows,tech,s.levels)'),'Dashboard must use confirmed buys');
