@@ -20,3 +20,18 @@ assert(page.includes('market-gold')&&!page.includes('</aside></div><section clas
 
 assert.equal(select('#replacement-b').classList.values.get('monitor-qualified'),true);
 assert.equal(select('#replacement-c').classList.values.get('monitor-qualified'),false);
+
+const reviews=JSON.parse(readFileSync(new URL('../worker/investment-reviews.json',import.meta.url),'utf8'));
+const reviewedModel={stocks:Object.entries(reviews.stocks).map(([symbol,value])=>({symbol,...value})),investmentReviewAsOf:reviews.asOf};
+const reviewedNodes=new Map();
+const node=()=>({children:[],textContent:'',innerHTML:'',classList:{toggle(){}},setAttribute(){},appendChild(child){this.children.push(child)}});
+const pick=id=>{if(!reviewedNodes.has(id))reviewedNodes.set(id,node());return reviewedNodes.get(id);};
+new Function('model','$','esc','document',source+';renderMonitorRows();')(reviewedModel,pick,String,{createElement:node});
+assert.equal(reviewedModel.stocks.length,4);
+for(const stock of reviewedModel.stocks){
+ assert.equal(stock.longTermReview.status,'pending');
+ assert(pick('#review-'+stock.symbol).children.some(n=>n.textContent===stock.longTermReview.evidence[1].finding));
+ assert(pick('#replacement-'+stock.symbol).children.some(n=>n.textContent.includes('中国移动')));
+ assert(!pick('#replacement-'+stock.symbol).innerHTML.includes('替代候选：'));
+}
+console.log('PASS: four-stock pending review evidence visible; research candidates never promoted to qualified');

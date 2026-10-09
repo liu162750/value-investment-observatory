@@ -1,5 +1,296 @@
 {
-  "asOf": null,
+  "asOf": "2026-10-09T16:33:40+08:00",
   "status": "pending",
-  "stocks": {}
+  "reviewType": "weekly",
+  "coverage": "四股产业、盈利质量、现金回报及替代方向已更新；估值、债务交叉核验与私有持仓适配仍待完成。",
+  "stocks": {
+    "sh600312": {
+      "longTermReview": {
+        "status": "pending",
+        "reason": "利润增长与收入、现金流分化，不能认定低估；重点复核产品结构、付款账期及全年回款。",
+        "asOf": "2026-10-09T16:33:40+08:00",
+        "source": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225483278.PDF",
+        "evidence": [
+          {
+            "topic": "产业竞争力与需求",
+            "finding": "电网高压开关技术与交付资质形成竞争壁垒；需求应看真实招标、交付和回款，不能把电网投资总额等同公司订单。",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225483278.PDF"
+          },
+          {
+            "topic": "正常化盈利及现金回报",
+            "finding": "收入53.74亿元，同比-5.64%；扣非7.98亿元，同比+20.76%；经营现金流-6.89亿元，购建长期资产现金1.44亿元，简化现金流差额-8.33亿元。 简化差额为经营现金流减购建长期资产现金，非完整自由现金流估值。",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225483278.PDF"
+          }
+        ],
+        "valuation": {
+          "status": "pending",
+          "marketCapYi": 279.25,
+          "quoteSource": "腾讯财经2026-10-09收盘后报价",
+          "quoteDate": "2026-10-09",
+          "halfYearAdjustedProfitYi": 7.9830224194,
+          "mechanicalAnnualizedMultiple": 17.49,
+          "method": "市值/（半年扣非×2），仅敏感性参照，非TTM市盈率、全年预测或内在价值；需校正季节性、周期与扩产。",
+          "assumptions": "待核验完整周期正常化利润、维持性资本开支、营运资本回收、折现率与终值增长；未建立有证据的估值区间。"
+        },
+        "debtAndGovernance": {
+          "status": "pending",
+          "finding": "已查阅报告相关项目；受限现金、融资到期结构、关联交易及报告期后治理变化尚未形成完整交叉核验，不给偿债安全结论。"
+        },
+        "expansionReturn": {
+          "status": "pending",
+          "finding": "需用投产后利用率、良率、增量经营现金及资本回报验证，投入金额不等于有效回报。"
+        },
+        "invalidationConditions": "若订单/份额持续下降并伴随扣非及回款恶化，或重大治理问题，须重审产业依据。",
+        "portfolioFit": {
+          "status": "pending",
+          "reason": "本次未取得生产后台两账户最新授权持仓数据与成交反馈，不能确认个人适配。三科技股共同暴露AI硬件资本开支及科技估值，业务环节不同不等于充分分散。"
+        },
+        "limitations": [
+          "半年报未经审计；本次未发现新增正式定期报告、业绩快报或预告。",
+          "产业依据未被单日跌幅否定；pending不等于通过，也不等于失效。"
+        ]
+      },
+      "replacementReview": {
+        "status": "pending",
+        "reason": "平高电气与两类现金回报候选已作初步比较；完整债务、正常化估值及两账户适配尚未核验，未达到更优替代确认标准。",
+        "asOf": "2026-10-09T16:33:40+08:00",
+        "source": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225483278.PDF",
+        "candidates": [
+          {
+            "name": "长江电力",
+            "symbol": "sh600900",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-31/1225534923.PDF",
+            "evidence": "水电经营现金流241.28亿元、扣非142.94亿元；来水、电价及债务再融资影响现金回报。与制造业风险来源不同，不等于价格合理。",
+            "marketCapYi": 7093.34,
+            "halfYearAdjustedProfitYi": 142.9403044404,
+            "comparison": "从设备订单/交付周期转换到水电或通信现金回报，需权衡增长、来水/电价或通信竞争、债务及买价。"
+          },
+          {
+            "name": "中国移动",
+            "symbol": "sh600941",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-14/1225472194.PDF",
+            "evidence": "经营现金流1148.54亿元，自由现金流538.69亿元；归母789.34亿元同比下降6.3%，扣非每股收益3.22元。通信现金回报与AI硬件风险不同，仍受竞争、资本开支及税制影响。",
+            "marketCapYi": 21257.63,
+            "comparison": "从设备订单/交付周期转换到水电或通信现金回报，需权衡增长、来水/电价或通信竞争、债务及买价。"
+          }
+        ]
+      }
+    },
+    "sz002156": {
+      "longTermReview": {
+        "status": "pending",
+        "reason": "归母高增长不能作为正常化盈利；扩产现金支出超过经营现金流，需核对新增产能利用率、折旧和融资压力。",
+        "asOf": "2026-10-09T16:33:40+08:00",
+        "source": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-08-29/072fbc43-caef-4b31-bf0e-ee19d9fa0459.PDF",
+        "evidence": [
+          {
+            "topic": "产业竞争力与需求",
+            "finding": "先进封测与AMD合作有报告证据，同时客户集中及半导体周期风险显著；公司披露的客户增长不等同独立核验未来采购。",
+            "source": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-08-29/072fbc43-caef-4b31-bf0e-ee19d9fa0459.PDF"
+          },
+          {
+            "topic": "正常化盈利及现金回报",
+            "finding": "收入160.41亿元，同比+23.03%；扣非7.47亿元，同比+77.78%；非经常损益约9.70亿元，占归母约56.5%；经营现金流29.33亿元，资本支出51.99亿元，简化差额-22.66亿元。 简化差额为经营现金流减购建长期资产现金，非完整自由现金流估值。",
+            "source": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-08-29/072fbc43-caef-4b31-bf0e-ee19d9fa0459.PDF"
+          }
+        ],
+        "valuation": {
+          "status": "pending",
+          "marketCapYi": 885.35,
+          "quoteSource": "腾讯财经2026-10-09收盘后报价",
+          "quoteDate": "2026-10-09",
+          "halfYearAdjustedProfitYi": 7.4746128661,
+          "mechanicalAnnualizedMultiple": 59.22,
+          "method": "市值/（半年扣非×2），仅敏感性参照，非TTM市盈率、全年预测或内在价值；需校正季节性、周期与扩产。",
+          "assumptions": "待核验完整周期正常化利润、维持性资本开支、营运资本回收、折现率与终值增长；未建立有证据的估值区间。"
+        },
+        "debtAndGovernance": {
+          "status": "pending",
+          "finding": "已查阅报告相关项目；受限现金、融资到期结构、关联交易及报告期后治理变化尚未形成完整交叉核验，不给偿债安全结论。"
+        },
+        "expansionReturn": {
+          "status": "pending",
+          "finding": "需用投产后利用率、良率、增量经营现金及资本回报验证，投入金额不等于有效回报。"
+        },
+        "invalidationConditions": "核心客户/份额持续流失、利用率及扣非利润恶化，或新增产能回报不足与融资压力叠加，须重审。",
+        "portfolioFit": {
+          "status": "pending",
+          "reason": "本次未取得生产后台两账户最新授权持仓数据与成交反馈，不能确认个人适配。三科技股共同暴露AI硬件资本开支及科技估值，业务环节不同不等于充分分散。"
+        },
+        "limitations": [
+          "半年报未经审计；本次未发现新增正式定期报告、业绩快报或预告。",
+          "产业依据未被单日跌幅否定；pending不等于通过，也不等于失效。"
+        ]
+      },
+      "replacementReview": {
+        "status": "pending",
+        "reason": "通富微电与两类现金回报候选已作初步比较；完整债务、正常化估值及两账户适配尚未核验，未达到更优替代确认标准。",
+        "asOf": "2026-10-09T16:33:40+08:00",
+        "source": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-08-29/072fbc43-caef-4b31-bf0e-ee19d9fa0459.PDF",
+        "candidates": [
+          {
+            "name": "长江电力",
+            "symbol": "sh600900",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-31/1225534923.PDF",
+            "evidence": "水电经营现金流241.28亿元、扣非142.94亿元；来水、电价及债务再融资影响现金回报。与制造业风险来源不同，不等于价格合理。",
+            "marketCapYi": 7093.34,
+            "halfYearAdjustedProfitYi": 142.9403044404,
+            "comparison": "可改变部分AI硬件资本开支暴露，但将放弃该产业增长敞口；没有证明同等风险下预期价值更优。"
+          },
+          {
+            "name": "中国移动",
+            "symbol": "sh600941",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-14/1225472194.PDF",
+            "evidence": "经营现金流1148.54亿元，自由现金流538.69亿元；归母789.34亿元同比下降6.3%，扣非每股收益3.22元。通信现金回报与AI硬件风险不同，仍受竞争、资本开支及税制影响。",
+            "marketCapYi": 21257.63,
+            "comparison": "可改变部分AI硬件资本开支暴露，但将放弃该产业增长敞口；没有证明同等风险下预期价值更优。"
+          }
+        ]
+      }
+    },
+    "sh601138": {
+      "longTermReview": {
+        "status": "pending",
+        "reason": "经营增长有证据，但现金转化不应与利润增长混同；短期融资与营运资本需求需核对，不能因客户AI需求叙事直接通过估值。",
+        "asOf": "2026-10-09T16:33:40+08:00",
+        "source": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468066.PDF",
+        "evidence": [
+          {
+            "topic": "产业竞争力与需求",
+            "finding": "服务器制造、交付规模与客户关系有竞争依据；同时受全球AI资本开支、客户采购集中及低利润率制造业务影响。",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468066.PDF"
+          },
+          {
+            "topic": "正常化盈利及现金回报",
+            "finding": "收入5578.61亿元，同比+54.63%；扣非229.84亿元，同比+96.99%；经营现金流73.91亿元，资本支出90.92亿元，简化差额-17.00亿元。 简化差额为经营现金流减购建长期资产现金，非完整自由现金流估值。",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468066.PDF"
+          }
+        ],
+        "valuation": {
+          "status": "pending",
+          "marketCapYi": 11126.58,
+          "quoteSource": "腾讯财经2026-10-09收盘后报价",
+          "quoteDate": "2026-10-09",
+          "halfYearAdjustedProfitYi": 229.84123,
+          "mechanicalAnnualizedMultiple": 24.2,
+          "method": "市值/（半年扣非×2），仅敏感性参照，非TTM市盈率、全年预测或内在价值；需校正季节性、周期与扩产。",
+          "assumptions": "待核验完整周期正常化利润、维持性资本开支、营运资本回收、折现率与终值增长；未建立有证据的估值区间。"
+        },
+        "debtAndGovernance": {
+          "status": "pending",
+          "finding": "已查阅报告相关项目；受限现金、融资到期结构、关联交易及报告期后治理变化尚未形成完整交叉核验，不给偿债安全结论。"
+        },
+        "expansionReturn": {
+          "status": "pending",
+          "finding": "需用投产后利用率、良率、增量经营现金及资本回报验证，投入金额不等于有效回报。"
+        },
+        "invalidationConditions": "客户订单持续削减、份额/毛利率下滑与库存应收恶化共同出现，或重大治理/偿债事件，须重审。",
+        "portfolioFit": {
+          "status": "pending",
+          "reason": "本次未取得生产后台两账户最新授权持仓数据与成交反馈，不能确认个人适配。三科技股共同暴露AI硬件资本开支及科技估值，业务环节不同不等于充分分散。"
+        },
+        "limitations": [
+          "半年报未经审计；本次未发现新增正式定期报告、业绩快报或预告。",
+          "产业依据未被单日跌幅否定；pending不等于通过，也不等于失效。"
+        ]
+      },
+      "replacementReview": {
+        "status": "pending",
+        "reason": "工业富联与两类现金回报候选已作初步比较；完整债务、正常化估值及两账户适配尚未核验，未达到更优替代确认标准。",
+        "asOf": "2026-10-09T16:33:40+08:00",
+        "source": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468066.PDF",
+        "candidates": [
+          {
+            "name": "长江电力",
+            "symbol": "sh600900",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-31/1225534923.PDF",
+            "evidence": "水电经营现金流241.28亿元、扣非142.94亿元；来水、电价及债务再融资影响现金回报。与制造业风险来源不同，不等于价格合理。",
+            "marketCapYi": 7093.34,
+            "halfYearAdjustedProfitYi": 142.9403044404,
+            "comparison": "可改变部分AI硬件资本开支暴露，但将放弃该产业增长敞口；没有证明同等风险下预期价值更优。"
+          },
+          {
+            "name": "中国移动",
+            "symbol": "sh600941",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-14/1225472194.PDF",
+            "evidence": "经营现金流1148.54亿元，自由现金流538.69亿元；归母789.34亿元同比下降6.3%，扣非每股收益3.22元。通信现金回报与AI硬件风险不同，仍受竞争、资本开支及税制影响。",
+            "marketCapYi": 21257.63,
+            "comparison": "可改变部分AI硬件资本开支暴露，但将放弃该产业增长敞口；没有证明同等风险下预期价值更优。"
+          }
+        ]
+      }
+    },
+    "sz002463": {
+      "longTermReview": {
+        "status": "pending",
+        "reason": "利润与现金回收背离、扩产投入较大；经营现金流约为归母39%，应收与存货、海外爬坡和扩产回报是重点。",
+        "asOf": "2026-10-09T16:33:40+08:00",
+        "source": "https://static.cninfo.com.cn/finalpage/2026-08-26/1225502252.PDF",
+        "evidence": [
+          {
+            "topic": "产业竞争力与需求",
+            "finding": "高速网络PCB工艺、认证和客户关系是产业依据；海外扩产须验证良率、实际交付与现金回报，技术升级亦有替代风险。",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-26/1225502252.PDF"
+          },
+          {
+            "topic": "正常化盈利及现金回报",
+            "finding": "收入136.89亿元，同比+61.17%；扣非27.95亿元，同比+70%；经营现金流11.51亿元，同比-45.14%；资本支出36.02亿元，简化差额-24.51亿元。 简化差额为经营现金流减购建长期资产现金，非完整自由现金流估值。",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-26/1225502252.PDF"
+          }
+        ],
+        "valuation": {
+          "status": "pending",
+          "marketCapYi": 2160.87,
+          "quoteSource": "腾讯财经2026-10-09收盘后报价",
+          "quoteDate": "2026-10-09",
+          "halfYearAdjustedProfitYi": 27.95,
+          "mechanicalAnnualizedMultiple": 38.66,
+          "method": "市值/（半年扣非×2），仅敏感性参照，非TTM市盈率、全年预测或内在价值；需校正季节性、周期与扩产。",
+          "assumptions": "待核验完整周期正常化利润、维持性资本开支、营运资本回收、折现率与终值增长；未建立有证据的估值区间。"
+        },
+        "debtAndGovernance": {
+          "status": "pending",
+          "finding": "已查阅报告相关项目；受限现金、融资到期结构、关联交易及报告期后治理变化尚未形成完整交叉核验，不给偿债安全结论。"
+        },
+        "expansionReturn": {
+          "status": "pending",
+          "finding": "需用投产后利用率、良率、增量经营现金及资本回报验证，投入金额不等于有效回报。"
+        },
+        "invalidationConditions": "核心客户流失、技术/份额退化、扩产良率长期不达标，或增长与回款持续背离且解释不足，须重审。",
+        "portfolioFit": {
+          "status": "pending",
+          "reason": "本次未取得生产后台两账户最新授权持仓数据与成交反馈，不能确认个人适配。三科技股共同暴露AI硬件资本开支及科技估值，业务环节不同不等于充分分散。"
+        },
+        "limitations": [
+          "半年报未经审计；本次未发现新增正式定期报告、业绩快报或预告。",
+          "产业依据未被单日跌幅否定；pending不等于通过，也不等于失效。"
+        ]
+      },
+      "replacementReview": {
+        "status": "pending",
+        "reason": "沪电股份与两类现金回报候选已作初步比较；完整债务、正常化估值及两账户适配尚未核验，未达到更优替代确认标准。",
+        "asOf": "2026-10-09T16:33:40+08:00",
+        "source": "https://static.cninfo.com.cn/finalpage/2026-08-26/1225502252.PDF",
+        "candidates": [
+          {
+            "name": "长江电力",
+            "symbol": "sh600900",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-31/1225534923.PDF",
+            "evidence": "水电经营现金流241.28亿元、扣非142.94亿元；来水、电价及债务再融资影响现金回报。与制造业风险来源不同，不等于价格合理。",
+            "marketCapYi": 7093.34,
+            "halfYearAdjustedProfitYi": 142.9403044404,
+            "comparison": "可改变部分AI硬件资本开支暴露，但将放弃该产业增长敞口；没有证明同等风险下预期价值更优。"
+          },
+          {
+            "name": "中国移动",
+            "symbol": "sh600941",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-08-14/1225472194.PDF",
+            "evidence": "经营现金流1148.54亿元，自由现金流538.69亿元；归母789.34亿元同比下降6.3%，扣非每股收益3.22元。通信现金回报与AI硬件风险不同，仍受竞争、资本开支及税制影响。",
+            "marketCapYi": 21257.63,
+            "comparison": "可改变部分AI硬件资本开支暴露，但将放弃该产业增长敞口；没有证明同等风险下预期价值更优。"
+          }
+        ]
+      }
+    }
+  }
 }

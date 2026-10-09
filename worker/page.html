@@ -89,11 +89,12 @@ function renderMonitorRows(){
  for(const stock of model.stocks){
   const review=stock.longTermReview,failed=review?.status==='invalidated',status=$('#review-'+stock.symbol),target=$('#replacement-'+stock.symbol);
   if(failed)failedCount++;
-  if(status)status.textContent=failed?'逻辑失效 · 需复核':review?.status==='validated'?'持有依据已核验':'持有依据待持续核验';
+  if(status){status.textContent=failed?'逻辑失效 · 需复核':review?.status==='validated'?'持有依据已核验':'持有依据待持续核验';if(review?.reason){const detail=document.createElement('div');detail.className='expanded-detail';detail.textContent=review.reason+' · '+review.asOf;status.appendChild(detail);for(const item of review.evidence||[]){const evidence=document.createElement('div');evidence.className='expanded-detail';evidence.textContent=item.finding;status.appendChild(evidence);}const link=document.createElement('a');link.href=review.source;link.target='_blank';link.rel='noopener noreferrer';link.textContent='公司报告核验依据';status.appendChild(link);}}
   const replacement=stock.replacementReview;
   const qualified=replacement?.status==='qualified'&&replacement.candidate?.name&&replacement.candidate?.symbol&&replacement.reason&&replacement.source&&replacement.asOf;
   if(qualified)qualifiedCount++;
   if(target){target.classList.toggle('monitor-qualified',!!qualified);target.setAttribute('role',qualified?'alert':'status');}if(target)target.innerHTML=qualified?'替代候选：<strong>'+esc(replacement.candidate.name)+' '+esc(replacement.candidate.symbol)+'</strong><div>'+esc(replacement.reason)+'</div><a href="'+esc(replacement.source)+'" target="_blank" rel="noopener noreferrer">核验依据 · '+esc(replacement.asOf)+'</a>':failed?'需复核换股 · 暂无已核验替代':stock.symbol==='sh600312'?'已有研究候选 · 尚未达到换股确认标准':'暂无已确认更优替代';
+  if(target&&!qualified&&replacement?.reason){const detail=document.createElement('div');detail.className='expanded-detail';detail.textContent=replacement.reason;target.appendChild(detail);for(const candidate of replacement.candidates||[]){const item=document.createElement('div');item.className='expanded-detail';item.textContent=candidate.name+' · 研究方向：'+candidate.evidence+' '+candidate.comparison;target.appendChild(item);}}
  }
  const run=$('#review-run-time');if(run)run.textContent=model.investmentReviewAsOf?'价值复核 '+model.investmentReviewAsOf:'自动价值复核：每周五16:30 · 新业绩另行复核';const summary=$('#monitor-status');if(summary)summary.textContent=qualifiedCount?'已核验替代 '+qualifiedCount+' 项':failedCount?'持有逻辑需复核 '+failedCount+' 项':'暂无已确认换股信号';
 }
