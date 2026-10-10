@@ -30,7 +30,7 @@ new Function('model','$','esc','document',source+';renderMonitorRows();')(review
 assert.equal(reviewedModel.stocks.length,4);
 for(const stock of reviewedModel.stocks){
  assert.equal(stock.longTermReview.status,'pending');
- assert(pick('#review-'+stock.symbol).children.some(n=>n.textContent===stock.longTermReview.evidence[1].finding));
+ assert(pick('#holding-evidence-'+stock.symbol).children.some(n=>n.textContent===stock.longTermReview.evidence[1].finding));
  assert(pick('#replacement-'+stock.symbol).children.some(n=>n.textContent.includes('中国移动')));
  assert(!pick('#replacement-'+stock.symbol).innerHTML.includes('替代候选：'));
 }
