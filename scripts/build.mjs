@@ -10,7 +10,19 @@ mkdirSync('dist/server',{recursive:true});
 const events=JSON.parse(readFileSync('worker/event-calendar.json','utf8'));
 const reviews=JSON.parse(readFileSync('worker/investment-reviews.json','utf8'));
 const snapshot=JSON.parse(readFileSync('worker/snapshot.json','utf8'));
-const accounts=JSON.parse(process.env.SERVER_ACCOUNTS_JSON || '[]');const backend=await import('../worker/dashboard.js?build='+Date.now());
+const accounts=JSON.parse(process.env.SERVER_ACCOUNTS_JSON || '[]');
+const overrides=JSON.parse(process.env.SERVER_ACCOUNT_OVERRIDES_JSON || '[]');
+for(const patch of overrides){
+ const account=accounts.find(a=>a.id===patch.id);
+ if(!account)throw new Error('Private account override has no matching account');
+ if(!Number.isFinite(patch.cash)||patch.cash<0||!Array.isArray(patch.positions)||!patch.positions.length||patch.positions.some(p=>!p.symbol||!Number.isInteger(p.shares)||p.shares<0))throw new Error('Invalid private account holdings override');
+ Object.assign(account,patch);
+ // A new holding snapshot does not confirm remaining stage budgets or floating sell capacity.
+ account.allocationConfirmed=false;
+ account.stageBudgets={};
+ account.sellableShares={};
+}
+const backend=await import('../worker/dashboard.js?build='+Date.now());
 const accountSource=readFileSync('worker/dashboard.js','utf8').replace('const accounts = [];','const accounts = '+JSON.stringify(accounts)+';');
 const privateModule=await import('data:text/javascript;base64,'+Buffer.from(accountSource).toString('base64'));snapshot.accounts=privateModule.publicAccounts(snapshot.stocks);
 for(const stock of snapshot.stocks){Object.assign(stock,reviews.stocks?.[stock.symbol]||{});}
