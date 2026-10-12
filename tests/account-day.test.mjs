@@ -7,6 +7,7 @@ const now=Date.parse('2026-10-08T10:00:00+08:00');
 const account={positions:[{symbol:'a',weight:.3},{symbol:'b',weight:.4}]};
 const stocks=[{symbol:'a',quote:{change:2,time:'2026-10-08 09:59:00'}},{symbol:'b',quote:{change:-1,time:'2026-10-08 09:59:00'}}];
 const priorChange=.3*2/102+.4*(-1)/99;
+assert(Math.abs(calculate({...account,dayReferenceDate:'2026-10-08',dayAssetRatio:415878.11/421672.11},stocks,now)+1.374053430255518)<.001,'Confirmed prior assets correct intraday purchase distortion');
 assert(Math.abs(calculate(account,stocks,now)-priorChange/(1-priorChange)*100)<1e-10);
 const exactAccount={positions:[{symbol:'a',weight:30.6/100.2},{symbol:'b',weight:39.6/100.2}]};
 assert(Math.abs(calculate(exactAccount,stocks,now)-.2)<1e-10,'Yesterday assets 100 includes cash 30, current assets 100.2');
