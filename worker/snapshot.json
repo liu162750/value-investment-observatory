@@ -7020,14 +7020,15 @@
         "reason": "整组变动≤3%且旧组校验通过",
         "newSupportEvidence": null,
         "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600312,day,,,320,qfq",
-        "sourceQuoteTime": "2026-10-19 16:14:34+08:00",
+        "sourceQuoteTime": "20261019161434",
         "nextScheduled": "2026-10-21 16:30",
         "marketGate": {
+          "date": "2026-10-19",
+          "lastCompleteMonth": "2026-09-30",
+          "ma20month": 3798.1159999999995,
           "indexClose": 3730.92,
-          "completedMonthlyMA20": 3798.12,
-          "lastMonth": "2026-09-30",
           "frozen": true,
-          "method": "20个已完成月K收盘均值，排除未完成当月，非20日均线",
+          "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
           "asOf": "2026-10-19"
         },
         "bands": [
@@ -7053,7 +7054,7 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-19T11:37:11.632Z",
+          "checkedAt": "2026-10-19T12:31:50.610Z",
           "dataDate": "2026-10-19",
           "recovery": {
             "frozen": false,
@@ -9928,14 +9929,15 @@
         "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据；趋势型冻结仍触发。整组旧档仅供参考，禁止据此买入",
         "newSupportEvidence": null,
         "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002156,day,,,320,qfq",
-        "sourceQuoteTime": "2026-10-19 16:14:33+08:00",
+        "sourceQuoteTime": "20261019161433",
         "nextScheduled": "2026-10-21 16:30",
         "marketGate": {
+          "date": "2026-10-19",
+          "lastCompleteMonth": "2026-09-30",
+          "ma20month": 3798.1159999999995,
           "indexClose": 3730.92,
-          "completedMonthlyMA20": 3798.12,
-          "lastMonth": "2026-09-30",
           "frozen": true,
-          "method": "20个已完成月K收盘均值，排除未完成当月，非20日均线",
+          "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
           "asOf": "2026-10-19"
         },
         "bands": [
@@ -9975,7 +9977,7 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-19T11:37:11.632Z",
+          "checkedAt": "2026-10-19T12:31:50.610Z",
           "dataDate": "2026-10-19",
           "recovery": {
             "frozen": true,
@@ -12859,14 +12861,15 @@
         "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据；趋势型冻结仍触发。整组旧档仅供参考，禁止据此买入",
         "newSupportEvidence": null,
         "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138,day,,,320,qfq",
-        "sourceQuoteTime": "2026-10-19 16:14:40+08:00",
+        "sourceQuoteTime": "20261019161440",
         "nextScheduled": "2026-10-21 16:30",
         "marketGate": {
+          "date": "2026-10-19",
+          "lastCompleteMonth": "2026-09-30",
+          "ma20month": 3798.1159999999995,
           "indexClose": 3730.92,
-          "completedMonthlyMA20": 3798.12,
-          "lastMonth": "2026-09-30",
           "frozen": true,
-          "method": "20个已完成月K收盘均值，排除未完成当月，非20日均线",
+          "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
           "asOf": "2026-10-19"
         },
         "bands": [
@@ -12906,7 +12909,7 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-19T11:37:11.632Z",
+          "checkedAt": "2026-10-19T12:31:50.610Z",
           "dataDate": "2026-10-19",
           "recovery": {
             "frozen": true,
@@ -16738,14 +16741,15 @@
         "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据；趋势型冻结仍触发。整组旧档仅供参考，禁止据此买入",
         "newSupportEvidence": null,
         "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,320,qfq",
-        "sourceQuoteTime": "2026-10-19 16:14:15+08:00",
+        "sourceQuoteTime": "20261019161415",
         "nextScheduled": "2026-10-21 16:30",
         "marketGate": {
+          "date": "2026-10-19",
+          "lastCompleteMonth": "2026-09-30",
+          "ma20month": 3798.1159999999995,
           "indexClose": 3730.92,
-          "completedMonthlyMA20": 3798.12,
-          "lastMonth": "2026-09-30",
           "frozen": true,
-          "method": "20个已完成月K收盘均值，排除未完成当月，非20日均线",
+          "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
           "asOf": "2026-10-19"
         },
         "bands": [
@@ -16785,7 +16789,7 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-19T11:37:11.632Z",
+          "checkedAt": "2026-10-19T12:31:50.610Z",
           "dataDate": "2026-10-19",
           "recovery": {
             "frozen": true,
