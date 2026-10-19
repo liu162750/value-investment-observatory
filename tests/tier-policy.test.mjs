@@ -1,6 +1,6 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {reviewTiers,completedWeekFriday,validate,POLICY,recoveryState,indicators,stageOf} from '../scripts/tier-policy.mjs';
+import {reviewTiers,completedWeekFriday,validate,POLICY,recoveryState,indicators,stageOf,freezeTriggers} from '../scripts/tier-policy.mjs';
 import {stocks} from '../worker/dashboard.js';
 const input=JSON.parse(readFileSync(new URL('./fixtures/atr20-review-20261019.json',import.meta.url),'utf8'));
 const audit=JSON.parse(readFileSync(new URL('../worker/tier-reviews.json',import.meta.url),'utf8'));
@@ -26,7 +26,7 @@ const page=readFileSync(new URL('../worker/page.html',import.meta.url),'utf8');
 new Function(page.slice(page.indexOf('const $='),page.lastIndexOf('</script>')));
 const notice=new Function(page.slice(page.indexOf('function tierReviewNotice('),page.indexOf('function render(){'))+';return tierReviewNotice;')();
 assert(page.includes("'+tierReviewNotice(s)+'"),'Every card must render an independent policy notice');
-assert(notice({levelReview:{status:'pending-support'}}).includes('下跌趋势'));
+assert(notice({levelReview:{status:'pending-support'}}).includes('下跌或破位冻结'));
 assert(notice({levelReview:{status:'pending-support'}}).includes('暂不据此买入'));
 assert(notice({levelReview:{status:'retained',stage:{name:'range'}}}).includes('保留已校验旧档'));
 const accountCalc=new Function('model',page.slice(page.indexOf('function accountView('),page.indexOf('const previewAccounts='))+';return accountView;')({stale:false});
@@ -48,4 +48,15 @@ const oneDay=synthetic.map((b,i)=>i===259?{...b,open:21,close:21,high:21.4,low:2
 assert.equal(recovery(oneDay,{...proof,kind:'official-event'}).frozen,true,'One strong close cannot unlock');
 const weak60=stable.map((b,i)=>i===199?{...b,open:30,close:30,high:30.4,low:29.6}:b);
 assert.equal(recovery(weak60,proof).frozen,true,'Both return thresholds must recover');
+const triggerBars=[{date:'2026-10-15',close:100},{date:'2026-10-16',close:98}];
+assert.equal(freezeTriggers(triggerBars,{ma60:99,atr:2},{return20:-.02,return60:-.03},null).trend,false,'MA60 alone is insufficient');
+assert.equal(freezeTriggers(triggerBars,{ma60:97,atr:2},{return20:-.10,return60:-.03},null).trend,false,'Return threshold alone is insufficient');
+assert.equal(freezeTriggers(triggerBars,{ma60:99,atr:2},{return20:-.10,return60:-.03},null).trend,true);
+const oldBands=[[105,106],[100,101],[120,121],[130,131]],healthy={return20:0,return60:0};
+assert.equal(freezeTriggers([{close:101},{close:99}],{ma60:90,atr:2},healthy,oldBands).structure,false,'One shallow close break is insufficient');
+assert.equal(freezeTriggers([{close:99},{close:99}],{ma60:90,atr:2},healthy,oldBands).twoCloses,true);
+assert.equal(freezeTriggers([{close:101},{close:97}],{ma60:90,atr:2},healthy,oldBands).singleBreak,false,'Exactly 3% is not more than 3%');
+assert.equal(freezeTriggers([{close:101},{close:96.99}],{ma60:90,atr:2},healthy,oldBands).singleBreak,true);
+assert.equal(freezeTriggers([{close:101},{close:96.99}],{ma60:90,atr:4},healthy,oldBands).singleBreak,false,'Larger ATR threshold wins');
 console.log('PASS: weekly-close basis, one ATR20 formula, price gates, future-data exclusion, whole-group retention and breached-band pending alerts');
+

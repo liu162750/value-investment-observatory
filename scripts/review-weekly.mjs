@@ -2,6 +2,7 @@ import {readFileSync,writeFileSync} from 'node:fs';
 import {reviewTiers,POLICY} from './tier-policy.mjs';
 import {stocks,distance} from '../worker/dashboard.js';
 const input=process.argv[2];if(!input)throw Error('显式提供带前复权完整日线与来源的本次输入文件');
+const checkOnly=process.argv.includes('--check-freeze');
 const data=JSON.parse(readFileSync(input,'utf8')),now=Date.now(),today=new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Shanghai'});
 if(data.asOf?.slice(0,10)!==today)throw Error('输入日期不是本次复核日期');
 const snapshot=JSON.parse(readFileSync('worker/snapshot.json','utf8'));let source=readFileSync('worker/dashboard.js','utf8');
@@ -10,13 +11,18 @@ const future=Array.from({length:8},(_,i)=>new Date(now+(i+1)*86400000)).find(d=>
 const next=future.toLocaleDateString('sv-SE',{timeZone:'Asia/Shanghai'})+' 16:30';
 for(const old of stocks){
  const a=data.stocks[old.symbol];if(!a?.source?.includes('qfq')||a.bars?.length<250)throw Error('缺少前复权输入与来源');
- const r=reviewTiers({bars:a.bars,now,oldLevels:old.levels,previousReview:old.levelReview,newSupportEvidence:a.newSupportEvidence});
+ let r=reviewTiers({bars:a.bars,now,oldLevels:old.levels,previousReview:old.levelReview,newSupportEvidence:a.newSupportEvidence});
+ if(checkOnly){
+  const check={checkedAt:r.asOf,dataDate:r.dataDate,recovery:r.recovery};
+  const readyForReview=old.levelReview?.status==='pending-support'&&!r.recovery.frozen;
+  r={...old.levelReview,freezeCheck:check,recovery:readyForReview?{...r.recovery,frozen:true,readyForReview:true}:r.recovery,status:r.recovery.frozen?'pending-support':old.levelReview.status,reason:r.recovery.frozen?r.reason:readyForReview?'恢复条件满足，等待正式整组复核；本次每日检查不改档':old.levelReview.reason,levels:old.levels};
+ }
  r.source=a.source;r.sourceQuoteTime=a.quote.time;r.nextScheduled=next;
  r.marketGate={...data.marketGate,asOf:a.dataDate};
  const activeBands=r.status==='adopted'?r.candidateBands.map(b=>({low:b.level[0],high:b.level[1],note:b.note})):old.levelReview?.bands||old.levels.map(v=>({low:v?.[0],high:v?.[1],note:'旧档参考'}));
  r.bands=activeBands;
- const sellReview={asOf:r.asOf,dataDate:r.dataDate,policy:POLICY,levels:r.levels.slice(2),status:r.status};
- const sellReference={price:r.referencePrice,asOf:r.referenceDate,source:'最近完整周前复权收盘基准，非持仓成本'};
+ const sellReview=checkOnly?old.sellReview:{asOf:r.asOf,dataDate:r.dataDate,policy:POLICY,levels:r.levels.slice(2),status:r.status};
+ const sellReference=checkOnly?old.sellReference:{price:r.referencePrice,asOf:r.referenceDate,source:'最近完整周前复权收盘基准，非持仓成本'};
  const marker=`{symbol:'${old.symbol}',`,start=source.indexOf(marker),end=source.indexOf('\n',start),original=source.slice(start,end),nameAt=original.indexOf('name:');
  let block=marker+`sellReview:${JSON.stringify(sellReview)},levelReview:${JSON.stringify(r)},sellReference:${JSON.stringify(sellReference)},`+original.slice(nameAt);
  block=block.slice(0,block.lastIndexOf('levels:'))+`levels:${JSON.stringify(r.levels)}},`;
