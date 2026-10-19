@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-10-19T17:22:42.067845+08:00",
+  "asOf": "2026-10-19T17:53:50.253399+08:00",
   "policy": "ATR20-handoff-v1",
   "stocks": {
     "sh600312": {
@@ -18,21 +18,19 @@
       "buy": [
         {
           "tier": "T1",
-          "low": 20.1,
-          "high": 20.6,
+          "low": 20.6,
+          "high": 21.1,
           "pct": 40,
-          "note": "Fib 38.2%回撤+Fib 61.8%支撑",
-          "originalNote": "Fib 38.2%回撤+Fib 61.8%支撑",
-          "edgePct": -3.83
+          "note": "ATR波动通道",
+          "edgePct": -1.49
         },
         {
           "tier": "T2",
-          "low": 19.0,
-          "high": 19.5,
+          "low": 19.5,
+          "high": 20.0,
           "pct": 60,
-          "note": "Fib 50%回撤+MA60+MA120",
-          "originalNote": "Fib 50%回撤+MA60+MA120",
-          "edgePct": -8.96
+          "note": "ATR波动通道",
+          "edgePct": -6.63
         }
       ],
       "sell": [
@@ -2634,7 +2632,27 @@
           "volume": 285308.0
         }
       ],
-      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600312,day,,,320,qfq"
+      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600312,day,,,320,qfq",
+      "previousBuy": [
+        {
+          "tier": "T1",
+          "low": 20.1,
+          "high": 20.6,
+          "pct": 40,
+          "note": "Fib 38.2%回撤+Fib 61.8%支撑",
+          "originalNote": "Fib 38.2%回撤+Fib 61.8%支撑",
+          "edgePct": -3.83
+        },
+        {
+          "tier": "T2",
+          "low": 19.0,
+          "high": 19.5,
+          "pct": 60,
+          "note": "Fib 50%回撤+MA60+MA120",
+          "originalNote": "Fib 50%回撤+MA60+MA120",
+          "edgePct": -8.96
+        }
+      ]
     },
     "sz002156": {
       "ok": true,
@@ -2652,21 +2670,19 @@
       "buy": [
         {
           "tier": "T1",
-          "low": 44.5,
-          "high": 45.5,
+          "low": 45.5,
+          "high": 47.0,
           "pct": 40,
-          "note": "ATR波动通道",
-          "originalNote": "ATR波动通道",
-          "edgePct": -4.51
+          "note": "近60日低点+近120日低点",
+          "edgePct": -1.36
         },
         {
           "tier": "T2",
-          "low": 40.5,
-          "high": 41.5,
+          "low": 41.5,
+          "high": 42.5,
           "pct": 60,
           "note": "ATR波动通道",
-          "originalNote": "ATR波动通道",
-          "edgePct": -12.91
+          "edgePct": -10.81
         }
       ],
       "sell": [
@@ -5268,7 +5284,27 @@
           "volume": 472457.0
         }
       ],
-      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002156,day,,,320,qfq"
+      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002156,day,,,320,qfq",
+      "previousBuy": [
+        {
+          "tier": "T1",
+          "low": 44.5,
+          "high": 45.5,
+          "pct": 40,
+          "note": "ATR波动通道",
+          "originalNote": "ATR波动通道",
+          "edgePct": -4.51
+        },
+        {
+          "tier": "T2",
+          "low": 40.5,
+          "high": 41.5,
+          "pct": 60,
+          "note": "ATR波动通道",
+          "originalNote": "ATR波动通道",
+          "edgePct": -12.91
+        }
+      ]
     },
     "sh601138": {
       "ok": true,
@@ -5286,21 +5322,19 @@
       "buy": [
         {
           "tier": "T1",
-          "low": 45.5,
-          "high": 46.5,
+          "low": 46.0,
+          "high": 47.0,
           "pct": 40,
-          "note": "近60日低点+近120日低点",
-          "originalNote": "近60日低点+近120日低点",
-          "edgePct": -2.54
+          "note": "ATR波动通道",
+          "edgePct": -1.49
         },
         {
           "tier": "T2",
-          "low": 42.0,
-          "high": 43.0,
+          "low": 42.5,
+          "high": 43.5,
           "pct": 60,
           "note": "ATR波动通道",
-          "originalNote": "ATR波动通道",
-          "edgePct": -9.87
+          "edgePct": -8.82
         }
       ],
       "sell": [
@@ -7902,7 +7936,27 @@
           "volume": 696363.0
         }
       ],
-      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138,day,,,320,qfq"
+      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138,day,,,320,qfq",
+      "previousBuy": [
+        {
+          "tier": "T1",
+          "low": 45.5,
+          "high": 46.5,
+          "pct": 40,
+          "note": "近60日低点+近120日低点",
+          "originalNote": "近60日低点+近120日低点",
+          "edgePct": -2.54
+        },
+        {
+          "tier": "T2",
+          "low": 42.0,
+          "high": 43.0,
+          "pct": 60,
+          "note": "ATR波动通道",
+          "originalNote": "ATR波动通道",
+          "edgePct": -9.87
+        }
+      ]
     },
     "sz002463": {
       "ok": true,
@@ -7920,21 +7974,19 @@
       "buy": [
         {
           "tier": "T1",
-          "low": 104.0,
-          "high": 106.0,
+          "low": 107.0,
+          "high": 110.0,
           "pct": 40,
-          "note": "ATR波动通道",
-          "originalNote": "ATR波动通道",
-          "edgePct": -5.15
+          "note": "Fib 78.6%回撤",
+          "edgePct": -1.57
         },
         {
           "tier": "T2",
-          "low": 94.5,
-          "high": 97.0,
+          "low": 97.0,
+          "high": 100.0,
           "pct": 60,
-          "note": "年线MA250",
-          "originalNote": "年线MA250",
-          "edgePct": -13.2
+          "note": "ATR波动通道",
+          "edgePct": -10.51
         }
       ],
       "sell": [
@@ -10540,7 +10592,27 @@
           "volume": 453523.0
         }
       ],
-      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,320,qfq"
+      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,320,qfq",
+      "previousBuy": [
+        {
+          "tier": "T1",
+          "low": 104.0,
+          "high": 106.0,
+          "pct": 40,
+          "note": "ATR波动通道",
+          "originalNote": "ATR波动通道",
+          "edgePct": -5.15
+        },
+        {
+          "tier": "T2",
+          "low": 94.5,
+          "high": 97.0,
+          "pct": 60,
+          "note": "年线MA250",
+          "originalNote": "年线MA250",
+          "edgePct": -13.2
+        }
+      ]
     }
   },
   "marketGate": {
@@ -10549,5 +10621,26 @@
     "lastMonth": "2026-09-30",
     "frozen": true,
     "method": "20个已完成月K收盘均值，排除未完成当月，非20日均线"
+  },
+  "userRequestedBuyAdjustment": true,
+  "buyParameters": {
+    "multipliers": [
+      0.5,
+      1.25
+    ],
+    "clamps": [
+      [
+        0.015,
+        0.06
+      ],
+      [
+        0.04,
+        0.16
+      ]
+    ],
+    "edgeMin": 0.01,
+    "absorbWin": 0.005,
+    "gapATR": 0.9975,
+    "note": "用户要求买档适当上调，未经过历史收益验证；卖档不变。定档后冻结参考价，不随现价下跌自动下移。"
   }
 }

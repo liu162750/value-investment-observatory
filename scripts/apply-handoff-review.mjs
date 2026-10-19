@@ -9,10 +9,11 @@ let src=readFileSync('worker/dashboard.js','utf8');
 for(const old of stocks){
  const a=audit.stocks[old.symbol];if(!a?.ok)throw Error('Invalid audit');
  const levels=[...a.buy,...a.sell].map(t=>[t.low,t.high]);
- const moved=levels.some((r,i)=>!old.levels[i]||Math.abs((r[0]+r[1])/(old.levels[i][0]+old.levels[i][1])-1)>.03);
+ const moved=audit.userRequestedBuyAdjustment===true||levels.some((r,i)=>!old.levels[i]||Math.abs((r[0]+r[1])/(old.levels[i][0]+old.levels[i][1])-1)>.03);
  const adopted=moved?levels:old.levels;
  const review={policyId:'ATR20-handoff-v1',asOf:audit.asOf,dataDate:a.dataDate,nextScheduled:'2026-10-21 16:30',atr20:a.atr,count:a.count,policy:'ATR20×1.0/2.2买档、×1.8/3.2卖档；技术锚点吸附；价格带净间距≥0.9975ATR20；非估值结论',bands:[...a.buy,...a.sell],marketGate:{...audit.marketGate,asOf:a.dataDate},changed:moved,changeRule:'任一档中心变动>3%或补缺档时，整组通过校验后发布；否则保留原组'};
- const sellReview={asOf:audit.asOf,dataDate:a.dataDate,policy:review.policy,levels:adopted.slice(2)};
+ if(audit.userRequestedBuyAdjustment){review.buyParameters=audit.buyParameters;review.frozenBuyReference=a.quote.price;review.previousBuy=a.previousBuy;review.policy='买档0.5/1.25ATR20人工复核上调；净间距≥0.9975ATR20；卖档保留；非估值结论';}
+ const sellReview=audit.userRequestedBuyAdjustment?old.sellReview:{asOf:audit.asOf,dataDate:a.dataDate,policy:review.policy,levels:adopted.slice(2)};
  const sellReference={price:a.quote.price,asOf:audit.asOf,source:'腾讯财经当日收盘复核基准，非持仓成本'};
  const marker=`{symbol:'${old.symbol}',`,start=src.indexOf(marker),end=src.indexOf('\n',start);
  let block=src.slice(start,end);

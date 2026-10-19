@@ -9,7 +9,8 @@ for(const stock of stocks){
  const bars=a.bars,trs=bars.slice(1).map((r,i)=>Math.max(r.high-r.low,Math.abs(r.high-bars[i].close),Math.abs(r.low-bars[i].close)));
  const atr=trs.slice(-20).reduce((x,y)=>x+y)/20;assert(Math.abs(atr-a.atr)<.00006);
  const levels=[...a.buy,...a.sell].map(t=>[t.low,t.high]);assert.deepEqual(stock.levels,levels);
- assert(levels[0][1]<=a.quote.price*.975);assert(levels[2][0]>=a.quote.price*1.05);
+ assert(levels[0][1]<=a.quote.price*(fixture.userRequestedBuyAdjustment?.99:.975));assert(levels[2][0]>=a.quote.price*1.05);
+ if(fixture.userRequestedBuyAdjustment){for(let i=0;i<2;i++)assert(levels[i][1]>a.previousBuy[i].high);assert.deepEqual(levels.slice(2),stock.sellReview.levels);}
  assert(levels[0][0]-levels[1][1]>=atr*1.05*.95-1e-8);assert(levels[3][0]-levels[2][1]>=atr*1.05*.95-1e-8);
  assert.equal(stock.levelReview.nextScheduled,'2026-10-21 16:30');
 }

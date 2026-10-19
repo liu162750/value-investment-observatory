@@ -4188,12 +4188,12 @@
       "report": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225483266.PDF",
       "levels": [
         [
-          20.1,
-          20.6
+          20.6,
+          21.1
         ],
         [
-          19,
-          19.5
+          19.5,
+          20
         ],
         [
           22.9,
@@ -6793,13 +6793,13 @@
       "levelType": "ATR20波动率与技术锚点复核；通道不是已确认支撑/压力；基本面估值待核验",
       "distances": [
         {
-          "delta": -0.8200000000000003,
-          "pct": -3.8281979458450057,
+          "delta": -0.3200000000000003,
+          "pct": -1.493930905695613,
           "inside": false
         },
         {
-          "delta": -1.9200000000000017,
-          "pct": -8.963585434173677,
+          "delta": -1.4200000000000017,
+          "pct": -6.629318394024283,
           "inside": false
         },
         {
@@ -6877,7 +6877,7 @@
       "mediaError": true,
       "sellReference": {
         "price": 21.42,
-        "asOf": "2026-10-19T17:22:42.067845+08:00",
+        "asOf": "2026-10-19T17:53:50.253399+08:00",
         "source": "腾讯财经当日收盘复核基准，非持仓成本"
       },
       "historyStale": true,
@@ -6898,30 +6898,28 @@
       },
       "levelReview": {
         "policyId": "ATR20-handoff-v1",
-        "asOf": "2026-10-19T17:22:42.067845+08:00",
+        "asOf": "2026-10-19T17:53:50.253399+08:00",
         "dataDate": "2026-10-19",
         "nextScheduled": "2026-10-21 16:30",
         "atr20": 0.56,
         "count": 321,
-        "policy": "ATR20×1.0/2.2买档、×1.8/3.2卖档；技术锚点吸附；价格带净间距≥0.9975ATR20；非估值结论",
+        "policy": "买档0.5/1.25ATR20人工复核上调；净间距≥0.9975ATR20；卖档保留；非估值结论",
         "bands": [
           {
             "tier": "T1",
-            "low": 20.1,
-            "high": 20.6,
+            "low": 20.6,
+            "high": 21.1,
             "pct": 40,
-            "note": "Fib 38.2%回撤+Fib 61.8%支撑",
-            "originalNote": "Fib 38.2%回撤+Fib 61.8%支撑",
-            "edgePct": -3.83
+            "note": "ATR波动通道",
+            "edgePct": -1.49
           },
           {
             "tier": "T2",
-            "low": 19,
-            "high": 19.5,
+            "low": 19.5,
+            "high": 20,
             "pct": 60,
-            "note": "Fib 50%回撤+MA60+MA120",
-            "originalNote": "Fib 50%回撤+MA60+MA120",
-            "edgePct": -8.96
+            "note": "ATR波动通道",
+            "edgePct": -6.63
           },
           {
             "tier": "T1",
@@ -6950,8 +6948,49 @@
           "method": "20个已完成月K收盘均值，排除未完成当月，非20日均线",
           "asOf": "2026-10-19"
         },
-        "changed": false,
-        "changeRule": "任一档中心变动>3%或补缺档时，整组通过校验后发布；否则保留原组"
+        "changed": true,
+        "changeRule": "任一档中心变动>3%或补缺档时，整组通过校验后发布；否则保留原组",
+        "buyParameters": {
+          "multipliers": [
+            0.5,
+            1.25
+          ],
+          "clamps": [
+            [
+              0.015,
+              0.06
+            ],
+            [
+              0.04,
+              0.16
+            ]
+          ],
+          "edgeMin": 0.01,
+          "absorbWin": 0.005,
+          "gapATR": 0.9975,
+          "note": "用户要求买档适当上调，未经过历史收益验证；卖档不变。定档后冻结参考价，不随现价下跌自动下移。"
+        },
+        "frozenBuyReference": 21.42,
+        "previousBuy": [
+          {
+            "tier": "T1",
+            "low": 20.1,
+            "high": 20.6,
+            "pct": 40,
+            "note": "Fib 38.2%回撤+Fib 61.8%支撑",
+            "originalNote": "Fib 38.2%回撤+Fib 61.8%支撑",
+            "edgePct": -3.83
+          },
+          {
+            "tier": "T2",
+            "low": 19,
+            "high": 19.5,
+            "pct": 60,
+            "note": "Fib 50%回撤+MA60+MA120",
+            "originalNote": "Fib 50%回撤+MA60+MA120",
+            "edgePct": -8.96
+          }
+        ]
       }
     },
     {
@@ -6964,12 +7003,12 @@
       "report": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-08-29/072fbc43-caef-4b31-bf0e-ee19d9fa0459.PDF",
       "levels": [
         [
-          44.5,
-          45.5
+          45.5,
+          47
         ],
         [
-          40.5,
-          41.5
+          41.5,
+          42.5
         ],
         [
           51.5,
@@ -9569,13 +9608,13 @@
       "levelType": "ATR20波动率与技术锚点复核；通道不是已确认支撑/压力；基本面估值待核验",
       "distances": [
         {
-          "delta": -2.1499999999999986,
-          "pct": -4.512067156348371,
+          "delta": -0.6499999999999986,
+          "pct": -1.3641133263378775,
           "inside": false
         },
         {
-          "delta": -6.149999999999999,
-          "pct": -12.90661070304302,
+          "delta": -5.149999999999999,
+          "pct": -10.807974816369358,
           "inside": false
         },
         {
@@ -9653,7 +9692,7 @@
       "mediaError": true,
       "sellReference": {
         "price": 47.65,
-        "asOf": "2026-10-19T17:22:42.067845+08:00",
+        "asOf": "2026-10-19T17:53:50.253399+08:00",
         "source": "腾讯财经当日收盘复核基准，非持仓成本"
       },
       "historyStale": true,
@@ -9674,30 +9713,28 @@
       },
       "levelReview": {
         "policyId": "ATR20-handoff-v1",
-        "asOf": "2026-10-19T17:22:42.067845+08:00",
+        "asOf": "2026-10-19T17:53:50.253399+08:00",
         "dataDate": "2026-10-19",
         "nextScheduled": "2026-10-21 16:30",
         "atr20": 2.7345,
         "count": 321,
-        "policy": "ATR20×1.0/2.2买档、×1.8/3.2卖档；技术锚点吸附；价格带净间距≥0.9975ATR20；非估值结论",
+        "policy": "买档0.5/1.25ATR20人工复核上调；净间距≥0.9975ATR20；卖档保留；非估值结论",
         "bands": [
           {
             "tier": "T1",
-            "low": 44.5,
-            "high": 45.5,
+            "low": 45.5,
+            "high": 47,
             "pct": 40,
-            "note": "ATR波动通道",
-            "originalNote": "ATR波动通道",
-            "edgePct": -4.51
+            "note": "近60日低点+近120日低点",
+            "edgePct": -1.36
           },
           {
             "tier": "T2",
-            "low": 40.5,
-            "high": 41.5,
+            "low": 41.5,
+            "high": 42.5,
             "pct": 60,
             "note": "ATR波动通道",
-            "originalNote": "ATR波动通道",
-            "edgePct": -12.91
+            "edgePct": -10.81
           },
           {
             "tier": "T1",
@@ -9726,8 +9763,49 @@
           "method": "20个已完成月K收盘均值，排除未完成当月，非20日均线",
           "asOf": "2026-10-19"
         },
-        "changed": false,
-        "changeRule": "任一档中心变动>3%或补缺档时，整组通过校验后发布；否则保留原组"
+        "changed": true,
+        "changeRule": "任一档中心变动>3%或补缺档时，整组通过校验后发布；否则保留原组",
+        "buyParameters": {
+          "multipliers": [
+            0.5,
+            1.25
+          ],
+          "clamps": [
+            [
+              0.015,
+              0.06
+            ],
+            [
+              0.04,
+              0.16
+            ]
+          ],
+          "edgeMin": 0.01,
+          "absorbWin": 0.005,
+          "gapATR": 0.9975,
+          "note": "用户要求买档适当上调，未经过历史收益验证；卖档不变。定档后冻结参考价，不随现价下跌自动下移。"
+        },
+        "frozenBuyReference": 47.65,
+        "previousBuy": [
+          {
+            "tier": "T1",
+            "low": 44.5,
+            "high": 45.5,
+            "pct": 40,
+            "note": "ATR波动通道",
+            "originalNote": "ATR波动通道",
+            "edgePct": -4.51
+          },
+          {
+            "tier": "T2",
+            "low": 40.5,
+            "high": 41.5,
+            "pct": 60,
+            "note": "ATR波动通道",
+            "originalNote": "ATR波动通道",
+            "edgePct": -12.91
+          }
+        ]
       }
     },
     {
@@ -9740,12 +9818,12 @@
       "report": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468066.PDF",
       "levels": [
         [
-          45.5,
-          46.5
+          46,
+          47
         ],
         [
-          42,
-          43
+          42.5,
+          43.5
         ],
         [
           51.5,
@@ -12345,13 +12423,13 @@
       "levelType": "ATR20波动率与技术锚点复核；通道不是已确认支撑/压力；基本面估值待核验",
       "distances": [
         {
-          "delta": -1.2100000000000009,
-          "pct": -2.5361559421504944,
+          "delta": -0.7100000000000009,
+          "pct": -1.4881576189478114,
           "inside": false
         },
         {
-          "delta": -4.710000000000001,
-          "pct": -9.872144204569274,
+          "delta": -4.210000000000001,
+          "pct": -8.824145881366592,
           "inside": false
         },
         {
@@ -12429,7 +12507,7 @@
       "mediaError": true,
       "sellReference": {
         "price": 47.71,
-        "asOf": "2026-10-19T17:22:42.067845+08:00",
+        "asOf": "2026-10-19T17:53:50.253399+08:00",
         "source": "腾讯财经当日收盘复核基准，非持仓成本"
       },
       "historyStale": true,
@@ -12450,30 +12528,28 @@
       },
       "levelReview": {
         "policyId": "ATR20-handoff-v1",
-        "asOf": "2026-10-19T17:22:42.067845+08:00",
+        "asOf": "2026-10-19T17:53:50.253399+08:00",
         "dataDate": "2026-10-19",
         "nextScheduled": "2026-10-21 16:30",
         "atr20": 2.458,
         "count": 321,
-        "policy": "ATR20×1.0/2.2买档、×1.8/3.2卖档；技术锚点吸附；价格带净间距≥0.9975ATR20；非估值结论",
+        "policy": "买档0.5/1.25ATR20人工复核上调；净间距≥0.9975ATR20；卖档保留；非估值结论",
         "bands": [
           {
             "tier": "T1",
-            "low": 45.5,
-            "high": 46.5,
+            "low": 46,
+            "high": 47,
             "pct": 40,
-            "note": "近60日低点+近120日低点",
-            "originalNote": "近60日低点+近120日低点",
-            "edgePct": -2.54
+            "note": "ATR波动通道",
+            "edgePct": -1.49
           },
           {
             "tier": "T2",
-            "low": 42,
-            "high": 43,
+            "low": 42.5,
+            "high": 43.5,
             "pct": 60,
             "note": "ATR波动通道",
-            "originalNote": "ATR波动通道",
-            "edgePct": -9.87
+            "edgePct": -8.82
           },
           {
             "tier": "T1",
@@ -12502,8 +12578,49 @@
           "method": "20个已完成月K收盘均值，排除未完成当月，非20日均线",
           "asOf": "2026-10-19"
         },
-        "changed": false,
-        "changeRule": "任一档中心变动>3%或补缺档时，整组通过校验后发布；否则保留原组"
+        "changed": true,
+        "changeRule": "任一档中心变动>3%或补缺档时，整组通过校验后发布；否则保留原组",
+        "buyParameters": {
+          "multipliers": [
+            0.5,
+            1.25
+          ],
+          "clamps": [
+            [
+              0.015,
+              0.06
+            ],
+            [
+              0.04,
+              0.16
+            ]
+          ],
+          "edgeMin": 0.01,
+          "absorbWin": 0.005,
+          "gapATR": 0.9975,
+          "note": "用户要求买档适当上调，未经过历史收益验证；卖档不变。定档后冻结参考价，不随现价下跌自动下移。"
+        },
+        "frozenBuyReference": 47.71,
+        "previousBuy": [
+          {
+            "tier": "T1",
+            "low": 45.5,
+            "high": 46.5,
+            "pct": 40,
+            "note": "近60日低点+近120日低点",
+            "originalNote": "近60日低点+近120日低点",
+            "edgePct": -2.54
+          },
+          {
+            "tier": "T2",
+            "low": 42,
+            "high": 43,
+            "pct": 60,
+            "note": "ATR波动通道",
+            "originalNote": "ATR波动通道",
+            "edgePct": -9.87
+          }
+        ]
       }
     },
     {
@@ -12516,12 +12633,12 @@
       "report": "https://disc.static.szse.cn/disc/disk03/finalpage/2026-08-26/510ef2bf-102c-47af-aab9-ec715b88b306.PDF",
       "levels": [
         [
-          104,
-          106
+          107,
+          110
         ],
         [
-          94.5,
-          97
+          97,
+          100
         ],
         [
           125,
@@ -15121,13 +15238,13 @@
       "levelType": "ATR20波动率与技术锚点复核；通道不是已确认支撑/压力；基本面估值待核验",
       "distances": [
         {
-          "delta": -5.75,
-          "pct": -5.1454138702460845,
+          "delta": -1.75,
+          "pct": -1.5659955257270695,
           "inside": false
         },
         {
-          "delta": -14.75,
-          "pct": -13.19910514541387,
+          "delta": -11.75,
+          "pct": -10.51454138702461,
           "inside": false
         },
         {
@@ -16149,7 +16266,7 @@
       "mediaError": true,
       "sellReference": {
         "price": 111.75,
-        "asOf": "2026-10-19T17:22:42.067845+08:00",
+        "asOf": "2026-10-19T17:53:50.253399+08:00",
         "source": "腾讯财经当日收盘复核基准，非持仓成本"
       },
       "historyStale": true,
@@ -16170,30 +16287,28 @@
       },
       "levelReview": {
         "policyId": "ATR20-handoff-v1",
-        "asOf": "2026-10-19T17:22:42.067845+08:00",
+        "asOf": "2026-10-19T17:53:50.253399+08:00",
         "dataDate": "2026-10-19",
         "nextScheduled": "2026-10-21 16:30",
         "atr20": 6.6175,
         "count": 321,
-        "policy": "ATR20×1.0/2.2买档、×1.8/3.2卖档；技术锚点吸附；价格带净间距≥0.9975ATR20；非估值结论",
+        "policy": "买档0.5/1.25ATR20人工复核上调；净间距≥0.9975ATR20；卖档保留；非估值结论",
         "bands": [
           {
             "tier": "T1",
-            "low": 104,
-            "high": 106,
+            "low": 107,
+            "high": 110,
             "pct": 40,
-            "note": "ATR波动通道",
-            "originalNote": "ATR波动通道",
-            "edgePct": -5.15
+            "note": "Fib 78.6%回撤",
+            "edgePct": -1.57
           },
           {
             "tier": "T2",
-            "low": 94.5,
-            "high": 97,
+            "low": 97,
+            "high": 100,
             "pct": 60,
-            "note": "年线MA250",
-            "originalNote": "年线MA250",
-            "edgePct": -13.2
+            "note": "ATR波动通道",
+            "edgePct": -10.51
           },
           {
             "tier": "T1",
@@ -16222,8 +16337,49 @@
           "method": "20个已完成月K收盘均值，排除未完成当月，非20日均线",
           "asOf": "2026-10-19"
         },
-        "changed": false,
-        "changeRule": "任一档中心变动>3%或补缺档时，整组通过校验后发布；否则保留原组"
+        "changed": true,
+        "changeRule": "任一档中心变动>3%或补缺档时，整组通过校验后发布；否则保留原组",
+        "buyParameters": {
+          "multipliers": [
+            0.5,
+            1.25
+          ],
+          "clamps": [
+            [
+              0.015,
+              0.06
+            ],
+            [
+              0.04,
+              0.16
+            ]
+          ],
+          "edgeMin": 0.01,
+          "absorbWin": 0.005,
+          "gapATR": 0.9975,
+          "note": "用户要求买档适当上调，未经过历史收益验证；卖档不变。定档后冻结参考价，不随现价下跌自动下移。"
+        },
+        "frozenBuyReference": 111.75,
+        "previousBuy": [
+          {
+            "tier": "T1",
+            "low": 104,
+            "high": 106,
+            "pct": 40,
+            "note": "ATR波动通道",
+            "originalNote": "ATR波动通道",
+            "edgePct": -5.15
+          },
+          {
+            "tier": "T2",
+            "low": 94.5,
+            "high": 97,
+            "pct": 60,
+            "note": "年线MA250",
+            "originalNote": "年线MA250",
+            "edgePct": -13.2
+          }
+        ]
       }
     }
   ],
