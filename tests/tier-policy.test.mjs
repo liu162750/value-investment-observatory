@@ -24,6 +24,11 @@ for(const stock of stocks){
 }
 const page=readFileSync(new URL('../worker/page.html',import.meta.url),'utf8');
 new Function(page.slice(page.indexOf('const $='),page.lastIndexOf('</script>')));
+const notice=new Function(page.slice(page.indexOf('function tierReviewNotice('),page.indexOf('function render(){'))+';return tierReviewNotice;')();
+assert(page.includes("'+tierReviewNotice(s)+'"),'Every card must render an independent policy notice');
+assert(notice({levelReview:{status:'pending-support'}}).includes('下跌趋势'));
+assert(notice({levelReview:{status:'pending-support'}}).includes('暂不据此买入'));
+assert(notice({levelReview:{status:'retained',stage:{name:'range'}}}).includes('保留已校验旧档'));
 const accountCalc=new Function('model',page.slice(page.indexOf('function accountView('),page.indexOf('const previewAccounts='))+';return accountView;')({stale:false});
 const s={symbol:'x',quote:{price:8,time:'2026-10-19 10:00:00'},levels:[[9,10],[7,8.5],[11,12],[13,14]],levelReview:{policyId:POLICY,status:'pending-support'}};
 const alerts=accountCalc({weight:.7,positions:[{symbol:'x',budgetAvailable:[true,true]}]},[s],Date.parse('2026-10-19T10:00:01+08:00')).positions[0].alerts;
