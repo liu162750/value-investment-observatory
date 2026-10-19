@@ -1,14 +1,7 @@
-# 自动价值复核
-
-用户最新确认每周完整复核一次，默认北京时间周五16:30；新业绩报告发现后当天额外复核该股。任务名“四股每周价值复核与业绩发布监测”，已创建为本聊天的本机心跳任务。任务运行依赖本机及应用可用，不是Render内置AI，也不承诺电脑离线仍执行。
-
-当前四股及未来替换标的均复核产业竞争力、真实需求与订单、正常化扣非盈利、自由现金流与回款、负债、扩产回报、治理、估值假设与失效条件，并比较经核验的替代候选。结合私有已录入持仓判断适配性，个人股数和现金不能出现在公开研究文件。未更新成交反馈时不能假定持仓已改变。
-
-结果文件 worker/investment-reviews.json：顶层 asOf、status；stocks按配置symbol键保存 longTermReview 与 replacementReview。longTermReview.status 为 pending/validated/invalidated，含reason、asOf、source及证据。replacementReview只有来源及比较证据完整且达到门槛才为qualified，含candidate.name、candidate.symbol、reason、asOf、source，否则pending。
-
-初始为空，不能当作已完成分析。部署时构建会嵌入公开结果及快照。自动任务运行后提交有依据的研究变化，并经检查与Render部署确认后展示；无实质变化不通知。不下单、不自动改持仓、不发送群消息、不更改已确认买T1/T2。AI研究并非保证准确，数据缺失和估值不确定性必须写明。
-
-监测在每日16:30和20:30运行，仅新报告或每周五16:30启动深入分析，其余只检查公告及事件变化，避免频繁重做分析。20:30后发布消息在下次可运行检查处理，记录实际披露与发现时间，不承诺全天实时捕捉。事件日期文件worker/event-calendar.json，三季报由预约披露接口同步；红底仅在距未来事件0至7天且尚未实际披露时显示。
-
-
-2026-10-19用户最新覆盖：每周三、周五北京时间16:30复核四股价值与四档，采用docs/t1t2-handoff-policy.md的ATR20规则；其余每日16:30/20:30检查新报告事件及临时条件。检查通过后自动提交原GitHub、部署原Render并确认目标提交live。WorkBuddy导出不代表迁移完成。
+﻿# 自动复核与发布
+每周三、周五北京时间16:30收盘后复核四股价值与四档，其他每日16:30/20:30只查新增业绩、重要事件和临时触发，避免重复研究。延迟运行记录实际时间，不承诺全天实时或离线执行。
+价格仅执行docs/t1t2-handoff-policy.md，通过scripts/review-weekly.mjs保存；每次取得新数据，不用旧回归样本冒充新行情。临时触发、整组替换、下跌保护、许可分离均按唯一规范。
+逐股核查产业竞争力、需求订单、正常化扣非盈利、现金流回款、债务、扩产回报、治理、估值假设与失效条件，以公司和交易所/巨潮原始披露为据；未知pending，单日涨跌不代表逻辑失效。替代候选仅完整比较核验后qualified。
+公开研究写worker/investment-reviews.json，stocks按symbol存longTermReview（status/reason/asOf/source/证据）和replacementReview（qualified须candidate.name/symbol及reason/asOf/source）。个人股数现金不公开，不假设成交。
+预约披露以官方最新记录核验变更，event-calendar仅未来0至7天突出，已披露不当未来预约。新正式报告/快报/预告在下一次可执行检查分析对应股，记录披露及发现时间、去重。
+同步dashboard、snapshot、tier-reviews、日期、样本；npm test及npm run build通过后提交原GitHub、部署原Render并核验目标提交live和网页。WorkBuddy导出不代表迁移完成。失败不清空有效数据，下次重试。不新建付费资源、不下单、不改持仓、不向群/他人/其他聊天发消息。仅实质变化、重要事件、失败或需用户处理通知，其余安静。

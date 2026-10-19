@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {reviewTiers,completedWeekFriday,validate,POLICY} from '../scripts/tier-policy.mjs';
+import {stocks} from '../worker/dashboard.js';
+const input=JSON.parse(readFileSync(new URL('./fixtures/atr20-review-20261019.json',import.meta.url),'utf8'));
+const audit=JSON.parse(readFileSync(new URL('../worker/tier-reviews.json',import.meta.url),'utf8'));
+assert.equal(completedWeekFriday(Date.parse('2026-10-21T16:30:00+08:00')),'2026-10-16');
+assert.equal(completedWeekFriday(Date.parse('2026-10-23T14:59:00+08:00')),'2026-10-16');
+assert.equal(completedWeekFriday(Date.parse('2026-10-23T16:30:00+08:00')),'2026-10-23');
+for(const stock of stocks){
+ const r=audit.stocks[stock.symbol],a=input.stocks[stock.symbol];
+ assert.equal(stock.levelReview.policyId,POLICY);assert.deepEqual(stock.levels,r.levels);
+ assert.equal(r.referenceDate,'2026-10-16');assert.equal(r.referencePrice,a.bars.find(b=>b.date==='2026-10-16').close);
+ assert(Math.abs(r.halfWidth-Math.max(.006*r.referencePrice,.15*r.atr20))<1e-10);
+ assert.deepEqual(validate(r.candidateBands.map(b=>b.level),{p:r.referencePrice,atr:r.atr20,buyEdge:r.buyEdge}),[]);
+ assert.deepEqual(stock.sellReview.levels,r.levels.slice(2));
+ if(r.status==='adopted')assert.deepEqual(r.levels,r.candidateBands.map(b=>b.level));
+ const now=Date.parse('2026-10-19T16:30:00+08:00');
+ const run=reviewTiers({bars:a.bars,now,oldLevels:r.levels});
+ const future=[...a.bars,{date:'2026-10-20',open:999,high:999,low:999,close:999}];
+ assert.deepEqual(reviewTiers({bars:future,now,oldLevels:r.levels}).candidateBands,run.candidateBands,'Future data must not enter review');
+ assert.throws(()=>reviewTiers({bars:a.bars.slice(-100),now}),/250/);
+ if(r.stage.name==='falling')assert.equal(r.status,'pending-support');
+}
+const page=readFileSync(new URL('../worker/page.html',import.meta.url),'utf8');
+new Function(page.slice(page.indexOf('const $='),page.lastIndexOf('</script>')));
+const accountCalc=new Function('model',page.slice(page.indexOf('function accountView('),page.indexOf('const previewAccounts='))+';return accountView;')({stale:false});
+const s={symbol:'x',quote:{price:8,time:'2026-10-19 10:00:00'},levels:[[9,10],[7,8.5],[11,12],[13,14]],levelReview:{policyId:POLICY,status:'pending-support'}};
+const alerts=accountCalc({weight:.7,positions:[{symbol:'x',budgetAvailable:[true,true]}]},[s],Date.parse('2026-10-19T10:00:01+08:00')).positions[0].alerts;
+assert.equal(alerts.length,2,'Below lower edge still registers buy touch');assert(alerts.every(a=>!a.flash&&a.text.includes('旧档参考')));
+const synthetic=Array.from({length:260},(_,i)=>({date:new Date(Date.UTC(2025,0,1+i)).toISOString().slice(0,10),open:20,close:20,high:20.4,low:19.6}));
+const syn=reviewTiers({bars:synthetic,now:Date.parse('2025-09-20T16:30:00+08:00')});
+assert(syn.levels[0][1]<=20*.97);assert(syn.levels[2][0]>=20*1.05);
+console.log('PASS: weekly-close basis, one ATR20 formula, price gates, future-data exclusion, whole-group retention and breached-band pending alerts');

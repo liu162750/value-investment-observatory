@@ -36,7 +36,7 @@ console.log('PASS: all four stocks, baseline buys, all tiers, intraday isolation
 
 assert(readFileSync(new URL('../worker/dashboard.js',import.meta.url),'utf8').includes('...(s.sellReview?.levels||'),'Dashboard must use confirmed buys');
 
-for(const stock of stocks){const saved=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.meta.url),'utf8')).stocks.find(s=>s.symbol===stock.symbol);assert.deepEqual(saved.levels.slice(0,2),stock.levels.slice(0,2));assert.deepEqual(saved.levels.slice(2),stock.sellReview.levels,'Seed and fetched sell tiers must share one saved review');if(stock.levelReview?.policyId!=='ATR20-handoff-v1'&&stock.sellReview.levels[0])assert(stock.sellReview.levels[0][0]>=stock.sellReference.price*1.12);}
+for(const stock of stocks){const saved=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.meta.url),'utf8')).stocks.find(s=>s.symbol===stock.symbol);assert.deepEqual(saved.levels.slice(0,2),stock.levels.slice(0,2));assert.deepEqual(saved.levels.slice(2),stock.sellReview.levels,'Seed and fetched sell tiers must share one saved review');if(!['ATR20-handoff-v1','weekly-close-atr20-v1'].includes(stock.levelReview?.policyId)&&stock.sellReview.levels[0])assert(stock.sellReview.levels[0][0]>=stock.sellReference.price*1.12);}
 
 for(const stock of stocks){assert.equal(stock.levelReview?.dataDate,'2026-10-19');assert.equal(stock.levelReview?.nextScheduled,'2026-10-21 16:30');}
 

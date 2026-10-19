@@ -1,0 +1,568 @@
+{
+  "policyId": "weekly-close-atr20-v1",
+  "asOf": "2026-10-19T11:02:52.315Z",
+  "stocks": {
+    "sh600312": {
+      "policyId": "weekly-close-atr20-v1",
+      "asOf": "2026-10-19T11:02:52.315Z",
+      "dataDate": "2026-10-19",
+      "referenceDate": "2026-10-16",
+      "referenceWeekEnding": "2026-10-16",
+      "referencePrice": 20.74,
+      "atr20": 0.5600000000000002,
+      "halfWidth": 0.12444,
+      "stage": {
+        "name": "rising",
+        "return20": 0.13225499524262618,
+        "return60": 0.19611346884074154,
+        "returnBeforeLast3": 0.051273919018923975
+      },
+      "parameters": {
+        "multipliers": [
+          -1,
+          -2.2,
+          1.8,
+          3.2
+        ],
+        "anchorWindow": 0.005,
+        "halfWidthPrice": 0.006,
+        "halfWidthATR": 0.15,
+        "minGapATR": 0.9975,
+        "minBuyEdge": 0.03,
+        "minSellEdge": 0.05,
+        "tick": 0.01,
+        "changeThreshold": 0.03
+      },
+      "buyEdge": 0.040501446480231455,
+      "candidateBands": [
+        {
+          "level": [
+            19.66,
+            19.9
+          ],
+          "target": 20.18,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        },
+        {
+          "level": [
+            18.85,
+            19.1
+          ],
+          "target": 19.508,
+          "anchor": {
+            "name": "Fib50%回撤",
+            "price": 19.491500000000002,
+            "weight": 7
+          },
+          "note": "边沿/间距校正通道（原锚点已移出）"
+        },
+        {
+          "level": [
+            21.78,
+            22.03
+          ],
+          "target": 21.747999999999998,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        },
+        {
+          "level": [
+            22.59,
+            22.84
+          ],
+          "target": 22.532,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        }
+      ],
+      "levels": [
+        [
+          19.66,
+          19.9
+        ],
+        [
+          18.85,
+          19.1
+        ],
+        [
+          21.78,
+          22.03
+        ],
+        [
+          22.59,
+          22.84
+        ]
+      ],
+      "status": "adopted",
+      "priceValidation": [],
+      "newCandidateValidation": [],
+      "reason": "整组候选通过定价校验后替换",
+      "newSupportEvidence": null,
+      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600312,day,,,320,qfq",
+      "sourceQuoteTime": "2026-10-19 16:14:34+08:00",
+      "nextScheduled": "2026-10-21 16:30",
+      "marketGate": {
+        "indexClose": 3730.92,
+        "completedMonthlyMA20": 3798.12,
+        "lastMonth": "2026-09-30",
+        "frozen": true,
+        "method": "20个已完成月K收盘均值，排除未完成当月，非20日均线",
+        "asOf": "2026-10-19"
+      },
+      "bands": [
+        {
+          "low": 19.66,
+          "high": 19.9,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        },
+        {
+          "low": 18.85,
+          "high": 19.1,
+          "note": "边沿/间距校正通道（原锚点已移出）"
+        },
+        {
+          "low": 21.78,
+          "high": 22.03,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        },
+        {
+          "low": 22.59,
+          "high": 22.84,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        }
+      ]
+    },
+    "sz002156": {
+      "policyId": "weekly-close-atr20-v1",
+      "asOf": "2026-10-19T11:02:52.315Z",
+      "dataDate": "2026-10-19",
+      "referenceDate": "2026-10-16",
+      "referenceWeekEnding": "2026-10-16",
+      "referencePrice": 48.67,
+      "atr20": 2.7344999999999984,
+      "halfWidth": 0.41017499999999973,
+      "stage": {
+        "name": "falling",
+        "return20": -0.17844827586206902,
+        "return60": -0.3029549444119368,
+        "returnBeforeLast3": -0.10810344827586216
+      },
+      "parameters": {
+        "multipliers": [
+          -1,
+          -2.2,
+          1.8,
+          3.2
+        ],
+        "anchorWindow": 0.005,
+        "halfWidthPrice": 0.006,
+        "halfWidthATR": 0.15,
+        "minGapATR": 0.9975,
+        "minBuyEdge": 0.03,
+        "minSellEdge": 0.05,
+        "tick": 0.01,
+        "changeThreshold": 0.03
+      },
+      "buyEdge": 0.03,
+      "candidateBands": [
+        {
+          "level": [
+            45.53,
+            46.35
+          ],
+          "target": 45.935500000000005,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        },
+        {
+          "level": [
+            41.98,
+            42.8
+          ],
+          "target": 42.65410000000001,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        },
+        {
+          "level": [
+            53.18,
+            54
+          ],
+          "target": 53.5921,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        },
+        {
+          "level": [
+            57.01,
+            57.83
+          ],
+          "target": 57.4204,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        }
+      ],
+      "levels": [
+        [
+          45.5,
+          47
+        ],
+        [
+          41.5,
+          42.5
+        ],
+        [
+          51.5,
+          53
+        ],
+        [
+          56,
+          57.5
+        ]
+      ],
+      "status": "pending-support",
+      "priceValidation": [],
+      "newCandidateValidation": [],
+      "reason": "下跌阶段无独立新支撑依据，保留整组旧档供历史参考；禁止据此买入",
+      "newSupportEvidence": null,
+      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002156,day,,,320,qfq",
+      "sourceQuoteTime": "2026-10-19 16:14:33+08:00",
+      "nextScheduled": "2026-10-21 16:30",
+      "marketGate": {
+        "indexClose": 3730.92,
+        "completedMonthlyMA20": 3798.12,
+        "lastMonth": "2026-09-30",
+        "frozen": true,
+        "method": "20个已完成月K收盘均值，排除未完成当月，非20日均线",
+        "asOf": "2026-10-19"
+      },
+      "bands": [
+        {
+          "tier": "T1",
+          "low": 45.5,
+          "high": 47,
+          "pct": 40,
+          "note": "近60日低点+近120日低点",
+          "edgePct": -1.36
+        },
+        {
+          "tier": "T2",
+          "low": 41.5,
+          "high": 42.5,
+          "pct": 60,
+          "note": "ATR波动通道",
+          "edgePct": -10.81
+        },
+        {
+          "tier": "T1",
+          "low": 51.5,
+          "high": 53,
+          "pct": 40,
+          "note": "年线MA250",
+          "originalNote": "年线MA250",
+          "edgePct": 8.08
+        },
+        {
+          "tier": "T2",
+          "low": 56,
+          "high": 57.5,
+          "pct": 60,
+          "note": "ATR波动通道",
+          "originalNote": "ATR波动通道",
+          "edgePct": 17.52
+        }
+      ]
+    },
+    "sh601138": {
+      "policyId": "weekly-close-atr20-v1",
+      "asOf": "2026-10-19T11:02:52.315Z",
+      "dataDate": "2026-10-19",
+      "referenceDate": "2026-10-16",
+      "referenceWeekEnding": "2026-10-16",
+      "referencePrice": 47.78,
+      "atr20": 2.4579999999999993,
+      "halfWidth": 0.36869999999999986,
+      "stage": {
+        "name": "falling",
+        "return20": -0.2553457156235367,
+        "return60": -0.16210045662100447,
+        "returnBeforeLast3": -0.23833307320118613
+      },
+      "parameters": {
+        "multipliers": [
+          -1,
+          -2.2,
+          1.8,
+          3.2
+        ],
+        "anchorWindow": 0.005,
+        "halfWidthPrice": 0.006,
+        "halfWidthATR": 0.15,
+        "minGapATR": 0.9975,
+        "minBuyEdge": 0.03,
+        "minSellEdge": 0.05,
+        "tick": 0.01,
+        "changeThreshold": 0.03
+      },
+      "buyEdge": 0.03,
+      "candidateBands": [
+        {
+          "level": [
+            44.95,
+            45.69
+          ],
+          "target": 45.322,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        },
+        {
+          "level": [
+            41.75,
+            42.49
+          ],
+          "target": 42.3724,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        },
+        {
+          "level": [
+            51.84,
+            52.57
+          ],
+          "target": 52.2044,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        },
+        {
+          "level": [
+            55.28,
+            56.01
+          ],
+          "target": 55.6456,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        }
+      ],
+      "levels": [
+        [
+          46,
+          47
+        ],
+        [
+          42.5,
+          43.5
+        ],
+        [
+          51.5,
+          53
+        ],
+        [
+          55.5,
+          56.5
+        ]
+      ],
+      "status": "pending-support",
+      "priceValidation": [
+        "买T1边沿过近"
+      ],
+      "newCandidateValidation": [],
+      "reason": "下跌阶段无独立新支撑依据，保留整组旧档供历史参考；禁止据此买入",
+      "newSupportEvidence": null,
+      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138,day,,,320,qfq",
+      "sourceQuoteTime": "2026-10-19 16:14:40+08:00",
+      "nextScheduled": "2026-10-21 16:30",
+      "marketGate": {
+        "indexClose": 3730.92,
+        "completedMonthlyMA20": 3798.12,
+        "lastMonth": "2026-09-30",
+        "frozen": true,
+        "method": "20个已完成月K收盘均值，排除未完成当月，非20日均线",
+        "asOf": "2026-10-19"
+      },
+      "bands": [
+        {
+          "tier": "T1",
+          "low": 46,
+          "high": 47,
+          "pct": 40,
+          "note": "ATR波动通道",
+          "edgePct": -1.49
+        },
+        {
+          "tier": "T2",
+          "low": 42.5,
+          "high": 43.5,
+          "pct": 60,
+          "note": "ATR波动通道",
+          "edgePct": -8.82
+        },
+        {
+          "tier": "T1",
+          "low": 51.5,
+          "high": 53,
+          "pct": 40,
+          "note": "ATR波动通道",
+          "originalNote": "ATR波动通道",
+          "edgePct": 7.94
+        },
+        {
+          "tier": "T2",
+          "low": 55.5,
+          "high": 56.5,
+          "pct": 60,
+          "note": "ATR波动通道",
+          "originalNote": "ATR波动通道",
+          "edgePct": 16.33
+        }
+      ]
+    },
+    "sz002463": {
+      "policyId": "weekly-close-atr20-v1",
+      "asOf": "2026-10-19T11:02:52.315Z",
+      "dataDate": "2026-10-19",
+      "referenceDate": "2026-10-16",
+      "referenceWeekEnding": "2026-10-16",
+      "referencePrice": 113.38,
+      "atr20": 6.6175000000000015,
+      "halfWidth": 0.9926250000000002,
+      "stage": {
+        "name": "falling",
+        "return20": -0.1286549707602339,
+        "return60": -0.12558685446009388,
+        "returnBeforeLast3": -0.10331384015594547
+      },
+      "parameters": {
+        "multipliers": [
+          -1,
+          -2.2,
+          1.8,
+          3.2
+        ],
+        "anchorWindow": 0.005,
+        "halfWidthPrice": 0.006,
+        "halfWidthATR": 0.15,
+        "minGapATR": 0.9975,
+        "minBuyEdge": 0.03,
+        "minSellEdge": 0.05,
+        "tick": 0.01,
+        "changeThreshold": 0.03
+      },
+      "buyEdge": 0.03,
+      "candidateBands": [
+        {
+          "level": [
+            105.77,
+            107.76
+          ],
+          "target": 106.76249999999999,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        },
+        {
+          "level": [
+            97.18,
+            99.16
+          ],
+          "target": 98.82149999999999,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        },
+        {
+          "level": [
+            124.3,
+            126.28
+          ],
+          "target": 125.2915,
+          "anchor": null,
+          "note": "ATR测算通道（非确认支撑/压力）"
+        },
+        {
+          "level": [
+            132.96,
+            134.95
+          ],
+          "target": 134.556,
+          "anchor": {
+            "name": "Fib61.8%反弹",
+            "price": 133.95445999999998,
+            "weight": 7
+          },
+          "note": "Fib61.8%反弹"
+        }
+      ],
+      "levels": [
+        [
+          107,
+          110
+        ],
+        [
+          97,
+          100
+        ],
+        [
+          125,
+          128
+        ],
+        [
+          135,
+          139
+        ]
+      ],
+      "status": "pending-support",
+      "priceValidation": [
+        "买T1边沿过近"
+      ],
+      "newCandidateValidation": [],
+      "reason": "下跌阶段无独立新支撑依据，保留整组旧档供历史参考；禁止据此买入",
+      "newSupportEvidence": null,
+      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,320,qfq",
+      "sourceQuoteTime": "2026-10-19 16:14:15+08:00",
+      "nextScheduled": "2026-10-21 16:30",
+      "marketGate": {
+        "indexClose": 3730.92,
+        "completedMonthlyMA20": 3798.12,
+        "lastMonth": "2026-09-30",
+        "frozen": true,
+        "method": "20个已完成月K收盘均值，排除未完成当月，非20日均线",
+        "asOf": "2026-10-19"
+      },
+      "bands": [
+        {
+          "tier": "T1",
+          "low": 107,
+          "high": 110,
+          "pct": 40,
+          "note": "Fib 78.6%回撤",
+          "edgePct": -1.57
+        },
+        {
+          "tier": "T2",
+          "low": 97,
+          "high": 100,
+          "pct": 60,
+          "note": "ATR波动通道",
+          "edgePct": -10.51
+        },
+        {
+          "tier": "T1",
+          "low": 125,
+          "high": 128,
+          "pct": 40,
+          "note": "Fib 50%反弹",
+          "originalNote": "Fib 50%反弹",
+          "edgePct": 11.86
+        },
+        {
+          "tier": "T2",
+          "low": 135,
+          "high": 139,
+          "pct": 60,
+          "note": "ATR间距/边沿校正通道（原锚点已移出区间）",
+          "originalNote": "Fib 61.8%反弹",
+          "edgePct": 20.81
+        }
+      ]
+    }
+  }
+}
