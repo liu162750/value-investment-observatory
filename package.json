@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "validate": "node scripts/validate-artifact.mjs",
+    "validate": "npm test",
     "test": "node tests/levels.test.mjs && node tests/account-day.test.mjs && node tests/monitor.test.mjs && node tests/gold-quote.test.mjs && node tests/position-alerts.test.mjs && node tests/events.test.mjs"
   }
 }

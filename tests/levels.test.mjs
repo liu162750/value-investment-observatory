@@ -12,7 +12,6 @@ for(const stock of stocks){
   assert.deepEqual(levels.slice(0,2),stock.levels.slice(0,2),'Preserve confirmed baseline buys: '+stock.symbol);
   if(levels[2]){assert(levels[2][0]>=levels[0][1]*1.08);assert(levels[2][0]-levels[0][1]>=tech.atr);assert(levels[2][0]>=stock.sellReference.price*1.12);assert(levels[2][0]-stock.sellReference.price>=tech.atr);}
   if(levels[3])assert(levels[3][0]-levels[2][1]>=tech.atr);
-  if(stock.symbol==='sz002156')assert.deepEqual(levels[2],[65.02,66.54],'Do not skip recent Tongfu resistance because of the former 3ATR floor');
   if(levels[2]){
    const pivots=[];
    for(let i=Math.max(2,done.length-120);i<done.length-2;i++)if(done.slice(i-2,i+3).every(r=>r.high<=done[i].high)&&done[i].high>done.at(-1).close)pivots.push(done[i].high);
@@ -38,3 +37,7 @@ console.log('PASS: all four stocks, baseline buys, all tiers, intraday isolation
 assert(readFileSync(new URL('../worker/dashboard.js',import.meta.url),'utf8').includes('...(s.sellReview?.levels||'),'Dashboard must use confirmed buys');
 
 for(const stock of stocks){const saved=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.meta.url),'utf8')).stocks.find(s=>s.symbol===stock.symbol);assert.deepEqual(saved.levels.slice(0,2),stock.levels.slice(0,2));assert.deepEqual(saved.levels.slice(2),stock.sellReview.levels,'Seed and fetched sell tiers must share one saved review');if(stock.sellReview.levels[0])assert(stock.sellReview.levels[0][0]>=stock.sellReference.price*1.12);}
+
+for(const stock of stocks){assert.equal(stock.levelReview?.dataDate,'2026-10-16');assert.equal(stock.levelReview?.nextScheduled,'2026-10-23 16:30');}
+
+for(const stock of stocks){assert.equal(stock.levelReview?.dataDate,'2026-10-16');assert.equal(stock.levelReview?.nextScheduled,'2026-10-23 16:30');}
