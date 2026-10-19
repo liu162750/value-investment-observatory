@@ -54,4 +54,6 @@ assert(inline(inlineStock,0,{...tierAccount,weight:.9},now).includes('8.5层'));
 assert(!inline(inlineStock,1,{...tierAccount,id:'other'},now).includes('条件通过'),'Account switching cannot reuse another account confirmation');
 inlineStock.levelReview.status='pending-support';
 assert(inline(inlineStock,1,tierAccount,now).includes('冻结，不能买'),'Stabilization cannot override freeze');
+assert.equal(inline(inlineStock,0,{...tierAccount,weight:.9},now),inline(inlineStock,1,{...tierAccount,weight:.9},now),'Both tiers use the same freeze wording even when T1 position limit is reached');
+assert(!page.includes("a.name+'：'"),'Inline status omits account name prefix');
 assert(page.includes('data-buy-tier='));
