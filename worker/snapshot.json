@@ -6882,7 +6882,7 @@
       },
       "historyStale": true,
       "sellReview": {
-        "asOf": "2026-10-19T11:02:52.315Z",
+        "asOf": "2026-10-19T11:21:37.033Z",
         "dataDate": "2026-10-19",
         "policy": "weekly-close-atr20-v1",
         "levels": [
@@ -6895,11 +6895,11 @@
             22.84
           ]
         ],
-        "status": "adopted"
+        "status": "retained"
       },
       "levelReview": {
         "policyId": "weekly-close-atr20-v1",
-        "asOf": "2026-10-19T11:02:52.315Z",
+        "asOf": "2026-10-19T11:21:37.033Z",
         "dataDate": "2026-10-19",
         "referenceDate": "2026-10-16",
         "referenceWeekEnding": "2026-10-16",
@@ -6911,6 +6911,20 @@
           "return20": 0.13225499524262618,
           "return60": 0.19611346884074154,
           "returnBeforeLast3": 0.051273919018923975
+        },
+        "recovery": {
+          "frozen": false,
+          "required": false,
+          "aboveMA60": true,
+          "returnsRecovered": true,
+          "evidenceOK": false,
+          "risingStructure": true,
+          "atrPeak": 0.6549999999999997,
+          "atrContracted": false,
+          "missing": [],
+          "frozenSince": null,
+          "recoveredAt": null,
+          "evidence": null
         },
         "parameters": {
           "multipliers": [
@@ -6989,10 +7003,10 @@
             22.84
           ]
         ],
-        "status": "adopted",
+        "status": "retained",
         "priceValidation": [],
         "newCandidateValidation": [],
-        "reason": "整组候选通过定价校验后替换",
+        "reason": "整组变动≤3%且旧组校验通过",
         "newSupportEvidence": null,
         "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600312,day,,,320,qfq",
         "sourceQuoteTime": "2026-10-19 16:14:34+08:00",
@@ -9733,7 +9747,7 @@
       },
       "historyStale": true,
       "sellReview": {
-        "asOf": "2026-10-19T11:02:52.315Z",
+        "asOf": "2026-10-19T11:21:37.033Z",
         "dataDate": "2026-10-19",
         "policy": "weekly-close-atr20-v1",
         "levels": [
@@ -9750,7 +9764,7 @@
       },
       "levelReview": {
         "policyId": "weekly-close-atr20-v1",
-        "asOf": "2026-10-19T11:02:52.315Z",
+        "asOf": "2026-10-19T11:21:37.033Z",
         "dataDate": "2026-10-19",
         "referenceDate": "2026-10-16",
         "referenceWeekEnding": "2026-10-16",
@@ -9762,6 +9776,24 @@
           "return20": -0.17844827586206902,
           "return60": -0.3029549444119368,
           "returnBeforeLast3": -0.10810344827586216
+        },
+        "recovery": {
+          "frozen": true,
+          "required": true,
+          "aboveMA60": false,
+          "returnsRecovered": false,
+          "evidenceOK": false,
+          "risingStructure": false,
+          "atrPeak": 2.944,
+          "atrContracted": false,
+          "missing": [
+            "未连续3个完整收盘站上各自MA60",
+            "20日/60日跌幅尚未同时退出阈值",
+            "缺少当期已核验的独立企稳依据"
+          ],
+          "frozenSince": "2026-10-19",
+          "recoveredAt": null,
+          "evidence": null
         },
         "parameters": {
           "multipliers": [
@@ -9839,7 +9871,7 @@
         "status": "pending-support",
         "priceValidation": [],
         "newCandidateValidation": [],
-        "reason": "下跌阶段无独立新支撑依据，保留整组旧档供历史参考；禁止据此买入",
+        "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据。整组旧档仅供参考，禁止据此买入",
         "newSupportEvidence": null,
         "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002156,day,,,320,qfq",
         "sourceQuoteTime": "2026-10-19 16:14:33+08:00",
@@ -12594,7 +12626,7 @@
       },
       "historyStale": true,
       "sellReview": {
-        "asOf": "2026-10-19T11:02:52.315Z",
+        "asOf": "2026-10-19T11:21:37.033Z",
         "dataDate": "2026-10-19",
         "policy": "weekly-close-atr20-v1",
         "levels": [
@@ -12611,7 +12643,7 @@
       },
       "levelReview": {
         "policyId": "weekly-close-atr20-v1",
-        "asOf": "2026-10-19T11:02:52.315Z",
+        "asOf": "2026-10-19T11:21:37.033Z",
         "dataDate": "2026-10-19",
         "referenceDate": "2026-10-16",
         "referenceWeekEnding": "2026-10-16",
@@ -12623,6 +12655,24 @@
           "return20": -0.2553457156235367,
           "return60": -0.16210045662100447,
           "returnBeforeLast3": -0.23833307320118613
+        },
+        "recovery": {
+          "frozen": true,
+          "required": true,
+          "aboveMA60": false,
+          "returnsRecovered": false,
+          "evidenceOK": false,
+          "risingStructure": false,
+          "atrPeak": 2.4774999999999987,
+          "atrContracted": false,
+          "missing": [
+            "未连续3个完整收盘站上各自MA60",
+            "20日/60日跌幅尚未同时退出阈值",
+            "缺少当期已核验的独立企稳依据"
+          ],
+          "frozenSince": "2026-10-19",
+          "recoveredAt": null,
+          "evidence": null
         },
         "parameters": {
           "multipliers": [
@@ -12702,7 +12752,7 @@
           "买T1边沿过近"
         ],
         "newCandidateValidation": [],
-        "reason": "下跌阶段无独立新支撑依据，保留整组旧档供历史参考；禁止据此买入",
+        "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据。整组旧档仅供参考，禁止据此买入",
         "newSupportEvidence": null,
         "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138,day,,,320,qfq",
         "sourceQuoteTime": "2026-10-19 16:14:40+08:00",
@@ -16401,7 +16451,7 @@
       },
       "historyStale": true,
       "sellReview": {
-        "asOf": "2026-10-19T11:02:52.315Z",
+        "asOf": "2026-10-19T11:21:37.033Z",
         "dataDate": "2026-10-19",
         "policy": "weekly-close-atr20-v1",
         "levels": [
@@ -16418,7 +16468,7 @@
       },
       "levelReview": {
         "policyId": "weekly-close-atr20-v1",
-        "asOf": "2026-10-19T11:02:52.315Z",
+        "asOf": "2026-10-19T11:21:37.033Z",
         "dataDate": "2026-10-19",
         "referenceDate": "2026-10-16",
         "referenceWeekEnding": "2026-10-16",
@@ -16430,6 +16480,24 @@
           "return20": -0.1286549707602339,
           "return60": -0.12558685446009388,
           "returnBeforeLast3": -0.10331384015594547
+        },
+        "recovery": {
+          "frozen": true,
+          "required": true,
+          "aboveMA60": false,
+          "returnsRecovered": false,
+          "evidenceOK": false,
+          "risingStructure": false,
+          "atrPeak": 6.8245000000000005,
+          "atrContracted": false,
+          "missing": [
+            "未连续3个完整收盘站上各自MA60",
+            "20日/60日跌幅尚未同时退出阈值",
+            "缺少当期已核验的独立企稳依据"
+          ],
+          "frozenSince": "2026-10-19",
+          "recoveredAt": null,
+          "evidence": null
         },
         "parameters": {
           "multipliers": [
@@ -16513,7 +16581,7 @@
           "买T1边沿过近"
         ],
         "newCandidateValidation": [],
-        "reason": "下跌阶段无独立新支撑依据，保留整组旧档供历史参考；禁止据此买入",
+        "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据。整组旧档仅供参考，禁止据此买入",
         "newSupportEvidence": null,
         "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,320,qfq",
         "sourceQuoteTime": "2026-10-19 16:14:15+08:00",

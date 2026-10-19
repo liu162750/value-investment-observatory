@@ -34,7 +34,25 @@ export function validate(levels,{p,atr,buyEdge}){
  if(levels[2][0]<p*1.05-1e-8)errors.push('卖T1边沿过近');
  return errors;
 }
-export function reviewTiers({bars,now=Date.now(),oldLevels=null,newSupportEvidence=null}){
+export function recoveryState(bars,m,stage,previousReview,evidence){
+ const date=bars.at(-1).date;
+ const weak=bars.at(-1).close<m.ma60||stage.return20<=-.10||stage.return60<=-.15;
+ const wasFrozen=previousReview?.recovery?.frozen===true||previousReview?.status==='pending-support';
+ const required=weak||wasFrozen;
+ const aboveMA60=bars.slice(-3).every((r,k)=>{const end=bars.length-3+k;return r.close>bars.slice(end-59,end+1).reduce((s,b)=>s+b.close,0)/60;});
+ const returnsRecovered=stage.return20>-.10&&stage.return60>-.15;
+ const risingStructure=bars.slice(-3).every((r,k,a)=>k===0||r.close>a[k-1].close&&r.low>=a[k-1].low);
+ const atrSeries=Array.from({length:20},(_,k)=>{const end=bars.length-19+k;const b=bars.slice(end-21,end);return b.slice(1).reduce((s,r,i)=>s+Math.max(r.high-r.low,Math.abs(r.high-b[i].close),Math.abs(r.low-b[i].close)),0)/20;});
+ const atrPeak=Math.max(...atrSeries),atrContracted=m.atr<=atrPeak*.8;
+ const kinds=['anchor-structure','atr-contraction','official-event'];
+ const sourced=evidence?.verified===true&&/^https:\/\//.test(evidence?.source||'')&&evidence?.asOf===date&&typeof evidence?.reason==='string'&&evidence.reason.trim().length>0&&kinds.includes(evidence?.kind);
+ const structureEvidence=evidence?.kind==='anchor-structure'&&risingStructure&&Number.isFinite(evidence.anchorPrice)&&evidence.anchorPrice>0&&bars.slice(-3).every(b=>b.low>=evidence.anchorPrice*.99)&&Math.abs(bars.at(-3).low/evidence.anchorPrice-1)<=.02;
+ const evidenceOK=sourced&&(structureEvidence||evidence.kind==='atr-contraction'&&atrContracted||evidence.kind==='official-event');
+ const frozen=required&&!(aboveMA60&&returnsRecovered&&evidenceOK);
+ const missing=[];if(required&&!aboveMA60)missing.push('未连续3个完整收盘站上各自MA60');if(required&&!returnsRecovered)missing.push('20日/60日跌幅尚未同时退出阈值');if(required&&!evidenceOK)missing.push('缺少当期已核验的独立企稳依据');
+ return {frozen,required,aboveMA60,returnsRecovered,evidenceOK,risingStructure,atrPeak,atrContracted,missing,frozenSince:required?(previousReview?.recovery?.frozenSince||previousReview?.dataDate||date):null,recoveredAt:required&&!frozen?date:previousReview?.recovery?.recoveredAt||null,evidence:evidenceOK?evidence:null};
+}
+export function reviewTiers({bars,now=Date.now(),oldLevels=null,previousReview=null,newSupportEvidence=null}){
  const localDate=iso(new Date(now+8*3600000)),minute=+(new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date(now)).replace(':',''));
  const done=bars.filter(r=>r.date<localDate||r.date===localDate&&minute>=1505);
  const m=indicators(done),stage=stageOf(done,m),friday=completedWeekFriday(now),monday=iso(new Date(Date.parse(friday+'T00:00:00Z')-4*86400000));
@@ -54,10 +72,9 @@ export function reviewTiers({bars,now=Date.now(),oldLevels=null,newSupportEviden
  const errors=validate(levels,{p,atr,buyEdge});if(errors.length)throw Error(errors.join(';'));
  for(let k=0;k<4;k++){candidate[k].level=levels[k];if(candidate[k].anchor&&(candidate[k].anchor.price<levels[k][0]||candidate[k].anchor.price>levels[k][1]))candidate[k].note='边沿/间距校正通道（原锚点已移出）';}
  const oldErrors=oldLevels?validate(oldLevels,{p,atr,buyEdge}):['无旧档'];
- const lowering=oldLevels&&levels.slice(0,2).some((r,i)=>oldLevels[i]&&(r[0]+r[1])<(oldLevels[i][0]+oldLevels[i][1])-.00001);
- const evidenceOK=typeof newSupportEvidence?.source==='string'&&/^https:\/\//.test(newSupportEvidence.source)&&!!newSupportEvidence.reason;
- const blocked=stage.name==='falling'&&lowering&&!evidenceOK;
+ const recovery=recoveryState(done,m,stage,previousReview,newSupportEvidence);
+ const blocked=recovery.frozen;
  const small=oldLevels&&levels.every((r,i)=>oldLevels[i]&&Math.abs((r[0]+r[1])/(oldLevels[i][0]+oldLevels[i][1])-1)<=.03);
  const retain=blocked||small&&!oldErrors.length;
- return {policyId:POLICY,asOf:new Date(now).toISOString(),dataDate:done.at(-1).date,referenceDate:weekly.date,referenceWeekEnding:friday,referencePrice:p,atr20:atr,halfWidth,stage,parameters:PARAMETERS,buyEdge,candidateBands:candidate,levels:retain?oldLevels:levels,status:blocked?'pending-support':retain?'retained':'adopted',priceValidation:retain?oldErrors:[],newCandidateValidation:errors,reason:blocked?'下跌阶段无独立新支撑依据，保留整组旧档供历史参考；禁止据此买入':retain?'整组变动≤3%且旧组校验通过':'整组候选通过定价校验后替换',newSupportEvidence:evidenceOK?newSupportEvidence:null};
+ return {policyId:POLICY,asOf:new Date(now).toISOString(),dataDate:done.at(-1).date,referenceDate:weekly.date,referenceWeekEnding:friday,referencePrice:p,atr20:atr,halfWidth,stage,recovery,parameters:PARAMETERS,buyEdge,candidateBands:candidate,levels:retain?(oldLevels||[null,null,null,null]):levels,status:blocked?'pending-support':retain?'retained':'adopted',priceValidation:retain?oldErrors:[],newCandidateValidation:errors,reason:blocked?'下跌恢复条件未满足：'+recovery.missing.join('；')+'。整组旧档仅供参考，禁止据此买入':retain?'整组变动≤3%且旧组校验通过':'整组候选通过定价校验后替换',newSupportEvidence:recovery.evidence};
 }

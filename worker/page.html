@@ -124,7 +124,7 @@ function renderAccountDayChanges(){
 function marketStockChanges(d){const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());return '<div class="market-stock-changes">'+(d.stocks||[]).map(s=>{const valid=!d.stale&&s.quote?.time?.slice(0,10)===today&&Number.isFinite(s.quote?.change);return '<div class="market-row"><span>'+esc(s.name)+'</span><strong></strong><span class="'+(valid?color(s.quote.change):'muted')+'" title="'+esc(s.quote?.time||'时间待核验')+'">'+(valid?pct(s.quote.change):'待更新')+'</span></div>';}).join('')+'</div>';}
 function tierReviewNotice(s){
  const r=s.levelReview;if(!r)return '';
- if(r.status==='pending-support')return '<div class="tier-review-warning" role="status"><strong>下跌趋势 · 买档待复核，暂不据此买入</strong><div>缺少新支撑核验，T1/T2保留旧档；触价也不代表可买。</div></div>';
+ if(r.status==='pending-support')return '<div class="tier-review-warning" role="status"><strong>下跌趋势 · 买档待复核，暂不据此买入</strong><div>T1/T2保留旧档；触价也不代表可买。</div>'+(r.recovery?'<div>恢复条件：连续3收盘站上MA60 '+(r.recovery.aboveMA60?'✓':'未满足')+'；20/60日跌幅退出阈值 '+(r.recovery.returnsRecovered?'✓':'未满足')+'；独立企稳依据 '+(r.recovery.evidenceOK?'✓':'待核验')+'</div>':'')+'</div>';
  if(r.priceValidation?.length)return '<div class="tier-review-warning" role="status"><strong>档位校验未通过 · 暂不据此买入</strong></div>';
  return '<div class="tier-review-note">'+(r.stage?.name==='rising'?'上涨阶段':r.stage?.name==='falling'?'下跌阶段':'震荡阶段')+' · '+(r.status==='retained'?'整组变化未超3%，保留已校验旧档':'已采用本次新四档')+'</div>';
 }
@@ -235,4 +235,5 @@ async function load(){if(busy)return;busy=true;$('#refresh').disabled=true;$('#r
 $('#refresh').onclick=()=>{loadGold();load();};if(window.initialDashboard){model=window.initialDashboard;render();$('#status').textContent='最近核验数据 '+model.date+' · 检查更新';}loadGold();load();setInterval(()=>{if(!document.hidden)loadGold();},30000);document.addEventListener('visibilitychange',()=>{if(!document.hidden){loadGold();load();}});setInterval(()=>{if(!document.hidden)load();},60000);
 if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'read_stock_watchlist',description:'读取大盘、隔夜美股和四股T1/T2观察区。',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true,untrustedContentHint:true},execute:async()=>{if(!model)await load();return model?{date:model.date,us:model.us,stocks:model.stocks.map(s=>({name:s.name,quote:s.quote,levels:s.levels,distances:s.distances,logic:s.logic}))}:{error:'数据不可用'};}})).catch(()=>{});}catch{}}
 </script></body></html>
+
 

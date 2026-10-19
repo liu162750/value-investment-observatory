@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {reviewTiers,completedWeekFriday,validate,POLICY} from '../scripts/tier-policy.mjs';
+import {reviewTiers,completedWeekFriday,validate,POLICY,recoveryState,indicators,stageOf} from '../scripts/tier-policy.mjs';
 import {stocks} from '../worker/dashboard.js';
 const input=JSON.parse(readFileSync(new URL('./fixtures/atr20-review-20261019.json',import.meta.url),'utf8'));
 const audit=JSON.parse(readFileSync(new URL('../worker/tier-reviews.json',import.meta.url),'utf8'));
@@ -36,4 +36,16 @@ assert.equal(alerts.length,2,'Below lower edge still registers buy touch');asser
 const synthetic=Array.from({length:260},(_,i)=>({date:new Date(Date.UTC(2025,0,1+i)).toISOString().slice(0,10),open:20,close:20,high:20.4,low:19.6}));
 const syn=reviewTiers({bars:synthetic,now:Date.parse('2025-09-20T16:30:00+08:00')});
 assert(syn.levels[0][1]<=20*.97);assert(syn.levels[2][0]>=20*1.05);
+const stable=synthetic.map((b,i)=>i<257?b:{...b,open:20+(i-256)*.1,close:20+(i-256)*.1,low:19.9+(i-256)*.1,high:20.5+(i-256)*.1});
+const frozen={status:'pending-support',dataDate:'2025-09-10'};
+const recovery=(bars,evidence)=>recoveryState(bars,indicators(bars),stageOf(bars,indicators(bars)),frozen,evidence);
+const proof={kind:'anchor-structure',source:'https://example.com/audit',asOf:stable.at(-1).date,reason:'Three complete rising closes and anchored lows verified',verified:true,anchorPrice:20};
+assert.equal(recovery(stable,null).frozen,true,'Range classification alone cannot clear a prior freeze');
+assert.equal(recovery(stable,{...proof,verified:false}).frozen,true,'A link without verification is insufficient');
+assert.equal(recovery(stable,{...proof,asOf:'2025-01-01'}).frozen,true,'Stale evidence cannot unlock');
+assert.equal(recovery(stable,proof).frozen,false,'All three recovery gates unlock the price review');
+const oneDay=synthetic.map((b,i)=>i===259?{...b,open:21,close:21,high:21.4,low:20.6}:b);
+assert.equal(recovery(oneDay,{...proof,kind:'official-event'}).frozen,true,'One strong close cannot unlock');
+const weak60=stable.map((b,i)=>i===199?{...b,open:30,close:30,high:30.4,low:29.6}:b);
+assert.equal(recovery(weak60,proof).frozen,true,'Both return thresholds must recover');
 console.log('PASS: weekly-close basis, one ATR20 formula, price gates, future-data exclusion, whole-group retention and breached-band pending alerts');

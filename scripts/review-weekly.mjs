@@ -10,7 +10,7 @@ const future=Array.from({length:8},(_,i)=>new Date(now+(i+1)*86400000)).find(d=>
 const next=future.toLocaleDateString('sv-SE',{timeZone:'Asia/Shanghai'})+' 16:30';
 for(const old of stocks){
  const a=data.stocks[old.symbol];if(!a?.source?.includes('qfq')||a.bars?.length<250)throw Error('缺少前复权输入与来源');
- const r=reviewTiers({bars:a.bars,now,oldLevels:old.levels,newSupportEvidence:a.newSupportEvidence});
+ const r=reviewTiers({bars:a.bars,now,oldLevels:old.levels,previousReview:old.levelReview,newSupportEvidence:a.newSupportEvidence});
  r.source=a.source;r.sourceQuoteTime=a.quote.time;r.nextScheduled=next;
  r.marketGate={...data.marketGate,asOf:a.dataDate};
  const activeBands=r.status==='adopted'?r.candidateBands.map(b=>({low:b.level[0],high:b.level[1],note:b.note})):old.levelReview?.bands||old.levels.map(v=>({low:v?.[0],high:v?.[1],note:'旧档参考'}));
