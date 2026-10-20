@@ -33,8 +33,24 @@ function evaluateMarketGate(months,rows,quote,now=Date.now()){
  return {policyId:'completed-month-ma20-v1',asOf:today,checkedAt,dataDate:last[0],date:last[0],lastCompleteMonth:last[0],monthCount:20,ma20month,indexClose,frozen:!(indexClose>ma20month),source,reason:indexClose>ma20month?'最近完整月收盘高于20个完整月收盘均值':'最近完整月收盘未高于20个完整月收盘均值'};
 }
 async function currentMarketGate(rows,quote){
- try{const data=await get('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq');return evaluateMarketGate(data.data?.sh000001?.month,rows,quote);}
- catch{return {asOf:null,checkedAt:new Date().toISOString(),frozen:null,reason:'月线来源更新失败，下次刷新继续核验'};}
+ const [monthly,weekly]=await Promise.allSettled([
+  get('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq'),
+  get('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq')
+ ]);
+ const gate=monthly.status==='fulfilled'?evaluateMarketGate(monthly.value.data?.sh000001?.month,rows,quote):{asOf:null,checkedAt:new Date().toISOString(),frozen:null,reason:'月线来源更新失败，下次刷新继续核验'};
+ return {...gate,weekly:weekly.status==='fulfilled'?evaluateWeeklyGate(weekly.value.data?.sh000001?.week):{passed:null,reason:'周线来源更新失败'}};
+}
+function evaluateWeeklyGate(raw,now=Date.now()){
+ const today=new Date(now).toLocaleDateString('sv-SE',{timeZone:'Asia/Shanghai'}),local=new Date(now+8*3600000),day=local.getUTCDay()||7;
+ const monday=new Date(Date.parse(today)-(day-1)*86400000).toISOString().slice(0,10);
+ const weekClosed=day>5||(day===5&&local.getUTCHours()*60+local.getUTCMinutes()>=905);
+ const selected=(raw||[]).filter(r=>/^\d{4}-\d{2}-\d{2}$/.test(r[0])&&r[0]<=today&&(weekClosed||r[0]<monday)).slice(-21);
+ const pending=reason=>({passed:null,checkedAt:new Date(now).toISOString(),reason});
+ if(selected.length!==21||selected.some((r,i)=>!Number.isFinite(Number(r[2]))||Number(r[2])<=0||(i>0&&r[0]<=selected[i-1][0])))return pending('完整周线不足或无效');
+ const expectedMonday=weekClosed?monday:new Date(Date.parse(monday)-7*86400000).toISOString().slice(0,10);
+ if(selected.at(-1)[0]<expectedMonday)return pending('最新完整周线未齐');
+ const ma20=selected.slice(-20).reduce((s,r)=>s+Number(r[2]),0)/20,previousMa20=selected.slice(0,20).reduce((s,r)=>s+Number(r[2]),0)/20,indexClose=Number(selected.at(-1)[2]);
+ return {passed:indexClose>ma20&&ma20>=previousMa20,asOf:today,checkedAt:new Date(now).toISOString(),dataDate:selected.at(-1)[0],indexClose,ma20,previousMa20,source:'https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq',displayOnly:true};
 }
 async function history(symbol){
  const cached=historyCache.get(symbol);if(cached&&Date.now()-cached.checked<300000)return completedDailyRows(cached.rows);
