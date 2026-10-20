@@ -1,3 +1,4 @@
+await import('../tests/market-gate.test.mjs');
 await import('../tests/events.test.mjs');
 await import('../tests/recovery.test.mjs');
 await import('../tests/position-alerts.test.mjs');

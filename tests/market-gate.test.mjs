@@ -1,0 +1,16 @@
+﻿import assert from 'node:assert/strict';
+import {evaluateMarketGate} from '../worker/dashboard.js';
+const now=Date.parse('2026-10-20T08:20:00+08:00');
+const months=Array.from({length:20},(_,i)=>[new Date(Date.UTC(2025,1+i,28)).toISOString().slice(0,10),'0',3800]);
+const run=(m=months,t=now)=>evaluateMarketGate(m,[],null,t);
+assert.equal(run().asOf,'2026-10-20');assert.equal(run().dataDate,'2026-09-28');
+assert.equal(run().frozen,true);
+const above=months.map(r=>[...r]);above.at(-1)[2]=3842.19;
+assert.equal(run(above).frozen,false);
+assert.equal(run([...above,['2026-10-20','0',1]]).frozen,false);
+assert.equal(run(above,Date.parse('2026-10-30T14:00:00+08:00')).frozen,false);
+assert.equal(run(above,Date.parse('2026-11-01T08:00:00+08:00')).asOf,null);
+assert.equal(run(months.slice(1)).asOf,null);
+assert.equal(run(months.map((r,i)=>i===5?months[4]:r)).asOf,null);
+assert.equal(run(months.map((r,i)=>i===5?[r[0],'0','bad']:r)).asOf,null);
+console.log('PASS: monthly gate excludes current month, ignores daily movement, requires 20 consecutive complete months');

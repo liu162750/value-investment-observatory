@@ -1,10 +1,10 @@
 {
-    "name":  "sites-worker-esm-starter",
-    "private":  true,
-    "type":  "module",
-    "scripts":  {
-                    "build":  "node scripts/build.mjs",
-                    "validate":  "npm test",
-                    "test":  "node tests/levels.test.mjs \u0026\u0026 node tests/account-day.test.mjs \u0026\u0026 node tests/monitor.test.mjs \u0026\u0026 node tests/gold-quote.test.mjs \u0026\u0026 node tests/position-alerts.test.mjs \u0026\u0026 node tests/events.test.mjs \u0026\u0026 node tests/tier-policy.test.mjs"
-                }
+  "name": "sites-worker-esm-starter",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "validate": "npm test",
+    "test": "node tests/levels.test.mjs && node tests/account-day.test.mjs && node tests/monitor.test.mjs && node tests/gold-quote.test.mjs && node tests/position-alerts.test.mjs && node tests/events.test.mjs && node tests/tier-policy.test.mjs && node tests/market-gate.test.mjs"
+  }
 }
