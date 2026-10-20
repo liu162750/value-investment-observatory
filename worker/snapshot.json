@@ -7025,7 +7025,7 @@
         "marketGate": {
           "policyId": "completed-month-ma20-v1",
           "asOf": "2026-10-20",
-          "checkedAt": "2026-10-20T08:35:42.855Z",
+          "checkedAt": "2026-10-20T12:28:10.703Z",
           "dataDate": "2026-09-30",
           "date": "2026-09-30",
           "lastCompleteMonth": "2026-09-30",
@@ -7059,7 +7059,7 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-20T08:36:02.219Z",
+          "checkedAt": "2026-10-20T12:28:55.112Z",
           "dataDate": "2026-10-20",
           "recovery": {
             "frozen": false,
@@ -9939,7 +9939,7 @@
         "marketGate": {
           "policyId": "completed-month-ma20-v1",
           "asOf": "2026-10-20",
-          "checkedAt": "2026-10-20T08:35:42.855Z",
+          "checkedAt": "2026-10-20T12:28:10.703Z",
           "dataDate": "2026-09-30",
           "date": "2026-09-30",
           "lastCompleteMonth": "2026-09-30",
@@ -9987,7 +9987,7 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-20T08:36:02.219Z",
+          "checkedAt": "2026-10-20T12:28:55.112Z",
           "dataDate": "2026-10-20",
           "recovery": {
             "frozen": true,
@@ -12876,7 +12876,7 @@
         "marketGate": {
           "policyId": "completed-month-ma20-v1",
           "asOf": "2026-10-20",
-          "checkedAt": "2026-10-20T08:35:42.855Z",
+          "checkedAt": "2026-10-20T12:28:10.703Z",
           "dataDate": "2026-09-30",
           "date": "2026-09-30",
           "lastCompleteMonth": "2026-09-30",
@@ -12924,7 +12924,7 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-20T08:36:02.219Z",
+          "checkedAt": "2026-10-20T12:28:55.112Z",
           "dataDate": "2026-10-20",
           "recovery": {
             "frozen": true,
@@ -16761,7 +16761,7 @@
         "marketGate": {
           "policyId": "completed-month-ma20-v1",
           "asOf": "2026-10-20",
-          "checkedAt": "2026-10-20T08:35:42.855Z",
+          "checkedAt": "2026-10-20T12:28:10.703Z",
           "dataDate": "2026-09-30",
           "date": "2026-09-30",
           "lastCompleteMonth": "2026-09-30",
@@ -16809,7 +16809,7 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-20T08:36:02.219Z",
+          "checkedAt": "2026-10-20T12:28:55.112Z",
           "dataDate": "2026-10-20",
           "recovery": {
             "frozen": true,
