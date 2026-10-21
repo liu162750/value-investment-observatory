@@ -11,6 +11,7 @@ assert(!importantEventsHTML({events:[event]},at('2026-10-14')).includes('event-t
 assert(!importantEventsHTML({events:[event]},at('2026-10-23')).includes('event-title-alert'));
 assert(!importantEventsHTML({events:[{...event,actualDate:event.date}]},at('2026-10-22')).includes('event-title-alert'));
 assert.equal(eventDays('unknown',at('2026-10-15')),null);
+assert(!importantEventsHTML({events:[{...event,actualDate:'2026-10-21',officialDisclosureDate:'2026-10-22'}]},at('2026-10-21')).includes('event-title-alert'),'An accessible report must not remain a future appointment merely because its official notice date is tomorrow');
 console.log('PASS: 7-day event reminder, before window, past event, actual disclosure, invalid date');
 
 assert.equal(importantEventsHTML({events:[event]},at('2026-10-14')),'');

@@ -1,15 +1,15 @@
 {
-  "asOf": "2026-10-20T12:28:54.901Z",
+  "asOf": "2026-10-21T11:09:31.350Z",
   "status": "pending",
-  "reviewType": "weekly",
-  "coverage": "四股产业、盈利质量、现金回报及替代方向已更新；估值、债务交叉核验与私有持仓适配仍待完成。",
+  "reviewType": "scheduled-with-new-quarterly-report",
+  "coverage": "10月21日周三延迟至19:07执行：四股技术与新增披露复核，平高三季报已分析；正常化估值、候选债务交叉核验及私人账户最新适配仍待完成。",
   "stocks": {
     "sh600312": {
       "longTermReview": {
         "status": "pending",
-        "reason": "利润增长与收入、现金流分化，不能认定低估；重点复核产品结构、付款账期及全年回款。",
-        "asOf": "2026-10-15T20:34:03+08:00",
-        "source": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225483278.PDF",
+        "reason": "三季报扣非同比+24.25%，利润增长仍有依据；收入同比−3.36%、经营现金流−4.17亿元，存货与付款资金占用上升，现金回报和估值安全边际尚未完整核验，不认定产业逻辑失效，也不升级为通过。",
+        "asOf": "2026-10-21T11:09:31.350Z",
+        "source": "https://pdf.dfcfw.com/pdf/H2_AN202610211830764486_1.pdf",
         "evidence": [
           {
             "topic": "产业竞争力与需求",
@@ -25,25 +25,36 @@
             "finding": "10月15日董事会选举马新征为董事长，属已披露增补安排的落实；未据此推断主营改善或恶化。来源记录17:35:19，本次20:34发现，公告落款10月16日。",
             "source": "https://pdf.dfcfw.com/pdf/H2_AN202610151830516991_1.pdf",
             "topic": "董事长选举结果"
+          },
+          {
+            "topic": "2026年第三季度报告：盈利与现金分化",
+            "announcementId": "AN202610211830764486",
+            "source": "https://pdf.dfcfw.com/pdf/H2_AN202610211830764486_1.pdf",
+            "sourceRecordedAt": "2026-10-21T17:55:19+08:00",
+            "officialNoticeDate": "2026-10-22",
+            "detectedAt": "2026-10-21T19:07:29+08:00",
+            "finding": "前三季收入81.53亿元，同比−3.36%；归母12.31亿元，同比+25.34%；扣非12.13亿元，同比+24.25%，单季扣非4.15亿元，同比+31.55%。经营现金流−4.17亿元，上年同期+1.30亿元；购建长期资产现金2.91亿元，简化差额−7.07亿元（非完整自由现金流估值）。销售回款110.53亿元，同比约+12.89%；采购付款98.99亿元，同比约+19.44%。公司解释主动缩短账期、提升现金支付占比，不能误写为回款绝对下降。存货27.87亿元，较年初17.65亿元约+57.9%；应收账款61.43亿元、较年初基本持平；合同负债23.83亿元、较年初约+37.8%，不能等同新增订单。未经审计，须继续看四季度交付、存货周转及全年现金兑现。"
           }
         ],
         "valuation": {
           "status": "pending",
-          "marketCapYi": 279.25,
-          "quoteSource": "腾讯财经2026-10-09收盘后报价",
-          "quoteDate": "2026-10-09",
-          "halfYearAdjustedProfitYi": 7.9830224194,
-          "mechanicalAnnualizedMultiple": 17.49,
-          "method": "市值/（半年扣非×2），仅敏感性参照，非TTM市盈率、全年预测或内在价值；需校正季节性、周期与扩产。",
-          "assumptions": "待核验完整周期正常化利润、维持性资本开支、营运资本回收、折现率与终值增长；未建立有证据的估值区间。"
+          "marketCapYi": 280.48,
+          "quoteDate": "2026-10-21",
+          "quoteSource": "腾讯财经完整收盘20.67元；报告股本13.5692亿股",
+          "nineMonthAdjustedProfitYi": 12.1330027322,
+          "mechanicalAnnualizedMultiple": 17.34,
+          "method": "市值/(前三季扣非×4/3)，仅机械敏感性参照，非TTM、盈利预测或内在价值；未校正季节性、维持性资本支出与现金转化。",
+          "assumptions": "账面扣非增长不能直接当现金流增长，现金占用与订单交付周期仍须核验；不发布未经完整正常化估值支持的安全边际。"
         },
         "debtAndGovernance": {
           "status": "pending",
-          "finding": "已查阅报告相关项目；受限现金、融资到期结构、关联交易及报告期后治理变化尚未形成完整交叉核验，不给偿债安全结论。"
+          "source": "https://pdf.dfcfw.com/pdf/H2_AN202610211830764486_1.pdf",
+          "finding": "季末货币资金62.01亿元，现金及现金等价物61.37亿元，长期借款0.742亿元，短借栏无金额，负债合计94.55亿元、总资产219.38亿元；负债以应付账款及合同负债等经营项目为主。不能把全部货币资金视为无约束可用现金，关联财务公司存款、受限资金和后续扩产付款仍需核验；未见仅凭此报表即认定偿债危机的依据。"
         },
         "expansionReturn": {
           "status": "pending",
-          "finding": "需用投产后利用率、良率、增量经营现金及资本回报验证，投入金额不等于有效回报。"
+          "source": "https://pdf.dfcfw.com/pdf/H2_AN202610211830764486_1.pdf",
+          "finding": "前三季购建长期资产支出2.91亿元，同比增加；10月21日董事会通过河南GIS绿色低碳智慧厂区施工招标采购方案，但未披露足以测算增量回报的完整投产盈利和现金数据，不将建设等同价值创造。"
         },
         "invalidationConditions": "若订单/份额持续下降并伴随扣非及回款恶化，或重大治理问题，须重审产业依据。",
         "portfolioFit": {
@@ -51,14 +62,21 @@
           "reason": "本次未取得生产后台两账户最新授权持仓数据与成交反馈，不能确认个人适配。三科技股共同暴露AI硬件资本开支及科技估值，业务环节不同不等于充分分散。"
         },
         "limitations": [
-          "半年报未经审计；本次未发现新增正式定期报告、业绩快报或预告。",
-          "产业依据未被单日跌幅否定；pending不等于通过，也不等于失效。"
-        ]
+          "2026三季报未经审计；已取得全文，公告标注10月22日但平台10月21日17:55已提供，19:07本次延迟任务发现并核验。",
+          "状态pending不等于通过或失效；现金流为负不能单独推导产业失效。"
+        ],
+        "lastScheduledCheck": {
+          "asOf": "2026-10-21T11:09:31.350Z",
+          "dataDate": "2026-10-21",
+          "status": "pending",
+          "scope": "产业、经营与事件检查；估值/债务及私人账户适配未完整通过，不冒充完整验证",
+          "source": "https://pdf.dfcfw.com/pdf/H2_AN202610211830764486_1.pdf"
+        }
       },
       "replacementReview": {
         "status": "pending",
-        "reason": "平高电气与两类现金回报候选已作初步比较；完整债务、正常化估值及两账户适配尚未核验，未达到更优替代确认标准。",
-        "asOf": "2026-10-09T16:33:40+08:00",
+        "reason": "平高新三季报利润增长但现金回报分化；水电/通信运营可改变风险来源，但来水、电价、通信竞争、债务与当前估值证据未完成同口径比较，不能确认更优替代。",
+        "asOf": "2026-10-21T11:09:31.350Z",
         "source": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225483278.PDF",
         "candidates": [
           {
@@ -125,7 +143,14 @@
         "limitations": [
           "半年报未经审计；本次未发现新增正式定期报告、业绩快报或预告。",
           "产业依据未被单日跌幅否定；pending不等于通过，也不等于失效。"
-        ]
+        ],
+        "lastScheduledCheck": {
+          "asOf": "2026-10-21T11:09:31.350Z",
+          "dataDate": "2026-10-21",
+          "status": "pending",
+          "scope": "产业、经营与事件检查；估值/债务及私人账户适配未完整通过，不冒充完整验证",
+          "source": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-08-29/072fbc43-caef-4b31-bf0e-ee19d9fa0459.PDF"
+        }
       },
       "replacementReview": {
         "status": "pending",
@@ -207,7 +232,14 @@
         "limitations": [
           "半年报未经审计；本次未发现新增正式定期报告、业绩快报或预告。",
           "产业依据未被单日跌幅否定；pending不等于通过，也不等于失效。"
-        ]
+        ],
+        "lastScheduledCheck": {
+          "asOf": "2026-10-21T11:09:31.350Z",
+          "dataDate": "2026-10-21",
+          "status": "pending",
+          "scope": "产业、经营与事件检查；估值/债务及私人账户适配未完整通过，不冒充完整验证",
+          "source": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468066.PDF"
+        }
       },
       "replacementReview": {
         "status": "pending",
@@ -302,7 +334,14 @@
         "limitations": [
           "半年报未经审计；本次未发现新增正式定期报告、业绩快报或预告。",
           "产业依据未被单日跌幅否定；pending不等于通过，也不等于失效。"
-        ]
+        ],
+        "lastScheduledCheck": {
+          "asOf": "2026-10-21T11:09:31.350Z",
+          "dataDate": "2026-10-21",
+          "status": "pending",
+          "scope": "产业、经营与事件检查；估值/债务及私人账户适配未完整通过，不冒充完整验证",
+          "source": "https://static.cninfo.com.cn/finalpage/2026-08-26/1225502252.PDF"
+        }
       },
       "replacementReview": {
         "status": "pending",
@@ -332,11 +371,11 @@
     }
   },
   "lastEventCheck": {
-    "checkedAt": "2026-10-20T12:28:54.901Z",
-    "type": "incremental-disclosure",
-    "symbol": "sz002463",
-    "announcementId": "AN202610201830720906",
-    "materialConclusionChanged": false,
-    "newPeriodicReport": false
+    "checkedAt": "2026-10-21T11:09:31.350Z",
+    "type": "quarterly-report",
+    "symbol": "sh600312",
+    "announcementId": "AN202610211830764486",
+    "materialConclusionChanged": true,
+    "newPeriodicReport": true
   }
 }
