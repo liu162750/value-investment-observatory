@@ -247,6 +247,7 @@ function newerGold(incoming,current){
  return Number.isFinite(time(current))&&(!Number.isFinite(time(incoming))||time(current)>time(incoming))?current:incoming;
 }
 function mergeDashboardData(next,previous){
+ if(next.stale&&previous?.stocks?.length&&next.cacheRevision===previous.cacheRevision)return {...previous,stale:true,updateError:next.updateError,gold:newerGold(next.gold,previous.gold)};
  if(!previous)return next;next.gold=newerGold(next.gold,previous.gold);
  for(const stock of next.stocks||[]){const old=previous.stocks?.find(s=>s.symbol===stock.symbol);if(!old)continue;
   if(stock.newsError)stock.notices=old.notices||[];if(stock.mediaError)stock.mediaNews=old.mediaNews||[];
@@ -255,10 +256,19 @@ function mergeDashboardData(next,previous){
  if(!next.importantEvents)next.importantEvents=previous.importantEvents;
  return next;
 }
+const dashboardCacheKey='dashboard.latest.v1';
+function restoreDashboard(seed,storage){
+ try{storage=storage||localStorage;const cached=JSON.parse(storage.getItem(dashboardCacheKey));if(seed?.cacheRevision&&cached?.cacheRevision===seed.cacheRevision&&Array.isArray(cached.stocks)&&Date.parse(cached.generated)>Date.parse(seed.generated))return {...cached,stale:true,restored:true};}catch{}
+ return seed?{...seed,stale:true}:null;
+}
+function saveDashboard(data,storage){
+ if(!data?.cacheRevision||data.stale||!Array.isArray(data.stocks))return;
+ try{storage=storage||localStorage;storage.setItem(dashboardCacheKey,JSON.stringify(data));}catch{}
+}
 let goldBusy=false;
 async function loadGold(){
  if(goldBusy)return;goldBusy=true;
- try{const response=await fetch('/api/gold',{cache:'no-store',signal:AbortSignal.timeout(35000)});if(!response.ok)throw Error();const gold=await response.json();if(!model)return;model.gold=newerGold(gold,model.gold);renderGold();}
+ try{const response=await fetch('/api/gold',{cache:'no-store',signal:AbortSignal.timeout(35000)});if(!response.ok)throw Error();const gold=await response.json();if(!model)return;model.gold=newerGold(gold,model.gold);saveDashboard(model);renderGold();}
  catch{if(model?.gold){model.gold={...model.gold,quoteError:true,session:'报价更新失败 · 保留上次来源时间'};renderGold();}}
  finally{goldBusy=false;}
 }
@@ -266,7 +276,7 @@ let volumeBusy=false;
 async function refreshMarketVolume(){if(volumeBusy||!model)return;volumeBusy=true;try{const r=await fetch('/api/market-volume',{cache:'no-store',signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error();const q=await r.json();if(!q.sh||!q.sz)return;model.marketTurnover=q;const node=document.querySelector('.market-volume-inline');if(node)node.outerHTML=marketVolume(model);}catch{}finally{volumeBusy=false;}}
 setInterval(()=>{if(!document.hidden)refreshMarketVolume();},30000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshMarketVolume();});
-async function load(){if(busy)return;busy=true;$('#refresh').disabled=true;$('#refresh').textContent='更新中';try{const r=await fetch('/data/dashboard.json',{cache:'no-store',signal:AbortSignal.timeout(45000)});if(!r.ok)throw Error();const next=await r.json();if(!Array.isArray(next.stocks))throw Error();model=mergeDashboardData(next,model);refreshMarketVolume();clearTimeout(load.retryTimer);render();}catch{$('#status').textContent='更新失败 · 保留最近核验数据 '+(model?.date||'');if(!model)$('#cards').innerHTML='<p class="empty">当前数据未取得，正在自动重试。</p>';clearTimeout(load.retryTimer);load.retryTimer=setTimeout(()=>{if(!document.hidden)load();},10000);}finally{busy=false;$('#refresh').disabled=false;$('#refresh').textContent='刷新';}}
+async function load(){if(busy)return;busy=true;$('#refresh').disabled=true;$('#refresh').textContent='更新中';try{const r=await fetch('/data/dashboard.json',{cache:'no-store',signal:AbortSignal.timeout(45000)});if(!r.ok)throw Error();const next=await r.json();if(!Array.isArray(next.stocks))throw Error();model=mergeDashboardData(next,model);saveDashboard(model);refreshMarketVolume();clearTimeout(load.retryTimer);render();}catch{$('#status').textContent='更新失败 · 保留最近核验数据 '+(model?.date||'');if(!model)$('#cards').innerHTML='<p class="empty">当前数据未取得，正在自动重试。</p>';clearTimeout(load.retryTimer);load.retryTimer=setTimeout(()=>{if(!document.hidden)load();},10000);}finally{busy=false;$('#refresh').disabled=false;$('#refresh').textContent='刷新';}}
 $('#refresh').onclick=()=>{loadGold();load();};if(window.initialDashboard){model=window.initialDashboard;render();$('#status').textContent='最近核验数据 '+model.date+' · 检查更新';}loadGold();load();setInterval(()=>{if(!document.hidden)loadGold();},30000);document.addEventListener('visibilitychange',()=>{if(!document.hidden){loadGold();load();}});setInterval(()=>{if(!document.hidden)load();},60000);
 if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'read_stock_watchlist',description:'读取大盘、隔夜美股和四股T1/T2观察区。',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true,untrustedContentHint:true},execute:async()=>{if(!model)await load();return model?{date:model.date,us:model.us,stocks:model.stocks.map(s=>({name:s.name,quote:s.quote,levels:s.levels,distances:s.distances,logic:s.logic}))}:{error:'数据不可用'};}})).catch(()=>{});}catch{}}
 </script></body></html>
