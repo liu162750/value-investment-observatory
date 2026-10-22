@@ -1,6 +1,6 @@
 {
   "policyId": "weekly-close-atr20-v1",
-  "asOf": "2026-10-21T11:09:31.444Z",
+  "asOf": "2026-10-22T08:57:42.721Z",
   "stocks": {
     "sh600312": {
       "policyId": "weekly-close-atr20-v1",
@@ -25,17 +25,17 @@
           "structure": false,
           "twoCloses": false,
           "singleBreak": false,
-          "t2Lower": 18.85,
-          "singleBreakThreshold": 0.5959999999999999,
-          "close": 20.67,
-          "date": "2026-10-21"
+          "t2Lower": 18.74,
+          "singleBreakThreshold": 0.6194999999999998,
+          "close": 21.33,
+          "date": "2026-10-22"
         },
         "freezeSources": [],
         "aboveMA60": true,
         "returnsRecovered": true,
         "evidenceOK": false,
         "risingStructure": false,
-        "atrPeak": 0.6324999999999997,
+        "atrPeak": 0.6194999999999998,
         "atrContracted": false,
         "missing": [],
         "frozenSince": null,
@@ -125,12 +125,12 @@
       "reason": "整组候选通过定价校验后替换",
       "newSupportEvidence": null,
       "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600312,day,,,320,qfq",
-      "sourceQuoteTime": "2026-10-21 16:14:47",
+      "sourceQuoteTime": "2026-10-22 16:14:37",
       "nextScheduled": "2026-10-23 16:30",
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
-        "asOf": "2026-10-21",
-        "checkedAt": "2026-10-21T11:07:29.371Z",
+        "asOf": "2026-10-22",
+        "checkedAt": "2026-10-22T08:57:19.768Z",
         "dataDate": "2026-09-30",
         "date": "2026-09-30",
         "lastCompleteMonth": "2026-09-30",
@@ -162,7 +162,36 @@
           "high": 22.88,
           "note": "ATR测算通道（非确认支撑/压力）"
         }
-      ]
+      ],
+      "freezeCheck": {
+        "checkedAt": "2026-10-22T08:57:42.721Z",
+        "dataDate": "2026-10-22",
+        "recovery": {
+          "frozen": false,
+          "required": false,
+          "triggers": {
+            "trend": false,
+            "structure": false,
+            "twoCloses": false,
+            "singleBreak": false,
+            "t2Lower": 18.74,
+            "singleBreakThreshold": 0.6194999999999998,
+            "close": 21.33,
+            "date": "2026-10-22"
+          },
+          "freezeSources": [],
+          "aboveMA60": true,
+          "returnsRecovered": true,
+          "evidenceOK": false,
+          "risingStructure": false,
+          "atrPeak": 0.6194999999999998,
+          "atrContracted": false,
+          "missing": [],
+          "frozenSince": null,
+          "recoveredAt": null,
+          "evidence": null
+        }
+      }
     },
     "sz002156": {
       "policyId": "weekly-close-atr20-v1",
@@ -188,9 +217,9 @@
           "twoCloses": false,
           "singleBreak": false,
           "t2Lower": 41.5,
-          "singleBreakThreshold": 2.7189999999999985,
-          "close": 47.67,
-          "date": "2026-10-21"
+          "singleBreakThreshold": 2.770999999999998,
+          "close": 47.8,
+          "date": "2026-10-22"
         },
         "freezeSources": [
           "trend"
@@ -199,7 +228,7 @@
         "returnsRecovered": false,
         "evidenceOK": false,
         "risingStructure": false,
-        "atrPeak": 2.7364999999999986,
+        "atrPeak": 2.770999999999998,
         "atrContracted": false,
         "missing": [
           "未连续3个完整收盘站上各自MA60",
@@ -290,12 +319,12 @@
       "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据；趋势型冻结仍触发。整组旧档仅供参考，禁止据此买入",
       "newSupportEvidence": null,
       "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002156,day,,,320,qfq",
-      "sourceQuoteTime": "2026-10-21 16:14:30",
+      "sourceQuoteTime": "2026-10-22 16:14:30",
       "nextScheduled": "2026-10-23 16:30",
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
-        "asOf": "2026-10-21",
-        "checkedAt": "2026-10-21T11:07:29.371Z",
+        "asOf": "2026-10-22",
+        "checkedAt": "2026-10-22T08:57:19.768Z",
         "dataDate": "2026-09-30",
         "date": "2026-09-30",
         "lastCompleteMonth": "2026-09-30",
@@ -341,7 +370,43 @@
           "originalNote": "ATR波动通道",
           "edgePct": 17.52
         }
-      ]
+      ],
+      "freezeCheck": {
+        "checkedAt": "2026-10-22T08:57:42.721Z",
+        "dataDate": "2026-10-22",
+        "recovery": {
+          "frozen": true,
+          "required": true,
+          "triggers": {
+            "trend": true,
+            "structure": false,
+            "twoCloses": false,
+            "singleBreak": false,
+            "t2Lower": 41.5,
+            "singleBreakThreshold": 2.770999999999998,
+            "close": 47.8,
+            "date": "2026-10-22"
+          },
+          "freezeSources": [
+            "trend"
+          ],
+          "aboveMA60": false,
+          "returnsRecovered": false,
+          "evidenceOK": false,
+          "risingStructure": false,
+          "atrPeak": 2.770999999999998,
+          "atrContracted": false,
+          "missing": [
+            "未连续3个完整收盘站上各自MA60",
+            "20日/60日跌幅尚未同时退出阈值",
+            "缺少当期已核验的独立企稳依据",
+            "趋势型冻结仍触发"
+          ],
+          "frozenSince": "2026-10-19",
+          "recoveredAt": null,
+          "evidence": null
+        }
+      }
     },
     "sh601138": {
       "policyId": "weekly-close-atr20-v1",
@@ -367,9 +432,9 @@
           "twoCloses": false,
           "singleBreak": false,
           "t2Lower": 42.5,
-          "singleBreakThreshold": 2.427499999999999,
-          "close": 49.7,
-          "date": "2026-10-21"
+          "singleBreakThreshold": 2.4129999999999994,
+          "close": 47.91,
+          "date": "2026-10-22"
         },
         "freezeSources": [
           "trend"
@@ -377,7 +442,7 @@
         "aboveMA60": false,
         "returnsRecovered": false,
         "evidenceOK": false,
-        "risingStructure": true,
+        "risingStructure": false,
         "atrPeak": 2.4774999999999987,
         "atrContracted": false,
         "missing": [
@@ -471,12 +536,12 @@
       "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据；趋势型冻结仍触发。整组旧档仅供参考，禁止据此买入",
       "newSupportEvidence": null,
       "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138,day,,,320,qfq",
-      "sourceQuoteTime": "2026-10-21 16:14:46",
+      "sourceQuoteTime": "2026-10-22 16:14:41",
       "nextScheduled": "2026-10-23 16:30",
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
-        "asOf": "2026-10-21",
-        "checkedAt": "2026-10-21T11:07:29.371Z",
+        "asOf": "2026-10-22",
+        "checkedAt": "2026-10-22T08:57:19.768Z",
         "dataDate": "2026-09-30",
         "date": "2026-09-30",
         "lastCompleteMonth": "2026-09-30",
@@ -522,7 +587,43 @@
           "originalNote": "ATR波动通道",
           "edgePct": 16.33
         }
-      ]
+      ],
+      "freezeCheck": {
+        "checkedAt": "2026-10-22T08:57:42.721Z",
+        "dataDate": "2026-10-22",
+        "recovery": {
+          "frozen": true,
+          "required": true,
+          "triggers": {
+            "trend": true,
+            "structure": false,
+            "twoCloses": false,
+            "singleBreak": false,
+            "t2Lower": 42.5,
+            "singleBreakThreshold": 2.4129999999999994,
+            "close": 47.91,
+            "date": "2026-10-22"
+          },
+          "freezeSources": [
+            "trend"
+          ],
+          "aboveMA60": false,
+          "returnsRecovered": false,
+          "evidenceOK": false,
+          "risingStructure": false,
+          "atrPeak": 2.4774999999999987,
+          "atrContracted": false,
+          "missing": [
+            "未连续3个完整收盘站上各自MA60",
+            "20日/60日跌幅尚未同时退出阈值",
+            "缺少当期已核验的独立企稳依据",
+            "趋势型冻结仍触发"
+          ],
+          "frozenSince": "2026-10-19",
+          "recoveredAt": null,
+          "evidence": null
+        }
+      }
     },
     "sz002463": {
       "policyId": "weekly-close-atr20-v1",
@@ -543,27 +644,29 @@
         "frozen": true,
         "required": true,
         "triggers": {
-          "trend": false,
+          "trend": true,
           "structure": false,
           "twoCloses": false,
           "singleBreak": false,
           "t2Lower": 97,
-          "singleBreakThreshold": 6.672500000000001,
-          "close": 114.97,
-          "date": "2026-10-21"
+          "singleBreakThreshold": 6.8125,
+          "close": 106.96,
+          "date": "2026-10-22"
         },
         "freezeSources": [
           "trend"
         ],
         "aboveMA60": false,
-        "returnsRecovered": true,
+        "returnsRecovered": false,
         "evidenceOK": false,
         "risingStructure": false,
-        "atrPeak": 6.672500000000001,
+        "atrPeak": 6.8125,
         "atrContracted": false,
         "missing": [
           "未连续3个完整收盘站上各自MA60",
-          "缺少当期已核验的独立企稳依据"
+          "20日/60日跌幅尚未同时退出阈值",
+          "缺少当期已核验的独立企稳依据",
+          "趋势型冻结仍触发"
         ],
         "frozenSince": "2026-10-19",
         "recoveredAt": null,
@@ -647,15 +750,15 @@
         "买T1边沿过近"
       ],
       "newCandidateValidation": [],
-      "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；缺少当期已核验的独立企稳依据。整组旧档仅供参考，禁止据此买入",
+      "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据；趋势型冻结仍触发。整组旧档仅供参考，禁止据此买入",
       "newSupportEvidence": null,
       "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,320,qfq",
-      "sourceQuoteTime": "2026-10-21 16:14:18",
+      "sourceQuoteTime": "2026-10-22 16:14:51",
       "nextScheduled": "2026-10-23 16:30",
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
-        "asOf": "2026-10-21",
-        "checkedAt": "2026-10-21T11:07:29.371Z",
+        "asOf": "2026-10-22",
+        "checkedAt": "2026-10-22T08:57:19.768Z",
         "dataDate": "2026-09-30",
         "date": "2026-09-30",
         "lastCompleteMonth": "2026-09-30",
@@ -701,7 +804,43 @@
           "originalNote": "Fib 61.8%反弹",
           "edgePct": 20.81
         }
-      ]
+      ],
+      "freezeCheck": {
+        "checkedAt": "2026-10-22T08:57:42.721Z",
+        "dataDate": "2026-10-22",
+        "recovery": {
+          "frozen": true,
+          "required": true,
+          "triggers": {
+            "trend": true,
+            "structure": false,
+            "twoCloses": false,
+            "singleBreak": false,
+            "t2Lower": 97,
+            "singleBreakThreshold": 6.8125,
+            "close": 106.96,
+            "date": "2026-10-22"
+          },
+          "freezeSources": [
+            "trend"
+          ],
+          "aboveMA60": false,
+          "returnsRecovered": false,
+          "evidenceOK": false,
+          "risingStructure": false,
+          "atrPeak": 6.8125,
+          "atrContracted": false,
+          "missing": [
+            "未连续3个完整收盘站上各自MA60",
+            "20日/60日跌幅尚未同时退出阈值",
+            "缺少当期已核验的独立企稳依据",
+            "趋势型冻结仍触发"
+          ],
+          "frozenSince": "2026-10-19",
+          "recoveredAt": null,
+          "evidence": null
+        }
+      }
     }
   }
 }
