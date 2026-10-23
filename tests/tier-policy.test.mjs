@@ -4,7 +4,7 @@ import {reviewTiers,completedWeekFriday,validate,POLICY,recoveryState,indicators
 import {stocks} from '../worker/dashboard.js';
 const input=JSON.parse(readFileSync(new URL('./fixtures/atr20-review-20261019.json',import.meta.url),'utf8'));
 const audit=JSON.parse(readFileSync(new URL('../worker/tier-reviews.json',import.meta.url),'utf8'));
-const latestInput=JSON.parse(readFileSync(new URL('./fixtures/atr20-review-20261021.json',import.meta.url),'utf8'));
+const latestInput=JSON.parse(readFileSync(new URL('./fixtures/atr20-review-20261023.json',import.meta.url),'utf8'));
 assert.equal(completedWeekFriday(Date.parse('2026-10-21T16:30:00+08:00')),'2026-10-16');
 assert.equal(completedWeekFriday(Date.parse('2026-10-23T14:59:00+08:00')),'2026-10-16');
 assert.equal(completedWeekFriday(Date.parse('2026-10-23T16:30:00+08:00')),'2026-10-23');
@@ -14,8 +14,8 @@ for(const stock of stocks){
  const latest=latestInput.stocks[stock.symbol];
  assert.equal(r.dataDate,latest.bars.at(-1).date);
  assert(Math.abs(r.atr20-indicators(latest.bars).atr)<1e-9,'Saved ATR must reproduce from the new complete daily input');
- assert.deepEqual(reviewTiers({bars:latest.bars,now:Date.parse('2026-10-21T19:10:00+08:00'),oldLevels:r.levels,previousReview:r}).candidateBands,r.candidateBands);
- assert.equal(r.referenceDate,'2026-10-16');assert.equal(r.referencePrice,a.bars.find(b=>b.date==='2026-10-16').close);
+ assert.deepEqual(reviewTiers({bars:latest.bars,now:Date.parse('2026-10-23T16:33:00+08:00'),oldLevels:r.levels,previousReview:r}).candidateBands,r.candidateBands);
+ assert.equal(r.referenceDate,'2026-10-23');assert.equal(r.referencePrice,latest.bars.find(b=>b.date==='2026-10-23').close);
  assert(Math.abs(r.halfWidth-Math.max(.006*r.referencePrice,.15*r.atr20))<1e-10);
  assert.deepEqual(validate(r.candidateBands.map(b=>b.level),{p:r.referencePrice,atr:r.atr20,buyEdge:r.buyEdge}),[]);
  assert.deepEqual(stock.sellReview.levels,r.levels.slice(2));
