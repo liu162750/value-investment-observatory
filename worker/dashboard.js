@@ -117,12 +117,33 @@ async function marketImportantNews(){
 }
 
 let goldCache=null,goldChecked=0,goldLatest=null;
+const GOLD_LEVEL_POLICY='gold-weekly-close-atr20-v1';
+function goldLevelReview(rows,now=Date.now()){
+ if(!Array.isArray(rows)||rows.length<60)throw Error('黄金日线不足');
+ const local=new Date(now+8*3600000),day=local.getUTCDay(),minutes=local.getUTCHours()*60+local.getUTCMinutes();
+ const monday=new Date(Date.UTC(local.getUTCFullYear(),local.getUTCMonth(),local.getUTCDate()-((day+6)%7)));
+ const currentWeekComplete=day===5&&minutes>=960||day===6||day===0;
+ const cutoff=currentWeekComplete?'9999-12-31':monday.toISOString().slice(0,10);
+ const eligible=rows.filter(r=>r.date<cutoff);
+ const reference=eligible.at(-1);if(!reference)throw Error('黄金完整周收盘待核验');
+ const throughReference=rows.filter(r=>r.date<=reference.date),trs=throughReference.slice(1).map((r,i)=>Math.max(r.high-r.low,Math.abs(r.high-throughReference[i].close),Math.abs(r.low-throughReference[i].close)));
+ if(trs.length<20)throw Error('黄金ATR20样本不足');
+ const atr20=trs.slice(-20).reduce((sum,x)=>sum+x,0)/20,p=reference.close,halfWidth=Math.max(.006*p,.15*atr20),cent=x=>Math.round((x+Number.EPSILON)*100)/100;
+ const shift=(range,delta)=>range.map(v=>cent(v+delta));
+ const levels=[-1,-2.2,1.8,3.2].map(mult=>[cent(p+mult*atr20-halfWidth),cent(p+mult*atr20+halfWidth)]);
+ const moveUntil=(index,condition,delta)=>{for(let n=0;condition()&&n<50000;n++)levels[index]=shift(levels[index],delta);if(condition())throw Error('黄金档位间距校正未收敛');};
+ moveUntil(0,()=>levels[0][1]>p*.97+1e-8,-.01);
+ moveUntil(2,()=>levels[2][0]<p*1.05-1e-8,.01);
+ moveUntil(1,()=>levels[0][0]-levels[1][1]<atr20*.9975-1e-8,-.01);
+ moveUntil(3,()=>levels[3][0]-levels[2][1]<atr20*.9975-1e-8,.01);
+ return {policyId:GOLD_LEVEL_POLICY,asOf:new Date(now).toISOString(),dataDate:rows.at(-1).date,referenceDate:reference.date,referencePrice:p,atr20,halfWidth,levels,nextReview:'每个完整交易周收盘后'};
+}
 function parseGold(payload,now=Date.now()){
  if(!Array.isArray(payload?.time))throw Error('上金所日线结构改变');
  const rows=completedDailyRows(payload.time.map(r=>({date:r[0],open:+r[1],close:+r[2],low:+r[3],high:+r[4],volume:0})).filter(r=>/^\d{4}-\d{2}-\d{2}$/.test(r.date)&&[r.open,r.close,r.low,r.high].every(p=>Number.isFinite(p)&&p>0)&&r.high>=r.low&&r.close>=r.low&&r.close<=r.high).sort((a,b)=>a.date.localeCompare(b.date)),now,960).slice(-150);
  if(rows.length<60)throw Error('黄金日线不足');
- const tech=technical(rows),last=rows.at(-1),prev=rows.at(-2),levels=candidates(rows,tech);
- return {name:'国内大盘黄金',symbol:'Au99.99',unit:'元/克',date:last.date,price:last.close,change:(last.close/prev.close-1)*100,session:'日线收盘参考',source:'上海黄金交易所',sourceUrl:'https://www.sge.com.cn/graph/Dailyhq',tech:{...tech,volumeRatio:null},levels,distances:(levels||[null,null,null,null]).map(r=>distance(last.close,r)),rows:rows.slice(-60),method:'近120日日线局部支撑／压力，区间为中心±0.25ATR14；技术观察区，非估值或成交信号。',analysis:'价格与20日、60日均线比较趋势；买档需止跌确认，卖档需转弱确认。实际利率、美元与人民币汇率影响黄金，黄金没有经营现金流，不能套用股票盈利估值。'};
+ const tech=technical(rows),last=rows.at(-1),prev=rows.at(-2),levelReview=goldLevelReview(rows,now),levels=levelReview.levels;
+ return {name:'国内大盘黄金',symbol:'Au99.99',unit:'元/克',date:last.date,price:last.close,change:(last.close/prev.close-1)*100,session:'日线收盘参考',source:'上海黄金交易所',sourceUrl:'https://www.sge.com.cn/graph/Dailyhq',tech:{...tech,volumeRatio:null},levelReview,levelDate:levelReview.referenceDate,levels,distances:levels.map(r=>distance(last.close,r)),rows:rows.slice(-60),method:'完整周收盘锚点＋ATR20四档；买T1至少低于周锚3%，卖T1至少高于周锚5%，同侧档位净间距至少约1个ATR20。每周收盘后更新，盘中只刷新距离。',analysis:'价格与20日、60日均线比较趋势；档位是波动观察区，不是估值或成交指令。买档需止跌确认，卖档需转弱确认。实际利率、美元与人民币汇率影响黄金，黄金没有经营现金流。'};
 }
 function parseGoldQuote(payload,now=Date.now()){
  if(payload?.heyue!=='Au99.99'||!Array.isArray(payload.times)||!Array.isArray(payload.data)||payload.times.length!==payload.data.length)throw Error('黄金分时结构或品种不符');
@@ -207,5 +228,5 @@ async function accessGate(req,env){if(env.PHONE_GATE_ENABLED!=='1')return null;c
 
 const page = "__PAGE__";
 export default {async fetch(request,env,ctx){const gate=await accessGate(request,env||{});if(gate)return gate;const url=new URL(request.url);if(request.method!=='GET')return json({error:'仅支持读取'},405);if(url.pathname==='/api/market-volume'){try{const q=parseQuotes(await get('https://qt.gtimg.cn/q=sh000001,sz399106','gbk'));return json({sh:q.sh000001||null,sz:q.sz399106||null});}catch{return json({error:'量能来源暂不可用'},503);}}if(url.pathname==='/api/gold'){try{return json(await goldDashboard());}catch{return json({error:'黄金来源暂不可用'},503);}}if(url.pathname==='/data/dashboard.json'||url.pathname==='/api/dashboard'){try{const data=await dashboard();if(recentDashboard()?.us){data.us=usAssets.map(([symbol,name])=>data.us.find(s=>s.symbol===symbol)||{...recentDashboard().us.find(s=>s.symbol===symbol),symbol,name,stale:true});}if(!data.turnover&&recentDashboard()?.turnover)data.turnover={...recentDashboard().turnover,stale:true};if(!data.gold&&recentDashboard()?.gold)data.gold={...recentDashboard().gold,stale:true};data.accounts=publicAccounts(data.stocks);data.cacheRevision=initialSnapshot?.cacheRevision;const usable=data.stocks.some(s=>Number.isFinite(s.quote.price));if(!usable&&recentDashboard())return json({...recentDashboard(),gold:data.gold||goldLatest||recentDashboard().gold,stale:true,updateError:'线上来源暂不可用，显示最近核验数据'});if(usable)latestDashboard=data;return json(data);}catch(error){console.error('dashboard update failed',error?.message);if(recentDashboard())return json({...recentDashboard(),gold:goldLatest||recentDashboard().gold,stale:true,updateError:'更新失败，显示最近核验数据'});return json({error:'行情源暂不可用'},503);}}if(url.pathname!=='/')return new Response('Not found',{status:404});const seed=recentDashboard()?'<script>window.initialDashboard='+JSON.stringify({...recentDashboard(),gold:goldLatest||recentDashboard().gold,stale:true}).replaceAll('<','\u003c')+';</script>':'';return new Response(page.replace('<script>',seed+'<script>'),{headers:{'content-type':'text/html; charset=utf-8','x-content-type-options':'nosniff','cache-control':'no-store'}});}};
-export {evaluateMarketGate,currentMarketGate,history,amountSummary,normalizeAnnouncements,parseGold,parseGoldQuote,parseGoldAlternative,parseGoldSina,goldReferenceClose,goldDashboard,accessGate,digest,publicAccounts,stocks,distance,technical,candidates,swingCandidates,completedDailyRows,parseQuotes};
+export {evaluateMarketGate,currentMarketGate,history,amountSummary,normalizeAnnouncements,parseGold,goldLevelReview,parseGoldQuote,parseGoldAlternative,parseGoldSina,goldReferenceClose,goldDashboard,accessGate,digest,publicAccounts,stocks,distance,technical,candidates,swingCandidates,completedDailyRows,parseQuotes};
 

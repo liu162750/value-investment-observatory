@@ -28,6 +28,12 @@ for(const stock of stocks){
  const done=completedDailyRows(rows,at('09:50:00')),tech=technical(done);assert.deepEqual(swingCandidates(done,tech).slice(0,2),candidates(done,tech).slice(0,2));
 }
 const goldBefore=parseGold(fixture.gold,at('09:50:00'));
+assert.equal(goldBefore.levelReview.policyId,'gold-weekly-close-atr20-v1');
+assert(goldBefore.levels.every(Boolean),'Gold must always produce four volatility tiers');
+assert(goldBefore.levels[0][1]<=goldBefore.levelReview.referencePrice*.97+.011,'Gold buy T1 must not crowd the weekly anchor');
+assert(goldBefore.levels[2][0]>=goldBefore.levelReview.referencePrice*1.05-.011,'Gold sell T1 must not crowd the weekly anchor');
+assert(goldBefore.levels[0][0]-goldBefore.levels[1][1]>=goldBefore.levelReview.atr20*.9975-.011,'Gold buy tiers need about one ATR20 net spacing');
+assert(goldBefore.levels[3][0]-goldBefore.levels[2][1]>=goldBefore.levelReview.atr20*.9975-.011,'Gold sell tiers need about one ATR20 net spacing');
 const goldWithFuture={...fixture.gold,time:[...fixture.gold.time,['2026-10-08',900,910,890,920],['2026-10-09',900,910,890,920]]};
 assert.deepEqual(parseGold(goldWithFuture,at('15:59:59')).levels,goldBefore.levels);
 assert.equal(parseGold(goldWithFuture,at('16:00:00')).date,'2026-10-08');
