@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {parseGoldQuote,parseGoldAlternative,parseGoldSina,goldReferenceClose,goldDashboard} from '../worker/dashboard.js';
+import {parseGoldQuote,parseGoldAlternative,parseGoldSina,goldReferenceClose,goldDashboard,parseBnbQuote,parseBnbAlternative,parseBnbYahoo} from '../worker/dashboard.js';
 const now=Date.parse('2026-10-08T10:05:00+08:00');
 const quote=JSON.parse(readFileSync(new URL('./fixtures/gold-quote.json',import.meta.url),'utf8'));
 const actual=parseGoldQuote(quote,now);
@@ -10,6 +10,13 @@ assert.notEqual(actual.price,+quote.data.at(-1),'Future placeholders must be exc
 assert.throws(()=>parseGoldQuote({...quote,heyue:'Au(T+D)'},now));
 assert.throws(()=>parseGoldQuote({...quote,delaystr:'2026年10月09日 10:00:59'},now));
 assert.throws(()=>parseGoldQuote({...quote,data:[]},now));
+const bnb=parseBnbQuote({symbol:'BNBUSDT',lastPrice:'1123.45',priceChangePercent:'-1.27',closeTime:now},now);
+assert.equal(bnb.price,1123.45);assert.equal(bnb.change,-1.27);assert.equal(bnb.currency,'USD');
+assert.throws(()=>parseBnbQuote({symbol:'BTCUSDT',lastPrice:'1',priceChangePercent:'2'},now));
+const bnbFallback=parseBnbAlternative({binancecoin:{usd:1120.5,usd_24h_change:2.4,last_updated_at:now/1000}},now);
+assert.equal(bnbFallback.price,1120.5);assert.equal(bnbFallback.change,2.4);
+const bnbYahoo=parseBnbYahoo({chart:{result:[{meta:{regularMarketPrice:1120,chartPreviousClose:1100,regularMarketTime:now/1000}}]}},now);
+assert.equal(bnbYahoo.price,1120);assert(Math.abs(bnbYahoo.change-1.8181818)<0.0001);
 const night={heyue:'Au99.99',delaystr:'2026年10月08日 21:01:00',times:['20:00','21:00','00:00','09:00'],data:[910,920,999,999]};
 assert.equal(parseGoldQuote(night,Date.parse('2026-10-08T22:00:00+08:00')).price,920);
 assert.equal(parseGoldQuote({...night,delaystr:'2026年10月09日 00:01:00'},Date.parse('2026-10-09T00:05:00+08:00')).price,999);
