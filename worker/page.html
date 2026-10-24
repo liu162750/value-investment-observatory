@@ -153,7 +153,7 @@ function renderHeaderQuotes(){
  const box=$('#header-quotes');if(!box)return;
  const quote=(label,value,change,title)=>'<div class="header-quote" title="'+esc(title||'来源时间待核验')+'"><span>'+esc(label)+'</span><strong>'+esc(value)+'</strong><span>24h/当日</span><b class="change '+color(change)+'">'+pct(change)+'</b></div>';
  const b=model?.bnb,g=model?.gold;
- box.innerHTML=quote('BNB',Number.isFinite(b?.price)?'$'+num(b.price):'待更新',b?.change,b?.source+' · '+(b?.quoteTime||''))+quote('黄金',Number.isFinite(g?.price)?'¥'+num(g.price)+'/克':'待更新',g?.change,g?.source+' · '+(g?.quoteTime||g?.date||''));
+ box.innerHTML=quote('BNB',Number.isFinite(b?.price)?num(b.price)+' USD':'待更新',b?.change,b?.source+' · '+(b?.quoteTime||''))+quote('黄金',Number.isFinite(g?.price)?'¥'+num(g.price)+'/克':'待更新',g?.change,g?.source+' · '+(g?.quoteTime||g?.date||''));
 }
 function sizeNewsViewport(){
  const list=document.querySelector('.unified-news .news-scroll');if(!list)return;
