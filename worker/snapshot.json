@@ -17860,5 +17860,30 @@
     ],
     "missing": [],
     "checkedAt": "2026-10-25T16:03:17.709Z"
+  },
+  "marketGate": {
+    "policyId": "completed-month-ma20-v1",
+    "asOf": "2026-10-23",
+    "checkedAt": "2026-10-23T12:35:04.206Z",
+    "dataDate": "2026-09-30",
+    "date": "2026-09-30",
+    "lastCompleteMonth": "2026-09-30",
+    "monthCount": 20,
+    "ma20month": 3798.1159999999995,
+    "indexClose": 3842.19,
+    "frozen": false,
+    "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
+    "reason": "最近完整月收盘高于20个完整月收盘均值",
+    "weekly": {
+      "passed": false,
+      "asOf": "2026-10-26",
+      "checkedAt": "2026-10-25T16:10:58.493Z",
+      "dataDate": "2026-10-23",
+      "indexClose": 3690.48,
+      "ma20": 3900.2735000000002,
+      "previousMa20": 3917.1364999999996,
+      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq",
+      "displayOnly": true
+    }
   }
 }
