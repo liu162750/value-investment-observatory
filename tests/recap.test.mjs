@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 const page=readFileSync(new URL('../worker/page.html',import.meta.url),'utf8');
 const facts=new Function(page.slice(page.indexOf('function dailyRecapFacts('),page.indexOf('function dailyRecapHTML('))+';return dailyRecapFacts;')();
@@ -28,7 +28,7 @@ assert.equal(metrics(rows.slice(-10),last,true).ma,'日线不足');
 assert.equal(metrics(rows.map(x=>({...x,volume:null})),last,true).ratio,null);
 assert.equal(metrics([],last,true).date,null);
 assert(page.includes('下一交易日，重点盯这四件事'));assert(page.includes('全市场广度数据未取得'));assert(page.includes('不以四只持仓涨跌替代板块排名'));
-const render=new Function('recapDailyMetrics','marketTemperature','esc','num','pct','color',page.slice(page.indexOf('function dailyRecapHTML('),page.indexOf('function renderDailyRecap('))+';return dailyRecapHTML;')(metrics,()=>'<div class="temperature-title"><span>偏热</span></div>',x=>String(x??'').replaceAll('<','&lt;'),(x,n=2)=>Number(x).toFixed(n),x=>(x>0?'+':'')+Number(x).toFixed(2)+'%',x=>x>0?'up':'down');
+const render=new Function('recapDailyMetrics','marketTemperature','esc','num','pct','color',page.slice(page.indexOf('function dailyRecapHTML('),page.indexOf('function selectDashboardView('))+';return dailyRecapHTML;')(metrics,()=>'<div class="temperature-title"><span>偏热</span></div>',x=>String(x??'').replaceAll('<','&lt;'),(x,n=2)=>Number(x).toFixed(n),x=>(x>0?'+':'')+Number(x).toFixed(2)+'%',x=>x>0?'up':'down');
 const essayData={...data,stocks:Array.from({length:4},(_,i)=>({name:'测试股'+i,symbol:'TEST'+i,quote:q,rows:[],levels:[],levelReview:{status:i?'pending-support':'adopted'}}))};
 const essay=render(facts(essayData,{weight:.9},now),essayData,{weight:.9},now);
 assert.equal((essay.match(/class="review-stock-paragraph"/g)||[]).length,4);
@@ -37,3 +37,4 @@ assert.equal((essay.match(/class="review-chapter"/g)||[]).length,3);
 assert(!essay.includes('class="recap-grid"'),'Review is a continuous essay rather than repeated data cards');
 assert(essay.includes('当天完整量价样本未齐'));assert(essay.includes('当前买档仍处于冻结状态'));assert(essay.includes('暂停新买T1'));
 console.log('PASS: recap separates intraday/close/history, rejects old/future amounts and unverified sectors, and retains one theme');
+
