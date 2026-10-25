@@ -17598,5 +17598,267 @@
     "quoteTime": "2026-10-24 02:29:00",
     "quoteError": false,
     "dailyError": false
+  },
+  "marketBreadth": {
+    "date": "2026-10-23",
+    "advance": 4525,
+    "decline": 909,
+    "flat": 139,
+    "unavailable": 3,
+    "total": 5576,
+    "quoted": 5573,
+    "source": "新浪财经全A股行情逐股汇总",
+    "scope": "沪深北A股；不含B股、基金；无有效现价或前收的股票单列",
+    "checkedAt": "2026-10-25T16:03:17.667Z",
+    "dateBasis": "交易日与同源上证指数及板块领涨股日期交叉核对；股票分页仅提供分时时刻",
+    "url": "https://vip.stock.finance.sina.com.cn/mkt/",
+    "startedAt": "2026-10-25T16:03:15.792Z"
+  },
+  "recapSectors": {
+    "groups": [
+      {
+        "scope": "行业板块",
+        "date": "2026-10-23",
+        "total": 48,
+        "quoted": 48,
+        "excluded": 0,
+        "top": [
+          {
+            "code": "new_dzxx",
+            "name": "电子信息",
+            "members": 247,
+            "change": 3.457429766667,
+            "leader": "sz300369",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:30",
+            "rank": 1,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#new_dzxx"
+          },
+          {
+            "code": "new_yqyb",
+            "name": "仪器仪表",
+            "members": 48,
+            "change": 3.3557532364215,
+            "leader": "sz300007",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:30",
+            "rank": 2,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#new_yqyb"
+          },
+          {
+            "code": "new_dqhy",
+            "name": "电器行业",
+            "members": 58,
+            "change": 3.1184622513023,
+            "leader": "sz002380",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:30",
+            "rank": 3,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#new_dqhy"
+          },
+          {
+            "code": "new_jxhy",
+            "name": "机械行业",
+            "members": 211,
+            "change": 3.0122728563559,
+            "leader": "sz300307",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:30",
+            "rank": 4,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#new_jxhy"
+          },
+          {
+            "code": "new_qtxy",
+            "name": "其它行业",
+            "members": 202,
+            "change": 2.8740698806951,
+            "leader": "sz300450",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:30",
+            "rank": 5,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#new_qtxy"
+          }
+        ],
+        "bottom": [
+          {
+            "code": "new_dlhy",
+            "name": "电力行业",
+            "members": 62,
+            "change": -0.92289621612551,
+            "leader": "sz000720",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:30",
+            "rank": 48,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#new_dlhy"
+          },
+          {
+            "code": "new_syhy",
+            "name": "石油行业",
+            "members": 24,
+            "change": -0.63846767757382,
+            "leader": "sz300157",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:30",
+            "rank": 47,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#new_syhy"
+          },
+          {
+            "code": "new_glql",
+            "name": "公路桥梁",
+            "members": 20,
+            "change": -0.3237320494729,
+            "leader": "sh600106",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:34:59",
+            "rank": 46,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#new_glql"
+          },
+          {
+            "code": "new_zhhy",
+            "name": "综合行业",
+            "members": 33,
+            "change": -0.061585835257891,
+            "leader": "sz000632",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:36:00",
+            "rank": 45,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#new_zhhy"
+          }
+        ],
+        "source": "新浪财经分类行情（备用口径）",
+        "time": "2026-10-23 15:35:30",
+        "checkedAt": "2026-10-25T16:03:16.134Z",
+        "dateBasis": "板块接口无独立时间戳；已核对各板块领涨股与同源指数为同一交易日",
+        "method": "新浪行业/概念分类平均涨跌幅，与东方财富板块指数口径不同；行业已排除次新股特色分组"
+      },
+      {
+        "scope": "概念板块",
+        "date": "2026-10-23",
+        "total": 175,
+        "quoted": 175,
+        "excluded": 0,
+        "top": [
+          {
+            "code": "gn_hljr",
+            "name": "互联金融",
+            "members": 19,
+            "change": 8.6255951689699,
+            "leader": "sz300033",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:15",
+            "rank": 1,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#gn_hljr"
+          },
+          {
+            "code": "gn_bcgn",
+            "name": "博彩概念",
+            "members": 32,
+            "change": 7.0732182899483,
+            "leader": "sz300033",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:15",
+            "rank": 2,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#gn_bcgn"
+          },
+          {
+            "code": "gn_xxaq",
+            "name": "信息安全",
+            "members": 15,
+            "change": 6.7039987380708,
+            "leader": "sz300369",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:30",
+            "rank": 3,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#gn_xxaq"
+          },
+          {
+            "code": "gn_hmgn",
+            "name": "鸿蒙概念",
+            "members": 20,
+            "change": 4.9559888017352,
+            "leader": "sz300496",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:45",
+            "rank": 4,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#gn_hmgn"
+          },
+          {
+            "code": "gn_gtdc",
+            "name": "固态电池",
+            "members": 29,
+            "change": 4.7929060500617,
+            "leader": "sz300450",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:30",
+            "rank": 5,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#gn_gtdc"
+          }
+        ],
+        "bottom": [
+          {
+            "code": "gn_scp1",
+            "name": "水产品",
+            "members": 9,
+            "change": -0.35799522673031,
+            "leader": "sz002696",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:30",
+            "rank": 175,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#gn_scp1"
+          },
+          {
+            "code": "gn_swrl",
+            "name": "生物燃料",
+            "members": 13,
+            "change": -0.26885005499206,
+            "leader": "sz000859",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:36:00",
+            "rank": 174,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#gn_swrl"
+          },
+          {
+            "code": "gn_zmq",
+            "name": "自贸区",
+            "members": 25,
+            "change": -0.093468863184951,
+            "leader": "sz002537",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:45",
+            "rank": 173,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#gn_zmq"
+          },
+          {
+            "code": "gn_swyz",
+            "name": "生物育种",
+            "members": 15,
+            "change": -0.081206496519721,
+            "leader": "sz300087",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:00",
+            "rank": 172,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#gn_swyz"
+          },
+          {
+            "code": "gn_dyzm",
+            "name": "东亚自贸",
+            "members": 28,
+            "change": -0.073691967575534,
+            "leader": "sz002537",
+            "date": "2026-10-23",
+            "time": "2026-10-23 15:35:45",
+            "rank": 171,
+            "url": "https://vip.stock.finance.sina.com.cn/mkt/#gn_dyzm"
+          }
+        ],
+        "source": "新浪财经分类行情（备用口径）",
+        "time": "2026-10-23 15:35:30",
+        "checkedAt": "2026-10-25T16:03:16.289Z",
+        "dateBasis": "板块接口无独立时间戳；已核对各板块领涨股与同源指数为同一交易日",
+        "method": "新浪行业/概念分类平均涨跌幅，与东方财富板块指数口径不同；行业已排除次新股特色分组"
+      }
+    ],
+    "missing": [],
+    "checkedAt": "2026-10-25T16:03:17.709Z"
   }
 }
