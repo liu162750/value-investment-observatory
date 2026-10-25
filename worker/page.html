@@ -77,7 +77,7 @@ function renderMarketSignals(){const node=document.querySelector('#market-signal
 function marketVolume(d){
  const a=d.marketTurnover?.sh,b=d.marketTurnover?.sz,now=new Date(),today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(now);
  const valid=!d.stale&&[a,b].every(q=>Number.isFinite(q?.amount)&&q.amount>0&&q.time?.slice(0,10)===today),time=valid?(a.time<b.time?a.time:b.time):null,amount=valid?a.amount+b.amount:null;
- const last=d.turnover?.rows?.at(-1),base=d.turnover?.average20||(last?.ratio>0?last.amount/last.ratio:null),baseDate=d.turnover?.averageAsOf||last?.date;
+ const last=d.turnover?.rows?.at(-1),isSameDay=last?.date===today,base=isSameDay?last.priorAverage20:d.turnover?.average20,baseDate=isSameDay?last.baselineAsOf:d.turnover?.averageAsOf;
  const sourceMinute=time?+time.slice(11,13)*60+ +time.slice(14,16):0,parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now),minute=+parts.find(x=>x.type==='hour').value*60+ +parts.find(x=>x.type==='minute').value;
  const closed=valid&&minute>=900&&sourceMinute>=900,elapsed=sourceMinute<=690?Math.max(0,sourceMinute-570):sourceMinute<780?120:Math.min(240,120+sourceMinute-780);
  const stamp=time?Date.parse(time.replace(' ','T')+'+08:00'):null,age=stamp?Date.now()-stamp:Infinity,lunch=minute>=690&&minute<780&&sourceMinute>=690,fresh=valid&&age>=0&&(age<=300000||lunch);
@@ -422,13 +422,13 @@ function dailyRecapHTML(f,d=model,account=null,now=Date.now()){
  const frozen=s=>s.levelReview?.status==='pending-support'||s.levelReview?.recovery?.frozen===true;
  const stocks=d.stocks||[],validStocks=stocks.filter(quoteOK),validIndices=(d.market||[]).filter(quoteOK),up=validIndices.filter(s=>s.quote.change>0).length,down=validIndices.filter(s=>s.quote.change<0).length;
  const amount=f.amount===null?null:f.amount>=1e12?num(f.amount/1e12,2)+'万亿元':num(f.amount/1e8,0)+'亿元';
- const rows=d.market?.[0]?.rows||[],previous=rows.filter(x=>x.date<date).at(-1)?.date,base=(d.turnover?.rows||[]).filter(x=>x.date<date&&Number.isFinite(x.amount)&&x.amount>0).sort((a,b)=>a.date.localeCompare(b.date)).slice(-20);
- const volume=f.closed&&same&&base.length===20&&base.at(-1).date===previous&&f.amount!==null?f.amount/(base.reduce((s,x)=>s+x.amount,0)/20):null;
+ const turnoverRows=(d.turnover?.rows||[]).filter(x=>x.date<=date&&Number.isFinite(x.amount)&&x.amount>0).sort((a,b)=>a.date.localeCompare(b.date)),turnoverDay=turnoverRows.find(x=>x.date===date),base=turnoverRows.filter(x=>x.date<date).slice(-20);
+ const volume=f.closed&&base.length===20&&turnoverDay?.baselineCount===20&&Number.isFinite(turnoverDay.priorAverage20)&&turnoverDay.priorAverage20>0&&turnoverDay.baselineAsOf===base.at(-1).date&&f.amount!==null?f.amount/turnoverDay.priorAverage20:null;
  const evidence=[];
  let market=indexOK?'上证'+(f.closed?'收于':'报')+num(index.quote.price)+'点，'+(index.quote.change>0?'上涨':index.quote.change<0?'下跌':'持平')+(index.quote.change===0?'':num(Math.abs(index.quote.change))+'%')+'。':'上证同日有效行情未齐，暂不下大盘强弱结论。';
  if(validIndices.length>=3){market+=up===validIndices.length?'监测指数全部上涨，指数层面形成同向修复。':down===validIndices.length?'监测指数全部下跌，指数层面承压较一致。':up&&down?'几项指数涨跌不一，指数层面存在分化，不能只凭上证涨跌概括全市场。':'指数方向暂不一致。';}
  if(amount)market+='沪深'+(f.closed?'实际成交额':'盘中累计成交额')+'为'+amount+'。';
- market+=volume===null?'同口径前20日成交额样本尚未齐，暂不判断资金是在持续回流还是缩量观望。':'成交额为前20个交易日均值的'+num(volume,2)+'倍，'+(volume>1.15?'交易活跃度高于近期平均；放量本身不能区分主动承接与集中卖出，还要结合价格方向。':volume<.85?'交易活跃度低于近期平均，当前涨跌的量能配合仍需观察。':'量能接近近期常态，尚无明显放量或缩量特征。');
+ market+=volume===null?'同口径前20日成交额样本尚未齐，暂不判断资金是在持续回流还是缩量观望。':'当日成交额'+(volume>1.15?'放量':volume<.85?'缩量':'接近常态')+'，为此前20个完整交易日均值的'+num(volume,2)+'倍（均额'+num(turnoverDay.priorAverage20/1e8,0)+'亿元，截至'+turnoverDay.baselineAsOf+'），'+(volume>1.15?'交易活跃度高于近期平均；放量本身不能区分主动承接与集中卖出，还要结合价格方向。':volume<.85?'交易活跃度低于近期平均，当前涨跌的量能配合仍需观察。':'量能接近近期常态，尚无明显放量或缩量特征。');
  let technical='';
  if(same){technical=metric.ma20===null?'完整日线不足，趋势确认暂缺依据。':metric.ma.startsWith('站')?'完整收盘位于20日均线上方，短期价格位置相对有利；仍要看后续能否持续站稳。':'完整收盘仍在20日均线下方，'+(indexOK&&index.quote.change>0?'当天上涨与趋势转强是两件事，先按均线下方的修复观察。':'短期趋势压力仍在，单日反弹不能自动解除。');technical+='MACD显示“'+metric.macd+'”，'+(metric.macd==='当日金叉'?'只是本日出现交叉，不能据此单独确认趋势反转。':metric.macd==='当日死叉'?'属于动能转弱线索，需要与价格结构一起确认。':'这是当前动能关系，不能把它写成今天新发生的金叉或死叉。');}else technical='最新完整日线未与复盘日期对齐，MA20和MACD不引用旧值作当天结论。';
  const mood=marketTemperature(d).match(/temperature-title[\s\S]*?<span[^>]*>([^<]*)<\/span>/)?.[1]||'数据不足';

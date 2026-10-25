@@ -1207,10 +1207,11 @@
         }
       ],
       "quote": {
-        "price": 3842.19,
-        "change": 0.31,
-        "time": "2026-09-30 16:15:00",
-        "source": "腾讯财经"
+        "price": 3690.48,
+        "change": 0.89,
+        "time": "2026-10-23 16:15:00",
+        "source": "腾讯财经",
+        "amount": 898666874902
       },
       "tech": {
         "date": "2026-09-30",
@@ -2427,10 +2428,11 @@
         }
       ],
       "quote": {
-        "price": 12887.62,
-        "change": -0.11,
-        "time": "2026-09-30 16:14:54",
-        "source": "腾讯财经"
+        "price": 11673.83,
+        "change": 2.79,
+        "time": "2026-10-23 16:14:54",
+        "source": "腾讯财经",
+        "amount": 1057616973533
       },
       "tech": {
         "date": "2026-09-30",
@@ -3647,10 +3649,11 @@
         }
       ],
       "quote": {
-        "price": 3135.28,
-        "change": -0.23,
-        "time": "2026-09-30 16:14:09",
-        "source": "腾讯财经"
+        "price": 2684.1,
+        "change": 4.16,
+        "time": "2026-10-23 16:14:09",
+        "source": "腾讯财经",
+        "amount": 534483185404
       },
       "tech": {
         "date": "2026-09-30",
@@ -4147,10 +4150,11 @@
         }
       ],
       "quote": {
-        "price": 1487.88,
-        "change": -2.75,
-        "time": "2026-10-08 10:39:36",
-        "source": "腾讯财经"
+        "price": 1345.51,
+        "change": 3.04,
+        "time": "2026-10-23 16:14:12",
+        "source": "腾讯财经",
+        "amount": 96902723394
       },
       "tech": {
         "date": "2026-09-30",
@@ -16986,40 +16990,613 @@
     }
   ],
   "turnover": {
+    "average20": 1670979325650.7722,
+    "averageAsOf": "2026-10-23",
     "rows": [
+      {
+        "date": "2026-07-24",
+        "amount": 1931140022313.31,
+        "change": null,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 0,
+        "baselineAsOf": null,
+        "baselineStart": null
+      },
+      {
+        "date": "2026-07-27",
+        "amount": 2076620477783.89,
+        "change": 7.53339756773872,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 1,
+        "baselineAsOf": "2026-07-24",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-07-28",
+        "amount": 2025780601238.63,
+        "change": -2.448202600771565,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 2,
+        "baselineAsOf": "2026-07-27",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-07-29",
+        "amount": 2296579100934.87,
+        "change": 13.367612441873767,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 3,
+        "baselineAsOf": "2026-07-28",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-07-30",
+        "amount": 2342809255544.14,
+        "change": 2.0130007536187655,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 4,
+        "baselineAsOf": "2026-07-29",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-07-31",
+        "amount": 2541948177796.45,
+        "change": 8.500005784980491,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 5,
+        "baselineAsOf": "2026-07-30",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-03",
+        "amount": 1997385855653.67,
+        "change": -21.42303005621646,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 6,
+        "baselineAsOf": "2026-07-31",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-04",
+        "amount": 2213591828635.65,
+        "change": 10.82444698253977,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 7,
+        "baselineAsOf": "2026-08-03",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-05",
+        "amount": 2659634501534.83,
+        "change": 20.15017706196083,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 8,
+        "baselineAsOf": "2026-08-04",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-06",
+        "amount": 2528781475662.44,
+        "change": -4.919962716564141,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 9,
+        "baselineAsOf": "2026-08-05",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-07",
+        "amount": 2664419750880.46,
+        "change": 5.363780007226127,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 10,
+        "baselineAsOf": "2026-08-06",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-10",
+        "amount": 2523102817721.5303,
+        "change": -5.30385398592813,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 11,
+        "baselineAsOf": "2026-08-07",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-11",
+        "amount": 2320985917227.78,
+        "change": -8.010648597993741,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 12,
+        "baselineAsOf": "2026-08-10",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-12",
+        "amount": 2152423109815.35,
+        "change": -7.26255192507862,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 13,
+        "baselineAsOf": "2026-08-11",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-13",
+        "amount": 2550916739358.84,
+        "change": 18.51372194092802,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 14,
+        "baselineAsOf": "2026-08-12",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-14",
+        "amount": 2142843225402.67,
+        "change": -15.997131841266487,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 15,
+        "baselineAsOf": "2026-08-13",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-17",
+        "amount": 2387457189783.23,
+        "change": 11.415392478588515,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 16,
+        "baselineAsOf": "2026-08-14",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-18",
+        "amount": 2400774685938.34,
+        "change": 0.5578108881742594,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 17,
+        "baselineAsOf": "2026-08-17",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-19",
+        "amount": 2511042521252.81,
+        "change": 4.593010579473522,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 18,
+        "baselineAsOf": "2026-08-18",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-20",
+        "amount": 2079363240051.6602,
+        "change": -17.191237406277626,
+        "ratio": null,
+        "priorAverage20": null,
+        "baselineCount": 19,
+        "baselineAsOf": "2026-08-19",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-21",
+        "amount": 1879264405344.9,
+        "change": -9.623082242320924,
+        "ratio": 0.8109435592320128,
+        "priorAverage20": 2317380024726.5273,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-08-20",
+        "baselineStart": "2026-07-24"
+      },
+      {
+        "date": "2026-08-24",
+        "amount": 2007456397338.53,
+        "change": 6.821392010035066,
+        "ratio": 0.8672318675850224,
+        "priorAverage20": 2314786243878.1074,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-08-21",
+        "baselineStart": "2026-07-27"
+      },
+      {
+        "date": "2026-08-25",
+        "amount": 1831844459909.01,
+        "change": -8.747982654185915,
+        "ratio": 0.792550615196649,
+        "priorAverage20": 2311328039855.839,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-08-24",
+        "baselineStart": "2026-07-28"
+      },
+      {
+        "date": "2026-08-26",
+        "amount": 1808723242719.83,
+        "change": -1.262182335629547,
+        "ratio": 0.7858440643976793,
+        "priorAverage20": 2301631232789.358,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-08-25",
+        "baselineStart": "2026-07-29"
+      },
+      {
+        "date": "2026-08-27",
+        "amount": 2125926799188.8198,
+        "change": 17.53742910894436,
+        "ratio": 0.9335547661412862,
+        "priorAverage20": 2277238439878.6064,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-08-26",
+        "baselineStart": "2026-07-30"
+      },
+      {
+        "date": "2026-08-28",
+        "amount": 2101715024358.7002,
+        "change": -1.1388809266320021,
+        "ratio": 0.9273386402964057,
+        "priorAverage20": 2266394317060.84,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-08-27",
+        "baselineStart": "2026-07-31"
+      },
+      {
+        "date": "2026-08-31",
+        "amount": 2131030144497.3298,
+        "change": 1.3948189834906088,
+        "ratio": 0.9494950139552035,
+        "priorAverage20": 2244382659388.952,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-08-28",
+        "baselineStart": "2026-08-03"
+      },
+      {
+        "date": "2026-09-01",
+        "amount": 2033402822269.48,
+        "change": -4.581226712345654,
+        "ratio": 0.9033070729804372,
+        "priorAverage20": 2251064873831.1353,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-08-31",
+        "baselineStart": "2026-08-04"
+      },
+      {
+        "date": "2026-09-02",
+        "amount": 1791178494595.53,
+        "change": -11.912264752519796,
+        "ratio": 0.7989001858790501,
+        "priorAverage20": 2242055423512.827,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-01",
+        "baselineStart": "2026-08-05"
+      },
+      {
+        "date": "2026-09-03",
+        "amount": 1758916323802.69,
+        "change": -1.8011700615088722,
+        "ratio": 0.8000046507405978,
+        "priorAverage20": 2198632623165.862,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-02",
+        "baselineStart": "2026-08-06"
+      },
+      {
+        "date": "2026-09-04",
+        "amount": 2030667836097.55,
+        "change": 15.449939750820363,
+        "ratio": 0.9400633442736284,
+        "priorAverage20": 2160139365572.8743,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-03",
+        "baselineStart": "2026-08-07"
+      },
+      {
+        "date": "2026-09-07",
+        "amount": 1946018893712.63,
+        "change": -4.168527263798838,
+        "ratio": 0.9142884613564204,
+        "priorAverage20": 2128451769833.729,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-04",
+        "baselineStart": "2026-08-10"
+      },
+      {
+        "date": "2026-09-08",
+        "amount": 1960334669031.19,
+        "change": 0.7356442100748817,
+        "ratio": 0.9336716205281643,
+        "priorAverage20": 2099597573633.284,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-07",
+        "baselineStart": "2026-08-11"
+      },
+      {
+        "date": "2026-09-09",
+        "amount": 1855606640262.48,
+        "change": -5.342354569511709,
+        "ratio": 0.8914478434530537,
+        "priorAverage20": 2081565011223.4543,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-08",
+        "baselineStart": "2026-08-12"
+      },
+      {
+        "date": "2026-09-10",
+        "amount": 1647147829484.9,
+        "change": -11.233997888048785,
+        "ratio": 0.7969848319632115,
+        "priorAverage20": 2066724187745.811,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-09",
+        "baselineStart": "2026-08-13"
+      },
+      {
+        "date": "2026-09-11",
+        "amount": 1971898487729.85,
+        "change": 19.715938814460078,
+        "ratio": 0.9754457695281882,
+        "priorAverage20": 2021535742252.1138,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-10",
+        "baselineStart": "2026-08-14"
+      },
+      {
+        "date": "2026-09-14",
+        "amount": 1629175552004.94,
+        "change": -17.380353900441914,
+        "ratio": 0.8093317709763688,
+        "priorAverage20": 2012988505368.4731,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-11",
+        "baselineStart": "2026-08-17"
+      },
+      {
+        "date": "2026-09-15",
+        "amount": 1612716789831.02,
+        "change": -1.0102509918998637,
+        "ratio": 0.8165346939128703,
+        "priorAverage20": 1975074423479.5586,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-14",
+        "baselineStart": "2026-08-18"
+      },
+      {
+        "date": "2026-09-16",
+        "amount": 1839121873617.53,
+        "change": 14.038737936760292,
+        "ratio": 0.9501208476611769,
+        "priorAverage20": 1935671528674.1926,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-15",
+        "baselineStart": "2026-08-19"
+      },
+      {
+        "date": "2026-09-17",
+        "amount": 1823134270447.29,
+        "change": -0.869306346663834,
+        "ratio": 0.9584973225305656,
+        "priorAverage20": 1902075496292.429,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-16",
+        "baselineStart": "2026-08-20"
+      },
+      {
+        "date": "2026-09-18",
+        "amount": 2077100295691.3599,
+        "change": 13.93018766422296,
+        "ratio": 1.099422972716104,
+        "priorAverage20": 1889264047812.2102,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-17",
+        "baselineStart": "2026-08-21"
+      },
+      {
+        "date": "2026-09-21",
+        "amount": 2031513487711.89,
+        "change": -2.1947331129860803,
+        "ratio": 1.0696928827178316,
+        "priorAverage20": 1899155842329.5332,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-18",
+        "baselineStart": "2026-08-24"
+      },
+      {
+        "date": "2026-09-22",
+        "amount": 2135550409931.12,
+        "change": 5.121153408457446,
+        "ratio": 1.1237617474390447,
+        "priorAverage20": 1900358696848.2012,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-21",
+        "baselineStart": "2026-08-25"
+      },
       {
         "date": "2026-09-23",
         "amount": 1764976416649.52,
         "change": -17.352622141734063,
-        "ratio": 0.9213969618322796
+        "ratio": 0.9213969618322796,
+        "priorAverage20": 1915543994349.3062,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-22",
+        "baselineStart": "2026-08-26"
       },
       {
         "date": "2026-09-24",
         "amount": 1653357362340.51,
         "change": -6.324110240571834,
-        "ratio": 0.8641135251541318
+        "ratio": 0.8641135251541318,
+        "priorAverage20": 1913356653045.7915,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-23",
+        "baselineStart": "2026-08-27"
       },
       {
         "date": "2026-09-28",
         "amount": 1702799061926.1802,
         "change": 2.990381916930529,
-        "ratio": 0.901081477676774
+        "ratio": 0.901081477676774,
+        "priorAverage20": 1889728181203.3755,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-24",
+        "baselineStart": "2026-08-28"
       },
       {
         "date": "2026-09-29",
         "amount": 1409197537634.93,
         "change": -17.242288350754244,
-        "ratio": 0.7536692774441002
+        "ratio": 0.7536692774441002,
+        "priorAverage20": 1869782383081.7495,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-28",
+        "baselineStart": "2026-08-31"
       },
       {
         "date": "2026-09-30",
         "amount": 1437989429382.03,
         "change": 2.0431409350474716,
-        "ratio": 0.7842049850741643
+        "ratio": 0.7842049850741643,
+        "priorAverage20": 1833690752738.6296,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-29",
+        "baselineStart": "2026-09-01"
+      },
+      {
+        "date": "2026-10-08",
+        "amount": 1682108741785.77,
+        "change": 16.976433026260086,
+        "ratio": 0.9324740921451772,
+        "priorAverage20": 1803920083094.257,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-09-30",
+        "baselineStart": "2026-09-02"
+      },
+      {
+        "date": "2026-10-09",
+        "amount": 1900540332846.87,
+        "change": 12.985580874468772,
+        "ratio": 1.0567559818186931,
+        "priorAverage20": 1798466595453.769,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-10-08",
+        "baselineStart": "2026-09-03"
+      },
+      {
+        "date": "2026-10-12",
+        "amount": 1537821027953.69,
+        "change": -19.085062212273773,
+        "ratio": 0.8517199220317789,
+        "priorAverage20": 1805547795905.978,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-10-09",
+        "baselineStart": "2026-09-04"
+      },
+      {
+        "date": "2026-10-13",
+        "amount": 1675908448195.94,
+        "change": 8.979420734413868,
+        "ratio": 0.9410429077081813,
+        "priorAverage20": 1780905455498.7852,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-10-12",
+        "baselineStart": "2026-09-07"
+      },
+      {
+        "date": "2026-10-14",
+        "amount": 1414391310174.94,
+        "change": -15.604500251938857,
+        "ratio": 0.8002666988878515,
+        "priorAverage20": 1767399933222.9507,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-10-13",
+        "baselineStart": "2026-09-08"
+      },
+      {
+        "date": "2026-10-15",
+        "amount": 1632996262217.77,
+        "change": 15.455761815716462,
+        "ratio": 0.9384481737518962,
+        "priorAverage20": 1740102765280.1382,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-10-14",
+        "baselineStart": "2026-09-09"
+      },
+      {
+        "date": "2026-10-16",
+        "amount": 1555414284317.3398,
+        "change": -4.750897457356462,
+        "ratio": 0.8996178438236028,
+        "priorAverage20": 1728972246377.9028,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-10-15",
+        "baselineStart": "2026-09-10"
+      },
+      {
+        "date": "2026-10-19",
+        "amount": 1437505199134.75,
+        "change": -7.580558206994947,
+        "ratio": 0.8336332806755877,
+        "priorAverage20": 1724385569119.525,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-10-16",
+        "baselineStart": "2026-09-11"
+      },
+      {
+        "date": "2026-10-20",
+        "amount": 1456106801591.75,
+        "change": 1.2940198385505974,
+        "ratio": 0.8577110476032312,
+        "priorAverage20": 1697665904689.77,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-10-19",
+        "baselineStart": "2026-09-14"
+      },
+      {
+        "date": "2026-10-21",
+        "amount": 1429344080511.1401,
+        "change": -1.8379641556068638,
+        "ratio": 0.8462602309305682,
+        "priorAverage20": 1689012467169.1104,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-10-20",
+        "baselineStart": "2026-09-15"
+      },
+      {
+        "date": "2026-10-22",
+        "amount": 1528708179396.34,
+        "change": 6.951727036198796,
+        "ratio": 0.9100299388226186,
+        "priorAverage20": 1679843831703.1162,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-10-21",
+        "baselineStart": "2026-09-16"
+      },
+      {
+        "date": "2026-10-23",
+        "amount": 1956257843621.6,
+        "change": 27.968036672250406,
+        "ratio": 1.175407460478549,
+        "priorAverage20": 1664323146992.0566,
+        "baselineCount": 20,
+        "baselineAsOf": "2026-10-22",
+        "baselineStart": "2026-09-17"
       }
     ],
     "source": "东方财富指数日线",
-    "scope": "上证综指＋深证综指成交额（含B股，不含北交所）"
+    "scope": "上证综指＋深证综指成交额（含B股，不含北交所）",
+    "checkedAt": "2026-10-25T16:31:07.135Z"
   },
   "gold": {
     "name": "国内大盘黄金",
@@ -17884,6 +18461,22 @@
       "previousMa20": 3917.1364999999996,
       "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq",
       "displayOnly": true
+    }
+  },
+  "marketTurnover": {
+    "sh": {
+      "price": 3690.48,
+      "change": 0.89,
+      "time": "2026-10-23 16:15:00",
+      "source": "腾讯财经",
+      "amount": 898666874902
+    },
+    "sz": {
+      "price": 2212.99,
+      "change": 2.44,
+      "time": "2026-10-23 16:14:15",
+      "source": "腾讯财经",
+      "amount": 1057590968719
     }
   }
 }

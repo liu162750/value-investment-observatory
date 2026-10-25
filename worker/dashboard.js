@@ -178,8 +178,25 @@ const xmlText=s=>s.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g,'$1').replace(/&amp;/g,
 async function mediaNews(stock){const rss=await get('https://news.google.com/rss/search?q='+encodeURIComponent(stock.name+' when:2d')+'&hl=zh-CN&gl=CN&ceid=CN:zh-Hans','utf-8');const allowed=['stcn.com','cnstock.com','cs.com.cn','xinhuanet.com','news.cn','cctv.com','people.com.cn','yicai.com','ce.cn'];const out=[];for(const match of rss.matchAll(/<item>([\s\S]*?)<\/item>/g)){const item=match[1],tag=t=>xmlText(item.match(new RegExp('<'+t+'[^>]*>([\\s\\S]*?)</'+t+'>'))?.[1]||''),sourceUrl=xmlText(item.match(/<source[^>]*url="([^"]+)"/)?.[1]||'');let host;try{host=new URL(sourceUrl).hostname;}catch{continue;}if(!allowed.some(d=>host===d||host.endsWith('.'+d)))continue;const title=tag('title'),time=Date.parse(tag('pubDate'));if(!title.includes(stock.name)||!Number.isFinite(time))continue;out.push({title,url:tag('link'),date:new Date(time).toLocaleDateString('sv-SE',{timeZone:'Asia/Shanghai'}),source:tag('source')+' · Google新闻索引'});}return out.slice(0,12);}
 
 const amountCache=new Map();
-async function amounts(secid){const cached=amountCache.get(secid);if(cached&&Date.now()-cached.time<3600000)return cached.rows;const d=await get('https://push2his.eastmoney.com/api/qt/stock/kline/get?secid='+secid+'&klt=101&fqt=0&lmt=30&end=20500101&fields1=f1,f2,f3,f4,f5,f6&fields2=f51,f52,f53,f54,f55,f56,f57');if(!d.data?.klines?.length)throw Error('成交额未返回');const rows=d.data.klines.map(r=>{const a=r.split(',');return {date:a[0],amount:+a[6]};});amountCache.set(secid,{time:Date.now(),rows});return rows;}
-function amountSummary(sh,sz){const matched=sh.map(r=>({date:r.date,amount:r.amount+(sz.find(s=>s.date===r.date)?.amount||NaN)})).filter(r=>Number.isFinite(r.amount)&&r.amount>0);const complete=completedDailyRows(matched);const rows=complete.map((r,i)=>{const prev=complete[i-1],base=complete.slice(Math.max(0,i-20),i),avg=base.length===20?base.reduce((v,s)=>v+s.amount,0)/20:null;return {...r,change:prev?(r.amount/prev.amount-1)*100:null,ratio:avg?r.amount/avg:null};});return {average20:complete.length>=20?complete.slice(-20).reduce((sum,r)=>sum+r.amount,0)/20:null,averageAsOf:complete.at(-1)?.date||null,rows:rows.slice(-5),source:'东方财富指数日线',scope:'上证综指＋深证综指成交额（含B股，不含北交所）'};}
+async function amounts(secid){
+ const cached=amountCache.get(secid),now=Date.now(),today=new Date(now+8*3600000).toISOString().slice(0,10),close=Date.parse(today+'T15:05:00+08:00');
+ if(cached&&now-cached.time<300000&&!(now>=close&&cached.time<close))return cached.rows;
+ const d=await get('https://push2his.eastmoney.com/api/qt/stock/kline/get?secid='+secid+'&klt=101&fqt=0&lmt=60&end=20500101&fields1=f1,f2,f3,f4,f5,f6&fields2=f51,f52,f53,f54,f55,f56,f57');
+ if(!d.data?.klines?.length)throw Error('成交额未返回');
+ const rows=d.data.klines.map(r=>{const a=r.split(',');return {date:a[0],amount:Number(a[6])};});
+ if(completedDailyRows(rows).filter(r=>Number.isFinite(r.amount)&&r.amount>0).length<21)throw Error('完整成交额不足21日');
+ amountCache.set(secid,{time:now,rows});return rows;
+}
+function amountSummary(sh,sz,now=Date.now()){
+ const valid=r=>/^\d{4}-\d{2}-\d{2}$/.test(r.date||'')&&Number.isFinite(r.amount)&&r.amount>0;
+ const left=completedDailyRows(sh,now).filter(valid).sort((a,b)=>a.date.localeCompare(b.date)),right=completedDailyRows(sz,now).filter(valid).sort((a,b)=>a.date.localeCompare(b.date));
+ if(new Set(left.map(x=>x.date)).size!==left.length||new Set(right.map(x=>x.date)).size!==right.length)throw Error('成交额日期重复');
+ const rightMap=new Map(right.map(r=>[r.date,r.amount])),allDates=[...new Set([...left,...right].map(r=>r.date))].sort();
+ const complete=left.filter(r=>rightMap.has(r.date)).map(r=>({date:r.date,amount:r.amount+rightMap.get(r.date)}));
+ const rows=complete.map((r,i)=>{const prev=complete[i-1],base=complete.slice(Math.max(0,i-20),i),noGap=base.length===20&&allDates.filter(date=>date>=base[0].date&&date<r.date).length===20,avg=noGap?base.reduce((sum,x)=>sum+x.amount,0)/20:null;return {...r,change:prev?(r.amount/prev.amount-1)*100:null,ratio:avg?r.amount/avg:null,priorAverage20:avg,baselineCount:noGap?20:base.length,baselineAsOf:base.at(-1)?.date||null,baselineStart:base[0]?.date||null};});
+ const recent=complete.slice(-20),averageValid=recent.length===20&&allDates.filter(date=>date>=recent[0].date&&date<=recent.at(-1).date).length===20;
+ return {average20:averageValid?recent.reduce((sum,r)=>sum+r.amount,0)/20:null,averageAsOf:complete.at(-1)?.date||null,rows:rows.slice(-60),source:'东方财富指数日线',scope:'上证综指＋深证综指成交额（含B股，不含北交所）',checkedAt:new Date(now).toISOString()};
+}
 async function marketImportantNews(){
  const results=await Promise.allSettled(['A股','资本市场','中国股市'].map(name=>mediaNews({name})));
  if(results.every(r=>r.status==='rejected'))throw Error('A股热点新闻源不可用');

@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {amountSummary} from '../worker/dashboard.js';
+const now=Date.parse('2026-10-23T16:00:00+08:00');
+const rows=Array.from({length:60},(_,i)=>({date:new Date(Date.UTC(2026,0,i+1)).toISOString().slice(0,10),amount:100+i}));
+const result=amountSummary(rows,rows,now),last=result.rows.at(-1),base=rows.slice(-21,-1).reduce((s,x)=>s+2*x.amount,0)/20;
+assert.equal(result.rows.length,60,'Frontend retains enough history rather than five display rows');assert.equal(last.baselineCount,20);assert.equal(last.priorAverage20,base);assert.equal(last.ratio,last.amount/base);assert.equal(last.baselineAsOf,rows.at(-2).date);assert.equal(last.baselineStart,rows.at(-21).date);
+const huge=structuredClone(rows);huge.at(-1).amount=1e8;assert.equal(amountSummary(huge,huge,now).rows.at(-1).priorAverage20,base,'Current day cannot enter its own denominator');
+assert.equal(amountSummary(rows,rows.filter((_,i)=>i!==50),now).rows.at(-1).priorAverage20,null,'Missing one exchange day must not silently extend the window');
+assert.equal(amountSummary(rows.slice(-20),rows.slice(-20),now).rows.at(-1).priorAverage20,null);
+assert.throws(()=>amountSummary([...rows,rows[0]],rows,now),/重复/);
+const added=[...rows,{date:'2026-10-23',amount:999},{date:'2026-10-26',amount:999}];
+assert.equal(amountSummary(added,added,Date.parse('2026-10-23T15:04:00+08:00')).rows.at(-1).date,rows.at(-1).date,'Before 15:05 unfinished/future days are excluded');
+assert.equal(amountSummary(added,added,Date.parse('2026-10-23T15:05:00+08:00')).rows.at(-1).date,'2026-10-23');
+console.log('PASS: turnover keeps 60 days, uses preceding 20 only, rejects gaps and duplicate dates, respects 15:05');
