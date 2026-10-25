@@ -19,4 +19,13 @@ r=facts({...data,stale:true},null,now);assert.equal(r.title,'历史快照参考'
 assert.equal(facts({...data,market:[],stocks:[],marketTurnover:null},null,now).amount,null);
 assert(!r.marketText.includes('半导体'),'No unverified sector leader is fabricated');
 assert.equal((page.match(/<style\b/g)||[]).length,1,'One authoritative theme rather than layered visual patches');
+const metrics=new Function(page.slice(page.indexOf('function recapDailyMetrics('),page.indexOf('function dailyRecapHTML('))+';return recapDailyMetrics;')();
+const rows=Array.from({length:100},(_,i)=>({date:new Date(Date.UTC(2026,5,1+i)).toISOString().slice(0,10),close:100+i,volume:100}));
+const last=rows.at(-1).date;
+let m=metrics(rows,last,true);assert.equal(m.ma,'站上 MA20');assert.equal(m.macd,'DIF在DEA上方','Being above is not a fresh golden cross');assert.equal(m.volume,'平量上涨');
+assert(metrics(rows,last,false).date<last,'Intraday indicators exclude unfinished current-day candle');
+assert.equal(metrics(rows.slice(-10),last,true).ma,'日线不足');
+assert.equal(metrics(rows.map(x=>({...x,volume:null})),last,true).ratio,null);
+assert.equal(metrics([],last,true).date,null);
+assert(page.includes('下一交易日观察'));assert(page.includes('全市场广度数据未取得'));assert(page.includes('不以四只持仓涨跌替代板块排名'));
 console.log('PASS: recap separates intraday/close/history, rejects old/future amounts and unverified sectors, and retains one theme');

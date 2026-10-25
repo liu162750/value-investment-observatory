@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const source=readFileSync(new URL('../worker/dashboard.js',import.meta.url),'utf8');
+const body=source.slice(source.indexOf('let recapSectorsCache'),source.indexOf('const initialSnapshot'));
+let calls=0;const stamp=Math.floor(Date.now()/1000)-10;
+const get=async url=>{calls++;const concept=new URL(url).searchParams.get('fs').endsWith(':3');return {data:{total:3,diff:[{f12:concept?'BK1134':'BK0457',f14:concept?'算力概念':'电网设备',f3:2,f124:stamp},{f12:'OTHER',f14:'其他',f3:3,f124:stamp},{f12:'TIE',f14:'同涨幅',f3:2,f124:stamp}]}};};
+const sectors=new Function('get',body+'return recapSectors;')(get);
+const result=await sectors();assert.equal(result.items.length,2);assert(result.items.every(x=>x.rank===2&&x.total===3));assert.notEqual(result.items[0].scope,result.items[1].scope);
+await sectors();assert.equal(calls,2,'Fifteen minute cache avoids repeated universe scans');
+const broken=new Function('get',body+'return recapSectors;')(async()=>({data:{total:101,diff:[]}}));assert.equal((await broken()).items.length,0,'Incomplete ranking universe is rejected');
+console.log('PASS: recap sector scopes, tied ranks, complete universes and caching');

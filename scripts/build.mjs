@@ -1,5 +1,6 @@
 await import('../tests/refresh-cache.test.mjs');
 await import('../tests/recap.test.mjs');
+await import('../tests/recap-sectors.test.mjs');
 import {createHash} from 'node:crypto';
 await import('../tests/market-gate.test.mjs');
 await import('../tests/events.test.mjs');
