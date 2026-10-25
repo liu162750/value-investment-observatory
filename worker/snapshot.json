@@ -7084,6 +7084,14 @@
             "evidence": null
           }
         }
+      },
+      "statusAudit": {
+        "checkedAt": "2026-10-25T02:54:24.262Z",
+        "dataDate": "2026-10-23",
+        "frozen": false,
+        "missing": [],
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600312,day,,,320,qfq",
+        "scope": "只读状态检查；未重算采用档位"
       }
     },
     {
@@ -10022,6 +10030,19 @@
             "evidence": null
           }
         }
+      },
+      "statusAudit": {
+        "checkedAt": "2026-10-25T02:54:24.262Z",
+        "dataDate": "2026-10-23",
+        "frozen": true,
+        "missing": [
+          "未连续3个完整收盘站上各自MA60",
+          "20日/60日跌幅尚未同时退出阈值",
+          "缺少当期已核验的独立企稳依据",
+          "趋势型冻结仍触发"
+        ],
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002156,day,,,320,qfq",
+        "scope": "只读状态检查；未重算采用档位"
       }
     },
     {
@@ -12960,6 +12981,19 @@
             "evidence": null
           }
         }
+      },
+      "statusAudit": {
+        "checkedAt": "2026-10-25T02:54:24.262Z",
+        "dataDate": "2026-10-23",
+        "frozen": true,
+        "missing": [
+          "未连续3个完整收盘站上各自MA60",
+          "20日/60日跌幅尚未同时退出阈值",
+          "缺少当期已核验的独立企稳依据",
+          "趋势型冻结仍触发"
+        ],
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138,day,,,320,qfq",
+        "scope": "只读状态检查；未重算采用档位"
       }
     },
     {
@@ -16843,6 +16877,19 @@
             "evidence": null
           }
         }
+      },
+      "statusAudit": {
+        "checkedAt": "2026-10-25T02:54:24.262Z",
+        "dataDate": "2026-10-23",
+        "frozen": true,
+        "missing": [
+          "未连续3个完整收盘站上各自MA60",
+          "20日/60日跌幅尚未同时退出阈值",
+          "缺少当期已核验的独立企稳依据",
+          "趋势型冻结仍触发"
+        ],
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,320,qfq",
+        "scope": "只读状态检查；未重算采用档位"
       }
     }
   ],
