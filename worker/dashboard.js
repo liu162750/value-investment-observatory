@@ -1,25 +1,26 @@
 const accounts = [];
 let recapSectorsCache=null,recapSectorsPending=null;
 async function recapSectors(){
- if(recapSectorsCache&&Date.now()-recapSectorsCache.checked<900000)return recapSectorsCache.value;
+ if(recapSectorsCache&&Date.now()-recapSectorsCache.checked<recapSectorsCache.ttl)return recapSectorsCache.value;
  if(recapSectorsPending)return recapSectorsPending;
  recapSectorsPending=(async()=>{
-  try{
-   const items=await Promise.all([{type:3,code:'BK1134',name:'算力概念',scope:'概念板块'},{type:2,code:'BK0457',name:'电网设备',scope:'行业板块'}].map(async target=>{
-    const url=page=>'https://push2.eastmoney.com/api/qt/clist/get?pn='+page+'&pz=100&fid=f3&po=1&fltt=2&fs=m:90+t:'+target.type+'&fields=f12,f14,f3,f124';
-    const first=await get(url(1)),total=first.data?.total;
-    if(!Number.isInteger(total)||total<1||total>2000)throw Error('板块范围无效');
-    const rest=await Promise.all(Array.from({length:Math.ceil(total/100)-1},(_,i)=>get(url(i+2))));
-    const rows=[first,...rest].flatMap(x=>Object.values(x.data?.diff||{}));
-    if(rows.length!==total||new Set(rows.map(x=>x.f12)).size!==total||rows.some(x=>!Number.isFinite(x.f3)||!Number.isFinite(x.f124)))throw Error('板块排名样本未齐');
-    const chosen=rows.find(x=>x.f12===target.code&&x.f14===target.name);
-    if(!chosen||chosen.f124*1000>Date.now())throw Error('板块行情无效');
-    const dateOf=x=>new Date(x.f124*1000+8*3600000).toISOString().slice(0,10);
-    if(rows.some(x=>dateOf(x)!==dateOf(chosen)))throw Error('板块日期不一致');
-    return {...target,date:dateOf(chosen),time:new Date(chosen.f124*1000+8*3600000).toISOString().slice(0,19).replace('T',' '),change:chosen.f3,rank:1+rows.filter(x=>x.f3>chosen.f3).length,total,source:'东方财富板块行情',url:'https://quote.eastmoney.com/bk/90.'+target.code+'.html'};
-   }));
-   const value={items,checkedAt:new Date().toISOString()};recapSectorsCache={checked:Date.now(),value};return value;
-  }catch{const value={items:[],error:'板块行情或完整排名样本未取得'};recapSectorsCache={checked:Date.now(),value};return value;}
+  const results=await Promise.allSettled([{type:2,scope:'行业板块'},{type:3,scope:'概念板块'}].map(async target=>{
+   const url=page=>'https://push2.eastmoney.com/api/qt/clist/get?pn='+page+'&pz=100&fid=f3&po=1&fltt=2&fs=m:90+t:'+target.type+'&fields=f12,f14,f3,f124';
+   const first=await get(url(1)),total=first.data?.total;
+   if(!Number.isInteger(total)||total<1||total>2000)throw Error('板块范围无效');
+   const rest=await Promise.all(Array.from({length:Math.ceil(total/100)-1},(_,i)=>get(url(i+2))));
+   const all=[first,...rest].flatMap(x=>Object.values(x.data?.diff||{}));
+   if(all.length!==total||new Set(all.map(x=>x.f12)).size!==total)throw Error('完整板块范围未齐');
+   const rows=all.filter(x=>Number.isFinite(x.f3)&&Number.isFinite(x.f124)&&x.f124>0&&x.f124*1000<=Date.now());
+   if(!rows.length)throw Error('有效板块报价未取得');
+   const dateOf=x=>new Date(x.f124*1000+8*3600000).toISOString().slice(0,10),date=dateOf(rows[0]);
+   if(rows.some(x=>dateOf(x)!==date))throw Error('板块日期不一致');
+   const ranked=[...rows].sort((a,b)=>b.f3-a.f3||a.f12.localeCompare(b.f12));
+   const item=x=>({code:x.f12,name:x.f14,change:x.f3,rank:1+rows.filter(y=>y.f3>x.f3).length,date,time:new Date(x.f124*1000+8*3600000).toISOString().slice(0,19).replace('T',' '),url:'https://quote.eastmoney.com/bk/90.'+x.f12+'.html'});
+   return {scope:target.scope,date,total,quoted:rows.length,excluded:total-rows.length,time:item(rows.reduce((a,b)=>a.f124<b.f124?a:b)).time,top:ranked.filter(x=>x.f3>0).slice(0,5).map(item),bottom:[...ranked].reverse().filter(x=>x.f3<0).slice(0,5).map(item),source:'东方财富板块行情'};
+  }));
+  const groups=results.filter(x=>x.status==='fulfilled').map(x=>x.value),missing=results.flatMap((x,i)=>x.status==='rejected'?[i===0?'行业板块':'概念板块']:[]);
+  const value={groups,missing,checkedAt:new Date().toISOString()};recapSectorsCache={checked:Date.now(),ttl:missing.length?60000:900000,value};return value;
  })().finally(()=>{recapSectorsPending=null;});return recapSectorsPending;
 }
 const initialSnapshot = null;

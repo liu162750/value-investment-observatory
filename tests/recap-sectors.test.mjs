@@ -5,7 +5,9 @@ const body=source.slice(source.indexOf('let recapSectorsCache'),source.indexOf('
 let calls=0;const stamp=Math.floor(Date.now()/1000)-10;
 const get=async url=>{calls++;const concept=new URL(url).searchParams.get('fs').endsWith(':3');return {data:{total:3,diff:[{f12:concept?'BK1134':'BK0457',f14:concept?'算力概念':'电网设备',f3:2,f124:stamp},{f12:'OTHER',f14:'其他',f3:3,f124:stamp},{f12:'TIE',f14:'同涨幅',f3:2,f124:stamp}]}};};
 const sectors=new Function('get',body+'return recapSectors;')(get);
-const result=await sectors();assert.equal(result.items.length,2);assert(result.items.every(x=>x.rank===2&&x.total===3));assert.notEqual(result.items[0].scope,result.items[1].scope);
+const result=await sectors();assert.equal(result.groups.length,2);assert(result.groups.every(x=>x.top[0].change===3&&x.top[1].rank===2&&x.top[2].rank===2&&x.total===3));assert.notEqual(result.groups[0].scope,result.groups[1].scope);assert(result.groups.every(x=>x.bottom.length===0),'Positive laggards must not be labeled decliners');
 await sectors();assert.equal(calls,2,'Fifteen minute cache avoids repeated universe scans');
-const broken=new Function('get',body+'return recapSectors;')(async()=>({data:{total:101,diff:[]}}));assert.equal((await broken()).items.length,0,'Incomplete ranking universe is rejected');
+const broken=new Function('get',body+'return recapSectors;')(async()=>({data:{total:101,diff:[]}}));assert.equal((await broken()).groups.length,0,'Incomplete ranking universe is rejected');
+const partial=new Function('get',body+'return recapSectors;')(async url=>{if(new URL(url).searchParams.get('fs').endsWith(':3'))throw Error('Concept feed unavailable');return {data:{total:2,diff:[{f12:'A',f14:'测试上涨',f3:2,f124:stamp},{f12:'B',f14:'测试下跌',f3:-2,f124:stamp}]}};});
+const part=await partial();assert.equal(part.groups.length,1);assert.deepEqual(part.missing,['概念板块']);assert.equal(part.groups[0].bottom[0].change,-2);
 console.log('PASS: recap sector scopes, tied ranks, complete universes and caching');
