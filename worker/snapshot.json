@@ -7025,7 +7025,7 @@
         "nextScheduled": "2026-10-28 16:30",
         "marketGate": {
           "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
-          "checkedAt": "2026-10-27T08:34:18.618Z",
+          "checkedAt": "2026-10-27T12:35:02.551Z",
           "method": "最近已完成月收盘与含当月最近20个完整月收盘均值比较；排除当前月",
           "policyId": "completed-month-ma20-v1",
           "frozen": false,
@@ -7058,7 +7058,7 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-27T08:35:40.046Z",
+          "checkedAt": "2026-10-27T12:35:02.698Z",
           "dataDate": "2026-10-27",
           "recovery": {
             "frozen": false,
@@ -9948,7 +9948,7 @@
         "nextScheduled": "2026-10-28 16:30",
         "marketGate": {
           "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
-          "checkedAt": "2026-10-27T08:34:18.618Z",
+          "checkedAt": "2026-10-27T12:35:02.551Z",
           "method": "最近已完成月收盘与含当月最近20个完整月收盘均值比较；排除当前月",
           "policyId": "completed-month-ma20-v1",
           "frozen": false,
@@ -9995,7 +9995,7 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-27T08:35:40.046Z",
+          "checkedAt": "2026-10-27T12:35:02.698Z",
           "dataDate": "2026-10-27",
           "recovery": {
             "frozen": true,
@@ -12897,7 +12897,7 @@
         "nextScheduled": "2026-10-28 16:30",
         "marketGate": {
           "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
-          "checkedAt": "2026-10-27T08:34:18.618Z",
+          "checkedAt": "2026-10-27T12:35:02.551Z",
           "method": "最近已完成月收盘与含当月最近20个完整月收盘均值比较；排除当前月",
           "policyId": "completed-month-ma20-v1",
           "frozen": false,
@@ -12944,7 +12944,7 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-27T08:35:40.046Z",
+          "checkedAt": "2026-10-27T12:35:02.698Z",
           "dataDate": "2026-10-27",
           "recovery": {
             "frozen": true,
@@ -16791,7 +16791,7 @@
         "nextScheduled": "2026-10-28 16:30",
         "marketGate": {
           "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
-          "checkedAt": "2026-10-27T08:34:18.618Z",
+          "checkedAt": "2026-10-27T12:35:02.551Z",
           "method": "最近已完成月收盘与含当月最近20个完整月收盘均值比较；排除当前月",
           "policyId": "completed-month-ma20-v1",
           "frozen": false,
@@ -16838,7 +16838,7 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-27T08:35:40.046Z",
+          "checkedAt": "2026-10-27T12:35:02.698Z",
           "dataDate": "2026-10-27",
           "recovery": {
             "frozen": true,
@@ -18433,7 +18433,7 @@
   "marketGate": {
     "policyId": "completed-month-ma20-v1",
     "asOf": "2026-10-27",
-    "checkedAt": "2026-10-27T08:34:18.618Z",
+    "checkedAt": "2026-10-27T12:35:02.551Z",
     "dataDate": "2026-09-30",
     "date": "2026-09-30",
     "lastCompleteMonth": "2026-09-30",
