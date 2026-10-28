@@ -1,6 +1,6 @@
 {
   "reportPeriod": "2026-09-30",
-  "checkedAt": "2026-10-21T11:09:31.350Z",
+  "checkedAt": "2026-10-28T08:38:47.000Z",
   "events": [
     {
       "symbol": "sz002156",
@@ -15,12 +15,15 @@
     {
       "symbol": "sz002463",
       "name": "沪电股份",
-      "title": "三季报预约披露",
+      "title": "三季报已披露",
       "date": "2026-10-28",
-      "actualDate": null,
-      "source": "东方财富预约披露汇总",
-      "sourceUrl": "https://data.eastmoney.com/bbsj/202609/yysj.html",
-      "type": "earnings"
+      "actualDate": "2026-10-28",
+      "source": "公司2026年第三季度报告（公告编号2026-076）",
+      "sourceUrl": "https://static.cninfo.com.cn/finalpage/2026-10-28/1225627804.PDF",
+      "type": "earnings",
+      "publishedAtDate": "2026-10-28",
+      "detectedAt": "2026-10-28T08:34:10.498Z",
+      "checkedAt": "2026-10-28T08:38:47.000Z"
     },
     {
       "symbol": "sh600312",
