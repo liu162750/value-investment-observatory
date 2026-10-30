@@ -27,13 +27,14 @@ for(const old of stocks){
  let block=marker+`sellReview:${JSON.stringify(sellReview)},levelReview:${JSON.stringify(r)},sellReference:${JSON.stringify(sellReference)},`+original.slice(nameAt);
  block=block.slice(0,block.lastIndexOf('levels:'))+`levels:${JSON.stringify(r.levels)}},`;
  source=source.slice(0,start)+block+source.slice(end);
- const s=snapshot.stocks.find(s=>s.symbol===old.symbol);Object.assign(s,{levels:r.levels,levelReview:r,sellReview,sellReference,levelDate:r.referenceDate,levelType:'完整周收盘基准 · ATR20统一四档 · 技术触价非交易许可',distances:r.levels.map(v=>distance(s.quote.price,v))});
+ const s=snapshot.stocks.find(s=>s.symbol===old.symbol);Object.assign(s,{rows:a.bars,levels:r.levels,levelReview:r,sellReview,sellReference,levelDate:r.referenceDate,levelType:'完整周收盘基准 · ATR20统一四档 · 技术触价非交易许可',distances:r.levels.map(v=>distance(s.quote.price,v))});
  result.stocks[old.symbol]=r;
 }
-if(checkOnly&&data.marketGate){
+if(data.marketGate){
  const gate=data.marketGate;
  snapshot.marketGate={...snapshot.marketGate,policyId:gate.policyId,asOf:gate.asOf||today,checkedAt:gate.checkedAt||data.asOf,dataDate:gate.lastMonth,date:gate.lastMonth,lastCompleteMonth:gate.lastMonth,monthCount:gate.monthCount,ma20month:gate.completedMonthlyMA20,indexClose:gate.indexClose,frozen:gate.frozen,source:gate.source,reason:gate.frozen?'最近完整月收盘未高于20个完整月收盘均值':'最近完整月收盘高于20个完整月收盘均值'};
 }
+snapshot.date=today;snapshot.generated=new Date(now).toISOString();
 source=source.replace("levelDate:s.levelReview?.dataDate||s.sellReview?.dataDate", "levelDate:s.levelReview?.referenceDate||s.levelReview?.dataDate||s.sellReview?.dataDate");
 source=source.replace("levelType:'ATR20波动率与技术锚点复核；通道不是已确认支撑/压力；基本面估值待核验'","levelType:'完整周收盘基准 · ATR20统一四档 · 技术触价非交易许可'");
 // Complete all calculations before writing any production file.
