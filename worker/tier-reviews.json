@@ -1,6 +1,6 @@
 {
   "policyId": "weekly-close-atr20-v1",
-  "asOf": "2026-10-30T09:25:25.757Z",
+  "asOf": "2026-10-30T12:30:32.974Z",
   "stocks": {
     "sh600312": {
       "policyId": "weekly-close-atr20-v1",
@@ -126,7 +126,7 @@
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
         "asOf": "2026-10-30",
-        "checkedAt": "2026-10-30T09:23:53.252Z",
+        "checkedAt": "2026-10-30T12:30:31.866Z",
         "dataDate": "2026-09-30",
         "lastMonth": "2026-09-30",
         "monthCount": 20,
@@ -157,7 +157,36 @@
           "high": 23.13,
           "note": "ATR测算通道（非确认支撑/压力）"
         }
-      ]
+      ],
+      "freezeCheck": {
+        "checkedAt": "2026-10-30T12:30:32.974Z",
+        "dataDate": "2026-10-30",
+        "recovery": {
+          "frozen": false,
+          "required": false,
+          "triggers": {
+            "trend": false,
+            "structure": false,
+            "twoCloses": false,
+            "singleBreak": false,
+            "t2Lower": 18.62,
+            "singleBreakThreshold": 0.7719999999999997,
+            "close": 20.54,
+            "date": "2026-10-30"
+          },
+          "freezeSources": [],
+          "aboveMA60": true,
+          "returnsRecovered": true,
+          "evidenceOK": false,
+          "risingStructure": false,
+          "atrPeak": 0.7719999999999997,
+          "atrContracted": false,
+          "missing": [],
+          "frozenSince": null,
+          "recoveredAt": null,
+          "evidence": null
+        }
+      }
     },
     "sz002156": {
       "policyId": "weekly-close-atr20-v1",
@@ -293,7 +322,7 @@
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
         "asOf": "2026-10-30",
-        "checkedAt": "2026-10-30T09:23:53.252Z",
+        "checkedAt": "2026-10-30T12:30:31.866Z",
         "dataDate": "2026-09-30",
         "lastMonth": "2026-09-30",
         "monthCount": 20,
@@ -338,7 +367,43 @@
           "originalNote": "ATR波动通道",
           "edgePct": 17.52
         }
-      ]
+      ],
+      "freezeCheck": {
+        "checkedAt": "2026-10-30T12:30:32.974Z",
+        "dataDate": "2026-10-30",
+        "recovery": {
+          "frozen": true,
+          "required": true,
+          "triggers": {
+            "trend": true,
+            "structure": false,
+            "twoCloses": false,
+            "singleBreak": false,
+            "t2Lower": 41.5,
+            "singleBreakThreshold": 2.9749999999999996,
+            "close": 40.72,
+            "date": "2026-10-30"
+          },
+          "freezeSources": [
+            "trend"
+          ],
+          "aboveMA60": false,
+          "returnsRecovered": false,
+          "evidenceOK": false,
+          "risingStructure": false,
+          "atrPeak": 2.9884999999999993,
+          "atrContracted": false,
+          "missing": [
+            "未连续3个完整收盘站上各自MA60",
+            "20日/60日跌幅尚未同时退出阈值",
+            "缺少当期已核验的独立企稳依据",
+            "趋势型冻结仍触发"
+          ],
+          "frozenSince": "2026-10-19",
+          "recoveredAt": null,
+          "evidence": null
+        }
+      }
     },
     "sh601138": {
       "policyId": "weekly-close-atr20-v1",
@@ -475,7 +540,7 @@
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
         "asOf": "2026-10-30",
-        "checkedAt": "2026-10-30T09:23:53.252Z",
+        "checkedAt": "2026-10-30T12:30:31.866Z",
         "dataDate": "2026-09-30",
         "lastMonth": "2026-09-30",
         "monthCount": 20,
@@ -520,7 +585,43 @@
           "originalNote": "ATR波动通道",
           "edgePct": 16.33
         }
-      ]
+      ],
+      "freezeCheck": {
+        "checkedAt": "2026-10-30T12:30:32.974Z",
+        "dataDate": "2026-10-30",
+        "recovery": {
+          "frozen": true,
+          "required": true,
+          "triggers": {
+            "trend": true,
+            "structure": false,
+            "twoCloses": false,
+            "singleBreak": false,
+            "t2Lower": 42.5,
+            "singleBreakThreshold": 2.7159999999999997,
+            "close": 45,
+            "date": "2026-10-30"
+          },
+          "freezeSources": [
+            "trend"
+          ],
+          "aboveMA60": false,
+          "returnsRecovered": false,
+          "evidenceOK": false,
+          "risingStructure": false,
+          "atrPeak": 2.7159999999999997,
+          "atrContracted": false,
+          "missing": [
+            "未连续3个完整收盘站上各自MA60",
+            "20日/60日跌幅尚未同时退出阈值",
+            "缺少当期已核验的独立企稳依据",
+            "趋势型冻结仍触发"
+          ],
+          "frozenSince": "2026-10-19",
+          "recoveredAt": null,
+          "evidence": null
+        }
+      }
     },
     "sz002463": {
       "policyId": "weekly-close-atr20-v1",
@@ -662,7 +763,7 @@
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
         "asOf": "2026-10-30",
-        "checkedAt": "2026-10-30T09:23:53.252Z",
+        "checkedAt": "2026-10-30T12:30:31.866Z",
         "dataDate": "2026-09-30",
         "lastMonth": "2026-09-30",
         "monthCount": 20,
@@ -707,7 +808,44 @@
           "originalNote": "Fib 61.8%反弹",
           "edgePct": 20.81
         }
-      ]
+      ],
+      "freezeCheck": {
+        "checkedAt": "2026-10-30T12:30:32.974Z",
+        "dataDate": "2026-10-30",
+        "recovery": {
+          "frozen": true,
+          "required": true,
+          "triggers": {
+            "trend": true,
+            "structure": true,
+            "twoCloses": true,
+            "singleBreak": true,
+            "t2Lower": 97,
+            "singleBreakThreshold": 7.564500000000001,
+            "close": 87.34,
+            "date": "2026-10-30"
+          },
+          "freezeSources": [
+            "trend",
+            "structure"
+          ],
+          "aboveMA60": false,
+          "returnsRecovered": false,
+          "evidenceOK": false,
+          "risingStructure": false,
+          "atrPeak": 7.564500000000001,
+          "atrContracted": false,
+          "missing": [
+            "未连续3个完整收盘站上各自MA60",
+            "20日/60日跌幅尚未同时退出阈值",
+            "缺少当期已核验的独立企稳依据",
+            "趋势型与结构型冻结仍触发"
+          ],
+          "frozenSince": "2026-10-19",
+          "recoveredAt": null,
+          "evidence": null
+        }
+      }
     }
   }
 }
