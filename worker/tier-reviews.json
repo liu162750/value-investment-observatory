@@ -125,16 +125,17 @@
       "nextScheduled": "2026-11-04 16:30",
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
-        "asOf": "2026-10-30",
-        "checkedAt": "2026-10-30T12:30:31.866Z",
-        "dataDate": "2026-09-30",
-        "lastMonth": "2026-09-30",
+        "asOf": "2026-11-01",
+        "checkedAt": "2026-11-01T13:55:36.000Z",
+        "dataDate": "2026-10-30",
+        "date": "2026-10-30",
+        "lastCompleteMonth": "2026-10-30",
         "monthCount": 20,
-        "completedMonthlyMA20": 3798.1159999999995,
-        "indexClose": 3842.19,
-        "frozen": false,
-        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
-        "reason": "最近完整月收盘高于20个完整月收盘均值"
+        "ma20month": 3812.022,
+        "indexClose": 3599.02,
+        "frozen": true,
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,45,qfq",
+        "reason": "最近完整月收盘未高于20个完整月收盘均值"
       },
       "bands": [
         {
@@ -321,16 +322,17 @@
       "nextScheduled": "2026-11-04 16:30",
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
-        "asOf": "2026-10-30",
-        "checkedAt": "2026-10-30T12:30:31.866Z",
-        "dataDate": "2026-09-30",
-        "lastMonth": "2026-09-30",
+        "asOf": "2026-11-01",
+        "checkedAt": "2026-11-01T13:55:36.000Z",
+        "dataDate": "2026-10-30",
+        "date": "2026-10-30",
+        "lastCompleteMonth": "2026-10-30",
         "monthCount": 20,
-        "completedMonthlyMA20": 3798.1159999999995,
-        "indexClose": 3842.19,
-        "frozen": false,
-        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
-        "reason": "最近完整月收盘高于20个完整月收盘均值"
+        "ma20month": 3812.022,
+        "indexClose": 3599.02,
+        "frozen": true,
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,45,qfq",
+        "reason": "最近完整月收盘未高于20个完整月收盘均值"
       },
       "bands": [
         {
@@ -539,16 +541,17 @@
       "nextScheduled": "2026-11-04 16:30",
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
-        "asOf": "2026-10-30",
-        "checkedAt": "2026-10-30T12:30:31.866Z",
-        "dataDate": "2026-09-30",
-        "lastMonth": "2026-09-30",
+        "asOf": "2026-11-01",
+        "checkedAt": "2026-11-01T13:55:36.000Z",
+        "dataDate": "2026-10-30",
+        "date": "2026-10-30",
+        "lastCompleteMonth": "2026-10-30",
         "monthCount": 20,
-        "completedMonthlyMA20": 3798.1159999999995,
-        "indexClose": 3842.19,
-        "frozen": false,
-        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
-        "reason": "最近完整月收盘高于20个完整月收盘均值"
+        "ma20month": 3812.022,
+        "indexClose": 3599.02,
+        "frozen": true,
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,45,qfq",
+        "reason": "最近完整月收盘未高于20个完整月收盘均值"
       },
       "bands": [
         {
@@ -762,16 +765,17 @@
       "nextScheduled": "2026-11-04 16:30",
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
-        "asOf": "2026-10-30",
-        "checkedAt": "2026-10-30T12:30:31.866Z",
-        "dataDate": "2026-09-30",
-        "lastMonth": "2026-09-30",
+        "asOf": "2026-11-01",
+        "checkedAt": "2026-11-01T13:55:36.000Z",
+        "dataDate": "2026-10-30",
+        "date": "2026-10-30",
+        "lastCompleteMonth": "2026-10-30",
         "monthCount": 20,
-        "completedMonthlyMA20": 3798.1159999999995,
-        "indexClose": 3842.19,
-        "frozen": false,
-        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
-        "reason": "最近完整月收盘高于20个完整月收盘均值"
+        "ma20month": 3812.022,
+        "indexClose": 3599.02,
+        "frozen": true,
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,45,qfq",
+        "reason": "最近完整月收盘未高于20个完整月收盘均值"
       },
       "bands": [
         {
