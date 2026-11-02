@@ -13,10 +13,11 @@ for(const stock of stocks){
  const r=audit.stocks[stock.symbol],a=input.stocks[stock.symbol];
  assert.equal(stock.levelReview.policyId,POLICY);assert.deepEqual(stock.levels,r.levels);
  const latest=snapshot.stocks.find(s=>s.symbol===stock.symbol).rows;
- assert.equal(r.dataDate,snapshot.date);
- assert(Math.abs(r.atr20-indicators(latest).atr)<1e-9,'Saved ATR must reproduce from the current complete daily input');
- assert.deepEqual(reviewTiers({bars:latest,now:Date.parse(r.asOf),oldLevels:r.levels,previousReview:r,newSupportEvidence:r.newSupportEvidence}).candidateBands,r.candidateBands);
- assert.equal(r.referencePrice,latest.find(b=>b.date===r.referenceDate).close);
+ const weeklyRows=latest.filter(b=>b.date<=r.referenceWeekEnding);
+ assert.equal(r.dataDate,r.referenceWeekEnding,'Pricing review must retain its complete-week cutoff, not the later daily freeze-check date');
+ assert(Math.abs(r.atr20-indicators(weeklyRows).atr)<1e-9,'Saved ATR must reproduce from the complete weekly-reference daily input');
+ assert.deepEqual(reviewTiers({bars:weeklyRows,now:Date.parse(r.asOf),oldLevels:r.levels,previousReview:r,newSupportEvidence:r.newSupportEvidence}).candidateBands,r.candidateBands);
+ assert.equal(r.referencePrice,weeklyRows.find(b=>b.date===r.referenceDate).close);
  assert(Math.abs(r.halfWidth-Math.max(.006*r.referencePrice,.15*r.atr20))<1e-10);
  assert.deepEqual(validate(r.candidateBands.map(b=>b.level),{p:r.referencePrice,atr:r.atr20,buyEdge:r.buyEdge}),[]);
  assert.deepEqual(stock.sellReview.levels,r.levels.slice(2));

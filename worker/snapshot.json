@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-30T12:30:32.974Z",
-  "date": "2026-10-30",
+  "generated": "2026-11-02T12:33:40.338Z",
+  "date": "2026-11-02",
   "market": [
     {
       "symbol": "sh000001",
@@ -4210,174 +4210,6 @@
       ],
       "rows": [
         {
-          "date": "2025-07-04",
-          "open": 14.387,
-          "close": 14.387,
-          "high": 14.577,
-          "low": 14.307,
-          "volume": 165996
-        },
-        {
-          "date": "2025-07-07",
-          "open": 14.507,
-          "close": 14.897,
-          "high": 14.947,
-          "low": 14.487,
-          "volume": 343992
-        },
-        {
-          "date": "2025-07-08",
-          "open": 14.967,
-          "close": 14.897,
-          "high": 14.997,
-          "low": 14.757,
-          "volume": 241031
-        },
-        {
-          "date": "2025-07-09",
-          "open": 14.907,
-          "close": 14.787,
-          "high": 15.077,
-          "low": 14.737,
-          "volume": 207533
-        },
-        {
-          "date": "2025-07-10",
-          "open": 14.707,
-          "close": 14.767,
-          "high": 14.787,
-          "low": 14.647,
-          "volume": 118965
-        },
-        {
-          "date": "2025-07-11",
-          "open": 14.767,
-          "close": 14.777,
-          "high": 14.867,
-          "low": 14.697,
-          "volume": 135248
-        },
-        {
-          "date": "2025-07-14",
-          "open": 14.787,
-          "close": 14.927,
-          "high": 15.067,
-          "low": 14.777,
-          "volume": 207745
-        },
-        {
-          "date": "2025-07-15",
-          "open": 14.837,
-          "close": 14.777,
-          "high": 14.847,
-          "low": 14.637,
-          "volume": 217407
-        },
-        {
-          "date": "2025-07-16",
-          "open": 14.717,
-          "close": 14.607,
-          "high": 14.797,
-          "low": 14.597,
-          "volume": 150299
-        },
-        {
-          "date": "2025-07-17",
-          "open": 14.677,
-          "close": 14.667,
-          "high": 14.857,
-          "low": 14.617,
-          "volume": 142183
-        },
-        {
-          "date": "2025-07-18",
-          "open": 14.667,
-          "close": 14.717,
-          "high": 14.727,
-          "low": 14.607,
-          "volume": 154643
-        },
-        {
-          "date": "2025-07-21",
-          "open": 15.407,
-          "close": 15.977,
-          "high": 16.227,
-          "low": 15.207,
-          "volume": 1190652
-        },
-        {
-          "date": "2025-07-22",
-          "open": 16.177,
-          "close": 16.507,
-          "high": 16.747,
-          "low": 15.587,
-          "volume": 1124181
-        },
-        {
-          "date": "2025-07-23",
-          "open": 16.677,
-          "close": 15.677,
-          "high": 16.727,
-          "low": 15.637,
-          "volume": 957145
-        },
-        {
-          "date": "2025-07-24",
-          "open": 15.517,
-          "close": 15.827,
-          "high": 15.927,
-          "low": 15.447,
-          "volume": 504157
-        },
-        {
-          "date": "2025-07-25",
-          "open": 15.747,
-          "close": 15.337,
-          "high": 15.767,
-          "low": 15.307,
-          "volume": 447784
-        },
-        {
-          "date": "2025-07-28",
-          "open": 15.347,
-          "close": 15.487,
-          "high": 15.487,
-          "low": 15.217,
-          "volume": 242352
-        },
-        {
-          "date": "2025-07-29",
-          "open": 15.457,
-          "close": 15.437,
-          "high": 15.457,
-          "low": 15.197,
-          "volume": 222061
-        },
-        {
-          "date": "2025-07-30",
-          "open": 15.357,
-          "close": 15.357,
-          "high": 15.517,
-          "low": 15.217,
-          "volume": 214563
-        },
-        {
-          "date": "2025-07-31",
-          "open": 15.287,
-          "close": 15.097,
-          "high": 15.347,
-          "low": 15.027,
-          "volume": 251562
-        },
-        {
-          "date": "2025-08-01",
-          "open": 15.037,
-          "close": 14.967,
-          "high": 15.147,
-          "low": 14.877,
-          "volume": 195861
-        },
-        {
           "date": "2025-08-04",
           "open": 14.867,
           "close": 15.037,
@@ -6776,6 +6608,14 @@
           "high": 21.08,
           "low": 19.7,
           "volume": 204084
+        },
+        {
+          "date": "2026-11-02",
+          "open": 20.6,
+          "close": 21.43,
+          "high": 21.86,
+          "low": 20.53,
+          "volume": 322666
         }
       ],
       "quote": {
@@ -6925,16 +6765,16 @@
             "twoCloses": false,
             "singleBreak": false,
             "t2Lower": 18.62,
-            "singleBreakThreshold": 0.7719999999999997,
-            "close": 20.54,
-            "date": "2026-10-30"
+            "singleBreakThreshold": 0.7854999999999996,
+            "close": 21.43,
+            "date": "2026-11-02"
           },
           "freezeSources": [],
           "aboveMA60": true,
           "returnsRecovered": true,
           "evidenceOK": false,
           "risingStructure": false,
-          "atrPeak": 0.7719999999999997,
+          "atrPeak": 0.7854999999999996,
           "atrContracted": false,
           "missing": [],
           "frozenSince": null,
@@ -7019,21 +6859,19 @@
         "newCandidateValidation": [],
         "reason": "整组变动≤3%且旧组校验通过",
         "newSupportEvidence": null,
-        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600312,day,,,320,qfq",
-        "sourceQuoteTime": "2026-10-30 close",
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600312,day,,,300,qfq",
+        "sourceQuoteTime": "2026-11-02 收盘",
         "nextScheduled": "2026-11-04 16:30",
         "marketGate": {
           "policyId": "completed-month-ma20-v1",
-          "asOf": "2026-10-30",
-          "checkedAt": "2026-10-30T12:30:31.866Z",
-          "dataDate": "2026-09-30",
-          "lastMonth": "2026-09-30",
+          "checkedAt": "2026-11-02T12:33:34.973Z",
+          "lastMonth": "2026-10-30",
           "monthCount": 20,
-          "completedMonthlyMA20": 3798.1159999999995,
-          "indexClose": 3842.19,
-          "frozen": false,
-          "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
-          "reason": "最近完整月收盘高于20个完整月收盘均值"
+          "completedMonthlyMA20": 3812.022,
+          "indexClose": 3599.02,
+          "frozen": true,
+          "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,45,qfq",
+          "reason": "最近完整月收盘未高于20个完整月收盘均值"
         },
         "bands": [
           {
@@ -7058,8 +6896,8 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-30T12:30:32.974Z",
-          "dataDate": "2026-10-30",
+          "checkedAt": "2026-11-02T12:33:40.338Z",
+          "dataDate": "2026-11-02",
           "recovery": {
             "frozen": false,
             "required": false,
@@ -7069,16 +6907,16 @@
               "twoCloses": false,
               "singleBreak": false,
               "t2Lower": 18.62,
-              "singleBreakThreshold": 0.7719999999999997,
-              "close": 20.54,
-              "date": "2026-10-30"
+              "singleBreakThreshold": 0.7854999999999996,
+              "close": 21.43,
+              "date": "2026-11-02"
             },
             "freezeSources": [],
             "aboveMA60": true,
             "returnsRecovered": true,
             "evidenceOK": false,
             "risingStructure": false,
-            "atrPeak": 0.7719999999999997,
+            "atrPeak": 0.7854999999999996,
             "atrContracted": false,
             "missing": [],
             "frozenSince": null,
@@ -7123,174 +6961,6 @@
         ]
       ],
       "rows": [
-        {
-          "date": "2025-07-04",
-          "open": 25.309,
-          "close": 25.009,
-          "high": 25.449,
-          "low": 24.919,
-          "volume": 261598
-        },
-        {
-          "date": "2025-07-07",
-          "open": 24.929,
-          "close": 24.839,
-          "high": 25.109,
-          "low": 24.729,
-          "volume": 167101
-        },
-        {
-          "date": "2025-07-08",
-          "open": 24.969,
-          "close": 25.149,
-          "high": 25.259,
-          "low": 24.919,
-          "volume": 223894
-        },
-        {
-          "date": "2025-07-09",
-          "open": 25.099,
-          "close": 24.879,
-          "high": 25.199,
-          "low": 24.779,
-          "volume": 206882
-        },
-        {
-          "date": "2025-07-10",
-          "open": 24.779,
-          "close": 24.829,
-          "high": 24.939,
-          "low": 24.719,
-          "volume": 179989
-        },
-        {
-          "date": "2025-07-11",
-          "open": 24.869,
-          "close": 25.399,
-          "high": 25.679,
-          "low": 24.679,
-          "volume": 406671
-        },
-        {
-          "date": "2025-07-14",
-          "open": 25.389,
-          "close": 25.679,
-          "high": 25.889,
-          "low": 25.199,
-          "volume": 348322
-        },
-        {
-          "date": "2025-07-15",
-          "open": 25.649,
-          "close": 25.529,
-          "high": 25.789,
-          "low": 25.299,
-          "volume": 258919
-        },
-        {
-          "date": "2025-07-16",
-          "open": 25.689,
-          "close": 25.829,
-          "high": 26.579,
-          "low": 25.679,
-          "volume": 615715
-        },
-        {
-          "date": "2025-07-17",
-          "open": 25.529,
-          "close": 25.969,
-          "high": 25.969,
-          "low": 25.359,
-          "volume": 391587
-        },
-        {
-          "date": "2025-07-18",
-          "open": 25.969,
-          "close": 25.879,
-          "high": 26.169,
-          "low": 25.759,
-          "volume": 269330
-        },
-        {
-          "date": "2025-07-21",
-          "open": 25.749,
-          "close": 25.759,
-          "high": 25.899,
-          "low": 25.599,
-          "volume": 234996
-        },
-        {
-          "date": "2025-07-22",
-          "open": 25.719,
-          "close": 25.919,
-          "high": 26.059,
-          "low": 25.649,
-          "volume": 291801
-        },
-        {
-          "date": "2025-07-23",
-          "open": 25.819,
-          "close": 25.799,
-          "high": 26.079,
-          "low": 25.709,
-          "volume": 278343
-        },
-        {
-          "date": "2025-07-24",
-          "open": 25.779,
-          "close": 26.299,
-          "high": 26.379,
-          "low": 25.779,
-          "volume": 451298
-        },
-        {
-          "date": "2025-07-25",
-          "open": 26.399,
-          "close": 26.489,
-          "high": 26.559,
-          "low": 26.049,
-          "volume": 381631
-        },
-        {
-          "date": "2025-07-28",
-          "open": 26.619,
-          "close": 27.419,
-          "high": 28.119,
-          "low": 26.619,
-          "volume": 978996
-        },
-        {
-          "date": "2025-07-29",
-          "open": 27.269,
-          "close": 27.769,
-          "high": 28.019,
-          "low": 27.219,
-          "volume": 713101
-        },
-        {
-          "date": "2025-07-30",
-          "open": 27.779,
-          "close": 27.799,
-          "high": 28.039,
-          "low": 27.229,
-          "volume": 589510
-        },
-        {
-          "date": "2025-07-31",
-          "open": 27.729,
-          "close": 28.039,
-          "high": 28.419,
-          "low": 27.619,
-          "volume": 916869
-        },
-        {
-          "date": "2025-08-01",
-          "open": 27.799,
-          "close": 27.049,
-          "high": 28.029,
-          "low": 26.949,
-          "volume": 614257
-        },
         {
           "date": "2025-08-04",
           "open": 26.739,
@@ -9690,6 +9360,14 @@
           "high": 43.25,
           "low": 40.45,
           "volume": 598797
+        },
+        {
+          "date": "2026-11-02",
+          "open": 41.89,
+          "close": 41.12,
+          "high": 41.96,
+          "low": 40.38,
+          "volume": 581294
         }
       ],
       "quote": {
@@ -9835,16 +9513,17 @@
           "required": true,
           "triggers": {
             "trend": true,
-            "structure": false,
-            "twoCloses": false,
+            "structure": true,
+            "twoCloses": true,
             "singleBreak": false,
             "t2Lower": 41.5,
-            "singleBreakThreshold": 2.9749999999999996,
-            "close": 40.72,
-            "date": "2026-10-30"
+            "singleBreakThreshold": 2.8874999999999997,
+            "close": 41.12,
+            "date": "2026-11-02"
           },
           "freezeSources": [
-            "trend"
+            "trend",
+            "structure"
           ],
           "aboveMA60": false,
           "returnsRecovered": false,
@@ -9856,7 +9535,7 @@
             "未连续3个完整收盘站上各自MA60",
             "20日/60日跌幅尚未同时退出阈值",
             "缺少当期已核验的独立企稳依据",
-            "趋势型冻结仍触发"
+            "趋势型与结构型冻结仍触发"
           ],
           "frozenSince": "2026-10-19",
           "recoveredAt": null,
@@ -9941,23 +9620,21 @@
           "买T1边沿过近"
         ],
         "newCandidateValidation": [],
-        "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据；趋势型冻结仍触发。整组旧档仅供参考，禁止据此买入",
+        "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据；趋势型与结构型冻结仍触发。整组旧档仅供参考，禁止据此买入",
         "newSupportEvidence": null,
-        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002156,day,,,320,qfq",
-        "sourceQuoteTime": "2026-10-30 close",
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002156,day,,,300,qfq",
+        "sourceQuoteTime": "2026-11-02 收盘",
         "nextScheduled": "2026-11-04 16:30",
         "marketGate": {
           "policyId": "completed-month-ma20-v1",
-          "asOf": "2026-10-30",
-          "checkedAt": "2026-10-30T12:30:31.866Z",
-          "dataDate": "2026-09-30",
-          "lastMonth": "2026-09-30",
+          "checkedAt": "2026-11-02T12:33:34.973Z",
+          "lastMonth": "2026-10-30",
           "monthCount": 20,
-          "completedMonthlyMA20": 3798.1159999999995,
-          "indexClose": 3842.19,
-          "frozen": false,
-          "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
-          "reason": "最近完整月收盘高于20个完整月收盘均值"
+          "completedMonthlyMA20": 3812.022,
+          "indexClose": 3599.02,
+          "frozen": true,
+          "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,45,qfq",
+          "reason": "最近完整月收盘未高于20个完整月收盘均值"
         },
         "bands": [
           {
@@ -9996,23 +9673,24 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-30T12:30:32.974Z",
-          "dataDate": "2026-10-30",
+          "checkedAt": "2026-11-02T12:33:40.338Z",
+          "dataDate": "2026-11-02",
           "recovery": {
             "frozen": true,
             "required": true,
             "triggers": {
               "trend": true,
-              "structure": false,
-              "twoCloses": false,
+              "structure": true,
+              "twoCloses": true,
               "singleBreak": false,
               "t2Lower": 41.5,
-              "singleBreakThreshold": 2.9749999999999996,
-              "close": 40.72,
-              "date": "2026-10-30"
+              "singleBreakThreshold": 2.8874999999999997,
+              "close": 41.12,
+              "date": "2026-11-02"
             },
             "freezeSources": [
-              "trend"
+              "trend",
+              "structure"
             ],
             "aboveMA60": false,
             "returnsRecovered": false,
@@ -10024,7 +9702,7 @@
               "未连续3个完整收盘站上各自MA60",
               "20日/60日跌幅尚未同时退出阈值",
               "缺少当期已核验的独立企稳依据",
-              "趋势型冻结仍触发"
+              "趋势型与结构型冻结仍触发"
             ],
             "frozenSince": "2026-10-19",
             "recoveredAt": null,
@@ -10073,174 +9751,6 @@
         ]
       ],
       "rows": [
-        {
-          "date": "2025-07-04",
-          "open": 21.69,
-          "close": 22.19,
-          "high": 22.73,
-          "low": 21.66,
-          "volume": 3236055
-        },
-        {
-          "date": "2025-07-07",
-          "open": 22.18,
-          "close": 22.36,
-          "high": 22.71,
-          "low": 21.72,
-          "volume": 1648997
-        },
-        {
-          "date": "2025-07-08",
-          "open": 23.26,
-          "close": 24.76,
-          "high": 24.76,
-          "low": 23.18,
-          "volume": 2896954
-        },
-        {
-          "date": "2025-07-09",
-          "open": 25.38,
-          "close": 24.98,
-          "high": 25.5,
-          "low": 24.88,
-          "volume": 2653866
-        },
-        {
-          "date": "2025-07-10",
-          "open": 25.28,
-          "close": 24.54,
-          "high": 25.37,
-          "low": 24.26,
-          "volume": 1864206
-        },
-        {
-          "date": "2025-07-11",
-          "open": 24.48,
-          "close": 24.38,
-          "high": 24.95,
-          "low": 24.26,
-          "volume": 1439146
-        },
-        {
-          "date": "2025-07-14",
-          "open": 24.38,
-          "close": 24.3,
-          "high": 24.6,
-          "low": 23.78,
-          "volume": 1084306
-        },
-        {
-          "date": "2025-07-15",
-          "open": 24.68,
-          "close": 25.63,
-          "high": 25.79,
-          "low": 24.55,
-          "volume": 2763471
-        },
-        {
-          "date": "2025-07-16",
-          "open": 25.37,
-          "close": 25.11,
-          "high": 25.79,
-          "low": 25.03,
-          "volume": 1456232
-        },
-        {
-          "date": "2025-07-17",
-          "open": 25.01,
-          "close": 25.88,
-          "high": 26.01,
-          "low": 25.01,
-          "volume": 1571342
-        },
-        {
-          "date": "2025-07-18",
-          "open": 25.87,
-          "close": 25.49,
-          "high": 26.37,
-          "low": 25.44,
-          "volume": 1289587
-        },
-        {
-          "date": "2025-07-21",
-          "open": 25.38,
-          "close": 25.4,
-          "high": 25.93,
-          "low": 25.13,
-          "volume": 865038
-        },
-        {
-          "date": "2025-07-22",
-          "open": 25.38,
-          "close": 25.34,
-          "high": 26.64,
-          "low": 25.18,
-          "volume": 1418847
-        },
-        {
-          "date": "2025-07-23",
-          "open": 24.88,
-          "close": 24.96,
-          "high": 25.14,
-          "low": 24.73,
-          "volume": 1140934
-        },
-        {
-          "date": "2025-07-24",
-          "open": 25.57,
-          "close": 26.83,
-          "high": 27.33,
-          "low": 25.43,
-          "volume": 2239425
-        },
-        {
-          "date": "2025-07-25",
-          "open": 26.83,
-          "close": 27.04,
-          "high": 27.53,
-          "low": 26.79,
-          "volume": 1074339
-        },
-        {
-          "date": "2025-07-28",
-          "open": 27.32,
-          "close": 27.95,
-          "high": 27.95,
-          "low": 26.99,
-          "volume": 1522496
-        },
-        {
-          "date": "2025-07-29",
-          "open": 27.94,
-          "close": 29.57,
-          "high": 29.66,
-          "low": 27.69,
-          "volume": 1788365
-        },
-        {
-          "date": "2025-07-30",
-          "open": 29.38,
-          "close": 31.66,
-          "high": 32.63,
-          "low": 28.67,
-          "volume": 2068356
-        },
-        {
-          "date": "2025-07-31",
-          "open": 32.28,
-          "close": 33.63,
-          "high": 34.92,
-          "low": 32.22,
-          "volume": 3022803
-        },
-        {
-          "date": "2025-08-01",
-          "open": 33.02,
-          "close": 32.02,
-          "high": 33.32,
-          "low": 31.5,
-          "volume": 2193951
-        },
         {
           "date": "2025-08-04",
           "open": 31.42,
@@ -12640,6 +12150,14 @@
           "high": 46.5,
           "low": 42.99,
           "volume": 1026975
+        },
+        {
+          "date": "2026-11-02",
+          "open": 45.17,
+          "close": 44.39,
+          "high": 45.5,
+          "low": 42.78,
+          "volume": 1171232
         }
       ],
       "quote": {
@@ -12790,8 +12308,8 @@
             "singleBreak": false,
             "t2Lower": 42.5,
             "singleBreakThreshold": 2.7159999999999997,
-            "close": 45,
-            "date": "2026-10-30"
+            "close": 44.39,
+            "date": "2026-11-02"
           },
           "freezeSources": [
             "trend"
@@ -12894,21 +12412,19 @@
         "newCandidateValidation": [],
         "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据；趋势型冻结仍触发。整组旧档仅供参考，禁止据此买入",
         "newSupportEvidence": null,
-        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138,day,,,320,qfq",
-        "sourceQuoteTime": "2026-10-30 close",
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138,day,,,300,qfq",
+        "sourceQuoteTime": "2026-11-02 收盘",
         "nextScheduled": "2026-11-04 16:30",
         "marketGate": {
           "policyId": "completed-month-ma20-v1",
-          "asOf": "2026-10-30",
-          "checkedAt": "2026-10-30T12:30:31.866Z",
-          "dataDate": "2026-09-30",
-          "lastMonth": "2026-09-30",
+          "checkedAt": "2026-11-02T12:33:34.973Z",
+          "lastMonth": "2026-10-30",
           "monthCount": 20,
-          "completedMonthlyMA20": 3798.1159999999995,
-          "indexClose": 3842.19,
-          "frozen": false,
-          "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
-          "reason": "最近完整月收盘高于20个完整月收盘均值"
+          "completedMonthlyMA20": 3812.022,
+          "indexClose": 3599.02,
+          "frozen": true,
+          "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,45,qfq",
+          "reason": "最近完整月收盘未高于20个完整月收盘均值"
         },
         "bands": [
           {
@@ -12947,8 +12463,8 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-30T12:30:32.974Z",
-          "dataDate": "2026-10-30",
+          "checkedAt": "2026-11-02T12:33:40.338Z",
+          "dataDate": "2026-11-02",
           "recovery": {
             "frozen": true,
             "required": true,
@@ -12959,8 +12475,8 @@
               "singleBreak": false,
               "t2Lower": 42.5,
               "singleBreakThreshold": 2.7159999999999997,
-              "close": 45,
-              "date": "2026-10-30"
+              "close": 44.39,
+              "date": "2026-11-02"
             },
             "freezeSources": [
               "trend"
@@ -13024,174 +12540,6 @@
         ]
       ],
       "rows": [
-        {
-          "date": "2025-07-04",
-          "open": 46.2,
-          "close": 46.8,
-          "high": 48.01,
-          "low": 46.09,
-          "volume": 1011468
-        },
-        {
-          "date": "2025-07-07",
-          "open": 46.7,
-          "close": 45.3,
-          "high": 47.61,
-          "low": 44.73,
-          "volume": 639771
-        },
-        {
-          "date": "2025-07-08",
-          "open": 44.95,
-          "close": 48.57,
-          "high": 48.87,
-          "low": 44.87,
-          "volume": 889991
-        },
-        {
-          "date": "2025-07-09",
-          "open": 48.37,
-          "close": 47.31,
-          "high": 48.79,
-          "low": 46.98,
-          "volume": 669887
-        },
-        {
-          "date": "2025-07-10",
-          "open": 47.9,
-          "close": 46.75,
-          "high": 48.05,
-          "low": 45.42,
-          "volume": 680527
-        },
-        {
-          "date": "2025-07-11",
-          "open": 46.6,
-          "close": 46.76,
-          "high": 48.7,
-          "low": 46.28,
-          "volume": 660824
-        },
-        {
-          "date": "2025-07-14",
-          "open": 46.8,
-          "close": 47.51,
-          "high": 48.05,
-          "low": 46.71,
-          "volume": 437255
-        },
-        {
-          "date": "2025-07-15",
-          "open": 48.49,
-          "close": 50.94,
-          "high": 51.05,
-          "low": 47.75,
-          "volume": 980748
-        },
-        {
-          "date": "2025-07-16",
-          "open": 51.4,
-          "close": 48.41,
-          "high": 51.45,
-          "low": 48.36,
-          "volume": 702764
-        },
-        {
-          "date": "2025-07-17",
-          "open": 48.3,
-          "close": 52.61,
-          "high": 53.16,
-          "low": 48.15,
-          "volume": 884652
-        },
-        {
-          "date": "2025-07-18",
-          "open": 53.01,
-          "close": 51.6,
-          "high": 54.59,
-          "low": 51.47,
-          "volume": 664821
-        },
-        {
-          "date": "2025-07-21",
-          "open": 51.39,
-          "close": 50.99,
-          "high": 51.94,
-          "low": 49.9,
-          "volume": 621631
-        },
-        {
-          "date": "2025-07-22",
-          "open": 50.76,
-          "close": 50.95,
-          "high": 52.96,
-          "low": 50.09,
-          "volume": 636862
-        },
-        {
-          "date": "2025-07-23",
-          "open": 50,
-          "close": 49.16,
-          "high": 50.22,
-          "low": 48.8,
-          "volume": 689649
-        },
-        {
-          "date": "2025-07-24",
-          "open": 50.16,
-          "close": 49.19,
-          "high": 50.66,
-          "low": 48.4,
-          "volume": 571444
-        },
-        {
-          "date": "2025-07-25",
-          "open": 48.89,
-          "close": 49.04,
-          "high": 49.86,
-          "low": 48.62,
-          "volume": 311958
-        },
-        {
-          "date": "2025-07-28",
-          "open": 49.41,
-          "close": 52.24,
-          "high": 52.82,
-          "low": 48.63,
-          "volume": 841264
-        },
-        {
-          "date": "2025-07-29",
-          "open": 52.6,
-          "close": 54.68,
-          "high": 55.04,
-          "low": 52.06,
-          "volume": 795814
-        },
-        {
-          "date": "2025-07-30",
-          "open": 54.18,
-          "close": 53.98,
-          "high": 54.28,
-          "low": 52.72,
-          "volume": 511114
-        },
-        {
-          "date": "2025-07-31",
-          "open": 55.7,
-          "close": 55.77,
-          "high": 58.09,
-          "low": 55.17,
-          "volume": 836063
-        },
-        {
-          "date": "2025-08-01",
-          "open": 54.81,
-          "close": 53.35,
-          "high": 56.28,
-          "low": 52.71,
-          "volume": 672200
-        },
         {
           "date": "2025-08-04",
           "open": 52.43,
@@ -15591,6 +14939,14 @@
           "high": 92.99,
           "low": 85.22,
           "volume": 640442
+        },
+        {
+          "date": "2026-11-02",
+          "open": 89,
+          "close": 86.05,
+          "high": 89.3,
+          "low": 84.03,
+          "volume": 638614
         }
       ],
       "quote": {
@@ -16684,9 +16040,9 @@
             "twoCloses": true,
             "singleBreak": true,
             "t2Lower": 97,
-            "singleBreakThreshold": 7.564500000000001,
-            "close": 87.34,
-            "date": "2026-10-30"
+            "singleBreakThreshold": 7.437,
+            "close": 86.05,
+            "date": "2026-11-02"
           },
           "freezeSources": [
             "trend",
@@ -16794,21 +16150,19 @@
         "newCandidateValidation": [],
         "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据；趋势型与结构型冻结仍触发。整组旧档仅供参考，禁止据此买入",
         "newSupportEvidence": null,
-        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,320,qfq",
-        "sourceQuoteTime": "2026-10-30 close",
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,300,qfq",
+        "sourceQuoteTime": "2026-11-02 收盘",
         "nextScheduled": "2026-11-04 16:30",
         "marketGate": {
           "policyId": "completed-month-ma20-v1",
-          "asOf": "2026-10-30",
-          "checkedAt": "2026-10-30T12:30:31.866Z",
-          "dataDate": "2026-09-30",
-          "lastMonth": "2026-09-30",
+          "checkedAt": "2026-11-02T12:33:34.973Z",
+          "lastMonth": "2026-10-30",
           "monthCount": 20,
-          "completedMonthlyMA20": 3798.1159999999995,
-          "indexClose": 3842.19,
-          "frozen": false,
-          "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq",
-          "reason": "最近完整月收盘高于20个完整月收盘均值"
+          "completedMonthlyMA20": 3812.022,
+          "indexClose": 3599.02,
+          "frozen": true,
+          "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,45,qfq",
+          "reason": "最近完整月收盘未高于20个完整月收盘均值"
         },
         "bands": [
           {
@@ -16847,8 +16201,8 @@
           }
         ],
         "freezeCheck": {
-          "checkedAt": "2026-10-30T12:30:32.974Z",
-          "dataDate": "2026-10-30",
+          "checkedAt": "2026-11-02T12:33:40.338Z",
+          "dataDate": "2026-11-02",
           "recovery": {
             "frozen": true,
             "required": true,
@@ -16858,9 +16212,9 @@
               "twoCloses": true,
               "singleBreak": true,
               "t2Lower": 97,
-              "singleBreakThreshold": 7.564500000000001,
-              "close": 87.34,
-              "date": "2026-10-30"
+              "singleBreakThreshold": 7.437,
+              "close": 86.05,
+              "date": "2026-11-02"
             },
             "freezeSources": [
               "trend",
@@ -18442,8 +17796,8 @@
   },
   "marketGate": {
     "policyId": "completed-month-ma20-v1",
-    "asOf": "2026-11-01",
-    "checkedAt": "2026-11-01T13:55:36.000Z",
+    "asOf": "2026-11-02",
+    "checkedAt": "2026-11-02T12:33:34.973Z",
     "dataDate": "2026-10-30",
     "date": "2026-10-30",
     "lastCompleteMonth": "2026-10-30",
