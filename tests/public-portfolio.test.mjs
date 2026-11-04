@@ -18,4 +18,7 @@ const aggregate=publicPortfolio(stocks,{...account,costBasisTotal:120,positions:
 assert(Math.abs(aggregate.floatingPnlRatio-20/120)<1e-12);
 assert.equal(aggregate.holdingsDateVerified,false);
 assert(!JSON.stringify(aggregate).includes('costBasisTotal'));
+const today=publicPortfolio(stocks,{...account,dayReference:{date:'2026-11-04',previousAssets:200}});
+assert(Math.abs(today.dayPnlRatio-.2)<1e-12);
+assert.equal(publicPortfolio(stocks,{...account,dayReference:{date:'2026-11-03',previousAssets:200}}).dayPnlRatio,null);
 console.log('PASS: public portfolio exposes ratios only and does not invent P/L without costs');
