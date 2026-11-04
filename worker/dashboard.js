@@ -163,10 +163,16 @@ function evaluateMarketGate(months,rows,quote,now=Date.now()){
 async function currentMarketGate(rows,quote){
  const [monthly,weekly]=await Promise.allSettled([
   get('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq'),
-  get('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq')
+  get('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq').catch(()=>get('https://proxy.finance.qq.com/ifzqgtimg/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq'))
  ]);
  const gate=monthly.status==='fulfilled'?evaluateMarketGate(monthly.value.data?.sh000001?.month,rows,quote):{asOf:null,checkedAt:new Date().toISOString(),frozen:null,reason:'月线来源更新失败，下次刷新继续核验'};
- const currentWeekly=weekly.status==='fulfilled'?weeklyMarketGate(weekly.value.data?.sh000001?.week):{status:'pending',passed:null,reason:'周线来源更新失败'};
+ let currentWeekly=weekly.status==='fulfilled'?weeklyMarketGate(weekly.value.data?.sh000001?.week):{status:'pending',passed:null,reason:'周线来源更新失败'};
+ if(currentWeekly.status==='pending'&&Array.isArray(rows)&&rows.length>=100){
+  const groups=new Map();
+  for(const bar of rows){const stamp=Date.parse(bar.date+'T00:00:00Z');if(!Number.isFinite(stamp))continue;const weekday=new Date(stamp).getUTCDay();const monday=new Date(stamp-((weekday+6)%7)*dayMs).toISOString().slice(0,10);groups.set(monday,[bar.date,'0',bar.close]);}
+  const derived=weeklyMarketGate([...groups.values()]);
+  if(derived.status!=='pending')currentWeekly={...derived,source:'腾讯财经上证指数完整前复权日线按自然周聚合',sourceUrl:'https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,day,,,600,qfq'};
+ }
  const lastWeekly=recentDashboard()?.marketGate?.weekly;
  const sameDayVerified=lastWeekly?.asOf===dateOf(Date.now())&&['weak','improving','strong'].includes(lastWeekly.status);
  return {...gate,weekly:currentWeekly.status==='pending'&&sameDayVerified?{...lastWeekly,sourceStatus:'本日已核验结果；本次来源暂不可用'}:currentWeekly};
