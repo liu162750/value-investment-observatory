@@ -1,66 +1,30 @@
 ﻿import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {reviewTiers,completedWeekFriday,validate,POLICY,recoveryState,indicators,stageOf,freezeTriggers} from '../scripts/tier-policy.mjs';
-import {stocks} from '../worker/dashboard.js';
-const input=JSON.parse(readFileSync(new URL('./fixtures/atr20-review-20261019.json',import.meta.url),'utf8'));
-const audit=JSON.parse(readFileSync(new URL('../worker/tier-reviews.json',import.meta.url),'utf8'));
-const latestInput=JSON.parse(readFileSync(new URL('./fixtures/atr20-review-20261023.json',import.meta.url),'utf8'));
+import {priceReview,POLICY} from '../scripts/mon-wed-policy.mjs';
 const snapshot=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.meta.url),'utf8'));
-assert.equal(completedWeekFriday(Date.parse('2026-10-21T16:30:00+08:00')),'2026-10-16');
-assert.equal(completedWeekFriday(Date.parse('2026-10-23T14:59:00+08:00')),'2026-10-16');
-assert.equal(completedWeekFriday(Date.parse('2026-10-23T16:30:00+08:00')),'2026-10-23');
-for(const stock of stocks){
- const r=audit.stocks[stock.symbol],a=input.stocks[stock.symbol];
- assert.equal(stock.levelReview.policyId,POLICY);assert.deepEqual(stock.levels,r.levels);
- const latest=snapshot.stocks.find(s=>s.symbol===stock.symbol).rows;
- const weeklyRows=latest.filter(b=>b.date<=r.referenceWeekEnding);
- assert.equal(r.dataDate,r.referenceWeekEnding,'Pricing review must retain its complete-week cutoff, not the later daily freeze-check date');
- assert(Math.abs(r.atr20-indicators(weeklyRows).atr)<1e-9,'Saved ATR must reproduce from the complete weekly-reference daily input');
- assert.deepEqual(reviewTiers({bars:weeklyRows,now:Date.parse(r.asOf),oldLevels:r.levels,previousReview:r,newSupportEvidence:r.newSupportEvidence}).candidateBands,r.candidateBands);
- assert.equal(r.referencePrice,weeklyRows.find(b=>b.date===r.referenceDate).close);
- assert(Math.abs(r.halfWidth-Math.max(.006*r.referencePrice,.15*r.atr20))<1e-10);
- assert.deepEqual(validate(r.candidateBands.map(b=>b.level),{p:r.referencePrice,atr:r.atr20,buyEdge:r.buyEdge}),[]);
- assert.deepEqual(stock.sellReview.levels,r.levels.slice(2));
- if(r.status==='adopted')assert.deepEqual(r.levels,r.candidateBands.map(b=>b.level));
- const now=Date.parse('2026-10-19T16:30:00+08:00');
- const run=reviewTiers({bars:a.bars,now,oldLevels:r.levels});
- const future=[...a.bars,{date:'2026-10-20',open:999,high:999,low:999,close:999}];
- assert.deepEqual(reviewTiers({bars:future,now,oldLevels:r.levels}).candidateBands,run.candidateBands,'Future data must not enter review');
- assert.throws(()=>reviewTiers({bars:a.bars.slice(-100),now}),/250/);
- if(r.stage.name==='falling')assert.equal(r.status,'pending-support');
+const reviews=JSON.parse(readFileSync(new URL('../worker/tier-reviews.json',import.meta.url),'utf8'));
+assert.equal(POLICY,'two-regime-ma60-final-v1');
+const expected={
+ sh600312:{regime:'A',levels:[19.53,18.04,22.08,23.18],ma5:21.07},
+ sz002156:{regime:'B',levels:[51.23,41.48,52.25,56.60],ma5:40.98},
+ sh601138:{regime:'B',levels:[52.57,44.35,53.62,58.44],ma5:44.36},
+ sz002463:{regime:'B',levels:[94.73,84.23,104.21,115.78],ma5:86.32}
+};
+for(const stock of snapshot.stocks){
+ const result=priceReview(stock.rows,Date.parse('2026-11-04T20:30:00+08:00'),{symbol:stock.symbol,legacyA:stock.symbol==='sh600312'?{date:'2026-11-04',low:18.6}:null});
+ const want=expected[stock.symbol];assert(want);
+ assert.equal(result.regime,want.regime);
+ assert.deepEqual(result.levels.map(x=>x[0]),want.levels);
+ assert.equal(result.ma5,want.ma5);
+ assert.deepEqual(stock.levels,result.levels);
+ assert.deepEqual(reviews.stocks[stock.symbol].levels,result.levels);
+ assert(result.levels[1][0]<result.levels[0][0]);
+ assert(result.levels[2][0]<result.levels[3][0]);
+ assert(!('riskLine' in result));
+ assert(!JSON.stringify(result).includes('cost'));
 }
-const page=readFileSync(new URL('../worker/page.html',import.meta.url),'utf8');
-new Function(page.slice(page.indexOf('const $='),page.lastIndexOf('</script>')));
-assert(!page.includes('tierReviewNotice(s)'), 'Redundant explanation panel is removed');
-const accountCalc=new Function('model',page.slice(page.indexOf('function accountView('),page.indexOf('const previewAccounts='))+';return accountView;')({stale:false});
-const s={symbol:'x',quote:{price:8,time:'2026-10-19 10:00:00'},levels:[[9,10],[7,8.5],[11,12],[13,14]],levelReview:{policyId:POLICY,status:'pending-support'}};
-const alerts=accountCalc({weight:.7,positions:[{symbol:'x',budgetAvailable:[true,true]}]},[s],Date.parse('2026-10-19T10:00:01+08:00')).positions[0].alerts;
-assert.equal(alerts.length,2,'Below lower edge still registers buy touch');assert(alerts.every(a=>!a.flash&&a.text.includes('旧档参考')));
-const synthetic=Array.from({length:260},(_,i)=>({date:new Date(Date.UTC(2025,0,1+i)).toISOString().slice(0,10),open:20,close:20,high:20.4,low:19.6}));
-const syn=reviewTiers({bars:synthetic,now:Date.parse('2025-09-20T16:30:00+08:00')});
-assert(syn.levels[0][1]<=20*.97);assert(syn.levels[2][0]>=20*1.05);
-const stable=synthetic.map((b,i)=>i<257?b:{...b,open:20+(i-256)*.1,close:20+(i-256)*.1,low:19.9+(i-256)*.1,high:20.5+(i-256)*.1});
-const frozen={status:'pending-support',dataDate:'2025-09-10'};
-const recovery=(bars,evidence)=>recoveryState(bars,indicators(bars),stageOf(bars,indicators(bars)),frozen,evidence);
-const proof={kind:'anchor-structure',source:'https://example.com/audit',asOf:stable.at(-1).date,reason:'Three complete rising closes and anchored lows verified',verified:true,anchorPrice:20};
-assert.equal(recovery(stable,null).frozen,true,'Range classification alone cannot clear a prior freeze');
-assert.equal(recovery(stable,{...proof,verified:false}).frozen,true,'A link without verification is insufficient');
-assert.equal(recovery(stable,{...proof,asOf:'2025-01-01'}).frozen,true,'Stale evidence cannot unlock');
-assert.equal(recovery(stable,proof).frozen,false,'All three recovery gates unlock the price review');
-const oneDay=synthetic.map((b,i)=>i===259?{...b,open:21,close:21,high:21.4,low:20.6}:b);
-assert.equal(recovery(oneDay,{...proof,kind:'official-event'}).frozen,true,'One strong close cannot unlock');
-const weak60=stable.map((b,i)=>i===199?{...b,open:30,close:30,high:30.4,low:29.6}:b);
-assert.equal(recovery(weak60,proof).frozen,true,'Both return thresholds must recover');
-const triggerBars=[{date:'2026-10-15',close:100},{date:'2026-10-16',close:98}];
-assert.equal(freezeTriggers(triggerBars,{ma60:99,atr:2},{return20:-.02,return60:-.03},null).trend,false,'MA60 alone is insufficient');
-assert.equal(freezeTriggers(triggerBars,{ma60:97,atr:2},{return20:-.10,return60:-.03},null).trend,false,'Return threshold alone is insufficient');
-assert.equal(freezeTriggers(triggerBars,{ma60:99,atr:2},{return20:-.10,return60:-.03},null).trend,true);
-const oldBands=[[105,106],[100,101],[120,121],[130,131]],healthy={return20:0,return60:0};
-assert.equal(freezeTriggers([{close:101},{close:99}],{ma60:90,atr:2},healthy,oldBands).structure,false,'One shallow close break is insufficient');
-assert.equal(freezeTriggers([{close:99},{close:99}],{ma60:90,atr:2},healthy,oldBands).twoCloses,true);
-assert.equal(freezeTriggers([{close:101},{close:97}],{ma60:90,atr:2},healthy,oldBands).singleBreak,false,'Exactly 3% is not more than 3%');
-assert.equal(freezeTriggers([{close:101},{close:96.99}],{ma60:90,atr:2},healthy,oldBands).singleBreak,true);
-assert.equal(freezeTriggers([{close:101},{close:96.99}],{ma60:90,atr:4},healthy,oldBands).singleBreak,false,'Larger ATR threshold wins');
-console.log('PASS: weekly-close basis, one ATR20 formula, price gates, future-data exclusion, whole-group retention and breached-band pending alerts');
-
-
+assert.equal(reviews.stocks.sh600312.lowAnchor,18.6);
+assert.equal(reviews.stocks.sz002156.possibleLimitUp,true);
+assert.equal(reviews.stocks.sz002463.possibleLimitUp,true);
+assert.equal(reviews.stocks.sh601138.largeRise,true);
+console.log('PASS: final two-regime prices, MA5, legacy Pinggao anchor, public-only sell tiers and limit-up observations');

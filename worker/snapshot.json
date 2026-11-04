@@ -1,6 +1,6 @@
 {
-  "generated": "2026-11-02T12:33:40.338Z",
-  "date": "2026-11-02",
+  "generated": "2026-11-04T12:45:06.039Z",
+  "date": "2026-11-04",
   "market": [
     {
       "symbol": "sh000001",
@@ -4192,447 +4192,23 @@
       "report": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225483266.PDF",
       "levels": [
         [
-          19.64,
-          19.89
+          19.53,
+          19.53
         ],
         [
-          18.62,
-          18.86
+          18.04,
+          18.04
         ],
         [
-          21.81,
-          22.05
+          22.08,
+          22.08
         ],
         [
-          22.89,
-          23.13
+          23.18,
+          23.18
         ]
       ],
       "rows": [
-        {
-          "date": "2025-08-04",
-          "open": 14.867,
-          "close": 15.037,
-          "high": 15.037,
-          "low": 14.837,
-          "volume": 128686
-        },
-        {
-          "date": "2025-08-05",
-          "open": 15.007,
-          "close": 15.127,
-          "high": 15.147,
-          "low": 14.967,
-          "volume": 122156
-        },
-        {
-          "date": "2025-08-06",
-          "open": 15.137,
-          "close": 15.347,
-          "high": 15.367,
-          "low": 15.017,
-          "volume": 181336
-        },
-        {
-          "date": "2025-08-07",
-          "open": 15.327,
-          "close": 15.407,
-          "high": 15.477,
-          "low": 15.237,
-          "volume": 168330
-        },
-        {
-          "date": "2025-08-08",
-          "open": 15.397,
-          "close": 15.457,
-          "high": 15.517,
-          "low": 15.287,
-          "volume": 148782
-        },
-        {
-          "date": "2025-08-11",
-          "open": 15.447,
-          "close": 15.377,
-          "high": 15.457,
-          "low": 15.307,
-          "volume": 135024
-        },
-        {
-          "date": "2025-08-12",
-          "open": 15.347,
-          "close": 15.257,
-          "high": 15.377,
-          "low": 15.207,
-          "volume": 132999
-        },
-        {
-          "date": "2025-08-13",
-          "open": 15.267,
-          "close": 15.267,
-          "high": 15.317,
-          "low": 15.177,
-          "volume": 163190
-        },
-        {
-          "date": "2025-08-14",
-          "open": 15.257,
-          "close": 15.067,
-          "high": 15.377,
-          "low": 14.977,
-          "volume": 201345
-        },
-        {
-          "date": "2025-08-15",
-          "open": 14.997,
-          "close": 15.327,
-          "high": 15.327,
-          "low": 14.997,
-          "volume": 177554
-        },
-        {
-          "date": "2025-08-18",
-          "open": 15.307,
-          "close": 15.577,
-          "high": 15.827,
-          "low": 15.287,
-          "volume": 349601
-        },
-        {
-          "date": "2025-08-19",
-          "open": 15.627,
-          "close": 15.647,
-          "high": 16.057,
-          "low": 15.607,
-          "volume": 309322
-        },
-        {
-          "date": "2025-08-20",
-          "open": 15.627,
-          "close": 15.807,
-          "high": 15.817,
-          "low": 15.527,
-          "volume": 253980
-        },
-        {
-          "date": "2025-08-21",
-          "open": 15.727,
-          "close": 15.577,
-          "high": 16.087,
-          "low": 15.517,
-          "volume": 360191
-        },
-        {
-          "date": "2025-08-22",
-          "open": 15.527,
-          "close": 15.577,
-          "high": 15.577,
-          "low": 15.347,
-          "volume": 353147
-        },
-        {
-          "date": "2025-08-25",
-          "open": 15.657,
-          "close": 15.697,
-          "high": 15.847,
-          "low": 15.517,
-          "volume": 373609
-        },
-        {
-          "date": "2025-08-26",
-          "open": 15.697,
-          "close": 15.877,
-          "high": 16.177,
-          "low": 15.587,
-          "volume": 388534
-        },
-        {
-          "date": "2025-08-27",
-          "open": 15.867,
-          "close": 15.477,
-          "high": 15.927,
-          "low": 15.477,
-          "volume": 306567
-        },
-        {
-          "date": "2025-08-28",
-          "open": 15.497,
-          "close": 15.467,
-          "high": 15.587,
-          "low": 15.107,
-          "volume": 246087
-        },
-        {
-          "date": "2025-08-29",
-          "open": 15.417,
-          "close": 15.237,
-          "high": 15.467,
-          "low": 15.167,
-          "volume": 255978
-        },
-        {
-          "date": "2025-09-01",
-          "open": 15.227,
-          "close": 15.327,
-          "high": 15.357,
-          "low": 15.177,
-          "volume": 173584
-        },
-        {
-          "date": "2025-09-02",
-          "open": 15.227,
-          "close": 14.917,
-          "high": 15.237,
-          "low": 14.827,
-          "volume": 239679
-        },
-        {
-          "date": "2025-09-03",
-          "open": 14.947,
-          "close": 14.547,
-          "high": 14.987,
-          "low": 14.517,
-          "volume": 173945
-        },
-        {
-          "date": "2025-09-04",
-          "open": 14.557,
-          "close": 14.547,
-          "high": 14.727,
-          "low": 14.347,
-          "volume": 208627
-        },
-        {
-          "date": "2025-09-05",
-          "open": 14.597,
-          "close": 14.737,
-          "high": 14.867,
-          "low": 14.517,
-          "volume": 193467
-        },
-        {
-          "date": "2025-09-08",
-          "open": 14.847,
-          "close": 15.087,
-          "high": 15.277,
-          "low": 14.777,
-          "volume": 242374
-        },
-        {
-          "date": "2025-09-09",
-          "open": 15.027,
-          "close": 14.827,
-          "high": 15.047,
-          "low": 14.777,
-          "volume": 152814
-        },
-        {
-          "date": "2025-09-10",
-          "open": 14.827,
-          "close": 14.677,
-          "high": 14.827,
-          "low": 14.607,
-          "volume": 115408
-        },
-        {
-          "date": "2025-09-11",
-          "open": 14.687,
-          "close": 14.877,
-          "high": 14.897,
-          "low": 14.577,
-          "volume": 147895
-        },
-        {
-          "date": "2025-09-12",
-          "open": 14.887,
-          "close": 14.937,
-          "high": 14.997,
-          "low": 14.767,
-          "volume": 193127
-        },
-        {
-          "date": "2025-09-15",
-          "open": 14.927,
-          "close": 14.707,
-          "high": 14.997,
-          "low": 14.667,
-          "volume": 162332
-        },
-        {
-          "date": "2025-09-16",
-          "open": 14.727,
-          "close": 14.617,
-          "high": 14.737,
-          "low": 14.547,
-          "volume": 131847
-        },
-        {
-          "date": "2025-09-17",
-          "open": 14.677,
-          "close": 14.947,
-          "high": 15.007,
-          "low": 14.617,
-          "volume": 271694
-        },
-        {
-          "date": "2025-09-18",
-          "open": 14.927,
-          "close": 14.857,
-          "high": 15.127,
-          "low": 14.707,
-          "volume": 304344
-        },
-        {
-          "date": "2025-09-19",
-          "open": 14.807,
-          "close": 14.987,
-          "high": 15.077,
-          "low": 14.737,
-          "volume": 174967
-        },
-        {
-          "date": "2025-09-22",
-          "open": 15.007,
-          "close": 14.967,
-          "high": 15.097,
-          "low": 14.737,
-          "volume": 180048
-        },
-        {
-          "date": "2025-09-23",
-          "open": 14.937,
-          "close": 15.187,
-          "high": 15.257,
-          "low": 14.767,
-          "volume": 357884
-        },
-        {
-          "date": "2025-09-24",
-          "open": 15.317,
-          "close": 15.527,
-          "high": 15.547,
-          "low": 15.087,
-          "volume": 387917
-        },
-        {
-          "date": "2025-09-25",
-          "open": 15.597,
-          "close": 15.687,
-          "high": 16.007,
-          "low": 15.567,
-          "volume": 539259
-        },
-        {
-          "date": "2025-09-26",
-          "open": 15.687,
-          "close": 15.807,
-          "high": 16.157,
-          "low": 15.587,
-          "volume": 422358
-        },
-        {
-          "date": "2025-09-29",
-          "open": 15.757,
-          "close": 15.947,
-          "high": 15.967,
-          "low": 15.627,
-          "volume": 330332
-        },
-        {
-          "date": "2025-09-30",
-          "open": 15.857,
-          "close": 16.207,
-          "high": 16.397,
-          "low": 15.857,
-          "volume": 402049
-        },
-        {
-          "date": "2025-10-09",
-          "open": 16.407,
-          "close": 17.077,
-          "high": 17.107,
-          "low": 16.227,
-          "volume": 629745
-        },
-        {
-          "date": "2025-10-10",
-          "open": 17.057,
-          "close": 17.107,
-          "high": 17.397,
-          "low": 16.777,
-          "volume": 514425
-        },
-        {
-          "date": "2025-10-13",
-          "open": 16.677,
-          "close": 17.167,
-          "high": 17.197,
-          "low": 16.657,
-          "volume": 392978
-        },
-        {
-          "date": "2025-10-14",
-          "open": 17.247,
-          "close": 16.927,
-          "high": 17.617,
-          "low": 16.787,
-          "volume": 504766
-        },
-        {
-          "date": "2025-10-15",
-          "open": 16.947,
-          "close": 17.137,
-          "high": 17.287,
-          "low": 16.607,
-          "volume": 469361
-        },
-        {
-          "date": "2025-10-16",
-          "open": 17.117,
-          "close": 17.107,
-          "high": 17.307,
-          "low": 16.847,
-          "volume": 285268
-        },
-        {
-          "date": "2025-10-17",
-          "open": 17.065,
-          "close": 15.925,
-          "high": 17.065,
-          "low": 15.925,
-          "volume": 495004
-        },
-        {
-          "date": "2025-10-20",
-          "open": 16.285,
-          "close": 16.255,
-          "high": 16.685,
-          "low": 16.115,
-          "volume": 434925
-        },
-        {
-          "date": "2025-10-21",
-          "open": 16.305,
-          "close": 16.785,
-          "high": 17.055,
-          "low": 16.155,
-          "volume": 421065
-        },
-        {
-          "date": "2025-10-22",
-          "open": 16.305,
-          "close": 16.015,
-          "high": 16.315,
-          "low": 15.915,
-          "volume": 390655
-        },
-        {
-          "date": "2025-10-23",
-          "open": 15.945,
-          "close": 16.145,
-          "high": 16.165,
-          "low": 15.605,
-          "volume": 257831
-        },
         {
           "date": "2025-10-24",
           "open": 16.115,
@@ -6616,13 +6192,28 @@
           "high": 21.86,
           "low": 20.53,
           "volume": 322666
+        },
+        {
+          "date": "2026-11-03",
+          "open": 21.43,
+          "close": 21.63,
+          "high": 21.88,
+          "low": 21.29,
+          "volume": 213525
+        },
+        {
+          "date": "2026-11-04",
+          "open": 21.74,
+          "close": 21.52,
+          "high": 21.83,
+          "low": 21.16,
+          "volume": 203375
         }
       ],
       "quote": {
-        "price": 20.78,
-        "change": -0.21,
-        "time": "2026-10-28 15:00:00",
-        "source": "Tencent QFQ daily close"
+        "price": 21.52,
+        "time": "2026-11-04 15:00",
+        "source": "???? qfq ????"
       },
       "tech": {
         "date": "2026-10-23",
@@ -6633,27 +6224,27 @@
         "state": "相对较强",
         "volumeRatio": 1.8764995013380583
       },
-      "levelDate": "2026-10-30",
-      "levelType": "完整周收盘基准 · ATR20统一四档 · 技术触价非交易许可",
+      "levelDate": "2026-11-04",
+      "levelType": "A类回调 / B类企稳 · 周一/周三完整收盘复核 · 价格与企稳需同达",
       "distances": [
         {
-          "delta": -0.8900000000000006,
-          "pct": -4.282964388835421,
+          "delta": -1.9899999999999984,
+          "pct": -9.247211895910773,
           "inside": false
         },
         {
-          "delta": -1.9200000000000017,
-          "pct": -9.23965351299327,
+          "delta": -3.4800000000000004,
+          "pct": -16.17100371747212,
           "inside": false
         },
         {
-          "delta": 1.0299999999999976,
-          "pct": 4.956689124157832,
+          "delta": 0.5599999999999987,
+          "pct": 2.6022304832713696,
           "inside": false
         },
         {
-          "delta": 2.1099999999999994,
-          "pct": 10.15399422521655,
+          "delta": 1.6600000000000001,
+          "pct": 7.71375464684015,
           "inside": false
         }
       ],
@@ -6720,208 +6311,123 @@
       "mediaNews": [],
       "mediaError": true,
       "sellReference": {
-        "price": 20.54,
-        "asOf": "2026-10-30",
-        "source": "最近完整周前复权收盘基准，非持仓成本"
+        "price": 21.52,
+        "asOf": "2026-11-04",
+        "source": "最近复核日收盘基准，非持仓成本"
       },
       "historyStale": false,
       "sellReview": {
-        "asOf": "2026-10-30T09:25:25.757Z",
-        "dataDate": "2026-10-30",
-        "policy": "weekly-close-atr20-v1",
+        "asOf": "2026-11-04T12:30:00.000Z",
+        "dataDate": "2026-11-04",
+        "policy": "two-regime-ma60-final-v1",
         "levels": [
           [
-            21.81,
-            22.05
+            22.08,
+            22.08
           ],
           [
-            22.89,
-            23.13
+            23.18,
+            23.18
           ]
         ],
-        "status": "retained"
+        "status": "adopted"
       },
       "levelReview": {
-        "policyId": "weekly-close-atr20-v1",
-        "asOf": "2026-10-30T09:25:25.757Z",
-        "dataDate": "2026-10-30",
-        "referenceDate": "2026-10-30",
-        "referenceWeekEnding": "2026-10-30",
-        "referencePrice": 20.54,
-        "atr20": 0.7719999999999997,
-        "halfWidth": 0.12324,
-        "stage": {
-          "name": "range",
-          "return20": 0.0985132099689805,
-          "return60": 0.06325706594885583,
-          "returnBeforeLast3": 0.12257995507540898
-        },
-        "recovery": {
-          "frozen": false,
-          "required": false,
-          "triggers": {
-            "trend": false,
-            "structure": false,
-            "twoCloses": false,
-            "singleBreak": false,
-            "t2Lower": 18.62,
-            "singleBreakThreshold": 0.7854999999999996,
-            "close": 21.43,
-            "date": "2026-11-02"
-          },
-          "freezeSources": [],
-          "aboveMA60": true,
-          "returnsRecovered": true,
-          "evidenceOK": false,
-          "risingStructure": false,
-          "atrPeak": 0.7854999999999996,
-          "atrContracted": false,
-          "missing": [],
-          "frozenSince": null,
-          "recoveredAt": null,
-          "evidence": null
-        },
-        "parameters": {
-          "multipliers": [
-            -1,
-            -2.2,
-            1.8,
-            3.2
-          ],
-          "anchorWindow": 0.005,
-          "halfWidthPrice": 0.006,
-          "halfWidthATR": 0.15,
-          "minGapATR": 0.9975,
-          "minBuyEdge": 0.03,
-          "minSellEdge": 0.05,
-          "tick": 0.01,
-          "changeThreshold": 0.03
-        },
-        "buyEdge": 0.03,
-        "candidateBands": [
-          {
-            "level": [
-              19.64,
-              19.89
-            ],
-            "target": 19.768,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "level": [
-              18.62,
-              18.86
-            ],
-            "target": 18.8416,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "level": [
-              21.81,
-              22.05
-            ],
-            "target": 21.929599999999997,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "level": [
-              22.89,
-              23.13
-            ],
-            "target": 23.010399999999997,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          }
-        ],
+        "policyId": "two-regime-ma60-final-v1",
+        "asOf": "2026-11-04T12:30:00.000Z",
+        "dataDate": "2026-11-04",
+        "referenceDate": "2026-11-04",
+        "referencePrice": 21.52,
+        "atr20": 0.7684999999999995,
+        "regime": "A",
+        "ma5": 21.07,
+        "ma20": 20.84,
+        "ma60": 19.95,
+        "signalDate": "2026-11-04",
+        "signalClose": 21.52,
+        "signalMA5": 21.07,
+        "lowAnchor": 18.6,
+        "anchorDate": "2026-11-04",
+        "aTierArmed": true,
+        "aTierLastTouch": null,
+        "priorWaveLow": 15.77,
+        "high20": 22.08,
+        "high120": 23.22,
+        "possibleLimitUp": false,
+        "largeRise": false,
+        "limitUpConfirmation": null,
         "levels": [
           [
-            19.64,
-            19.89
+            19.53,
+            19.53
           ],
           [
-            18.62,
-            18.86
+            18.04,
+            18.04
           ],
           [
-            21.81,
-            22.05
+            22.08,
+            22.08
           ],
           [
-            22.89,
-            23.13
+            23.18,
+            23.18
           ]
         ],
-        "status": "retained",
-        "priceValidation": [],
-        "newCandidateValidation": [],
-        "reason": "整组变动≤3%且旧组校验通过",
-        "newSupportEvidence": null,
-        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600312,day,,,300,qfq",
-        "sourceQuoteTime": "2026-11-02 收盘",
-        "nextScheduled": "2026-11-04 16:30",
+        "bands": [
+          {
+            "low": 19.53,
+            "high": 19.53,
+            "note": "锁定前低计算"
+          },
+          {
+            "low": 18.04,
+            "high": 18.04,
+            "note": "锁定前低计算"
+          },
+          {
+            "low": 22.08,
+            "high": 22.08,
+            "note": "近20日最高价/MA60"
+          },
+          {
+            "low": 23.18,
+            "high": 23.18,
+            "note": "卖①上方5%"
+          }
+        ],
+        "status": "adopted",
+        "nextScheduled": "2026-11-09 16:30",
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600312,day,,,600,qfq",
+        "reason": "A/B在MA60上下5%切换；A类锁定前低；B类买②需企稳且到价；价格条件不等于成交；卖档仅按公开行情计算",
         "marketGate": {
           "policyId": "completed-month-ma20-v1",
-          "checkedAt": "2026-11-02T12:33:34.973Z",
-          "lastMonth": "2026-10-30",
+          "asOf": "2026-11-04",
+          "checkedAt": "2026-11-04T12:45:06.039Z",
+          "dataDate": "2026-10-30",
+          "lastCompleteMonth": "2026-10-30",
           "monthCount": 20,
-          "completedMonthlyMA20": 3812.022,
+          "ma20month": 3812.022,
           "indexClose": 3599.02,
           "frozen": true,
           "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,45,qfq",
-          "reason": "最近完整月收盘未高于20个完整月收盘均值"
-        },
-        "bands": [
-          {
-            "low": 19.64,
-            "high": 19.89,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "low": 18.62,
-            "high": 18.86,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "low": 21.81,
-            "high": 22.05,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "low": 22.89,
-            "high": 23.13,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          }
-        ],
-        "freezeCheck": {
-          "checkedAt": "2026-11-02T12:33:40.338Z",
-          "dataDate": "2026-11-02",
-          "recovery": {
-            "frozen": false,
-            "required": false,
-            "triggers": {
-              "trend": false,
-              "structure": false,
-              "twoCloses": false,
-              "singleBreak": false,
-              "t2Lower": 18.62,
-              "singleBreakThreshold": 0.7854999999999996,
-              "close": 21.43,
-              "date": "2026-11-02"
-            },
-            "freezeSources": [],
-            "aboveMA60": true,
-            "returnsRecovered": true,
-            "evidenceOK": false,
-            "risingStructure": false,
-            "atrPeak": 0.7854999999999996,
-            "atrContracted": false,
-            "missing": [],
-            "frozenSince": null,
-            "recoveredAt": null,
-            "evidence": null
+          "reason": "最近完整月收盘未高于20个完整月收盘均值",
+          "weekly": {
+            "policyId": "weekly-ma10-ma20-three-state-v1",
+            "status": "weak",
+            "passed": false,
+            "asOf": "2026-11-04",
+            "checkedAt": "2026-11-04T12:45:06.039Z",
+            "dataDate": "2026-10-30",
+            "indexClose": 3599.02,
+            "ma10": 3823.2409999999995,
+            "ma20": 3878.6490000000003,
+            "maxTotalWeight": 0.6,
+            "maxSingleWeight": 0.18,
+            "allowedBuyTiers": [
+              0
+            ],
+            "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq"
           }
         }
       },
@@ -6932,7 +6438,8 @@
         "missing": [],
         "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600312,day,,,320,qfq",
         "scope": "只读状态检查；未重算采用档位"
-      }
+      },
+      "price": 21.52
     },
     {
       "symbol": "sz002156",
@@ -6944,447 +6451,23 @@
       "report": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-08-29/072fbc43-caef-4b31-bf0e-ee19d9fa0459.PDF",
       "levels": [
         [
-          45.5,
-          47
+          51.23,
+          51.23
         ],
         [
-          41.5,
-          42.5
+          41.48,
+          41.48
         ],
         [
-          51.5,
-          53
+          52.25,
+          52.25
         ],
         [
-          56,
-          57.5
+          56.6,
+          56.6
         ]
       ],
       "rows": [
-        {
-          "date": "2025-08-04",
-          "open": 26.739,
-          "close": 27.029,
-          "high": 27.159,
-          "low": 26.719,
-          "volume": 300416
-        },
-        {
-          "date": "2025-08-05",
-          "open": 27.019,
-          "close": 27.149,
-          "high": 27.159,
-          "low": 26.799,
-          "volume": 300161
-        },
-        {
-          "date": "2025-08-06",
-          "open": 26.919,
-          "close": 27.649,
-          "high": 27.799,
-          "low": 26.659,
-          "volume": 504605
-        },
-        {
-          "date": "2025-08-07",
-          "open": 27.399,
-          "close": 27.469,
-          "high": 27.789,
-          "low": 27.249,
-          "volume": 489066
-        },
-        {
-          "date": "2025-08-08",
-          "open": 27.299,
-          "close": 26.719,
-          "high": 27.299,
-          "low": 26.709,
-          "volume": 401399
-        },
-        {
-          "date": "2025-08-11",
-          "open": 26.739,
-          "close": 27.369,
-          "high": 27.709,
-          "low": 26.729,
-          "volume": 444982
-        },
-        {
-          "date": "2025-08-12",
-          "open": 27.319,
-          "close": 28.619,
-          "high": 28.869,
-          "low": 27.049,
-          "volume": 1074602
-        },
-        {
-          "date": "2025-08-13",
-          "open": 28.379,
-          "close": 28.509,
-          "high": 28.589,
-          "low": 28.159,
-          "volume": 595378
-        },
-        {
-          "date": "2025-08-14",
-          "open": 28.859,
-          "close": 28.469,
-          "high": 29.419,
-          "low": 27.919,
-          "volume": 1079669
-        },
-        {
-          "date": "2025-08-15",
-          "open": 28.329,
-          "close": 28.579,
-          "high": 28.729,
-          "low": 28.169,
-          "volume": 633198
-        },
-        {
-          "date": "2025-08-18",
-          "open": 28.889,
-          "close": 29.469,
-          "high": 29.579,
-          "low": 28.479,
-          "volume": 1015569
-        },
-        {
-          "date": "2025-08-19",
-          "open": 29.459,
-          "close": 28.719,
-          "high": 29.459,
-          "low": 28.709,
-          "volume": 770452
-        },
-        {
-          "date": "2025-08-20",
-          "open": 28.509,
-          "close": 29.219,
-          "high": 29.479,
-          "low": 28.239,
-          "volume": 765741
-        },
-        {
-          "date": "2025-08-21",
-          "open": 29.209,
-          "close": 28.789,
-          "high": 29.859,
-          "low": 28.719,
-          "volume": 663740
-        },
-        {
-          "date": "2025-08-22",
-          "open": 28.789,
-          "close": 30.149,
-          "high": 30.399,
-          "low": 28.789,
-          "volume": 1409095
-        },
-        {
-          "date": "2025-08-25",
-          "open": 30.489,
-          "close": 29.939,
-          "high": 30.979,
-          "low": 29.559,
-          "volume": 1266239
-        },
-        {
-          "date": "2025-08-26",
-          "open": 29.709,
-          "close": 29.809,
-          "high": 30.399,
-          "low": 29.469,
-          "volume": 802425
-        },
-        {
-          "date": "2025-08-27",
-          "open": 29.829,
-          "close": 29.419,
-          "high": 30.779,
-          "low": 29.319,
-          "volume": 1210729
-        },
-        {
-          "date": "2025-08-28",
-          "open": 29.399,
-          "close": 29.999,
-          "high": 30.009,
-          "low": 29.079,
-          "volume": 867946
-        },
-        {
-          "date": "2025-08-29",
-          "open": 31.649,
-          "close": 33.009,
-          "high": 33.009,
-          "low": 31.499,
-          "volume": 1779622
-        },
-        {
-          "date": "2025-09-01",
-          "open": 35.359,
-          "close": 34.799,
-          "high": 35.919,
-          "low": 33.499,
-          "volume": 3271530
-        },
-        {
-          "date": "2025-09-02",
-          "open": 33.909,
-          "close": 34.059,
-          "high": 36.199,
-          "low": 33.889,
-          "volume": 2591451
-        },
-        {
-          "date": "2025-09-03",
-          "open": 33.819,
-          "close": 35.279,
-          "high": 37.049,
-          "low": 33.169,
-          "volume": 2588650
-        },
-        {
-          "date": "2025-09-04",
-          "open": 34.569,
-          "close": 31.739,
-          "high": 34.799,
-          "low": 31.739,
-          "volume": 2051404
-        },
-        {
-          "date": "2025-09-05",
-          "open": 31.239,
-          "close": 32.129,
-          "high": 32.419,
-          "low": 30.179,
-          "volume": 1715115
-        },
-        {
-          "date": "2025-09-08",
-          "open": 31.769,
-          "close": 32.889,
-          "high": 33.569,
-          "low": 31.259,
-          "volume": 1672661
-        },
-        {
-          "date": "2025-09-09",
-          "open": 32.259,
-          "close": 31.129,
-          "high": 32.559,
-          "low": 31.119,
-          "volume": 1152284
-        },
-        {
-          "date": "2025-09-10",
-          "open": 31.509,
-          "close": 31.349,
-          "high": 32.339,
-          "low": 31.119,
-          "volume": 928479
-        },
-        {
-          "date": "2025-09-11",
-          "open": 31.149,
-          "close": 32.819,
-          "high": 32.829,
-          "low": 31.019,
-          "volume": 1360543
-        },
-        {
-          "date": "2025-09-12",
-          "open": 32.829,
-          "close": 33.029,
-          "high": 33.829,
-          "low": 32.439,
-          "volume": 1323266
-        },
-        {
-          "date": "2025-09-15",
-          "open": 33.919,
-          "close": 32.869,
-          "high": 34.029,
-          "low": 32.849,
-          "volume": 1093419
-        },
-        {
-          "date": "2025-09-16",
-          "open": 32.919,
-          "close": 33.379,
-          "high": 33.799,
-          "low": 32.799,
-          "volume": 992383
-        },
-        {
-          "date": "2025-09-17",
-          "open": 33.269,
-          "close": 33.669,
-          "high": 34.269,
-          "low": 33.019,
-          "volume": 922709
-        },
-        {
-          "date": "2025-09-18",
-          "open": 33.679,
-          "close": 34.759,
-          "high": 36.579,
-          "low": 33.519,
-          "volume": 2007474
-        },
-        {
-          "date": "2025-09-19",
-          "open": 34.919,
-          "close": 34.299,
-          "high": 35.669,
-          "low": 34.049,
-          "volume": 1330663
-        },
-        {
-          "date": "2025-09-22",
-          "open": 34.099,
-          "close": 34.879,
-          "high": 35.519,
-          "low": 33.819,
-          "volume": 1019490
-        },
-        {
-          "date": "2025-09-23",
-          "open": 35.069,
-          "close": 34.209,
-          "high": 35.219,
-          "low": 33.279,
-          "volume": 1086784
-        },
-        {
-          "date": "2025-09-24",
-          "open": 35.049,
-          "close": 37.639,
-          "high": 37.639,
-          "low": 34.929,
-          "volume": 956619
-        },
-        {
-          "date": "2025-09-25",
-          "open": 39.599,
-          "close": 38.719,
-          "high": 39.899,
-          "low": 38.319,
-          "volume": 2721862
-        },
-        {
-          "date": "2025-09-26",
-          "open": 37.969,
-          "close": 37.629,
-          "high": 38.919,
-          "low": 37.629,
-          "volume": 1374592
-        },
-        {
-          "date": "2025-09-29",
-          "open": 37.719,
-          "close": 38.099,
-          "high": 38.619,
-          "low": 37.479,
-          "volume": 1358296
-        },
-        {
-          "date": "2025-09-30",
-          "open": 38.599,
-          "close": 40.089,
-          "high": 40.979,
-          "low": 38.199,
-          "volume": 1920329
-        },
-        {
-          "date": "2025-10-09",
-          "open": 44.109,
-          "close": 44.109,
-          "high": 44.109,
-          "low": 44.109,
-          "volume": 130800
-        },
-        {
-          "date": "2025-10-10",
-          "open": 44.989,
-          "close": 45.519,
-          "high": 47.909,
-          "low": 44.539,
-          "volume": 3280544
-        },
-        {
-          "date": "2025-10-13",
-          "open": 40.959,
-          "close": 46.889,
-          "high": 47.449,
-          "low": 40.959,
-          "volume": 2633733
-        },
-        {
-          "date": "2025-10-14",
-          "open": 46.059,
-          "close": 42.199,
-          "high": 46.059,
-          "low": 42.189,
-          "volume": 2263578
-        },
-        {
-          "date": "2025-10-15",
-          "open": 41.539,
-          "close": 42.399,
-          "high": 42.799,
-          "low": 39.649,
-          "volume": 1410438
-        },
-        {
-          "date": "2025-10-16",
-          "open": 43.099,
-          "close": 42.739,
-          "high": 44.949,
-          "low": 42.539,
-          "volume": 1676859
-        },
-        {
-          "date": "2025-10-17",
-          "open": 41.099,
-          "close": 38.689,
-          "high": 41.419,
-          "low": 38.599,
-          "volume": 1722299
-        },
-        {
-          "date": "2025-10-20",
-          "open": 39.629,
-          "close": 39.189,
-          "high": 40.419,
-          "low": 38.799,
-          "volume": 1084573
-        },
-        {
-          "date": "2025-10-21",
-          "open": 39.209,
-          "close": 40.509,
-          "high": 40.779,
-          "low": 39.199,
-          "volume": 1039501
-        },
-        {
-          "date": "2025-10-22",
-          "open": 40.509,
-          "close": 40.289,
-          "high": 40.919,
-          "low": 39.719,
-          "volume": 727906
-        },
-        {
-          "date": "2025-10-23",
-          "open": 39.829,
-          "close": 39.629,
-          "high": 40.169,
-          "low": 38.889,
-          "volume": 680061
-        },
         {
           "date": "2025-10-24",
           "open": 40.209,
@@ -9368,13 +8451,28 @@
           "high": 41.96,
           "low": 40.38,
           "volume": 581294
+        },
+        {
+          "date": "2026-11-03",
+          "open": 40.3,
+          "close": 38.48,
+          "high": 40.62,
+          "low": 38.22,
+          "volume": 676813
+        },
+        {
+          "date": "2026-11-04",
+          "open": 39.5,
+          "close": 42.33,
+          "high": 42.33,
+          "low": 39.5,
+          "volume": 1026474
         }
       ],
       "quote": {
-        "price": 45.24,
-        "change": 2.49,
-        "time": "2026-10-28 15:00:00",
-        "source": "Tencent QFQ daily close"
+        "price": 42.33,
+        "time": "2026-11-04 15:00",
+        "source": "???? qfq ????"
       },
       "tech": {
         "date": "2026-10-23",
@@ -9385,27 +8483,27 @@
         "state": "偏弱",
         "volumeRatio": 1.2682093335976223
       },
-      "levelDate": "2026-10-30",
-      "levelType": "完整周收盘基准 · ATR20统一四档 · 技术触价非交易许可",
+      "levelDate": "2026-11-04",
+      "levelType": "A类回调 / B类企稳 · 周一/周三完整收盘复核 · 价格与企稳需同达",
       "distances": [
         {
-          "delta": 0.259999999999998,
-          "pct": 0.5747126436781564,
+          "delta": 8.899999999999999,
+          "pct": 21.02527758091188,
           "inside": false
         },
         {
-          "delta": -2.740000000000002,
-          "pct": -6.056587091069854,
+          "delta": -0.8500000000000014,
+          "pct": -2.00803212851406,
           "inside": false
         },
         {
-          "delta": 6.259999999999998,
-          "pct": 13.837312113174177,
+          "delta": 9.920000000000002,
+          "pct": 23.434916135128756,
           "inside": false
         },
         {
-          "delta": 10.759999999999998,
-          "pct": 23.784261715296193,
+          "delta": 14.270000000000003,
+          "pct": 33.71131585164187,
           "inside": false
         }
       ],
@@ -9472,241 +8570,127 @@
       "mediaNews": [],
       "mediaError": true,
       "sellReference": {
-        "price": 40.72,
-        "asOf": "2026-10-30",
-        "source": "最近完整周前复权收盘基准，非持仓成本"
+        "price": 42.33,
+        "asOf": "2026-11-04",
+        "source": "最近复核日收盘基准，非持仓成本"
       },
       "historyStale": false,
       "sellReview": {
-        "asOf": "2026-10-30T09:25:25.757Z",
-        "dataDate": "2026-10-30",
-        "policy": "weekly-close-atr20-v1",
+        "asOf": "2026-11-04T12:30:00.000Z",
+        "dataDate": "2026-11-04",
+        "policy": "two-regime-ma60-final-v1",
         "levels": [
           [
-            51.5,
-            53
+            52.25,
+            52.25
           ],
           [
-            56,
-            57.5
+            56.6,
+            56.6
           ]
         ],
-        "status": "pending-support"
+        "status": "adopted"
       },
       "levelReview": {
-        "policyId": "weekly-close-atr20-v1",
-        "asOf": "2026-10-30T09:25:25.757Z",
-        "dataDate": "2026-10-30",
-        "referenceDate": "2026-10-30",
-        "referenceWeekEnding": "2026-10-30",
-        "referencePrice": 40.72,
-        "atr20": 2.9749999999999996,
-        "halfWidth": 0.4462499999999999,
-        "stage": {
-          "name": "falling",
-          "return20": -0.33267781055391676,
-          "return60": -0.2714260153873681,
-          "returnBeforeLast3": -0.29941002949852513
+        "policyId": "two-regime-ma60-final-v1",
+        "asOf": "2026-11-04T12:30:00.000Z",
+        "dataDate": "2026-11-04",
+        "referenceDate": "2026-11-04",
+        "referencePrice": 42.33,
+        "atr20": 2.8945,
+        "regime": "B",
+        "ma5": 40.98,
+        "ma20": 47.28,
+        "ma60": 56.6,
+        "signalDate": "2026-11-04",
+        "signalClose": 42.33,
+        "signalMA5": 40.98,
+        "lowAnchor": null,
+        "anchorDate": null,
+        "aTierArmed": null,
+        "aTierLastTouch": null,
+        "priorWaveLow": 51.23,
+        "high20": 58.13,
+        "high120": 84.7,
+        "possibleLimitUp": true,
+        "largeRise": true,
+        "limitUpConfirmation": {
+          "status": "pending",
+          "date": null,
+          "close": null
         },
-        "recovery": {
-          "frozen": true,
-          "required": true,
-          "triggers": {
-            "trend": true,
-            "structure": true,
-            "twoCloses": true,
-            "singleBreak": false,
-            "t2Lower": 41.5,
-            "singleBreakThreshold": 2.8874999999999997,
-            "close": 41.12,
-            "date": "2026-11-02"
-          },
-          "freezeSources": [
-            "trend",
-            "structure"
-          ],
-          "aboveMA60": false,
-          "returnsRecovered": false,
-          "evidenceOK": false,
-          "risingStructure": false,
-          "atrPeak": 2.9884999999999993,
-          "atrContracted": false,
-          "missing": [
-            "未连续3个完整收盘站上各自MA60",
-            "20日/60日跌幅尚未同时退出阈值",
-            "缺少当期已核验的独立企稳依据",
-            "趋势型与结构型冻结仍触发"
-          ],
-          "frozenSince": "2026-10-19",
-          "recoveredAt": null,
-          "evidence": null
-        },
-        "parameters": {
-          "multipliers": [
-            -1,
-            -2.2,
-            1.8,
-            3.2
-          ],
-          "anchorWindow": 0.005,
-          "halfWidthPrice": 0.006,
-          "halfWidthATR": 0.15,
-          "minGapATR": 0.9975,
-          "minBuyEdge": 0.03,
-          "minSellEdge": 0.05,
-          "tick": 0.01,
-          "changeThreshold": 0.03
-        },
-        "buyEdge": 0.03,
-        "candidateBands": [
-          {
-            "level": [
-              37.3,
-              38.19
-            ],
-            "target": 37.745,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "level": [
-              33.44,
-              34.33
-            ],
-            "target": 34.175,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "level": [
-              45.63,
-              46.52
-            ],
-            "target": 46.074999999999996,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "level": [
-              49.79,
-              50.69
-            ],
-            "target": 50.239999999999995,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          }
-        ],
         "levels": [
           [
-            45.5,
-            47
+            51.23,
+            51.23
           ],
           [
-            41.5,
-            42.5
+            41.48,
+            41.48
           ],
           [
-            51.5,
-            53
+            52.25,
+            52.25
           ],
           [
-            56,
-            57.5
+            56.6,
+            56.6
           ]
         ],
-        "status": "pending-support",
-        "priceValidation": [
-          "方向或交叉错误",
-          "买T1边沿过近"
+        "bands": [
+          {
+            "low": 51.23,
+            "high": 51.23,
+            "note": "复盘价或前波段低点计算"
+          },
+          {
+            "low": 41.48,
+            "high": 41.48,
+            "note": "复盘价或前波段低点计算"
+          },
+          {
+            "low": 52.25,
+            "high": 52.25,
+            "note": "MA20或前波段低点上方2%"
+          },
+          {
+            "low": 56.6,
+            "high": 56.6,
+            "note": "MA60或卖①上方5%"
+          }
         ],
-        "newCandidateValidation": [],
-        "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据；趋势型与结构型冻结仍触发。整组旧档仅供参考，禁止据此买入",
-        "newSupportEvidence": null,
-        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002156,day,,,300,qfq",
-        "sourceQuoteTime": "2026-11-02 收盘",
-        "nextScheduled": "2026-11-04 16:30",
+        "status": "adopted",
+        "nextScheduled": "2026-11-09 16:30",
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002156,day,,,600,qfq",
+        "reason": "A/B在MA60上下5%切换；A类锁定前低；B类买②需企稳且到价；价格条件不等于成交；卖档仅按公开行情计算",
         "marketGate": {
           "policyId": "completed-month-ma20-v1",
-          "checkedAt": "2026-11-02T12:33:34.973Z",
-          "lastMonth": "2026-10-30",
+          "asOf": "2026-11-04",
+          "checkedAt": "2026-11-04T12:45:06.039Z",
+          "dataDate": "2026-10-30",
+          "lastCompleteMonth": "2026-10-30",
           "monthCount": 20,
-          "completedMonthlyMA20": 3812.022,
+          "ma20month": 3812.022,
           "indexClose": 3599.02,
           "frozen": true,
           "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,45,qfq",
-          "reason": "最近完整月收盘未高于20个完整月收盘均值"
-        },
-        "bands": [
-          {
-            "tier": "T1",
-            "low": 45.5,
-            "high": 47,
-            "pct": 40,
-            "note": "近60日低点+近120日低点",
-            "edgePct": -1.36
-          },
-          {
-            "tier": "T2",
-            "low": 41.5,
-            "high": 42.5,
-            "pct": 60,
-            "note": "ATR波动通道",
-            "edgePct": -10.81
-          },
-          {
-            "tier": "T1",
-            "low": 51.5,
-            "high": 53,
-            "pct": 40,
-            "note": "年线MA250",
-            "originalNote": "年线MA250",
-            "edgePct": 8.08
-          },
-          {
-            "tier": "T2",
-            "low": 56,
-            "high": 57.5,
-            "pct": 60,
-            "note": "ATR波动通道",
-            "originalNote": "ATR波动通道",
-            "edgePct": 17.52
-          }
-        ],
-        "freezeCheck": {
-          "checkedAt": "2026-11-02T12:33:40.338Z",
-          "dataDate": "2026-11-02",
-          "recovery": {
-            "frozen": true,
-            "required": true,
-            "triggers": {
-              "trend": true,
-              "structure": true,
-              "twoCloses": true,
-              "singleBreak": false,
-              "t2Lower": 41.5,
-              "singleBreakThreshold": 2.8874999999999997,
-              "close": 41.12,
-              "date": "2026-11-02"
-            },
-            "freezeSources": [
-              "trend",
-              "structure"
+          "reason": "最近完整月收盘未高于20个完整月收盘均值",
+          "weekly": {
+            "policyId": "weekly-ma10-ma20-three-state-v1",
+            "status": "weak",
+            "passed": false,
+            "asOf": "2026-11-04",
+            "checkedAt": "2026-11-04T12:45:06.039Z",
+            "dataDate": "2026-10-30",
+            "indexClose": 3599.02,
+            "ma10": 3823.2409999999995,
+            "ma20": 3878.6490000000003,
+            "maxTotalWeight": 0.6,
+            "maxSingleWeight": 0.18,
+            "allowedBuyTiers": [
+              0
             ],
-            "aboveMA60": false,
-            "returnsRecovered": false,
-            "evidenceOK": false,
-            "risingStructure": false,
-            "atrPeak": 2.9884999999999993,
-            "atrContracted": false,
-            "missing": [
-              "未连续3个完整收盘站上各自MA60",
-              "20日/60日跌幅尚未同时退出阈值",
-              "缺少当期已核验的独立企稳依据",
-              "趋势型与结构型冻结仍触发"
-            ],
-            "frozenSince": "2026-10-19",
-            "recoveredAt": null,
-            "evidence": null
+            "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq"
           }
         }
       },
@@ -9722,7 +8706,8 @@
         ],
         "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002156,day,,,320,qfq",
         "scope": "只读状态检查；未重算采用档位"
-      }
+      },
+      "price": 42.33
     },
     {
       "symbol": "sh601138",
@@ -9734,447 +8719,23 @@
       "report": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468066.PDF",
       "levels": [
         [
-          46,
-          47
+          52.57,
+          52.57
         ],
         [
-          42.5,
-          43.5
+          44.35,
+          44.35
         ],
         [
-          51.5,
-          53
+          53.62,
+          53.62
         ],
         [
-          55.5,
-          56.5
+          58.44,
+          58.44
         ]
       ],
       "rows": [
-        {
-          "date": "2025-08-04",
-          "open": 31.42,
-          "close": 31.99,
-          "high": 32.12,
-          "low": 31.23,
-          "volume": 1381801
-        },
-        {
-          "date": "2025-08-05",
-          "open": 32.52,
-          "close": 34.07,
-          "high": 34.36,
-          "low": 32.13,
-          "volume": 2445901
-        },
-        {
-          "date": "2025-08-06",
-          "open": 33.12,
-          "close": 33.32,
-          "high": 33.71,
-          "low": 32.57,
-          "volume": 1476207
-        },
-        {
-          "date": "2025-08-07",
-          "open": 35.22,
-          "close": 34.67,
-          "high": 36.66,
-          "low": 33.74,
-          "volume": 2435918
-        },
-        {
-          "date": "2025-08-08",
-          "open": 34.75,
-          "close": 35.61,
-          "high": 36.57,
-          "low": 34.08,
-          "volume": 1801252
-        },
-        {
-          "date": "2025-08-11",
-          "open": 35.52,
-          "close": 35.37,
-          "high": 36.21,
-          "low": 34.12,
-          "volume": 1929848
-        },
-        {
-          "date": "2025-08-12",
-          "open": 35.49,
-          "close": 38.73,
-          "high": 38.73,
-          "low": 35.49,
-          "volume": 2228502
-        },
-        {
-          "date": "2025-08-13",
-          "open": 38.74,
-          "close": 42.7,
-          "high": 42.7,
-          "low": 37.97,
-          "volume": 2423668
-        },
-        {
-          "date": "2025-08-14",
-          "open": 42.98,
-          "close": 42.24,
-          "high": 44.8,
-          "low": 42,
-          "volume": 2420015
-        },
-        {
-          "date": "2025-08-15",
-          "open": 41.61,
-          "close": 43.88,
-          "high": 44.72,
-          "low": 41.52,
-          "volume": 2306713
-        },
-        {
-          "date": "2025-08-18",
-          "open": 43.82,
-          "close": 43.48,
-          "high": 44.27,
-          "low": 40.68,
-          "volume": 2630780
-        },
-        {
-          "date": "2025-08-19",
-          "open": 43.04,
-          "close": 47.93,
-          "high": 47.93,
-          "low": 42.7,
-          "volume": 2730438
-        },
-        {
-          "date": "2025-08-20",
-          "open": 45.52,
-          "close": 46.93,
-          "high": 47.98,
-          "low": 44.82,
-          "volume": 2530587
-        },
-        {
-          "date": "2025-08-21",
-          "open": 46.44,
-          "close": 44.31,
-          "high": 47.42,
-          "low": 43.59,
-          "volume": 2316619
-        },
-        {
-          "date": "2025-08-22",
-          "open": 43.52,
-          "close": 44.85,
-          "high": 46.31,
-          "low": 43.02,
-          "volume": 2412630
-        },
-        {
-          "date": "2025-08-25",
-          "open": 45.52,
-          "close": 47.02,
-          "high": 47.09,
-          "low": 43.72,
-          "volume": 3060730
-        },
-        {
-          "date": "2025-08-26",
-          "open": 45.9,
-          "close": 44.5,
-          "high": 46.02,
-          "low": 44.5,
-          "volume": 2216374
-        },
-        {
-          "date": "2025-08-27",
-          "open": 44.02,
-          "close": 44.74,
-          "high": 46.91,
-          "low": 43.53,
-          "volume": 2603612
-        },
-        {
-          "date": "2025-08-28",
-          "open": 43.62,
-          "close": 47.96,
-          "high": 48.97,
-          "low": 43.24,
-          "volume": 3459293
-        },
-        {
-          "date": "2025-08-29",
-          "open": 47.02,
-          "close": 52.85,
-          "high": 52.85,
-          "low": 46.16,
-          "volume": 3430227
-        },
-        {
-          "date": "2025-09-01",
-          "open": 53.01,
-          "close": 54.64,
-          "high": 55.98,
-          "low": 51.32,
-          "volume": 2695192
-        },
-        {
-          "date": "2025-09-02",
-          "open": 55.72,
-          "close": 52.9,
-          "high": 57.02,
-          "low": 51.53,
-          "volume": 2723115
-        },
-        {
-          "date": "2025-09-03",
-          "open": 52.9,
-          "close": 53.26,
-          "high": 54.62,
-          "low": 50.1,
-          "volume": 2219157
-        },
-        {
-          "date": "2025-09-04",
-          "open": 55.52,
-          "close": 52.15,
-          "high": 56.9,
-          "low": 48.95,
-          "volume": 3338313
-        },
-        {
-          "date": "2025-09-05",
-          "open": 52.32,
-          "close": 54.85,
-          "high": 56.22,
-          "low": 49.62,
-          "volume": 3390913
-        },
-        {
-          "date": "2025-09-08",
-          "open": 54.02,
-          "close": 50.42,
-          "high": 55.16,
-          "low": 49.4,
-          "volume": 3032515
-        },
-        {
-          "date": "2025-09-09",
-          "open": 49.42,
-          "close": 47.81,
-          "high": 50.52,
-          "low": 46.52,
-          "volume": 2621774
-        },
-        {
-          "date": "2025-09-10",
-          "open": 50.62,
-          "close": 52.69,
-          "high": 52.69,
-          "low": 49.62,
-          "volume": 3460787
-        },
-        {
-          "date": "2025-09-11",
-          "open": 54.82,
-          "close": 58.06,
-          "high": 58.06,
-          "low": 53.67,
-          "volume": 2722798
-        },
-        {
-          "date": "2025-09-12",
-          "open": 57.9,
-          "close": 60.92,
-          "high": 62.12,
-          "low": 57.05,
-          "volume": 3156052
-        },
-        {
-          "date": "2025-09-15",
-          "open": 59.02,
-          "close": 58.92,
-          "high": 60.3,
-          "low": 57.52,
-          "volume": 1931719
-        },
-        {
-          "date": "2025-09-16",
-          "open": 58.89,
-          "close": 58.75,
-          "high": 60.92,
-          "low": 57.89,
-          "volume": 1794970
-        },
-        {
-          "date": "2025-09-17",
-          "open": 57.92,
-          "close": 60.14,
-          "high": 62.02,
-          "low": 56.73,
-          "volume": 2419094
-        },
-        {
-          "date": "2025-09-18",
-          "open": 58.41,
-          "close": 63.38,
-          "high": 66.25,
-          "low": 58.41,
-          "volume": 3150669
-        },
-        {
-          "date": "2025-09-19",
-          "open": 64.66,
-          "close": 65.12,
-          "high": 67.65,
-          "low": 64.02,
-          "volume": 2368673
-        },
-        {
-          "date": "2025-09-22",
-          "open": 65.57,
-          "close": 69.52,
-          "high": 70.91,
-          "low": 63.66,
-          "volume": 2399280
-        },
-        {
-          "date": "2025-09-23",
-          "open": 73.74,
-          "close": 69.89,
-          "high": 73.74,
-          "low": 67.52,
-          "volume": 2670327
-        },
-        {
-          "date": "2025-09-24",
-          "open": 67.82,
-          "close": 67.65,
-          "high": 68.96,
-          "low": 66.52,
-          "volume": 1963844
-        },
-        {
-          "date": "2025-09-25",
-          "open": 66.9,
-          "close": 67.48,
-          "high": 68.88,
-          "low": 65.21,
-          "volume": 1886682
-        },
-        {
-          "date": "2025-09-26",
-          "open": 66.57,
-          "close": 63.89,
-          "high": 67.53,
-          "low": 63.67,
-          "volume": 1921757
-        },
-        {
-          "date": "2025-09-29",
-          "open": 63.87,
-          "close": 65.6,
-          "high": 66.52,
-          "low": 63.87,
-          "volume": 1550358
-        },
-        {
-          "date": "2025-09-30",
-          "open": 65.82,
-          "close": 65.03,
-          "high": 68.5,
-          "low": 64.54,
-          "volume": 1653417
-        },
-        {
-          "date": "2025-10-09",
-          "open": 66.13,
-          "close": 67.47,
-          "high": 69.9,
-          "low": 66.02,
-          "volume": 2215437
-        },
-        {
-          "date": "2025-10-10",
-          "open": 67.33,
-          "close": 65.43,
-          "high": 69.01,
-          "low": 64.48,
-          "volume": 1842838
-        },
-        {
-          "date": "2025-10-13",
-          "open": 60.02,
-          "close": 62.5,
-          "high": 63.65,
-          "low": 60.02,
-          "volume": 1708677
-        },
-        {
-          "date": "2025-10-14",
-          "open": 64.01,
-          "close": 58.74,
-          "high": 64.68,
-          "low": 58.27,
-          "volume": 1946791
-        },
-        {
-          "date": "2025-10-15",
-          "open": 58.74,
-          "close": 62.4,
-          "high": 62.92,
-          "low": 57.52,
-          "volume": 1911663
-        },
-        {
-          "date": "2025-10-16",
-          "open": 61.02,
-          "close": 62.61,
-          "high": 63.37,
-          "low": 60.72,
-          "volume": 1159393
-        },
-        {
-          "date": "2025-10-17",
-          "open": 62.02,
-          "close": 59.03,
-          "high": 62.29,
-          "low": 58.92,
-          "volume": 1378795
-        },
-        {
-          "date": "2025-10-20",
-          "open": 61.02,
-          "close": 61.08,
-          "high": 62.84,
-          "low": 60.09,
-          "volume": 1450023
-        },
-        {
-          "date": "2025-10-21",
-          "open": 61.96,
-          "close": 67.02,
-          "high": 67.21,
-          "low": 61.44,
-          "volume": 2522878
-        },
-        {
-          "date": "2025-10-22",
-          "open": 66.01,
-          "close": 64.48,
-          "high": 66.02,
-          "low": 63.52,
-          "volume": 1671917
-        },
-        {
-          "date": "2025-10-23",
-          "open": 63.82,
-          "close": 63.01,
-          "high": 64.04,
-          "low": 61.72,
-          "volume": 1110253
-        },
         {
           "date": "2025-10-24",
           "open": 64.2,
@@ -12158,13 +10719,28 @@
           "high": 45.5,
           "low": 42.78,
           "volume": 1171232
+        },
+        {
+          "date": "2026-11-03",
+          "open": 43.45,
+          "close": 41.95,
+          "high": 44.16,
+          "low": 41.83,
+          "volume": 1169836
+        },
+        {
+          "date": "2026-11-04",
+          "open": 42.2,
+          "close": 45.25,
+          "high": 45.73,
+          "low": 41.51,
+          "volume": 1564523
         }
       ],
       "quote": {
-        "price": 48.64,
-        "change": 2.72,
-        "time": "2026-10-28 15:00:00",
-        "source": "Tencent QFQ daily close"
+        "price": 45.25,
+        "time": "2026-11-04 15:00",
+        "source": "???? qfq ????"
       },
       "tech": {
         "date": "2026-10-23",
@@ -12175,27 +10751,27 @@
         "state": "偏弱",
         "volumeRatio": 1.3107914277717636
       },
-      "levelDate": "2026-10-30",
-      "levelType": "完整周收盘基准 · ATR20统一四档 · 技术触价非交易许可",
+      "levelDate": "2026-11-04",
+      "levelType": "A类回调 / B类企稳 · 周一/周三完整收盘复核 · 价格与企稳需同达",
       "distances": [
         {
-          "delta": -1.6400000000000006,
-          "pct": -3.371710526315791,
+          "delta": 7.32,
+          "pct": 16.176795580110497,
           "inside": false
         },
         {
-          "delta": -5.140000000000001,
-          "pct": -10.567434210526317,
+          "delta": -0.8999999999999986,
+          "pct": -1.9889502762430906,
           "inside": false
         },
         {
-          "delta": 2.8599999999999994,
-          "pct": 5.879934210526314,
+          "delta": 8.369999999999997,
+          "pct": 18.49723756906077,
           "inside": false
         },
         {
-          "delta": 6.859999999999999,
-          "pct": 14.10361842105263,
+          "delta": 13.189999999999998,
+          "pct": 29.149171270718227,
           "inside": false
         }
       ],
@@ -12262,240 +10838,123 @@
       "mediaNews": [],
       "mediaError": true,
       "sellReference": {
-        "price": 45,
-        "asOf": "2026-10-30",
-        "source": "最近完整周前复权收盘基准，非持仓成本"
+        "price": 45.25,
+        "asOf": "2026-11-04",
+        "source": "最近复核日收盘基准，非持仓成本"
       },
       "historyStale": false,
       "sellReview": {
-        "asOf": "2026-10-30T09:25:25.757Z",
-        "dataDate": "2026-10-30",
-        "policy": "weekly-close-atr20-v1",
+        "asOf": "2026-11-04T12:30:00.000Z",
+        "dataDate": "2026-11-04",
+        "policy": "two-regime-ma60-final-v1",
         "levels": [
           [
-            51.5,
-            53
+            53.62,
+            53.62
           ],
           [
-            55.5,
-            56.5
+            58.44,
+            58.44
           ]
         ],
-        "status": "pending-support"
+        "status": "adopted"
       },
       "levelReview": {
-        "policyId": "weekly-close-atr20-v1",
-        "asOf": "2026-10-30T09:25:25.757Z",
-        "dataDate": "2026-10-30",
-        "referenceDate": "2026-10-30",
-        "referenceWeekEnding": "2026-10-30",
-        "referencePrice": 45,
-        "atr20": 2.7159999999999997,
-        "halfWidth": 0.40739999999999993,
-        "stage": {
-          "name": "falling",
-          "return20": -0.2622950819672131,
-          "return60": -0.15333960489181564,
-          "returnBeforeLast3": -0.24721311475409835
-        },
-        "recovery": {
-          "frozen": true,
-          "required": true,
-          "triggers": {
-            "trend": true,
-            "structure": false,
-            "twoCloses": false,
-            "singleBreak": false,
-            "t2Lower": 42.5,
-            "singleBreakThreshold": 2.7159999999999997,
-            "close": 44.39,
-            "date": "2026-11-02"
-          },
-          "freezeSources": [
-            "trend"
-          ],
-          "aboveMA60": false,
-          "returnsRecovered": false,
-          "evidenceOK": false,
-          "risingStructure": false,
-          "atrPeak": 2.7159999999999997,
-          "atrContracted": false,
-          "missing": [
-            "未连续3个完整收盘站上各自MA60",
-            "20日/60日跌幅尚未同时退出阈值",
-            "缺少当期已核验的独立企稳依据",
-            "趋势型冻结仍触发"
-          ],
-          "frozenSince": "2026-10-19",
-          "recoveredAt": null,
-          "evidence": null
-        },
-        "parameters": {
-          "multipliers": [
-            -1,
-            -2.2,
-            1.8,
-            3.2
-          ],
-          "anchorWindow": 0.005,
-          "halfWidthPrice": 0.006,
-          "halfWidthATR": 0.15,
-          "minGapATR": 0.9975,
-          "minBuyEdge": 0.03,
-          "minSellEdge": 0.05,
-          "tick": 0.01,
-          "changeThreshold": 0.03
-        },
-        "buyEdge": 0.03,
-        "candidateBands": [
-          {
-            "level": [
-              41.88,
-              42.69
-            ],
-            "target": 42.284,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "level": [
-              38.36,
-              39.17
-            ],
-            "target": 39.0248,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "level": [
-              49.48,
-              50.3
-            ],
-            "target": 49.8888,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "level": [
-              53.28,
-              54.1
-            ],
-            "target": 53.6912,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          }
-        ],
+        "policyId": "two-regime-ma60-final-v1",
+        "asOf": "2026-11-04T12:30:00.000Z",
+        "dataDate": "2026-11-04",
+        "referenceDate": "2026-11-04",
+        "referencePrice": 45.25,
+        "atr20": 2.9114999999999998,
+        "regime": "B",
+        "ma5": 44.36,
+        "ma20": 48.28,
+        "ma60": 58.44,
+        "signalDate": "2026-11-04",
+        "signalClose": 45.25,
+        "signalMA5": 44.36,
+        "lowAnchor": null,
+        "anchorDate": null,
+        "aTierArmed": null,
+        "aTierLastTouch": null,
+        "priorWaveLow": 52.57,
+        "high20": 59.15,
+        "high120": 84.3,
+        "possibleLimitUp": false,
+        "largeRise": true,
+        "limitUpConfirmation": null,
         "levels": [
           [
-            46,
-            47
+            52.57,
+            52.57
           ],
           [
-            42.5,
-            43.5
+            44.35,
+            44.35
           ],
           [
-            51.5,
-            53
+            53.62,
+            53.62
           ],
           [
-            55.5,
-            56.5
+            58.44,
+            58.44
           ]
         ],
-        "status": "pending-support",
-        "priceValidation": [
-          "方向或交叉错误",
-          "价格带净间距不足",
-          "买T1边沿过近"
+        "bands": [
+          {
+            "low": 52.57,
+            "high": 52.57,
+            "note": "复盘价或前波段低点计算"
+          },
+          {
+            "low": 44.35,
+            "high": 44.35,
+            "note": "复盘价或前波段低点计算"
+          },
+          {
+            "low": 53.62,
+            "high": 53.62,
+            "note": "MA20或前波段低点上方2%"
+          },
+          {
+            "low": 58.44,
+            "high": 58.44,
+            "note": "MA60或卖①上方5%"
+          }
         ],
-        "newCandidateValidation": [],
-        "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据；趋势型冻结仍触发。整组旧档仅供参考，禁止据此买入",
-        "newSupportEvidence": null,
-        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138,day,,,300,qfq",
-        "sourceQuoteTime": "2026-11-02 收盘",
-        "nextScheduled": "2026-11-04 16:30",
+        "status": "adopted",
+        "nextScheduled": "2026-11-09 16:30",
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138,day,,,600,qfq",
+        "reason": "A/B在MA60上下5%切换；A类锁定前低；B类买②需企稳且到价；价格条件不等于成交；卖档仅按公开行情计算",
         "marketGate": {
           "policyId": "completed-month-ma20-v1",
-          "checkedAt": "2026-11-02T12:33:34.973Z",
-          "lastMonth": "2026-10-30",
+          "asOf": "2026-11-04",
+          "checkedAt": "2026-11-04T12:45:06.039Z",
+          "dataDate": "2026-10-30",
+          "lastCompleteMonth": "2026-10-30",
           "monthCount": 20,
-          "completedMonthlyMA20": 3812.022,
+          "ma20month": 3812.022,
           "indexClose": 3599.02,
           "frozen": true,
           "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,45,qfq",
-          "reason": "最近完整月收盘未高于20个完整月收盘均值"
-        },
-        "bands": [
-          {
-            "tier": "T1",
-            "low": 46,
-            "high": 47,
-            "pct": 40,
-            "note": "ATR波动通道",
-            "edgePct": -1.49
-          },
-          {
-            "tier": "T2",
-            "low": 42.5,
-            "high": 43.5,
-            "pct": 60,
-            "note": "ATR波动通道",
-            "edgePct": -8.82
-          },
-          {
-            "tier": "T1",
-            "low": 51.5,
-            "high": 53,
-            "pct": 40,
-            "note": "ATR波动通道",
-            "originalNote": "ATR波动通道",
-            "edgePct": 7.94
-          },
-          {
-            "tier": "T2",
-            "low": 55.5,
-            "high": 56.5,
-            "pct": 60,
-            "note": "ATR波动通道",
-            "originalNote": "ATR波动通道",
-            "edgePct": 16.33
-          }
-        ],
-        "freezeCheck": {
-          "checkedAt": "2026-11-02T12:33:40.338Z",
-          "dataDate": "2026-11-02",
-          "recovery": {
-            "frozen": true,
-            "required": true,
-            "triggers": {
-              "trend": true,
-              "structure": false,
-              "twoCloses": false,
-              "singleBreak": false,
-              "t2Lower": 42.5,
-              "singleBreakThreshold": 2.7159999999999997,
-              "close": 44.39,
-              "date": "2026-11-02"
-            },
-            "freezeSources": [
-              "trend"
+          "reason": "最近完整月收盘未高于20个完整月收盘均值",
+          "weekly": {
+            "policyId": "weekly-ma10-ma20-three-state-v1",
+            "status": "weak",
+            "passed": false,
+            "asOf": "2026-11-04",
+            "checkedAt": "2026-11-04T12:45:06.039Z",
+            "dataDate": "2026-10-30",
+            "indexClose": 3599.02,
+            "ma10": 3823.2409999999995,
+            "ma20": 3878.6490000000003,
+            "maxTotalWeight": 0.6,
+            "maxSingleWeight": 0.18,
+            "allowedBuyTiers": [
+              0
             ],
-            "aboveMA60": false,
-            "returnsRecovered": false,
-            "evidenceOK": false,
-            "risingStructure": false,
-            "atrPeak": 2.7159999999999997,
-            "atrContracted": false,
-            "missing": [
-              "未连续3个完整收盘站上各自MA60",
-              "20日/60日跌幅尚未同时退出阈值",
-              "缺少当期已核验的独立企稳依据",
-              "趋势型冻结仍触发"
-            ],
-            "frozenSince": "2026-10-19",
-            "recoveredAt": null,
-            "evidence": null
+            "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq"
           }
         }
       },
@@ -12511,7 +10970,8 @@
         ],
         "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138,day,,,320,qfq",
         "scope": "只读状态检查；未重算采用档位"
-      }
+      },
+      "price": 45.25
     },
     {
       "symbol": "sz002463",
@@ -12523,447 +10983,23 @@
       "report": "https://disc.static.szse.cn/disc/disk03/finalpage/2026-08-26/510ef2bf-102c-47af-aab9-ec715b88b306.PDF",
       "levels": [
         [
-          107,
-          110
+          94.73,
+          94.73
         ],
         [
-          97,
-          100
+          84.23,
+          84.23
         ],
         [
-          125,
-          128
+          104.21,
+          104.21
         ],
         [
-          135,
-          139
+          115.78,
+          115.78
         ]
       ],
       "rows": [
-        {
-          "date": "2025-08-04",
-          "open": 52.43,
-          "close": 53.44,
-          "high": 53.71,
-          "low": 51.7,
-          "volume": 453269
-        },
-        {
-          "date": "2025-08-05",
-          "open": 54.19,
-          "close": 52.08,
-          "high": 54.76,
-          "low": 51.2,
-          "volume": 567905
-        },
-        {
-          "date": "2025-08-06",
-          "open": 51.59,
-          "close": 52.08,
-          "high": 53.63,
-          "low": 51.3,
-          "volume": 471140
-        },
-        {
-          "date": "2025-08-07",
-          "open": 52.08,
-          "close": 50.72,
-          "high": 52.94,
-          "low": 49.6,
-          "volume": 744866
-        },
-        {
-          "date": "2025-08-08",
-          "open": 50.51,
-          "close": 50.58,
-          "high": 51.36,
-          "low": 49.74,
-          "volume": 417591
-        },
-        {
-          "date": "2025-08-11",
-          "open": 50.5,
-          "close": 51.53,
-          "high": 52.19,
-          "low": 50.33,
-          "volume": 522156
-        },
-        {
-          "date": "2025-08-12",
-          "open": 51.57,
-          "close": 52.48,
-          "high": 52.68,
-          "low": 51,
-          "volume": 600141
-        },
-        {
-          "date": "2025-08-13",
-          "open": 53.36,
-          "close": 57.78,
-          "high": 57.78,
-          "low": 52.5,
-          "volume": 1102026
-        },
-        {
-          "date": "2025-08-14",
-          "open": 57.48,
-          "close": 54.57,
-          "high": 57.48,
-          "low": 54.44,
-          "volume": 756850
-        },
-        {
-          "date": "2025-08-15",
-          "open": 54.38,
-          "close": 54.85,
-          "high": 56.55,
-          "low": 53.9,
-          "volume": 667918
-        },
-        {
-          "date": "2025-08-18",
-          "open": 54.83,
-          "close": 55.46,
-          "high": 57,
-          "low": 53.08,
-          "volume": 771211
-        },
-        {
-          "date": "2025-08-19",
-          "open": 55.33,
-          "close": 54.45,
-          "high": 57.12,
-          "low": 53.76,
-          "volume": 732527
-        },
-        {
-          "date": "2025-08-20",
-          "open": 53.13,
-          "close": 54.15,
-          "high": 54.75,
-          "low": 50.9,
-          "volume": 543146
-        },
-        {
-          "date": "2025-08-21",
-          "open": 54.18,
-          "close": 53.07,
-          "high": 54.5,
-          "low": 51.2,
-          "volume": 796534
-        },
-        {
-          "date": "2025-08-22",
-          "open": 53.05,
-          "close": 55.13,
-          "high": 56.4,
-          "low": 52.52,
-          "volume": 957338
-        },
-        {
-          "date": "2025-08-25",
-          "open": 55.82,
-          "close": 57.45,
-          "high": 57.98,
-          "low": 54.19,
-          "volume": 1045457
-        },
-        {
-          "date": "2025-08-26",
-          "open": 57.25,
-          "close": 57.15,
-          "high": 59,
-          "low": 56.51,
-          "volume": 696686
-        },
-        {
-          "date": "2025-08-27",
-          "open": 56.91,
-          "close": 58.39,
-          "high": 61.17,
-          "low": 56.91,
-          "volume": 971258
-        },
-        {
-          "date": "2025-08-28",
-          "open": 58.68,
-          "close": 63.62,
-          "high": 63.74,
-          "low": 57.92,
-          "volume": 1009704
-        },
-        {
-          "date": "2025-08-29",
-          "open": 64,
-          "close": 68.29,
-          "high": 69.5,
-          "low": 62.7,
-          "volume": 979239
-        },
-        {
-          "date": "2025-09-01",
-          "open": 68.68,
-          "close": 69.3,
-          "high": 71,
-          "low": 65.83,
-          "volume": 916326
-        },
-        {
-          "date": "2025-09-02",
-          "open": 68.7,
-          "close": 66.72,
-          "high": 71.71,
-          "low": 64.92,
-          "volume": 971940
-        },
-        {
-          "date": "2025-09-03",
-          "open": 66.06,
-          "close": 65.48,
-          "high": 67.08,
-          "low": 64.15,
-          "volume": 674717
-        },
-        {
-          "date": "2025-09-04",
-          "open": 65.93,
-          "close": 58.88,
-          "high": 66.99,
-          "low": 58.88,
-          "volume": 868580
-        },
-        {
-          "date": "2025-09-05",
-          "open": 58.19,
-          "close": 63.64,
-          "high": 64.06,
-          "low": 58.19,
-          "volume": 994750
-        },
-        {
-          "date": "2025-09-08",
-          "open": 63.47,
-          "close": 59.87,
-          "high": 63.47,
-          "low": 58.58,
-          "volume": 832911
-        },
-        {
-          "date": "2025-09-09",
-          "open": 58.6,
-          "close": 58.89,
-          "high": 59.8,
-          "low": 57.64,
-          "volume": 545615
-        },
-        {
-          "date": "2025-09-10",
-          "open": 60.51,
-          "close": 62.98,
-          "high": 63.95,
-          "low": 60.51,
-          "volume": 929521
-        },
-        {
-          "date": "2025-09-11",
-          "open": 65.4,
-          "close": 69.33,
-          "high": 69.33,
-          "low": 65.4,
-          "volume": 835870
-        },
-        {
-          "date": "2025-09-12",
-          "open": 69.1,
-          "close": 71.4,
-          "high": 72.5,
-          "low": 68.6,
-          "volume": 901397
-        },
-        {
-          "date": "2025-09-15",
-          "open": 70.4,
-          "close": 68.44,
-          "high": 70.4,
-          "low": 67.87,
-          "volume": 601322
-        },
-        {
-          "date": "2025-09-16",
-          "open": 68.36,
-          "close": 71.5,
-          "high": 73.7,
-          "low": 68.36,
-          "volume": 648366
-        },
-        {
-          "date": "2025-09-17",
-          "open": 71.5,
-          "close": 70.4,
-          "high": 72.31,
-          "low": 68.7,
-          "volume": 478404
-        },
-        {
-          "date": "2025-09-18",
-          "open": 69.64,
-          "close": 74.92,
-          "high": 77.48,
-          "low": 69.51,
-          "volume": 874856
-        },
-        {
-          "date": "2025-09-19",
-          "open": 75.6,
-          "close": 75.4,
-          "high": 77.08,
-          "low": 74.1,
-          "volume": 523296
-        },
-        {
-          "date": "2025-09-22",
-          "open": 75.78,
-          "close": 79.56,
-          "high": 80.7,
-          "low": 73.5,
-          "volume": 612339
-        },
-        {
-          "date": "2025-09-23",
-          "open": 82.48,
-          "close": 77.4,
-          "high": 83.95,
-          "low": 74.55,
-          "volume": 805348
-        },
-        {
-          "date": "2025-09-24",
-          "open": 75.52,
-          "close": 73.95,
-          "high": 76.18,
-          "low": 72.93,
-          "volume": 597087
-        },
-        {
-          "date": "2025-09-25",
-          "open": 74.2,
-          "close": 74.21,
-          "high": 75.79,
-          "low": 72.19,
-          "volume": 522537
-        },
-        {
-          "date": "2025-09-26",
-          "open": 74.14,
-          "close": 71.52,
-          "high": 74.42,
-          "low": 71.38,
-          "volume": 492167
-        },
-        {
-          "date": "2025-09-29",
-          "open": 71.3,
-          "close": 73.81,
-          "high": 73.92,
-          "low": 71,
-          "volume": 433007
-        },
-        {
-          "date": "2025-09-30",
-          "open": 74.17,
-          "close": 72.97,
-          "high": 74.89,
-          "low": 72.19,
-          "volume": 364536
-        },
-        {
-          "date": "2025-10-09",
-          "open": 74.21,
-          "close": 73.45,
-          "high": 76.75,
-          "low": 73.3,
-          "volume": 528217
-        },
-        {
-          "date": "2025-10-10",
-          "open": 72.56,
-          "close": 72.26,
-          "high": 76.19,
-          "low": 70.81,
-          "volume": 460838
-        },
-        {
-          "date": "2025-10-13",
-          "open": 66.5,
-          "close": 70,
-          "high": 70.7,
-          "low": 66.49,
-          "volume": 522841
-        },
-        {
-          "date": "2025-10-14",
-          "open": 71.4,
-          "close": 65.3,
-          "high": 72.1,
-          "low": 64.88,
-          "volume": 638678
-        },
-        {
-          "date": "2025-10-15",
-          "open": 65.3,
-          "close": 67.69,
-          "high": 67.95,
-          "low": 64.56,
-          "volume": 415782
-        },
-        {
-          "date": "2025-10-16",
-          "open": 67.3,
-          "close": 66.75,
-          "high": 68.21,
-          "low": 66.38,
-          "volume": 299100
-        },
-        {
-          "date": "2025-10-17",
-          "open": 66.3,
-          "close": 63.67,
-          "high": 66.41,
-          "low": 63.5,
-          "volume": 465957
-        },
-        {
-          "date": "2025-10-20",
-          "open": 64.81,
-          "close": 66.45,
-          "high": 68.25,
-          "low": 64.81,
-          "volume": 478374
-        },
-        {
-          "date": "2025-10-21",
-          "open": 66.43,
-          "close": 69.55,
-          "high": 69.85,
-          "low": 65.35,
-          "volume": 606025
-        },
-        {
-          "date": "2025-10-22",
-          "open": 68.65,
-          "close": 69.45,
-          "high": 70.99,
-          "low": 68.5,
-          "volume": 353781
-        },
-        {
-          "date": "2025-10-23",
-          "open": 68.83,
-          "close": 67.59,
-          "high": 69.1,
-          "low": 66.7,
-          "volume": 285454
-        },
         {
           "date": "2025-10-24",
           "open": 69.54,
@@ -14947,13 +12983,28 @@
           "high": 89.3,
           "low": 84.03,
           "volume": 638614
+        },
+        {
+          "date": "2026-11-03",
+          "open": 83.47,
+          "close": 78.14,
+          "high": 84.68,
+          "low": 77.45,
+          "volume": 787648
+        },
+        {
+          "date": "2026-11-04",
+          "open": 78.2,
+          "close": 85.95,
+          "high": 85.95,
+          "low": 76.3,
+          "volume": 768996
         }
       ],
       "quote": {
-        "price": 104.57,
-        "change": 5.37,
-        "time": "2026-10-28 15:00:00",
-        "source": "Tencent QFQ daily close"
+        "price": 85.95,
+        "time": "2026-11-04 15:00",
+        "source": "???? qfq ????"
       },
       "tech": {
         "date": "2026-10-23",
@@ -14964,27 +13015,27 @@
         "state": "偏弱",
         "volumeRatio": 1.2188310800511055
       },
-      "levelDate": "2026-10-30",
-      "levelType": "完整周收盘基准 · ATR20统一四档 · 技术触价非交易许可",
+      "levelDate": "2026-11-04",
+      "levelType": "A类回调 / B类企稳 · 周一/周三完整收盘复核 · 价格与企稳需同达",
       "distances": [
         {
-          "delta": 2.430000000000007,
-          "pct": 2.323802237735495,
+          "delta": 8.780000000000001,
+          "pct": 10.215241419429901,
           "inside": false
         },
         {
-          "delta": -4.569999999999993,
-          "pct": -4.370278282490192,
+          "delta": -1.7199999999999989,
+          "pct": -2.001163467132052,
           "inside": false
         },
         {
-          "delta": 20.430000000000007,
-          "pct": 19.53715214688726,
+          "delta": 18.25999999999999,
+          "pct": 21.244909831297253,
           "inside": false
         },
         {
-          "delta": 30.430000000000007,
-          "pct": 29.100124318638244,
+          "delta": 29.83,
+          "pct": 34.70622454915648,
           "inside": false
         }
       ],
@@ -15995,246 +14046,127 @@
       "mediaNews": [],
       "mediaError": true,
       "sellReference": {
-        "price": 87.34,
-        "asOf": "2026-10-30",
-        "source": "最近完整周前复权收盘基准，非持仓成本"
+        "price": 85.95,
+        "asOf": "2026-11-04",
+        "source": "最近复核日收盘基准，非持仓成本"
       },
       "historyStale": false,
       "sellReview": {
-        "asOf": "2026-10-30T09:25:25.757Z",
-        "dataDate": "2026-10-30",
-        "policy": "weekly-close-atr20-v1",
+        "asOf": "2026-11-04T12:30:00.000Z",
+        "dataDate": "2026-11-04",
+        "policy": "two-regime-ma60-final-v1",
         "levels": [
           [
-            125,
-            128
+            104.21,
+            104.21
           ],
           [
-            135,
-            139
+            115.78,
+            115.78
           ]
         ],
-        "status": "pending-support"
+        "status": "adopted"
       },
       "levelReview": {
-        "policyId": "weekly-close-atr20-v1",
-        "asOf": "2026-10-30T09:25:25.757Z",
-        "dataDate": "2026-10-30",
-        "referenceDate": "2026-10-30",
-        "referenceWeekEnding": "2026-10-30",
-        "referencePrice": 87.34,
-        "atr20": 7.564500000000001,
-        "halfWidth": 1.134675,
-        "stage": {
-          "name": "falling",
-          "return20": -0.2959290608625553,
-          "return60": -0.0953909891248057,
-          "returnBeforeLast3": -0.20032245062474807
+        "policyId": "two-regime-ma60-final-v1",
+        "asOf": "2026-11-04T12:30:00.000Z",
+        "dataDate": "2026-11-04",
+        "referenceDate": "2026-11-04",
+        "referencePrice": 85.95,
+        "atr20": 7.846000000000001,
+        "regime": "B",
+        "ma5": 86.32,
+        "ma20": 104.21,
+        "ma60": 115.78,
+        "signalDate": "2026-11-04",
+        "signalClose": 85.95,
+        "signalMA5": 86.32,
+        "lowAnchor": null,
+        "anchorDate": null,
+        "aTierArmed": null,
+        "aTierLastTouch": null,
+        "priorWaveLow": 94.73,
+        "high20": 123.11,
+        "high120": 158.2,
+        "possibleLimitUp": true,
+        "largeRise": true,
+        "limitUpConfirmation": {
+          "status": "pending",
+          "date": null,
+          "close": null
         },
-        "recovery": {
-          "frozen": true,
-          "required": true,
-          "triggers": {
-            "trend": true,
-            "structure": true,
-            "twoCloses": true,
-            "singleBreak": true,
-            "t2Lower": 97,
-            "singleBreakThreshold": 7.437,
-            "close": 86.05,
-            "date": "2026-11-02"
-          },
-          "freezeSources": [
-            "trend",
-            "structure"
-          ],
-          "aboveMA60": false,
-          "returnsRecovered": false,
-          "evidenceOK": false,
-          "risingStructure": false,
-          "atrPeak": 7.564500000000001,
-          "atrContracted": false,
-          "missing": [
-            "未连续3个完整收盘站上各自MA60",
-            "20日/60日跌幅尚未同时退出阈值",
-            "缺少当期已核验的独立企稳依据",
-            "趋势型与结构型冻结仍触发"
-          ],
-          "frozenSince": "2026-10-19",
-          "recoveredAt": null,
-          "evidence": null
-        },
-        "parameters": {
-          "multipliers": [
-            -1,
-            -2.2,
-            1.8,
-            3.2
-          ],
-          "anchorWindow": 0.005,
-          "halfWidthPrice": 0.006,
-          "halfWidthATR": 0.15,
-          "minGapATR": 0.9975,
-          "minBuyEdge": 0.03,
-          "minSellEdge": 0.05,
-          "tick": 0.01,
-          "changeThreshold": 0.03
-        },
-        "buyEdge": 0.03,
-        "candidateBands": [
-          {
-            "level": [
-              78.64,
-              80.91
-            ],
-            "target": 79.77550000000001,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "level": [
-              68.82,
-              71.09
-            ],
-            "target": 70.6981,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          },
-          {
-            "level": [
-              99.7,
-              101.97
-            ],
-            "target": 100.9561,
-            "anchor": {
-              "name": "Fib78.60000000000001%回撤",
-              "price": 100.83771999999999,
-              "weight": 6
-            },
-            "note": "Fib78.60000000000001%回撤"
-          },
-          {
-            "level": [
-              110.41,
-              112.68
-            ],
-            "target": 111.5464,
-            "anchor": null,
-            "note": "ATR测算通道（非确认支撑/压力）"
-          }
-        ],
         "levels": [
           [
-            107,
-            110
+            94.73,
+            94.73
           ],
           [
-            97,
-            100
+            84.23,
+            84.23
           ],
           [
-            125,
-            128
+            104.21,
+            104.21
           ],
           [
-            135,
-            139
+            115.78,
+            115.78
           ]
         ],
-        "status": "pending-support",
-        "priceValidation": [
-          "方向或交叉错误",
-          "价格带净间距不足",
-          "买T1边沿过近"
+        "bands": [
+          {
+            "low": 94.73,
+            "high": 94.73,
+            "note": "复盘价或前波段低点计算"
+          },
+          {
+            "low": 84.23,
+            "high": 84.23,
+            "note": "复盘价或前波段低点计算"
+          },
+          {
+            "low": 104.21,
+            "high": 104.21,
+            "note": "MA20或前波段低点上方2%"
+          },
+          {
+            "low": 115.78,
+            "high": 115.78,
+            "note": "MA60或卖①上方5%"
+          }
         ],
-        "newCandidateValidation": [],
-        "reason": "下跌恢复条件未满足：未连续3个完整收盘站上各自MA60；20日/60日跌幅尚未同时退出阈值；缺少当期已核验的独立企稳依据；趋势型与结构型冻结仍触发。整组旧档仅供参考，禁止据此买入",
-        "newSupportEvidence": null,
-        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,300,qfq",
-        "sourceQuoteTime": "2026-11-02 收盘",
-        "nextScheduled": "2026-11-04 16:30",
+        "status": "adopted",
+        "nextScheduled": "2026-11-09 16:30",
+        "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,600,qfq",
+        "reason": "A/B在MA60上下5%切换；A类锁定前低；B类买②需企稳且到价；价格条件不等于成交；卖档仅按公开行情计算",
         "marketGate": {
           "policyId": "completed-month-ma20-v1",
-          "checkedAt": "2026-11-02T12:33:34.973Z",
-          "lastMonth": "2026-10-30",
+          "asOf": "2026-11-04",
+          "checkedAt": "2026-11-04T12:45:06.039Z",
+          "dataDate": "2026-10-30",
+          "lastCompleteMonth": "2026-10-30",
           "monthCount": 20,
-          "completedMonthlyMA20": 3812.022,
+          "ma20month": 3812.022,
           "indexClose": 3599.02,
           "frozen": true,
           "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,45,qfq",
-          "reason": "最近完整月收盘未高于20个完整月收盘均值"
-        },
-        "bands": [
-          {
-            "tier": "T1",
-            "low": 107,
-            "high": 110,
-            "pct": 40,
-            "note": "Fib 78.6%回撤",
-            "edgePct": -1.57
-          },
-          {
-            "tier": "T2",
-            "low": 97,
-            "high": 100,
-            "pct": 60,
-            "note": "ATR波动通道",
-            "edgePct": -10.51
-          },
-          {
-            "tier": "T1",
-            "low": 125,
-            "high": 128,
-            "pct": 40,
-            "note": "Fib 50%反弹",
-            "originalNote": "Fib 50%反弹",
-            "edgePct": 11.86
-          },
-          {
-            "tier": "T2",
-            "low": 135,
-            "high": 139,
-            "pct": 60,
-            "note": "ATR间距/边沿校正通道（原锚点已移出区间）",
-            "originalNote": "Fib 61.8%反弹",
-            "edgePct": 20.81
-          }
-        ],
-        "freezeCheck": {
-          "checkedAt": "2026-11-02T12:33:40.338Z",
-          "dataDate": "2026-11-02",
-          "recovery": {
-            "frozen": true,
-            "required": true,
-            "triggers": {
-              "trend": true,
-              "structure": true,
-              "twoCloses": true,
-              "singleBreak": true,
-              "t2Lower": 97,
-              "singleBreakThreshold": 7.437,
-              "close": 86.05,
-              "date": "2026-11-02"
-            },
-            "freezeSources": [
-              "trend",
-              "structure"
+          "reason": "最近完整月收盘未高于20个完整月收盘均值",
+          "weekly": {
+            "policyId": "weekly-ma10-ma20-three-state-v1",
+            "status": "weak",
+            "passed": false,
+            "asOf": "2026-11-04",
+            "checkedAt": "2026-11-04T12:45:06.039Z",
+            "dataDate": "2026-10-30",
+            "indexClose": 3599.02,
+            "ma10": 3823.2409999999995,
+            "ma20": 3878.6490000000003,
+            "maxTotalWeight": 0.6,
+            "maxSingleWeight": 0.18,
+            "allowedBuyTiers": [
+              0
             ],
-            "aboveMA60": false,
-            "returnsRecovered": false,
-            "evidenceOK": false,
-            "risingStructure": false,
-            "atrPeak": 7.564500000000001,
-            "atrContracted": false,
-            "missing": [
-              "未连续3个完整收盘站上各自MA60",
-              "20日/60日跌幅尚未同时退出阈值",
-              "缺少当期已核验的独立企稳依据",
-              "趋势型与结构型冻结仍触发"
-            ],
-            "frozenSince": "2026-10-19",
-            "recoveredAt": null,
-            "evidence": null
+            "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq"
           }
         }
       },
@@ -16250,7 +14182,8 @@
         ],
         "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,320,qfq",
         "scope": "只读状态检查；未重算采用档位"
-      }
+      },
+      "price": 85.95
     }
   ],
   "us": [
@@ -17796,17 +15729,33 @@
   },
   "marketGate": {
     "policyId": "completed-month-ma20-v1",
-    "asOf": "2026-11-02",
-    "checkedAt": "2026-11-02T12:33:34.973Z",
+    "asOf": "2026-11-04",
+    "checkedAt": "2026-11-04T12:45:06.039Z",
     "dataDate": "2026-10-30",
-    "date": "2026-10-30",
     "lastCompleteMonth": "2026-10-30",
     "monthCount": 20,
     "ma20month": 3812.022,
     "indexClose": 3599.02,
     "frozen": true,
     "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,45,qfq",
-    "reason": "最近完整月收盘未高于20个完整月收盘均值"
+    "reason": "最近完整月收盘未高于20个完整月收盘均值",
+    "weekly": {
+      "policyId": "weekly-ma10-ma20-three-state-v1",
+      "status": "weak",
+      "passed": false,
+      "asOf": "2026-11-04",
+      "checkedAt": "2026-11-04T12:45:06.039Z",
+      "dataDate": "2026-10-30",
+      "indexClose": 3599.02,
+      "ma10": 3823.2409999999995,
+      "ma20": 3878.6490000000003,
+      "maxTotalWeight": 0.6,
+      "maxSingleWeight": 0.18,
+      "allowedBuyTiers": [
+        0
+      ],
+      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq"
+    }
   },
   "marketTurnover": {
     "sh": {
