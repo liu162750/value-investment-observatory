@@ -46,11 +46,11 @@ for(const stock of stocks){
  saved.sellReview={asOf:review.asOf,dataDate:review.referenceDate,policy:POLICY,levels:review.levels.slice(2),status:'adopted'};
  saved.sellReference={price:review.referencePrice,asOf:review.referenceDate,source:'最近复核日收盘基准，非持仓成本'};
  saved.levelDate=review.referenceDate;
- saved.levelType='A类回调 / B类企稳 · 周一/周三完整收盘复核 · 触价不等于成交';
+ saved.levelType='上升趋势回踩 / 下降趋势收盘企稳 · 周一/周三复核 · 触价不等于成交';
  saved.distances=review.levels.map(level=>distance(saved.quote?.price,level));
 }
 snapshot.date=today;
 snapshot.generated=new Date(now).toISOString();
 writeFileSync('worker/snapshot.json',JSON.stringify(snapshot,null,2)+'\n');
 writeFileSync('worker/tier-reviews.json',JSON.stringify(result,null,2)+'\n');
-console.log(JSON.stringify({policyId:POLICY,asOf:result.asOf,previousReviewAsOf:result.previousReviewAsOf,marketGate,stocks:Object.fromEntries(Object.entries(result.stocks).map(([symbol,r])=>[symbol,{regime:r.regime,referenceDate:r.referenceDate,referencePrice:r.referencePrice,ma5:r.ma5,ma20:r.ma20,ma60:r.ma60,lowAnchor:r.lowAnchor,levels:r.levels,nextScheduled:r.nextScheduled}]))},null,2));
+console.log(JSON.stringify({policyId:POLICY,asOf:result.asOf,previousReviewAsOf:result.previousReviewAsOf,marketGate,stocks:Object.fromEntries(Object.entries(result.stocks).map(([symbol,r])=>[symbol,{trend:r.trend,referenceDate:r.referenceDate,referencePrice:r.referencePrice,ma5:r.ma5,ma20:r.ma20,ma60:r.ma60,lowAnchor:r.lowAnchor,levels:r.levels,nextScheduled:r.nextScheduled}]))},null,2));

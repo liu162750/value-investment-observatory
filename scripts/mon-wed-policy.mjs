@@ -1,4 +1,4 @@
-export const POLICY='two-regime-ma60-final-v1';
+export const POLICY='ma60-trend-final-20261104';
 const dayMs=86400000;
 const dateOf=now=>new Date(now+8*3600000).toISOString().slice(0,10);
 const cents=n=>Math.round((n+Number.EPSILON)*100)/100;
@@ -31,40 +31,31 @@ export function priceReview(rows,now=Date.now(),options={}){
  if(!(atr>0))throw Error('ATR20无效');
  const p=last.close,average=n=>bars.slice(-n).reduce((sum,b)=>sum+b.close,0)/n;
  const ma5=average(5),ma20=average(20),ma60=average(60);
- const previousRegime=options?.previous?.policyId===POLICY?options.previous.regime:null;
- const regime=p>ma60*1.05?'A':p<ma60*.95?'B':previousRegime;
- if(!regime)throw Error('现价处于MA60上下5%缓冲区，缺少前次类型，A/B待核验');
- const prior=options?.previous?.policyId===POLICY&&options.previous.regime===regime?options.previous:null;
- let lowAnchor=null,anchorDate=null,aTierArmed=null,aTierLastTouch=null;
- if(regime==='A'){
+ const trend=p>ma60?'上升趋势':p<ma60?'下降趋势':null;
+ if(!trend)throw Error('复盘收盘价等于MA60，趋势分叉待核验');
+ const prior=options?.previous?.policyId===POLICY&&options.previous.trend===trend?options.previous:null;
+ let lowAnchor=null,anchorDate=null;
+ if(trend==='上升趋势'){
   const legacy=options?.legacyA;
   lowAnchor=prior?.lowAnchor??(legacy?.date&&legacy.date<=last.date?legacy.low:null)??Math.min(...bars.slice(-60).map(b=>b.low));
   anchorDate=prior?.anchorDate??(legacy?.date&&legacy.date<=last.date?legacy.date:last.date);
-  aTierArmed=prior?.aTierArmed??true;aTierLastTouch=prior?.aTierLastTouch??null;
-  for(const bar of bars.filter(b=>b.date>anchorDate)){
-   if(bar.low<lowAnchor)lowAnchor=bar.low;
-   const t1=cents(lowAnchor*1.05);
-   if(aTierArmed&&bar.low<=t1){aTierArmed=false;aTierLastTouch=bar.date;}
-   else if(!aTierArmed&&bar.close>t1*1.05)aTierArmed=true;
-  }
+  for(const bar of bars.filter(b=>b.date>anchorDate))if(bar.low<lowAnchor)lowAnchor=bar.low;
   if(bars.at(-1).date>anchorDate)anchorDate=bars.at(-1).date;
  }
- const priorWaveLow=Math.min(...bars.slice(-120,-20).map(b=>b.low));
- const high120=Math.max(...bars.slice(-120).map(b=>b.high));
- const buy1=regime==='A'?lowAnchor*1.05:priorWaveLow;
- const buy2=regime==='A'?lowAnchor*.97:p*.98;
+ const low60=Math.min(...bars.slice(-60).map(b=>b.low));
+ const buy2=trend==='上升趋势'?lowAnchor:Math.max(low60,p*.97);
+ const buy1=trend==='上升趋势'?lowAnchor*1.05:cents(buy2)*1.03;
  const high20=Math.max(...bars.slice(-20).map(b=>b.high));
- const sell1=regime==='A'?Math.max(ma60*1.03,high20):Math.max(ma20,cents(buy1)*1.02);
- const sell2=regime==='A'?cents(sell1)*1.05:Math.max(ma60,cents(sell1)*1.05);
+ const sell1=trend==='上升趋势'&&options.symbol==='sh600312'?high20:ma20;
+ const sell2=trend==='上升趋势'&&options.symbol==='sh600312'?cents(sell1)*1.05:ma60;
  const levels=[buy1,buy2,sell1,sell2].map(value=>[cents(value),cents(value)]);
- if(levels.some(b=>b[0]<=0)||levels[1][0]>=levels[0][0]||levels[0][0]>=levels[2][0]||levels[2][0]>=levels[3][0]||(regime==='A'&&levels[0][0]>=p))throw Error('最终版四档顺序不成立，停止展示');
+ if(levels.some(b=>b[0]<=0)||levels[1][0]>=levels[0][0]||levels[0][0]>=levels[2][0]||levels[2][0]>=levels[3][0]||(trend==='上升趋势'&&levels[0][0]>=p))throw Error('最终定稿四档顺序不成立，停止展示');
  const previousClose=bars.at(-2).close;
  const possibleLimitUp=options.symbol&&/^(sh60|sz00)/.test(options.symbol)&&p/previousClose-1>=.099;
  const nextComplete=daily.find(b=>b.date>last.date);
  const limitUpConfirmation=possibleLimitUp?(nextComplete?{status:nextComplete.close>=p*.97?'passed':'failed',date:nextComplete.date,close:nextComplete.close}: {status:'pending',date:null,close:null}):null;
- const largeRise=p/previousClose-1>=.07;
  const latestClose=daily.at(-1).close,latestMA5=daily.slice(-5).reduce((sum,b)=>sum+b.close,0)/5;
- return {policyId:POLICY,asOf:new Date(now).toISOString(),dataDate:daily.at(-1).date,referenceDate:last.date,referencePrice:p,atr20:atr,regime,ma5:cents(ma5),ma20:cents(ma20),ma60:cents(ma60),signalDate:daily.at(-1).date,signalClose:latestClose,signalMA5:cents(latestMA5),lowAnchor:lowAnchor===null?null:cents(lowAnchor),anchorDate,aTierArmed,aTierLastTouch,priorWaveLow:cents(priorWaveLow),high20:cents(high20),high120:cents(high120),possibleLimitUp:Boolean(possibleLimitUp),largeRise,limitUpConfirmation,levels,bands:levels.map((b,i)=>({low:b[0],high:b[1],note:i<2?regime==='A'?'锁定前低计算':'复盘价或前波段低点计算':i===2?regime==='A'?'近20日最高价/MA60':'MA20或前波段低点上方2%':regime==='A'?'卖①上方5%':'MA60或卖①上方5%'})),status:'adopted',nextScheduled:nextReviewDay(now),source:'腾讯财经前复权日线',reason:'A/B在MA60上下5%切换；A类锁定前低；B类买②需企稳且到价；价格条件不等于成交；卖档仅按公开行情计算'};
+ return {policyId:POLICY,asOf:new Date(now).toISOString(),dataDate:daily.at(-1).date,referenceDate:last.date,referencePrice:p,atr20:atr,trend,ma5:cents(ma5),ma20:cents(ma20),ma60:cents(ma60),signalDate:daily.at(-1).date,signalClose:latestClose,signalMA5:cents(latestMA5),low60:cents(low60),lowAnchor:lowAnchor===null?null:cents(lowAnchor),anchorDate,high20:cents(high20),possibleLimitUp:Boolean(possibleLimitUp),limitUpConfirmation,levels,bands:levels.map((b,i)=>({low:b[0],high:b[1],note:i<2?trend==='上升趋势'?'确认前低计算':'近60日低点与复盘收盘计算':i===2?options.symbol==='sh600312'&&trend==='上升趋势'?'近20日最高价':'MA20':options.symbol==='sh600312'&&trend==='上升趋势'?'平高确认档':'MA60'})),status:'adopted',nextScheduled:nextReviewDay(now),source:'腾讯财经前复权日线',reason:'复盘收盘与MA60比较；下降趋势买①需完整收盘站上MA5，涨停次日复核；价格条件不等于成交或账户许可'};
 }
 export function weeklyMarketGate(raw,now=Date.now()){
  const today=dateOf(now),local=new Date(now+8*3600000),weekday=local.getUTCDay();

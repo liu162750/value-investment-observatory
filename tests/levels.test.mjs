@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {stocks,completedDailyRows,technical,swingCandidates,parseGold} from '../worker/dashboard.js';
 const fixture=JSON.parse(readFileSync(new URL('./fixtures/daily-audit.json',import.meta.url),'utf8'));
@@ -34,7 +34,7 @@ console.log('PASS: all four stocks, baseline buys, all tiers, intraday isolation
 
 assert(readFileSync(new URL('../worker/dashboard.js',import.meta.url),'utf8').includes('...(s.sellReview?.levels||'),'Dashboard must use confirmed buys');
 
-for(const stock of stocks){const saved=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.meta.url),'utf8')).stocks.find(s=>s.symbol===stock.symbol);assert.equal(stock.levelReview?.policyId,'two-regime-ma60-final-v1');assert.deepEqual(saved.levels,stock.levels);assert.deepEqual(saved.sellReview.levels,stock.sellReview.levels,'Seed and fetched levels must share one saved review');assert(stock.levels[1][0]<stock.levels[0][0]);assert(stock.levels[0][0]<stock.levels[2][0]);assert(stock.levels[2][0]<stock.levels[3][0]);}
+for(const stock of stocks){const saved=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.meta.url),'utf8')).stocks.find(s=>s.symbol===stock.symbol);assert.equal(stock.levelReview?.policyId,'ma60-trend-final-20261104');assert.deepEqual(saved.levels,stock.levels);assert.deepEqual(saved.sellReview.levels,stock.sellReview.levels,'Seed and fetched levels must share one saved review');assert(stock.levels[1][0]<stock.levels[0][0]);assert(stock.levels[0][0]<stock.levels[2][0]);assert(stock.levels[2][0]<stock.levels[3][0]);}
 
 for(const stock of stocks){assert.equal(stock.levelReview?.dataDate,'2026-11-04');assert.match(stock.levelReview?.nextScheduled||'',/^\d{4}-\d{2}-\d{2} 16:30$/,'Next review must be explicitly scheduled at 16:30');}
 

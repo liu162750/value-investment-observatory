@@ -1,5 +1,5 @@
 {
-  "policyId": "two-regime-ma60-final-v1",
+  "policyId": "ma60-trend-final-20261104",
   "asOf": "2026-11-04T12:30:00.000Z",
   "previousReviewAsOf": "2026-11-02T12:33:40.338Z",
   "marketGate": {
@@ -34,28 +34,24 @@
   },
   "stocks": {
     "sh600312": {
-      "policyId": "two-regime-ma60-final-v1",
+      "policyId": "ma60-trend-final-20261104",
       "asOf": "2026-11-04T12:30:00.000Z",
       "dataDate": "2026-11-04",
       "referenceDate": "2026-11-04",
       "referencePrice": 21.52,
       "atr20": 0.7684999999999995,
-      "regime": "A",
+      "trend": "上升趋势",
       "ma5": 21.07,
       "ma20": 20.84,
       "ma60": 19.95,
       "signalDate": "2026-11-04",
       "signalClose": 21.52,
       "signalMA5": 21.07,
+      "low60": 18.36,
       "lowAnchor": 18.6,
       "anchorDate": "2026-11-04",
-      "aTierArmed": true,
-      "aTierLastTouch": null,
-      "priorWaveLow": 15.77,
       "high20": 22.08,
-      "high120": 23.22,
       "possibleLimitUp": false,
-      "largeRise": false,
       "limitUpConfirmation": null,
       "levels": [
         [
@@ -63,8 +59,8 @@
           19.53
         ],
         [
-          18.04,
-          18.04
+          18.6,
+          18.6
         ],
         [
           22.08,
@@ -79,28 +75,28 @@
         {
           "low": 19.53,
           "high": 19.53,
-          "note": "锁定前低计算"
+          "note": "确认前低计算"
         },
         {
-          "low": 18.04,
-          "high": 18.04,
-          "note": "锁定前低计算"
+          "low": 18.6,
+          "high": 18.6,
+          "note": "确认前低计算"
         },
         {
           "low": 22.08,
           "high": 22.08,
-          "note": "近20日最高价/MA60"
+          "note": "近20日最高价"
         },
         {
           "low": 23.18,
           "high": 23.18,
-          "note": "卖①上方5%"
+          "note": "平高确认档"
         }
       ],
       "status": "adopted",
       "nextScheduled": "2026-11-09 16:30",
       "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600312,day,,,600,qfq",
-      "reason": "A/B在MA60上下5%切换；A类锁定前低；B类买②需企稳且到价；价格条件不等于成交；卖档仅按公开行情计算",
+      "reason": "复盘收盘与MA60比较；下降趋势买①需完整收盘站上MA5，涨停次日复核；价格条件不等于成交或账户许可",
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
         "asOf": "2026-11-04",
@@ -133,28 +129,24 @@
       }
     },
     "sz002156": {
-      "policyId": "two-regime-ma60-final-v1",
+      "policyId": "ma60-trend-final-20261104",
       "asOf": "2026-11-04T12:30:00.000Z",
       "dataDate": "2026-11-04",
       "referenceDate": "2026-11-04",
       "referencePrice": 42.33,
       "atr20": 2.8945,
-      "regime": "B",
+      "trend": "下降趋势",
       "ma5": 40.98,
       "ma20": 47.28,
       "ma60": 56.6,
       "signalDate": "2026-11-04",
       "signalClose": 42.33,
       "signalMA5": 40.98,
+      "low60": 38.22,
       "lowAnchor": null,
       "anchorDate": null,
-      "aTierArmed": null,
-      "aTierLastTouch": null,
-      "priorWaveLow": 51.23,
       "high20": 58.13,
-      "high120": 84.7,
       "possibleLimitUp": true,
-      "largeRise": true,
       "limitUpConfirmation": {
         "status": "pending",
         "date": null,
@@ -162,16 +154,16 @@
       },
       "levels": [
         [
-          51.23,
-          51.23
+          42.29,
+          42.29
         ],
         [
-          41.48,
-          41.48
+          41.06,
+          41.06
         ],
         [
-          52.25,
-          52.25
+          47.28,
+          47.28
         ],
         [
           56.6,
@@ -180,30 +172,30 @@
       ],
       "bands": [
         {
-          "low": 51.23,
-          "high": 51.23,
-          "note": "复盘价或前波段低点计算"
+          "low": 42.29,
+          "high": 42.29,
+          "note": "近60日低点与复盘收盘计算"
         },
         {
-          "low": 41.48,
-          "high": 41.48,
-          "note": "复盘价或前波段低点计算"
+          "low": 41.06,
+          "high": 41.06,
+          "note": "近60日低点与复盘收盘计算"
         },
         {
-          "low": 52.25,
-          "high": 52.25,
-          "note": "MA20或前波段低点上方2%"
+          "low": 47.28,
+          "high": 47.28,
+          "note": "MA20"
         },
         {
           "low": 56.6,
           "high": 56.6,
-          "note": "MA60或卖①上方5%"
+          "note": "MA60"
         }
       ],
       "status": "adopted",
       "nextScheduled": "2026-11-09 16:30",
       "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002156,day,,,600,qfq",
-      "reason": "A/B在MA60上下5%切换；A类锁定前低；B类买②需企稳且到价；价格条件不等于成交；卖档仅按公开行情计算",
+      "reason": "复盘收盘与MA60比较；下降趋势买①需完整收盘站上MA5，涨停次日复核；价格条件不等于成交或账户许可",
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
         "asOf": "2026-11-04",
@@ -236,41 +228,37 @@
       }
     },
     "sh601138": {
-      "policyId": "two-regime-ma60-final-v1",
+      "policyId": "ma60-trend-final-20261104",
       "asOf": "2026-11-04T12:30:00.000Z",
       "dataDate": "2026-11-04",
       "referenceDate": "2026-11-04",
       "referencePrice": 45.25,
       "atr20": 2.9114999999999998,
-      "regime": "B",
+      "trend": "下降趋势",
       "ma5": 44.36,
       "ma20": 48.28,
       "ma60": 58.44,
       "signalDate": "2026-11-04",
       "signalClose": 45.25,
       "signalMA5": 44.36,
+      "low60": 41.51,
       "lowAnchor": null,
       "anchorDate": null,
-      "aTierArmed": null,
-      "aTierLastTouch": null,
-      "priorWaveLow": 52.57,
       "high20": 59.15,
-      "high120": 84.3,
       "possibleLimitUp": false,
-      "largeRise": true,
       "limitUpConfirmation": null,
       "levels": [
         [
-          52.57,
-          52.57
+          45.21,
+          45.21
         ],
         [
-          44.35,
-          44.35
+          43.89,
+          43.89
         ],
         [
-          53.62,
-          53.62
+          48.28,
+          48.28
         ],
         [
           58.44,
@@ -279,30 +267,30 @@
       ],
       "bands": [
         {
-          "low": 52.57,
-          "high": 52.57,
-          "note": "复盘价或前波段低点计算"
+          "low": 45.21,
+          "high": 45.21,
+          "note": "近60日低点与复盘收盘计算"
         },
         {
-          "low": 44.35,
-          "high": 44.35,
-          "note": "复盘价或前波段低点计算"
+          "low": 43.89,
+          "high": 43.89,
+          "note": "近60日低点与复盘收盘计算"
         },
         {
-          "low": 53.62,
-          "high": 53.62,
-          "note": "MA20或前波段低点上方2%"
+          "low": 48.28,
+          "high": 48.28,
+          "note": "MA20"
         },
         {
           "low": 58.44,
           "high": 58.44,
-          "note": "MA60或卖①上方5%"
+          "note": "MA60"
         }
       ],
       "status": "adopted",
       "nextScheduled": "2026-11-09 16:30",
       "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138,day,,,600,qfq",
-      "reason": "A/B在MA60上下5%切换；A类锁定前低；B类买②需企稳且到价；价格条件不等于成交；卖档仅按公开行情计算",
+      "reason": "复盘收盘与MA60比较；下降趋势买①需完整收盘站上MA5，涨停次日复核；价格条件不等于成交或账户许可",
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
         "asOf": "2026-11-04",
@@ -335,28 +323,24 @@
       }
     },
     "sz002463": {
-      "policyId": "two-regime-ma60-final-v1",
+      "policyId": "ma60-trend-final-20261104",
       "asOf": "2026-11-04T12:30:00.000Z",
       "dataDate": "2026-11-04",
       "referenceDate": "2026-11-04",
       "referencePrice": 85.95,
       "atr20": 7.846000000000001,
-      "regime": "B",
+      "trend": "下降趋势",
       "ma5": 86.32,
       "ma20": 104.21,
       "ma60": 115.78,
       "signalDate": "2026-11-04",
       "signalClose": 85.95,
       "signalMA5": 86.32,
+      "low60": 76.3,
       "lowAnchor": null,
       "anchorDate": null,
-      "aTierArmed": null,
-      "aTierLastTouch": null,
-      "priorWaveLow": 94.73,
       "high20": 123.11,
-      "high120": 158.2,
       "possibleLimitUp": true,
-      "largeRise": true,
       "limitUpConfirmation": {
         "status": "pending",
         "date": null,
@@ -364,12 +348,12 @@
       },
       "levels": [
         [
-          94.73,
-          94.73
+          85.87,
+          85.87
         ],
         [
-          84.23,
-          84.23
+          83.37,
+          83.37
         ],
         [
           104.21,
@@ -382,30 +366,30 @@
       ],
       "bands": [
         {
-          "low": 94.73,
-          "high": 94.73,
-          "note": "复盘价或前波段低点计算"
+          "low": 85.87,
+          "high": 85.87,
+          "note": "近60日低点与复盘收盘计算"
         },
         {
-          "low": 84.23,
-          "high": 84.23,
-          "note": "复盘价或前波段低点计算"
+          "low": 83.37,
+          "high": 83.37,
+          "note": "近60日低点与复盘收盘计算"
         },
         {
           "low": 104.21,
           "high": 104.21,
-          "note": "MA20或前波段低点上方2%"
+          "note": "MA20"
         },
         {
           "low": 115.78,
           "high": 115.78,
-          "note": "MA60或卖①上方5%"
+          "note": "MA60"
         }
       ],
       "status": "adopted",
       "nextScheduled": "2026-11-09 16:30",
       "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,600,qfq",
-      "reason": "A/B在MA60上下5%切换；A类锁定前低；B类买②需企稳且到价；价格条件不等于成交；卖档仅按公开行情计算",
+      "reason": "复盘收盘与MA60比较；下降趋势买①需完整收盘站上MA5，涨停次日复核；价格条件不等于成交或账户许可",
       "marketGate": {
         "policyId": "completed-month-ma20-v1",
         "asOf": "2026-11-04",

@@ -23,11 +23,10 @@ const $=id=>document.getElementById(id),esc=x=>String(x??'').replace(/[&<>"']/g,
 const weightPct=x=>Number.isFinite(x)?n(x*100)+'%':'—';
 function link(url){try{const u=new URL(url);return u.protocol==='https:'?u.href:'#'}catch{return '#'}}
 function chinaDay(now=Date.now()){return new Date(now+8*3600000).toISOString().slice(0,10)}
-function tierDistance(price,band,isBuy,valid,stale,quoteTime,regime,index){
+function tierDistance(price,band,isBuy,valid,stale,quoteTime){
  if(!valid||!Number.isFinite(price)||price<=0||!Array.isArray(band))return '距离待核验';
  const [lo,hi]=band,stamp=Date.parse(String(quoteTime||'').replace(' ','T')+'+08:00'),fresh=!stale&&Number.isFinite(stamp)&&stamp<=Date.now()&&Date.now()-stamp<=300000;
  const suffix=fresh?' · 仅价格状态':' · 历史参考';
- if(regime==='B'&&index===0)return price<lo?'已跌破 '+n((lo-price)/lo*100,1)+'% · 历史位置，不代表买过':'高于前波段低点 '+n((price-lo)/lo*100,1)+'%'+suffix;
  if(isBuy)return price<=hi?'已跌破 '+n((hi-price)/hi*100,1)+'%'+suffix:'还差跌 '+n((price-hi)/price*100,1)+'%'+suffix;
  if(price>=lo)return '已越过 '+n((price-lo)/lo*100,1)+'%'+suffix;
  return '还差涨 '+n((lo-price)/price*100,1)+'%'+suffix;
@@ -38,23 +37,27 @@ function tierVerdict(s,gate,valid,stale,portfolio){
  const r=s.levelReview||{},dated='（完整收盘 '+(r.referenceDate||'日期待核验')+'；非实际成交）';
  const marketHold=r.marketGate?.frozen===true?'；月线市场条件未通过':r.marketGate?.frozen===false?'；月线市场条件通过':'；月线市场条件待核验';
  if(!Number.isFinite(price)||price<=0)return '现价未取得，保留完整收盘价位作历史参考'+dated;
+ if(fresh&&Number.isFinite(bands[3]?.[0])&&price>=bands[3][0])return '卖②价位已到；定稿对应清掉，实际可卖仓位及完整条件须核验'+dated;
+ if(fresh&&Number.isFinite(bands[2]?.[0])&&price>=bands[2][0])return '卖①价位已到；定稿对应减一半，实际可卖仓位及完整条件须核验'+dated;
  const weight=portfolio?.investedWeight,remaining=Number.isFinite(weight)?Math.max(0,99-weight*100):null;
  if(remaining===null)return '持仓数据待核验，无法判断99%总仓拦截';
  if(remaining===0)return '总仓已达99%，新增买入暂停';
  if(s.fundamentalReview?.status==='screen-warning')return '财务初筛提示风险，待正式披露复核';
  const allowance='；距99%总仓上限尚有 '+n(remaining,2)+' 个百分点，账户预算和可用资金待核验';
- if(r.regime==='B'){
-  if(r.possibleLimitUp&&r.limitUpConfirmation?.status==='pending')return 'B类：疑似涨停日，次日完整收盘待确认'+dated+marketHold;
-  if(r.limitUpConfirmation?.status==='failed')return 'B类：次日未守住涨停日收盘的97%，企稳确认失败'+dated+marketHold;
-  if(r.limitUpConfirmation?.status==='passed'&&r.signalClose>r.signalMA5){if(fresh&&price<=bands[1][1])return 'B类：次日97%及MA5条件通过，买②价格条件也满足；账户及市场仍需核对'+dated+marketHold+allowance;return 'B类：次日97%及MA5条件通过，买②尚需价格回落'+dated+marketHold;}
-  if(r.largeRise&&r.dataDate===r.referenceDate)return 'B类：单日大涨后观察下一完整收盘'+dated+marketHold;
-  if(r.signalClose>r.signalMA5){if(fresh&&price<=bands[1][1])return 'B类：完整收盘站上MA5，买②价格条件也满足；账户及市场仍需核对'+dated+marketHold+allowance;return 'B类：完整收盘站上MA5；'+(fresh?'买②还差跌 '+n(Math.max(0,(price-bands[1][1])/price*100),1)+'%':'买②距离以历史行情作参考')+dated+marketHold;}
-  return 'B类：完整收盘尚未站上MA5；买②须与企稳条件同时满足'+dated;
+ if(r.trend==='下降趋势'){
+  if(r.possibleLimitUp&&r.limitUpConfirmation?.status==='pending')return '下降趋势：涨停日已站上MA5，次日完整收盘须守住涨停日收盘的97%；买①企稳待确认'+dated+marketHold;
+  if(r.limitUpConfirmation?.status==='failed')return '下降趋势：次日未守住涨停日收盘的97%，企稳未确认'+dated+marketHold;
+  if(!(r.signalClose>r.signalMA5))return '下降趋势：等企稳（完整收盘站上MA5）'+dated+marketHold;
+  if(r.limitUpConfirmation?.status==='passed'||!r.possibleLimitUp){
+   const second=fresh&&price<=bands[1][1]?'；买②价格已到，须先核验买①实际成交及再次企稳':'；买②尚未到价';
+   return '下降趋势：完整收盘企稳技术条件满足，买①账户条件待核验'+second+dated+marketHold+allowance;
+  }
+  return '下降趋势：等企稳（完整收盘站上MA5）'+dated+marketHold;
  }
- if(!fresh)return 'A类：行情未取得五分钟内有效报价，价位仅供历史参考'+dated;
- if(price<=bands[1][1])return 'A类：买②价位触及，仅价格条件'+marketHold+allowance;
- if(price<=bands[0][1])return 'A类：买①价位触及，仅价格条件'+marketHold+allowance;
- return 'A类：等待价格回到买①；触价与成交分开记录'+dated;
+ if(!fresh)return '上升趋势：行情未取得五分钟内有效报价，价位仅供历史参考'+dated;
+ if(price<=bands[1][1])return '上升趋势：买②价位触及，仅价格条件'+marketHold+allowance;
+ if(price<=bands[0][1])return '上升趋势：买①价位触及，仅价格条件'+marketHold+allowance;
+ return '上升趋势：买①还差跌 '+n((price-bands[0][1])/price*100,1)+'%；触价与成交分开记录'+dated;
 }
 function financialDetail(s){const f=s.fundamentalReview||{},rows=s.rows||[],price=s.quote?.price,high=rows.length>=250?Math.max(...rows.slice(-250).map(x=>Number(x.high)||0)):null;if(!(high>0&&Number.isFinite(price)&&price/high<=.75))return '';if(!Array.isArray(f.observations)||f.observations.length!==3)return '<div class="tier-source">距250日高点已超25%；三季财务数据待核验。</div>';const order=[...f.observations].reverse(),periods=order.map(x=>x.period).join(' → '),revenue=order.map(x=>n(x.revenueGrowth,1)+'%').join(' → '),margin=order.map(x=>n(x.grossMargin,2)+'%').join(' → ');return '<div class="tier-source">三季 '+esc(periods)+'<br>营收同比 '+esc(revenue)+'<br>毛利率 '+esc(margin)+'<br>'+(f.status==='screen-warning'?'连续下滑初筛触发，暂缓新增买入。':'两项未触发连续下滑；不能据此认定只是估值下跌。')+'</div>'}
 function render(d){
@@ -69,9 +72,9 @@ function render(d){
  $('pools').innerHTML=['涨停','跌停','炸板'].map((name,i)=>'<span class="pill">'+name+' '+esc(d.pools?.[i]?.count??'待核验')+' 家</span>').join('');
  const cap=Number.isFinite(g.maxTotalWeight)?n(g.maxTotalWeight*100,0)+'%':'待核验';
  const currentWeight=d.publicPortfolio?.investedWeight,gateReady=state!=='pending'&&g.asOf===chinaDay()&&Number.isFinite(g.maxTotalWeight);
- $('guard').innerHTML='<div><strong>周线'+label+' · A类回调 / B类企稳且价格与企稳同达；成交须另行确认</strong><p>周线参考总仓 '+(gateReady?cap:'待核验')+' · '+(Number.isFinite(currentWeight)?'快照总仓 '+weightPct(currentWeight)+'，距99%还可补 '+n(Math.max(0,99-currentWeight*100),2)+' 个百分点':'持仓比例待核验')+'；账户实际可用额度待核验</p></div>';
+ $('guard').innerHTML='<div><strong>周线'+label+' · 上升看回踩，下降看完整收盘企稳；成交须另行确认</strong><p>周线参考总仓 '+(gateReady?cap:'待核验')+' · '+(Number.isFinite(currentWeight)?'快照总仓 '+weightPct(currentWeight)+'，距99%还可补 '+n(Math.max(0,99-currentWeight*100),2)+' 个百分点':'持仓比例待核验')+'；账户实际可用额度待核验</p></div>';
  $('watch-grid').innerHTML=(d.stocks||[]).map(s=>{const position=d.publicPortfolio?.positions?.find(p=>p.symbol===s.symbol);return '<div class="watch"><div class="label">'+esc(s.name)+'</div><div class="value">¥'+n(s.quote?.price)+'</div><div class="change '+color(s.quote?.change)+'">'+pct(s.quote?.change)+'</div><div class="watch-weight">'+(d.publicPortfolio?.holdingsDateVerified===true&&d.publicPortfolio?.holdingsAsOf?.slice(0,10)===chinaDay()?'当前持仓 ':'快照估算占比 ')+(position?weightPct(position.weight):'暂无可核算数据')+'</div></div>'}).join('');
- $('tier-grid').innerHTML=(d.stocks||[]).map(s=>{const r=s.levelReview||{},q=s.quote||{},valid=r.policyId==='two-regime-ma60-final-v1'&&r.status!=='pending'&&Array.isArray(s.levels)&&s.levels.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));return '<article class="tier"><div class="tier-top"><h3>'+esc(s.name)+'</h3><span class="change '+color(q.change)+'">'+pct(q.change)+'</span></div><div class="tier-price">¥'+n(q.price)+'</div><div class="tier-weight">'+(d.publicPortfolio?.holdingsDateVerified===true&&d.publicPortfolio?.holdingsAsOf?.slice(0,10)===chinaDay()?'当前持仓 ':'快照估算占比 ')+(d.publicPortfolio?.positions?.find(p=>p.symbol===s.symbol)?weightPct(d.publicPortfolio.positions.find(p=>p.symbol===s.symbol).weight):'暂无数据')+' · 持仓 '+esc(d.publicPortfolio?.holdingsAsOf||'日期未提供')+'</div><div class="tier-meta">类型 '+esc(r.regime||'待核验')+' · MA5 ¥'+n(r.ma5)+' · MA20 ¥'+n(r.ma20)+' · MA60 ¥'+n(r.ma60)+'<br>复核收盘 '+esc(r.referenceDate||'待核验')+' ¥'+n(r.referencePrice)+' · 下次复核 '+esc(r.nextScheduled||'待核验')+'</div><div class="bands">'+['买T1','买T2','卖T1','卖T2'].map((name,i)=>'<div class="band"><b class="'+(i<2?'down':'up')+'">'+name+'</b><strong>'+(valid?n(s.levels[i][0]):'待核验')+'</strong><small class="band-distance">'+esc(tierDistance(q.price,s.levels?.[i],i<2,valid,d.stale,q.time,r.regime,i))+'</small></div>').join('')+'</div>'+'<div class="tier-state">'+esc(tierVerdict(s,state,valid,d.stale,d.publicPortfolio))+'</div>'+financialDetail(s)+'<div class="tier-source">行情 '+esc(q.time||'时间待核验')+' · 日线 '+esc(r.dataDate||'待核验')+' · 来源 '+esc(r.source||'待核验')+'</div></article>'}).join('');
+ $('tier-grid').innerHTML=(d.stocks||[]).map(s=>{const r=s.levelReview||{},q=s.quote||{},valid=r.policyId==='ma60-trend-final-20261104'&&r.status!=='pending'&&Array.isArray(s.levels)&&s.levels.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));return '<article class="tier"><div class="tier-top"><h3>'+esc(s.name)+'</h3><span class="change '+color(q.change)+'">'+pct(q.change)+'</span></div><div class="tier-price">¥'+n(q.price)+'</div><div class="tier-weight">'+(d.publicPortfolio?.holdingsDateVerified===true&&d.publicPortfolio?.holdingsAsOf?.slice(0,10)===chinaDay()?'当前持仓 ':'快照估算占比 ')+(d.publicPortfolio?.positions?.find(p=>p.symbol===s.symbol)?weightPct(d.publicPortfolio.positions.find(p=>p.symbol===s.symbol).weight):'暂无数据')+' · 持仓 '+esc(d.publicPortfolio?.holdingsAsOf||'日期未提供')+'</div><div class="tier-meta">趋势 '+esc(r.trend||'待核验')+' · MA5 ¥'+n(r.ma5)+' · MA20 ¥'+n(r.ma20)+' · MA60 ¥'+n(r.ma60)+'<br>复核收盘 '+esc(r.referenceDate||'待核验')+' ¥'+n(r.referencePrice)+' · 下次复核 '+esc(r.nextScheduled||'待核验')+'</div><div class="bands">'+['买T1','买T2','卖T1','卖T2'].map((name,i)=>'<div class="band"><b class="'+(i<2?'down':'up')+'">'+name+'</b><strong>'+(valid?n(s.levels[i][0]):'待核验')+'</strong><small class="band-distance">'+esc(tierDistance(q.price,s.levels?.[i],i<2,valid,d.stale,q.time))+'</small></div>').join('')+'</div>'+'<div class="tier-state">'+esc(tierVerdict(s,state,valid,d.stale,d.publicPortfolio))+'</div>'+financialDetail(s)+'<div class="tier-source">行情 '+esc(q.time||'时间待核验')+' · 日线 '+esc(r.dataDate||'待核验')+' · 来源 '+esc(r.source||'待核验')+'</div></article>'}).join('');
  const portfolio=d.publicPortfolio||{},positions=portfolio.status==='ok'?portfolio.positions:[],cash=portfolio.status==='ok'?portfolio.cashWeight:null;
  $('allocation-time').textContent=portfolio.status==='ok'?'持仓快照 '+(portfolio.holdingsAsOf||'日期未提供')+' · 行情 '+(portfolio.quoteTime||'时间未提供'):portfolio.reason||'持仓数据未配置';
  $('alloc-bar').innerHTML=positions.map((p,i)=>'<span style="width:'+n(p.weight*100,3)+'%;background:'+['#f0b429','#67a7e5','#af8ada','#16c784'][i]+'" title="'+esc(p.name)+' '+weightPct(p.weight)+'"></span>').join('')+(Number.isFinite(cash)?'<span style="width:'+n(cash*100,3)+'%;background:#627084" title="现金 '+weightPct(cash)+'"></span>':'');
