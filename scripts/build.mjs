@@ -45,7 +45,7 @@ snapshot.accounts=[];
 for(const stock of snapshot.stocks){Object.assign(stock,reviews.stocks?.[stock.symbol]||{});}
 snapshot.importantEvents={events:events.events,checkedAt:events.checkedAt,stale:true};
 snapshot.investmentReviewAsOf=reviews.asOf;
-snapshot.cacheRevision=createHash('sha256').update(readFileSync('worker/dashboard.js')).update(readFileSync('scripts/mon-wed-policy.mjs')).update(readFileSync('worker/page.html')).update(JSON.stringify(reviews)).update(JSON.stringify(accounts)).digest('hex');
-const source=inlinePolicy(readFileSync('worker/dashboard.js','utf8')).replace('const eventCalendar = "__EVENTS__";','const eventCalendar = '+JSON.stringify(events)+';').replace('const investmentReviews = "__REVIEWS__";','const investmentReviews = '+JSON.stringify(reviews)+';').replace('const initialSnapshot = null;', 'const initialSnapshot = '+JSON.stringify(snapshot)+';').replace('const page = "__PAGE__";', 'const page = '+JSON.stringify(readFileSync('worker/page.html','utf8'))+';');
+snapshot.cacheRevision=createHash('sha256').update(readFileSync('worker/dashboard.js')).update(readFileSync('scripts/mon-wed-policy.mjs')).update(readFileSync('worker/public-page.html')).update(JSON.stringify(reviews)).update(JSON.stringify(accounts)).digest('hex');
+const source=inlinePolicy(readFileSync('worker/dashboard.js','utf8')).replace('const eventCalendar = "__EVENTS__";','const eventCalendar = '+JSON.stringify(events)+';').replace('const investmentReviews = "__REVIEWS__";','const investmentReviews = '+JSON.stringify(reviews)+';').replace('const initialSnapshot = null;', 'const initialSnapshot = '+JSON.stringify(snapshot)+';').replace('const page = "__PAGE__";', 'const page = '+JSON.stringify(readFileSync('worker/public-page.html','utf8'))+';');
 writeFileSync('dist/server/index.js',source);
 console.log('Worker build complete');
