@@ -14,6 +14,7 @@ await import('../tests/levels.test.mjs');
 await import('../tests/tier-policy.test.mjs');
 await import('../tests/mon-wed-policy.test.mjs');
 await import('../tests/public-page.test.mjs');
+await import('../tests/public-portfolio.test.mjs');
 import {mkdirSync,copyFileSync,readFileSync,writeFileSync} from 'node:fs';
 mkdirSync('dist/server',{recursive:true});
 const events=JSON.parse(readFileSync('worker/event-calendar.json','utf8'));
@@ -39,6 +40,8 @@ for(const patch of overrides){
  account.stageBudgets={};
  account.sellableShares={};
 }
+const publicAccountId=process.env.PUBLIC_ACCOUNT_ID;
+const publicAccount=publicAccountId?accounts.find(a=>a.id===publicAccountId):accounts.find(a=>String(a.name||'').includes('老刘'))||(accounts.length===1?accounts[0]:null);
 const backend=await import('../worker/dashboard.js?build='+Date.now());
 const policySource=readFileSync('scripts/mon-wed-policy.mjs','utf8').replace(/export /g,'');
 const inlinePolicy=source=>source.replace("import {priceReview,weeklyMarketGate} from '../scripts/mon-wed-policy.mjs';",policySource);
@@ -47,6 +50,6 @@ for(const stock of snapshot.stocks){Object.assign(stock,reviews.stocks?.[stock.s
 snapshot.importantEvents={events:events.events,checkedAt:events.checkedAt,stale:true};
 snapshot.investmentReviewAsOf=reviews.asOf;
 snapshot.cacheRevision=createHash('sha256').update(readFileSync('worker/dashboard.js')).update(readFileSync('scripts/mon-wed-policy.mjs')).update(readFileSync('worker/public-page.html')).update(JSON.stringify(reviews)).update(JSON.stringify(accounts)).digest('hex');
-const source=inlinePolicy(readFileSync('worker/dashboard.js','utf8')).replace('const eventCalendar = "__EVENTS__";','const eventCalendar = '+JSON.stringify(events)+';').replace('const investmentReviews = "__REVIEWS__";','const investmentReviews = '+JSON.stringify(reviews)+';').replace('const initialSnapshot = null;', 'const initialSnapshot = '+JSON.stringify(snapshot)+';').replace('const page = "__PAGE__";', 'const page = '+JSON.stringify(readFileSync('worker/public-page.html','utf8'))+';');
+const source=inlinePolicy(readFileSync('worker/dashboard.js','utf8')).replace('const eventCalendar = "__EVENTS__";','const eventCalendar = '+JSON.stringify(events)+';').replace('const investmentReviews = "__REVIEWS__";','const investmentReviews = '+JSON.stringify(reviews)+';').replace('const initialSnapshot = null;', 'const initialSnapshot = '+JSON.stringify(snapshot)+';').replace('const accounts = [];','const accounts = '+JSON.stringify(publicAccount?[publicAccount]:[])+';').replace('const page = "__PAGE__";', 'const page = '+JSON.stringify(readFileSync('worker/public-page.html','utf8'))+';');
 writeFileSync('dist/server/index.js',source);
 console.log('Worker build complete');
