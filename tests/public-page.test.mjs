@@ -15,7 +15,7 @@ const elements=new Map();
 const document={getElementById(id){if(!elements.has(id))elements.set(id,{innerHTML:'',textContent:'',style:{}});return elements.get(id)}};
 const context=vm.createContext({document,URL,Date,console});
 vm.runInContext(script.slice(0,script.indexOf("$('refresh').onclick")),context);
-context.data={generated:'2026-11-04T03:00:00Z',date:'2026-11-04',accounts:[{name:'private',cash:12345}],publicPortfolio:{status:'ok',holdingsAsOf:'2026-11-04',holdingsDateVerified:true,quoteTime:'2026-11-04 11:00:00',positions:[{symbol:'sh600312',name:'平高电气',weight:.285}],cashWeight:.1,investedWeight:.9,floatingPnlRatio:-.04,dayPnlRatio:.0029,dayPnlDate:'2026-11-04'},marketGate:{weekly:{status:'weak',maxTotalWeight:.6,dataDate:'2026-10-30'}},market:[],pools:[],stocks:[{name:'平高电气',symbol:'sh600312',quote:{price:20,change:-1,time:'2026-11-04 11:00:00'},levelReview:{policyId:'fixed-high-250-buy-v1',status:'adopted',referenceDate:'2026-11-02',referencePrice:21,atr20:1,buyAnchorHigh:30,buyAnchorDate:'2026-11-04',nextScheduled:'2026-11-04 15:05'},levels:[[21,21],[15,15],[23,24],[26,27]],rows:[],notices:[],longTermReview:{status:'pending',shortReason:'扣非仍增长；经营现金流为负，继续看回款',reason:'扣非增长，但现金流待复核',asOf:'2026-11-04',source:'https://example.com/report.pdf'},replacementReview:{status:'pending',candidate:{name:'不得展示候选'}}}],marketNews:[]};
+context.data={generated:'2026-11-04T03:00:00Z',date:'2026-11-04',accounts:[{name:'private',cash:12345}],publicPortfolio:{status:'ok',holdingsAsOf:'2026-11-04',holdingsDateVerified:true,quoteTime:'2026-11-04 11:00:00',positions:[{symbol:'sh600312',name:'平高电气',weight:.285}],cashWeight:.1,investedWeight:.9,floatingPnlRatio:-.04,dayPnlRatio:.0029,dayPnlDate:'2026-11-04'},marketGate:{weekly:{status:'weak',maxTotalWeight:.6,dataDate:'2026-10-30'}},market:[],pools:[],stocks:[{name:'平高电气',symbol:'sh600312',quote:{price:20,change:-1,time:'2026-11-04 11:00:00'},levelReview:{policyId:'fixed-high-250-buy-v1',status:'adopted',referenceDate:'2026-11-02',referencePrice:21,atr20:1,buyAnchorHigh:30,buyAnchorDate:'2026-11-04',nextScheduled:'2026-11-09 16:30'},levels:[[21,21],[15,15],[23,24],[26,27]],rows:[],notices:[],longTermReview:{status:'pending',shortReason:'扣非仍增长；经营现金流为负，继续看回款',reason:'扣非增长，但现金流待复核',asOf:'2026-11-04',source:'https://example.com/report.pdf',materialEvents:[{title:'国网中标公告',officialDisclosureDate:'2026-11-04',summary:'合计中标约9.98亿元；正式商务合同尚未签署。',source:'https://example.com/official.pdf'}]},replacementReview:{status:'pending',candidate:{name:'不得展示候选'}}}],marketNews:[]};
 vm.runInContext('render(data)',context);
 assert(elements.get('tier-grid').innerHTML.includes('基准 2026-11-02'));
 assert(elements.get('tier-grid').innerHTML.includes('还差涨 15.0%'));
@@ -38,6 +38,8 @@ assert(verdict({...base,quote:{...base.quote,price:50}},'weak',.95).includes('�
 assert(elements.get('logic-grid').innerHTML.includes('暂不换；扣非仍增长'));
 assert(elements.get('logic-grid').innerHTML.includes('扣非利润'));
 assert(elements.get('logic-grid').innerHTML.includes('经营现金流'));
+assert(elements.get('logic-grid').innerHTML.includes('国网中标公告'));
+assert(elements.get('logic-grid').innerHTML.includes('https://example.com/official.pdf'));
 assert(!elements.get('logic-grid').innerHTML.includes('扣非增长，但现金流待复核'));
 assert(!elements.get('logic-grid').innerHTML.includes('不得展示候选'));
 context.data.stocks[0].longTermReview={status:'invalidated',reason:'正式披露证实原依据不再成立',asOf:'2026-11-04',source:'https://example.com/official.pdf'};

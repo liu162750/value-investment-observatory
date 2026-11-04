@@ -16,27 +16,34 @@ export function nextReviewDay(now=Date.now()){
  const local=new Date(now+8*3600000),today=dateOf(now),minute=local.getUTCHours()*60+local.getUTCMinutes();
  for(let n=0;n<8;n++){
   const d=new Date(Date.parse(today+'T00:00:00Z')+n*dayMs),w=d.getUTCDay();
-  if((w===1||w===3)&&(n>0||minute<905))return d.toISOString().slice(0,10)+' 15:05';
+  if((w===1||w===3)&&(n>0||minute<990))return d.toISOString().slice(0,10)+' 16:30';
  }
  throw Error('下次复核日计算失败');
 }
 export function priceReview(rows,now=Date.now(),anchor=null){
- const cutoff=reviewDay(now),daily=rows.filter(b=>b.date<=dateOf(now)),bars=daily.filter(b=>b.date<=cutoff);
- if(bars.length<21)throw Error('完整前复权日线不足21根');
+ const today=dateOf(now),local=new Date(now+8*3600000),minute=local.getUTCHours()*60+local.getUTCMinutes(),cutoff=reviewDay(now);
+ const daily=rows.filter(b=>b.date<today||minute>=905&&b.date<=today),bars=daily.filter(b=>b.date<=cutoff);
+ if(bars.length<250)throw Error('完整前复权日线不足250根');
  if(daily.some((b,i)=>![b.open,b.high,b.low,b.close].every(n=>Number.isFinite(n)&&n>0)||b.low>Math.min(b.open,b.close)||b.high<Math.max(b.open,b.close)||(i&&b.date<=daily[i-1].date)))throw Error('日线无效或乱序');
  const recent=bars.slice(-21),last=recent.at(-1);
  if(Date.parse(cutoff+'T00:00:00Z')-Date.parse(last.date+'T00:00:00Z')>4*dayMs)throw Error('复核基准日行情过期');
  const atr=recent.slice(1).reduce((sum,b,i)=>sum+Math.max(b.high-b.low,Math.abs(b.high-recent[i].close),Math.abs(b.low-recent[i].close)),0)/20;
  if(!(atr>0))throw Error('ATR20无效');
  const p=last.close,ar=atr/p;
- const high=anchor?Math.max(anchor.high,...daily.filter(b=>b.date>anchor.date).map(b=>b.high)):Math.max(...daily.slice(-250).map(b=>b.high));
- if(!(high>0)||anchor&&daily.at(-1).date<anchor.date)throw Error('250日固定高点无法核验');
+ const anchored=anchor?.policyId===POLICY||Number.isFinite(anchor?.high);
+ const anchorDate=anchor?.buyAnchorDate||anchor?.date||null;
+ let high=anchored?(anchor.buyAnchorHigh??anchor.high):Math.max(...daily.slice(-250).map(b=>b.high));
+ let highDate=anchored?anchorDate:null;
+ if(!(high>0))throw Error('250日固定高点无法核验');
+ if(!highDate)highDate=daily.slice(-250).filter(b=>b.high===high).at(-1)?.date||last.date;
+ for(const bar of daily.filter(b=>b.date>(anchored?anchorDate||'':cutoff))){if(bar.high>high){high=bar.high;highDate=bar.date;}}
+ if(anchored&&anchorDate&&daily.at(-1).date<anchorDate)throw Error('固定高点锚点日期晚于日线');
  const buy1=high*.70,buy2=high*.50;
  let sell1=p*(1+clamp(1.8*ar,.06,.12)),sell2=p*(1+clamp(3.2*ar,.10,.26));
  if(sell2<=sell1)sell2=sell1*1.03;
  const levels=[[cents(buy1),cents(buy1)],[cents(buy2),cents(buy2)],[cents(sell1),cents(sell1+.3*atr)],[cents(sell2),cents(sell2+.3*atr)]];
  if(levels.some(b=>b[0]<=0||b[0]>b[1])||levels[1][1]>=levels[0][0]||levels[2][0]<=p||levels[2][1]>=levels[3][0])throw Error('四档价格校验失败，待人工复核');
- return {policyId:POLICY,asOf:new Date(now).toISOString(),dataDate:daily.at(-1).date,referenceDate:last.date,referencePrice:p,atr20:atr,buyAnchorHigh:high,buyAnchorDate:daily.at(-1).date,levels,bands:levels.map((b,i)=>({low:b[0],high:b[1],note:i<2?'250日固定高点回撤':'复核价加ATR20，幅度限幅'})),status:'adopted',priceValidation:[],nextScheduled:nextReviewDay(now),source:'腾讯财经前复权日线',reason:'买档锚定250日高点、只随新高上移；卖档按周一/周三复核，技术触价非交易许可'};
+ return {policyId:POLICY,asOf:new Date(now).toISOString(),dataDate:daily.at(-1).date,referenceDate:last.date,referencePrice:p,atr20:atr,buyAnchorHigh:high,buyAnchorDate:highDate,levels,bands:levels.map((b,i)=>({low:b[0],high:b[1],note:i===0?'250日高点×70%':i===1?'250日高点×50%；另需完整周线转强或强势':'复核价加ATR20，幅度限幅'})),status:'adopted',priceValidation:[],nextScheduled:nextReviewDay(now),source:'腾讯财经前复权日线',reason:'买①/买②锚定固定250日高点×70%/50%；新高只上移锚点，买②另需完整周线转强或强势；卖档按周一/周三复核，技术触价非交易许可'};
 }
 export function weeklyMarketGate(raw,now=Date.now()){
  const today=dateOf(now),local=new Date(now+8*3600000),weekday=local.getUTCDay();

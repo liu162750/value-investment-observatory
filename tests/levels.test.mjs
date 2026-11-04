@@ -1,6 +1,6 @@
 ﻿import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {stocks,completedDailyRows,technical,candidates,swingCandidates,parseGold} from '../worker/dashboard.js';
+import {stocks,completedDailyRows,technical,swingCandidates,parseGold} from '../worker/dashboard.js';
 const fixture=JSON.parse(readFileSync(new URL('./fixtures/daily-audit.json',import.meta.url),'utf8'));
 const at=time=>Date.parse('2026-10-08T'+time+'+08:00');
 for(const stock of stocks){
@@ -8,24 +8,16 @@ for(const stock of stocks){
  for(const time of ['00:01:00','09:50:00','12:00:00','15:04:59']){
   const done=completedDailyRows(rows,at(time));
   assert.equal(done.at(-1).date,'2026-09-30');
-  const tech=technical(done),levels=swingCandidates(done,tech,stock.levels,stock.sellReference);
-  assert.deepEqual(levels.slice(0,2),stock.levels.slice(0,2),'Preserve confirmed baseline buys: '+stock.symbol);
-  if(levels[2]){assert(levels[2][0]>=levels[0][1]*1.08);assert(levels[2][0]-levels[0][1]>=tech.atr);assert(levels[2][0]>=stock.sellReference.price*1.12);assert(levels[2][0]-stock.sellReference.price>=tech.atr);}
-  if(levels[3])assert(levels[3][0]-levels[2][1]>=tech.atr);
-  if(levels[2]){
-   const pivots=[];
-   for(let i=Math.max(2,done.length-120);i<done.length-2;i++)if(done.slice(i-2,i+3).every(r=>r.high<=done[i].high)&&done[i].high>done.at(-1).close)pivots.push(done[i].high);
-   const floor=Math.max(stock.levels[0][1]*1.08,stock.levels[0][1]+tech.atr,stock.sellReference.price*1.12,stock.sellReference.price+tech.atr);
-   const nearest=Math.min(...pivots.filter(p=>Math.floor((p-tech.atr*.25)*100)/100>=floor));
-   assert.equal(levels[2][0],Math.floor((nearest-tech.atr*.25)*100)/100,'Use nearest qualified recent resistance for every stock');
-  }
-  assert.deepEqual(levels,swingCandidates(completedDailyRows(rows.map(r=>r.date==='2026-10-08'?{...r,close:r.close*2,high:r.high*2}:r),at(time)),tech,stock.levels,stock.sellReference),'Intraday movement must not change tiers');
+  const tech=technical(done),levels=swingCandidates(done,tech,stock.levels);
+  assert(Number.isFinite(tech.atr20)&&tech.atr20>0,'Use the shared simple-average ATR20 calculation');
+  assert.deepEqual(levels,stock.levels,'Daily refresh preserves the last adopted four-tier group: '+stock.symbol);
+  assert.deepEqual(swingCandidates(completedDailyRows(rows.map(r=>r.date==='2026-10-08'?{...r,close:r.close*2,high:r.high*2}:r),at(time)),tech,stock.levels),stock.levels,'Intraday movement must not change tiers');
  }
  const afterClose=completedDailyRows(rows,at('15:05:00'));
  assert.equal(afterClose.at(-1).date,'2026-10-08');
- assert.deepEqual(swingCandidates(afterClose,technical(afterClose),stock.levels,stock.sellReference).slice(0,2),stock.levels.slice(0,2),'Confirmed buys remain stable after new close');
+ assert.deepEqual(swingCandidates(afterClose,technical(afterClose),stock.levels),stock.levels,'Confirmed tiers remain stable after new close');
  const future=[...rows,{date:'2026-10-09',close:999}];assert.equal(completedDailyRows(future,at('18:00:00')).at(-1).date,'2026-10-08');
- const done=completedDailyRows(rows,at('09:50:00')),tech=technical(done);assert.deepEqual(swingCandidates(done,tech).slice(0,2),candidates(done,tech).slice(0,2));
+ const done=completedDailyRows(rows,at('09:50:00'));assert.deepEqual(swingCandidates(done,technical(done)),[null,null,null,null],'No saved review means no generated tiers');
 }
 const goldBefore=parseGold(fixture.gold,at('09:50:00'));
 assert.equal(goldBefore.levelReview.policyId,'gold-weekly-close-atr20-v1');
@@ -42,7 +34,7 @@ console.log('PASS: all four stocks, baseline buys, all tiers, intraday isolation
 
 assert(readFileSync(new URL('../worker/dashboard.js',import.meta.url),'utf8').includes('...(s.sellReview?.levels||'),'Dashboard must use confirmed buys');
 
-for(const stock of stocks){const saved=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.meta.url),'utf8')).stocks.find(s=>s.symbol===stock.symbol);assert.deepEqual(saved.levels.slice(0,2),stock.levels.slice(0,2));assert.deepEqual(saved.levels.slice(2),stock.sellReview.levels,'Seed and fetched sell tiers must share one saved review');if(!['ATR20-handoff-v1','weekly-close-atr20-v1'].includes(stock.levelReview?.policyId)&&stock.sellReview.levels[0])assert(stock.sellReview.levels[0][0]>=stock.sellReference.price*1.12);}
+for(const stock of stocks){const saved=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.meta.url),'utf8')).stocks.find(s=>s.symbol===stock.symbol);assert.equal(stock.levelReview?.policyId,'fixed-high-250-buy-v1');assert.deepEqual(saved.levels,stock.levels);assert.deepEqual(saved.sellReview.levels,stock.sellReview.levels,'Seed and fetched levels must share one saved review');assert.equal(stock.levels[0][0],Math.round(stock.levelReview.buyAnchorHigh*.7*100)/100);assert.equal(stock.levels[1][0],Math.round(stock.levelReview.buyAnchorHigh*.5*100)/100);assert(stock.levels[2][0]>stock.levelReview.referencePrice);}
 
-for(const stock of stocks){assert.equal(stock.levelReview?.dataDate,stock.levelReview?.referenceWeekEnding,'The pricing review date must remain the last complete weekly reference, independent of the daily freeze-check date');assert.match(stock.levelReview?.nextScheduled||'',/^\d{4}-\d{2}-\d{2} 16:30$/,'Next review must be explicitly scheduled at 16:30');}
+for(const stock of stocks){assert.equal(stock.levelReview?.dataDate,'2026-11-04');assert.match(stock.levelReview?.nextScheduled||'',/^\d{4}-\d{2}-\d{2} 16:30$/,'Next review must be explicitly scheduled at 16:30');}
 
