@@ -166,7 +166,10 @@ async function currentMarketGate(rows,quote){
   get('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq')
  ]);
  const gate=monthly.status==='fulfilled'?evaluateMarketGate(monthly.value.data?.sh000001?.month,rows,quote):{asOf:null,checkedAt:new Date().toISOString(),frozen:null,reason:'月线来源更新失败，下次刷新继续核验'};
- return {...gate,weekly:weekly.status==='fulfilled'?weeklyMarketGate(weekly.value.data?.sh000001?.week):{status:'pending',passed:null,reason:'周线来源更新失败'}};
+ const currentWeekly=weekly.status==='fulfilled'?weeklyMarketGate(weekly.value.data?.sh000001?.week):{status:'pending',passed:null,reason:'周线来源更新失败'};
+ const lastWeekly=recentDashboard()?.marketGate?.weekly;
+ const sameDayVerified=lastWeekly?.asOf===dateOf(Date.now())&&['weak','improving','strong'].includes(lastWeekly.status);
+ return {...gate,weekly:currentWeekly.status==='pending'&&sameDayVerified?{...lastWeekly,sourceStatus:'本日已核验结果；本次来源暂不可用'}:currentWeekly};
 }
 function evaluateWeeklyGate(raw,now=Date.now()){
  const today=new Date(now).toLocaleDateString('sv-SE',{timeZone:'Asia/Shanghai'}),local=new Date(now+8*3600000),day=local.getUTCDay()||7;
