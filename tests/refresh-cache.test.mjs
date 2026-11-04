@@ -35,7 +35,7 @@ globalThis.__dashboardFixture=fresh;
 try{
  await worker.fetch(new Request('https://test/api/dashboard'),{});
  const html=await(await worker.fetch(new Request('https://test/'),{})).text();
- assert(html.includes('"price":2'),'Server reload seed must use its last successful response');
+ assert(!html.includes('"price":2'),'Public HTML must not embed the last dashboard payload');
  globalThis.__dashboardFailure=true;
  const failed=await(await worker.fetch(new Request('https://test/api/dashboard'),{})).json();
  assert.equal(failed.stocks[0].quote.price,2,'Server outage must preserve the last successful response');
