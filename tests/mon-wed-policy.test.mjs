@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {reviewDay,nextReviewDay,priceReview,weeklyMarketGate,POLICY} from '../scripts/mon-wed-policy.mjs';
-const policySource=readFileSync(new URL('../scripts/mon-wed-policy.mjs',import.meta.url),'utf8').replace(/export /g,'');
-assert(readFileSync(new URL('../worker/dashboard.js',import.meta.url),'utf8').includes(policySource),'服务器内嵌规则须与独立算法完全一致');
+const policySource=readFileSync(new URL('../scripts/mon-wed-policy.mjs',import.meta.url),'utf8').replace(/\r\n/g,'\n').replace(/export /g,'');
+assert(readFileSync(new URL('../worker/dashboard.js',import.meta.url),'utf8').replace(/\r\n/g,'\n').includes(policySource),'服务器内嵌规则须与独立算法完全一致');
 assert.equal(reviewDay(Date.parse('2026-11-02T14:59:00+08:00')),'2026-10-28');
 assert.equal(reviewDay(Date.parse('2026-11-02T15:05:00+08:00')),'2026-11-02');
 assert.equal(reviewDay(Date.parse('2026-11-04T14:59:00+08:00')),'2026-11-02');
