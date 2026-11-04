@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {priceReview,POLICY} from '../scripts/mon-wed-policy.mjs';
 const snapshot=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.meta.url),'utf8'));
