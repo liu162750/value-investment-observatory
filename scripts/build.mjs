@@ -13,6 +13,7 @@ await import('../tests/account-day.test.mjs');
 await import('../tests/levels.test.mjs');
 await import('../tests/tier-policy.test.mjs');
 await import('../tests/mon-wed-policy.test.mjs');
+await import('../tests/public-page.test.mjs');
 import {mkdirSync,copyFileSync,readFileSync,writeFileSync} from 'node:fs';
 mkdirSync('dist/server',{recursive:true});
 const events=JSON.parse(readFileSync('worker/event-calendar.json','utf8'));

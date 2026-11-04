@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+
+const html=readFileSync(new URL('../worker/public-page.html',import.meta.url),'utf8');
+const sections=[...html.matchAll(/<h2><b>(\d\d)<\/b> ([^<]+)/g)].map(x=>x[1]);
+assert.deepEqual(sections,['01','02','03','04','05','06','07','08','09']);
+assert(!html.includes('国内大盘黄金')&&!html.includes('股民情绪'));
+assert(html.includes('max-width:1320px')&&html.includes('@media(max-width:760px)'));
+const script=html.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+assert(script);
+const elements=new Map();
+const document={getElementById(id){if(!elements.has(id))elements.set(id,{innerHTML:'',textContent:''});return elements.get(id)}};
+const context=vm.createContext({document,URL,Date,console});
+vm.runInContext(script.slice(0,script.indexOf("$('refresh').onclick")),context);
+context.data={generated:'2026-11-04T03:00:00Z',date:'2026-11-04',accounts:[{name:'private',cash:12345}],marketGate:{weekly:{status:'weak',maxTotalWeight:.6,dataDate:'2026-10-30'}},market:[],pools:[],stocks:[{name:'平高电气',symbol:'sh600312',quote:{price:20,change:-1,time:'2026-11-04 11:00:00'},levelReview:{policyId:'mon-wed-close-atr20-v1',status:'adopted',referenceDate:'2026-11-02',referencePrice:21,atr20:1,nextScheduled:'2026-11-04 15:05'},levels:[[19,20],[17,18],[23,24],[26,27]],rows:[],notices:[]}],marketNews:[]};
+vm.runInContext('render(data)',context);
+assert(elements.get('tier-grid').innerHTML.includes('基准 2026-11-02'));
+assert(elements.get('tier-grid').innerHTML.includes('不可买 · 周线弱势'));
+assert(![...elements.values()].some(x=>String(x.innerHTML).includes('12345')||String(x.innerHTML).includes('private')));
+console.log('PASS: nine responsive public sections, current stock basis, no old modules or personal account data');
