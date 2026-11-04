@@ -14,4 +14,8 @@ assert(Math.abs(result.floatingPnlRatio-.4)<1e-12);
 assert.deepEqual(result.positions.map(x=>x.weight),[20,30,40,50].map(x=>x/240));
 assert(!JSON.stringify(result).includes('shares')&&!JSON.stringify(result).includes('costPrice')&&!JSON.stringify(result).includes('cash":100'));
 assert.equal(publicPortfolio(stocks,{...account,positions:account.positions.map(({costPrice,...p})=>p)}).floatingPnlRatio,null);
+const aggregate=publicPortfolio(stocks,{...account,costBasisTotal:120,positions:account.positions.map(({costPrice,...p})=>p)});
+assert(Math.abs(aggregate.floatingPnlRatio-20/120)<1e-12);
+assert.equal(aggregate.holdingsDateVerified,false);
+assert(!JSON.stringify(aggregate).includes('costBasisTotal'));
 console.log('PASS: public portfolio exposes ratios only and does not invent P/L without costs');
