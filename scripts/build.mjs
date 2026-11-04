@@ -23,7 +23,7 @@ const snapshot=JSON.parse(readFileSync('worker/snapshot.json','utf8'));
 // A packaged fallback must never expose the retired price levels as current tiers.
 for(const stock of snapshot.stocks){
  stock.levels=[null,null,null,null];stock.distances=[null,null,null,null];
- stock.levelReview={policyId:'mon-wed-close-atr20-v1',status:'pending',reason:'等待本次完整日线复核'};
+ stock.levelReview={policyId:'fixed-high-250-buy-v1',status:'pending',reason:'等待本次完整日线复核'};
  stock.sellReview={status:'pending',levels:[null,null]};stock.sellReference=null;
  stock.levelDate='待核验';stock.levelType='新规则档位待核验';
 }
