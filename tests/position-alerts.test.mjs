@@ -13,7 +13,7 @@ for(const weight of [.85,.9]){
 }
 assert(!calculate({weight:.849,positions:[{symbol:'sample',budgetAvailable:[true,true]}]},stocks,now).positions[0].alerts[0].text.includes('八五仓'));
 console.log('PASS: 85% boundary blocks T1 only, applies to either account without prior rule flag');
-const warningSource=page.slice(page.indexOf('function refreshCardPositionWarnings(){'),page.indexOf('let selectedAccountId;'));
+const warningSource=page.slice(page.indexOf('function effectiveTotalCap(){'),page.indexOf('let selectedAccountId;'));
 const node={hidden:true,textContent:'',closest:()=>({dataset:{symbol:'sample'}}),classList:{toggle(){}}},model={stocks:[],accounts:[{id:'a',name:'老刘',weight:.85,positions:[]},{id:'b',name:'安好',weight:.8,positions:[]}]};
 const refresh=new Function('model','document','selectedAccountId','accountView',warningSource+';refreshCardPositionWarnings();');
 const run=(id)=>refresh(model,document,id,calculate);
@@ -25,11 +25,11 @@ run('a');assert.equal(node.hidden,true,'Switching to a lower-position account cl
 model.accounts[0].weight=.965;
 model.accounts[0].positions=[{symbol:'sample',budgetAvailable:[true,true]}];
 model.stocks=[{symbol:'sample',quote:{time:new Date().toLocaleString('sv-SE',{timeZone:'Asia/Shanghai'})},distances:[{inside:false},{inside:true}],tradeChecks:[]}];
-run('a');assert(node.textContent.includes('买T2'));assert(!node.textContent.includes('别再买T1'));
+run('a');assert(node.textContent.includes('买T2'));assert(!node.textContent.includes('暂停新增买入'));
 model.accounts[0].positions[0].budgetAvailable[1]=false;
 run('a');assert(node.textContent.includes('额度待核验'));
 model.stocks[0].distances[1].inside=false;
-run('a');assert(node.textContent.includes('别再买T1'));
+run('a');assert(node.textContent.includes('暂停新增买入'));
 console.log('PASS: T2 status takes priority; missing budget never becomes permission; leaving T2 restores T1 position reminder');
 const tierAccount={id:'trial',weight:.7,rulesConfirmed:true,rules:{t1PauseAt:.85},positions:[{symbol:'sample',budgetAvailable:[true,true]}]};
 const checks=[0,1].map(()=>({accountId:'trial',confirmed:true,stopConfirmed:false,checkedAt:'2026-10-08T10:00:00+08:00'}));
@@ -45,15 +45,15 @@ assert(calculate(tierAccount,tierStocks,now).positions[0].alerts[1].text.include
 tierStocks[0].levelReview={status:'pending-support'};
 assert(calculate(tierAccount,tierStocks,now).positions[0].alerts.every(a=>a.text.includes('旧档参考')),'Freeze overrides both tier entry styles');
 const inline=new Function(page.slice(page.indexOf('function buyTierStatus('),page.indexOf('function refreshTierEntryStates('))+';return buyTierStatus;')();
-const inlineStock={symbol:'sample',quote:{price:9,time:'2026-10-08 10:00:00'},levels:[[9,10],[8,9]],levelReview:{marketGate:{asOf:'2026-10-08',frozen:false}},tradeChecks:[{accountId:'trial',checkedAt:'2026-10-08T10:00:00+08:00',confirmed:true,stopConfirmed:false},{accountId:'trial',checkedAt:'2026-10-08T10:00:00+08:00',confirmed:true,stopConfirmed:false}]};
+const inlineStock={symbol:'sample',quote:{price:9,time:'2026-10-08 10:00:00'},levels:[[9,10],[8,9]],levelReview:{marketGate:{asOf:'2026-10-08',weekly:{asOf:'2026-10-08',status:'strong',allowedBuyTiers:[0,1],maxTotalWeight:.85,maxSingleWeight:.25}}},tradeChecks:[{accountId:'trial',checkedAt:'2026-10-08T10:00:00+08:00',confirmed:true,stopConfirmed:false},{accountId:'trial',checkedAt:'2026-10-08T10:00:00+08:00',confirmed:true,stopConfirmed:false}]};
 assert(inline(inlineStock,0,tierAccount,now).includes('试探条件通过'));
 assert(inline(inlineStock,1,tierAccount,now).includes('未企稳，不能买'));
 inlineStock.tradeChecks[1].stopConfirmed=true;
 assert(inline(inlineStock,1,tierAccount,now).includes('企稳及其他条件通过'));
-assert(inline(inlineStock,0,{...tierAccount,weight:.9},now).includes('8.5层'));
+assert(inline(inlineStock,0,{...tierAccount,weight:.9},now).includes('已达8.5层'));
 assert(!inline(inlineStock,1,{...tierAccount,id:'other'},now).includes('条件通过'),'Account switching cannot reuse another account confirmation');
 inlineStock.levelReview.status='pending-support';
-assert(inline(inlineStock,1,tierAccount,now).includes('冻结，不能买'),'Stabilization cannot override freeze');
+assert(inline(inlineStock,1,tierAccount,now).includes('待核验，不能买'),'Stabilization cannot override freeze');
 assert.equal(inline(inlineStock,0,{...tierAccount,weight:.9},now),inline(inlineStock,1,{...tierAccount,weight:.9},now),'Both tiers use the same freeze wording even when T1 position limit is reached');
 assert(!page.includes("a.name+'：'"),'Inline status omits account name prefix');
 assert(page.includes('data-buy-tier='));

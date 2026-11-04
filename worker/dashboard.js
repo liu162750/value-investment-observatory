@@ -1,3 +1,56 @@
+const POLICY='mon-wed-close-atr20-v1';
+const dayMs=86400000;
+const dateOf=now=>new Date(now+8*3600000).toISOString().slice(0,10);
+const cents=n=>Math.round((n+Number.EPSILON)*100)/100;
+const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
+
+function reviewDay(now=Date.now()){
+ const local=new Date(now+8*3600000),weekday=local.getUTCDay(),minute=local.getUTCHours()*60+local.getUTCMinutes();
+ const today=dateOf(now);let back=0;
+ if(weekday===0)back=4;else if(weekday===1)back=minute>=905?0:5;
+ else if(weekday===2)back=1;else if(weekday===3)back=minute>=905?0:2;
+ else back=weekday-3;
+ return new Date(Date.parse(today+'T00:00:00Z')-back*dayMs).toISOString().slice(0,10);
+}
+function nextReviewDay(now=Date.now()){
+ const local=new Date(now+8*3600000),today=dateOf(now),minute=local.getUTCHours()*60+local.getUTCMinutes();
+ for(let n=0;n<8;n++){
+  const d=new Date(Date.parse(today+'T00:00:00Z')+n*dayMs),w=d.getUTCDay();
+  if((w===1||w===3)&&(n>0||minute<905))return d.toISOString().slice(0,10)+' 15:05';
+ }
+ throw Error('下次复核日计算失败');
+}
+function priceReview(rows,now=Date.now()){
+ const cutoff=reviewDay(now),bars=rows.filter(b=>b.date<=cutoff&&b.date<=dateOf(now));
+ if(bars.length<21)throw Error('完整前复权日线不足21根');
+ if(bars.some((b,i)=>![b.open,b.high,b.low,b.close].every(n=>Number.isFinite(n)&&n>0)||b.low>Math.min(b.open,b.close)||b.high<Math.max(b.open,b.close)||(i&&b.date<=bars[i-1].date)))throw Error('日线无效或乱序');
+ const recent=bars.slice(-21),last=recent.at(-1);
+ if(Date.parse(cutoff+'T00:00:00Z')-Date.parse(last.date+'T00:00:00Z')>4*dayMs)throw Error('复核基准日行情过期');
+ const atr=recent.slice(1).reduce((sum,b,i)=>sum+Math.max(b.high-b.low,Math.abs(b.high-recent[i].close),Math.abs(b.low-recent[i].close)),0)/20;
+ if(!(atr>0))throw Error('ATR20无效');
+ const p=last.close,ar=atr/p;
+ let buy1=p*(1-clamp(ar,.03,.08)),buy2=p*(1-clamp(1.8*ar,.07,.18));
+ let sell1=p*(1+clamp(1.8*ar,.06,.12)),sell2=p*(1+clamp(3.2*ar,.10,.26));
+ if(buy2>=buy1)buy2=buy1*.98;
+ if(sell2<=sell1)sell2=sell1*1.03;
+ const levels=[[cents(buy1-.3*atr),cents(buy1)],[cents(buy2-.3*atr),cents(buy2)],[cents(sell1),cents(sell1+.3*atr)],[cents(sell2),cents(sell2+.3*atr)]];
+ if(levels.some(b=>b[0]<=0||b[0]>b[1])||levels[1][1]>=levels[0][0]||levels[0][1]>=p||levels[2][0]<=p||levels[2][1]>=levels[3][0])throw Error('四档价格带交叉，待人工复核');
+ return {policyId:POLICY,asOf:new Date(now).toISOString(),dataDate:last.date,referenceDate:last.date,referencePrice:p,atr20:atr,levels,bands:levels.map((b,i)=>({low:b[0],high:b[1],note:i<2?'复核价减ATR20，幅度限幅':'复核价加ATR20，幅度限幅'})),status:'adopted',priceValidation:[],nextScheduled:nextReviewDay(now),source:'腾讯财经前复权日线',reason:'周一/周三最近已完成收盘基准；技术测算，不代表估值或交易许可'};
+}
+function weeklyMarketGate(raw,now=Date.now()){
+ const today=dateOf(now),local=new Date(now+8*3600000),weekday=local.getUTCDay();
+ const monday=new Date(Date.parse(today+'T00:00:00Z')-((weekday+6)%7)*dayMs).toISOString().slice(0,10);
+ const complete=weekday===6||weekday===0||weekday===5&&local.getUTCHours()*60+local.getUTCMinutes()>=905;
+ const rows=(raw||[]).filter(r=>Array.isArray(r)&&/^\d{4}-\d{2}-\d{2}$/.test(r[0])&&r[0]<=today&&(complete||r[0]<monday)).slice(-20);
+ const pending=reason=>({policyId:'weekly-ma10-ma20-three-state-v1',status:'pending',passed:null,asOf:today,checkedAt:new Date(now).toISOString(),reason});
+ if(rows.length<20||rows.some((r,i)=>!(Number(r[2])>0)||(i&&r[0]<=rows[i-1][0])))return pending('完整周线不足20根或数据无效');
+ const expected=new Date(Date.parse(monday+'T00:00:00Z')-(complete?0:7)*dayMs).toISOString().slice(0,10);
+ if(rows.at(-1)[0]<expected)return pending('最新完整周线未齐');
+ const close=Number(rows.at(-1)[2]),ma10=rows.slice(-10).reduce((s,r)=>s+Number(r[2]),0)/10,ma20=rows.reduce((s,r)=>s+Number(r[2]),0)/20;
+ const status=close>ma10?'strong':close>ma20?'improving':'weak';
+ return {policyId:'weekly-ma10-ma20-three-state-v1',status,passed:status!=='weak',asOf:today,checkedAt:new Date(now).toISOString(),dataDate:rows.at(-1)[0],indexClose:close,ma10,ma20,maxTotalWeight:{strong:.85,improving:.70,weak:.60}[status],maxSingleWeight:{strong:.25,improving:.21,weak:.18}[status],allowedBuyTiers:status==='strong'?[0,1]:status==='improving'?[0]:[],source:'https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq'};
+}
+
 const accounts = [];
 
 let sinaContextCache=null,sinaContextPending=null;
@@ -113,7 +166,7 @@ async function currentMarketGate(rows,quote){
   get('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq')
  ]);
  const gate=monthly.status==='fulfilled'?evaluateMarketGate(monthly.value.data?.sh000001?.month,rows,quote):{asOf:null,checkedAt:new Date().toISOString(),frozen:null,reason:'月线来源更新失败，下次刷新继续核验'};
- return {...gate,weekly:weekly.status==='fulfilled'?evaluateWeeklyGate(weekly.value.data?.sh000001?.week):{passed:null,reason:'周线来源更新失败'}};
+ return {...gate,weekly:weekly.status==='fulfilled'?weeklyMarketGate(weekly.value.data?.sh000001?.week):{status:'pending',passed:null,reason:'周线来源更新失败'}};
 }
 function evaluateWeeklyGate(raw,now=Date.now()){
  const today=new Date(now).toLocaleDateString('sv-SE',{timeZone:'Asia/Shanghai'}),local=new Date(now+8*3600000),day=local.getUTCDay()||7;
@@ -346,6 +399,47 @@ async function earningsEvents(){
 }
 async function dashboard(){const symbols=[...indices,...stocks.map(s=>s.symbol)];const tasks=await Promise.allSettled([get('https://qt.gtimg.cn/q='+symbols.concat('sz399106').join(','),'gbk'),...symbols.map(history),...stocks.map(s=>announcements(s.symbol)),...usAssets.map(usClose),...stocks.map(mediaNews),amounts('1.000001'),amounts('0.399106'),marketImportantNews(),goldDashboard(),earningsEvents(),bnbQuote(),recapSectors()]);const noticeStart=1+symbols.length,usStart=noticeStart+stocks.length,mediaStart=usStart+usAssets.length,amountStart=mediaStart+stocks.length;const quotes=tasks[0].status==='fulfilled'?parseQuotes(tasks[0].value):{};const data=symbols.map((symbol,i)=>{const r=tasks[i+1];return {symbol,rows:r.status==='fulfilled'?r.value:[],historyStale:r.status!=='fulfilled'||r.value.historyStale===true,quote:quotes[symbol]||null};});const market=data.slice(0,indices.length).map(d=>({...d,tech:technical(d.rows)}));const marketGate=await currentMarketGate(market[0].rows,quotes.sh000001);const date=quotes.sh000001?.time?.slice(0,10)||market[0].rows.at(-1)?.date;const pools=date?await Promise.allSettled(['ZT','DT','ZB'].map(t=>pool(date,t))):[];return {generated:new Date().toISOString(),investmentReviewAsOf:investmentReviews?.asOf||null,accounts,date,market,marketGate,marketTurnover:{sh:quotes.sh000001||null,sz:quotes.sz399106||null},recapSectors:tasks[amountStart+6].status==='fulfilled'?tasks[amountStart+6].value:null,marketBreadth:tasks[amountStart+6].status==='fulfilled'?tasks[amountStart+6].value.breadth:null,importantEvents:tasks[amountStart+4].status==='fulfilled'?tasks[amountStart+4].value:null,bnb:tasks[amountStart+5].status==='fulfilled'?tasks[amountStart+5].value:bnbCache||null,gold:tasks[amountStart+3].status==='fulfilled'?tasks[amountStart+3].value:null,goldError:tasks[amountStart+3].status!=='fulfilled',marketNews:tasks[amountStart+2].status==='fulfilled'?tasks[amountStart+2].value:[],marketNewsError:tasks[amountStart+2].status!=='fulfilled',turnover:tasks[amountStart].status==='fulfilled'&&tasks[amountStart+1].status==='fulfilled'?amountSummary(tasks[amountStart].value,tasks[amountStart+1].value):null,pools:pools.map(r=>r.status==='fulfilled'?r.value:null),us:tasks.slice(usStart,mediaStart).filter(r=>r.status==='fulfilled').map(r=>r.value),stocks:stocks.map((s,i)=>{const d=data[i+indices.length],tech=technical(d.rows),newer=tech?.date>'2026-09-30',levels=[...s.levels.slice(0,2),...(s.sellReview?.levels||[null,null])],news=tasks[noticeStart+i];const q=d.quote||{price:d.rows.at(-1)?.close??null,change:d.rows.length>=2?(d.rows.at(-1).close/d.rows.at(-2).close-1)*100:null,time:d.rows.at(-1)?.date?d.rows.at(-1).date+' 收盘':null,source:'腾讯财经日线 · 历史参考'};return {...s,...d,levelReview:{...s.levelReview,marketGate},longTermReview:investmentReviews?.stocks?.[s.symbol]?.longTermReview,replacementReview:investmentReviews?.stocks?.[s.symbol]?.replacementReview,rows:d.rows.slice(-60),quote:q,tech,levels,levelDate:s.levelReview?.referenceDate||s.levelReview?.dataDate||s.sellReview?.dataDate||tech?.date||'待核验',levelType:'完整周收盘基准 · ATR20统一四档 · 技术触价非交易许可',distances:(levels||[null,null,null,null]).map(r=>distance(q.price,r)),notices:news.status==='fulfilled'?news.value:[],newsError:news.status!=='fulfilled',mediaNews:tasks[mediaStart+i].status==='fulfilled'?tasks[mediaStart+i].value:[],mediaError:tasks[mediaStart+i].status!=='fulfilled'};})};}
 
+const financialTrendCache=new Map();
+function evaluateFinancialTrend(rows){
+ const observations=(rows||[]).filter(r=>/^\d{4}Q[1-4]$/.test(String(r.QDATE||''))).sort((a,b)=>String(b.QDATE).localeCompare(String(a.QDATE))).slice(0,3);
+ const ordinal=q=>Number(q.slice(0,4))*4+Number(q.slice(-1));
+ if(observations.length!==3||new Set(observations.map(r=>r.QDATE)).size!==3||ordinal(observations[0].QDATE)-ordinal(observations[1].QDATE)!==1||ordinal(observations[1].QDATE)-ordinal(observations[2].QDATE)!==1||observations.some(r=>r.YSTZ==null||r.XSMLL==null||![Number(r.YSTZ),Number(r.XSMLL)].every(Number.isFinite)))return {status:'pending',reason:'最近三个连续季度的可比指标不完整'};
+ const [current,previous,oldest]=observations;
+ const revenueDecline=Number(current.YSTZ)<Number(previous.YSTZ)&&Number(previous.YSTZ)<Number(oldest.YSTZ);
+ const marginDecline=Number(current.XSMLL)<Number(previous.XSMLL)&&Number(previous.XSMLL)<Number(oldest.XSMLL)&&Number(oldest.XSMLL)-Number(current.XSMLL)>.3;
+ return {status:revenueDecline||marginDecline?'screen-warning':'screen-clear',periods:observations.map(r=>r.QDATE),revenueDecline,marginDecline,reason:revenueDecline||marginDecline?'第三方财报汇总显示连续下滑，待原始公告核对；暂缓新增买入':'这两项初筛未触发；现金流、扣非、债务和估值仍需核验'};
+}
+async function fundamentalTrend(symbol){
+ const cached=financialTrendCache.get(symbol);if(cached&&Date.now()-cached.checked<cached.ttl)return cached.value;
+ const url='https://datacenter-web.eastmoney.com/api/data/v1/get?reportName=RPT_LICO_FN_CPD&columns=SECURITY_CODE,REPORTDATE,QDATE,YSTZ,XSMLL&filter='+encodeURIComponent('(SECURITY_CODE="'+symbol.slice(2)+'")')+'&pageNumber=1&pageSize=4&sortColumns=REPORTDATE&sortTypes=-1';
+ try{const response=await get(url),value={...evaluateFinancialTrend(response.result?.data),source:url,checkedAt:new Date().toISOString()};
+  financialTrendCache.set(symbol,{value,checked:Date.now(),ttl:value.status==='pending'?600000:3600000});return value;
+ }catch(error){return {status:'pending',reason:'财务汇总来源暂不可用',checkedAt:new Date().toISOString()};}
+}
+async function dashboardNew(){
+ const data=await dashboard();
+ const financial=await Promise.all(data.stocks.map(s=>fundamentalTrend(s.symbol)));
+ for(const [i,s] of data.stocks.entries()){
+  s.fundamentalReview=financial[i];
+  try{
+   if(s.historyStale)throw Error('日线来源未更新');
+   const rows=await history(s.symbol);
+   if(rows.historyStale)throw Error('日线来源未更新');
+   const review=priceReview(rows);
+   if(data.market[0]?.historyStale!==true&&data.market[0]?.rows?.at(-1)?.date===reviewDay()&&review.referenceDate!==reviewDay())throw Error('复核日个股日线尚未更新');
+   s.levelReview={...review,marketGate:data.marketGate};s.levels=review.levels;s.levelDate=review.referenceDate;
+   s.levelType='周一/周三收盘基准 · ATR20限幅四档 · 技术触价非交易许可';
+   s.sellReview={asOf:review.asOf,dataDate:review.dataDate,policy:review.policyId,levels:review.levels.slice(2),status:review.status};
+   s.sellReference={price:review.referencePrice,asOf:review.referenceDate,source:'最近复核日收盘基准，非持仓成本'};
+   s.distances=review.levels.map(v=>distance(s.quote.price,v));
+  }catch(error){
+   s.levelReview={policyId:'mon-wed-close-atr20-v1',status:'pending',reason:error.message,marketGate:data.marketGate};
+   s.levels=[null,null,null,null];s.distances=[null,null,null,null];s.levelDate='待核验';
+   s.levelType='新规则档位待核验，旧档停止使用';s.sellReference=null;
+  }
+ }
+ return data;
+}
 function publicAccounts(stockData){return accounts.map(a=>{const valid=a.positions.every(p=>Number.isFinite(stockData.find(s=>s.symbol===p.symbol)?.quote?.price));const invested=valid?a.positions.reduce((v,p)=>v+p.shares*stockData.find(s=>s.symbol===p.symbol).quote.price,0):null,total=valid?invested+a.cash:null;const tech=valid?a.positions.filter(p=>p.symbol!=='sh600312').reduce((v,p)=>v+p.shares*stockData.find(s=>s.symbol===p.symbol).quote.price,0)/total:null;return {id:a.id,name:a.name,holdingsAsOf:a.holdingsAsOf,dayAssetRatio:a.dayReference?.previousAssets>0&&valid?total/a.dayReference.previousAssets:null,dayReferenceDate:a.dayReference?.date,weight:valid?invested/total:null,cashWeight:valid?a.cash/total:null,allocationPolicy:a.allocationPolicy,rules:a.rules,rulesConfirmed:a.rulesConfirmed,allocationConfirmed:a.allocationConfirmed,positions:a.positions.map(p=>{const s=stockData.find(s=>s.symbol===p.symbol),weight=valid?p.shares*s.quote.price/total:null;return {symbol:p.symbol,weight,full:valid&&(p.symbol==='sh600312'?weight>=a.rules.pinggaoMax:tech>=a.rules.techSharedMax),budgetAvailable:[0,1].map(k=>valid&&a.allocationConfirmed&&a.cash>=s.quote.price*100&&(a.stageBudgets[p.symbol]?.[k===0?'t1':'t2']||0)>=s.quote.price*100),sellAvailable:(a.sellableShares[p.symbol]||0)>0};})};});}
 
 const gatePage='<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>授权访问</title><style>body{margin:0;min-height:100dvh;display:grid;place-items:center;background:#0b1421;color:#dfebf8;font:14px system-ui}main{width:min(320px,85vw);padding:25px;border:1px solid #37566f;border-radius:14px;background:#142235}h1{font-size:20px}input,button{box-sizing:border-box;width:100%;padding:12px;margin-top:12px;border-radius:7px;border:1px solid #3b526b;background:#1a2b40;color:inherit;font:inherit}button{background:#24645a;cursor:pointer}p{color:#9fb7ce;font-size:12px}#error{color:#ff9c9c}</style><main><h1>价值投资观察台</h1><p>输入授权手机号，同一浏览器记住30天</p><form id="form"><input id="phone" aria-label="授权手机号" inputmode="tel" autocomplete="tel" required maxlength="20" placeholder="授权手机号"><button>进入网页</button></form><p id="error" role="status"></p></main><script>document.getElementById("form").onsubmit=async e=>{e.preventDefault();const b=e.target.querySelector("button");b.disabled=true;try{const r=await fetch("/access/login",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({phone:document.getElementById("phone").value})});if(!r.ok)throw Error();location.reload();}catch{document.getElementById("error").textContent="号码未获授权，或暂时无法验证，请联系老刘。";}finally{b.disabled=false;}};</script></html>';
@@ -355,6 +449,6 @@ async function signAccess(s,key){const k=await crypto.subtle.importKey('raw',new
 async function accessGate(req,env){if(env.PHONE_GATE_ENABLED!=='1')return null;const u=new URL(req.url),key=env.PHONE_SESSION_SECRET,allowed=new Set((env.PHONE_ALLOWED_HASHES||'').split(',').filter(Boolean));if(!key||!allowed.size)return new Response('访问名单配置中，请稍后再试',{status:503,headers:{'cache-control':'no-store'}});if(u.pathname==='/access/login'&&req.method==='POST'){if(req.headers.get('origin')!==u.origin)return new Response('Forbidden',{status:403});let data;try{data=await req.json();}catch{return new Response('Bad request',{status:400});}const phone=String(data.phone||'').replace(/[\s-]/g,'').replace(/^\+86/,'');if(!/^1[3-9]\d{9}$/.test(phone))return new Response('Denied',{status:403});const hash=await digest(phone);if(!allowed.has(hash))return new Response('Denied',{status:403});const payload=hash+'.'+(Date.now()+30*86400000),token=payload+'.'+await signAccess(payload,key);return new Response('{}',{headers:{'content-type':'application/json','cache-control':'no-store','set-cookie':'stock_access='+token+'; Path=/; Max-Age=2592000; HttpOnly; Secure; SameSite=Lax'}});}const token=req.headers.get('cookie')?.match(/(?:^|;\s*)stock_access=([^;]+)/)?.[1],parts=token?.split('.');if(parts?.length===3&&allowed.has(parts[0])&&+parts[1]>Date.now()&&parts[2]===await signAccess(parts[0]+'.'+parts[1],key))return null;if(u.pathname==='/')return new Response(gatePage,{headers:{'content-type':'text/html;charset=utf-8','cache-control':'no-store'}});return new Response('{"error":"请先输入授权手机号"}',{status:401,headers:{'content-type':'application/json;charset=utf-8','cache-control':'no-store'}});}
 
 const page = "__PAGE__";
-export default {async fetch(request,env,ctx){const gate=await accessGate(request,env||{});if(gate)return gate;const url=new URL(request.url);if(request.method!=='GET')return json({error:'仅支持读取'},405);if(url.pathname==='/api/market-volume'){try{const q=parseQuotes(await get('https://qt.gtimg.cn/q=sh000001,sz399106','gbk'));return json({sh:q.sh000001||null,sz:q.sz399106||null});}catch{return json({error:'量能来源暂不可用'},503);}}if(url.pathname==='/api/gold'){try{return json(await goldDashboard());}catch{return json({error:'黄金来源暂不可用'},503);}}if(url.pathname==='/api/bnb'){try{return json(await bnbQuote());}catch{return json({error:'BNB来源暂不可用'},503);}}if(url.pathname==='/data/dashboard.json'||url.pathname==='/api/dashboard'){try{const data=await dashboard();if(recentDashboard()?.us){data.us=usAssets.map(([symbol,name])=>data.us.find(s=>s.symbol===symbol)||{...recentDashboard().us.find(s=>s.symbol===symbol),symbol,name,stale:true});}if(!data.turnover&&recentDashboard()?.turnover)data.turnover={...recentDashboard().turnover,stale:true};if(!data.gold&&recentDashboard()?.gold)data.gold={...recentDashboard().gold,stale:true};if(!data.bnb&&recentDashboard()?.bnb)data.bnb={...recentDashboard().bnb,stale:true};data.accounts=publicAccounts(data.stocks);data.cacheRevision=initialSnapshot?.cacheRevision;const usable=data.stocks.some(s=>Number.isFinite(s.quote.price));if(!usable&&recentDashboard())return json({...recentDashboard(),gold:data.gold||goldLatest||recentDashboard().gold,stale:true,updateError:'线上来源暂不可用，显示最近核验数据'});if(usable)latestDashboard=data;return json(data);}catch(error){console.error('dashboard update failed',error?.message);if(recentDashboard())return json({...recentDashboard(),gold:goldLatest||recentDashboard().gold,stale:true,updateError:'更新失败，显示最近核验数据'});return json({error:'行情源暂不可用'},503);}}if(url.pathname!=='/')return new Response('Not found',{status:404});const seed=recentDashboard()?'<script>window.initialDashboard='+JSON.stringify({...recentDashboard(),gold:goldLatest||recentDashboard().gold,stale:true}).replaceAll('<','\u003c')+';</script>':'';return new Response(page.replace('<script>',seed+'<script>'),{headers:{'content-type':'text/html; charset=utf-8','x-content-type-options':'nosniff','cache-control':'no-store'}});}};
+export default {async fetch(request,env,ctx){const url=new URL(request.url);if(request.method!=='GET')return json({error:'仅支持读取'},405);if(url.pathname==='/api/market-volume'){try{const q=parseQuotes(await get('https://qt.gtimg.cn/q=sh000001,sz399106','gbk'));return json({sh:q.sh000001||null,sz:q.sz399106||null});}catch{return json({error:'量能来源暂不可用'},503);}}if(url.pathname==='/api/gold'){try{return json(await goldDashboard());}catch{return json({error:'黄金来源暂不可用'},503);}}if(url.pathname==='/api/bnb'){try{return json(await bnbQuote());}catch{return json({error:'BNB来源暂不可用'},503);}}if(url.pathname==='/data/dashboard.json'||url.pathname==='/api/dashboard'){try{const data=await dashboardNew();if(recentDashboard()?.us){data.us=usAssets.map(([symbol,name])=>data.us.find(s=>s.symbol===symbol)||{...recentDashboard().us.find(s=>s.symbol===symbol),symbol,name,stale:true});}if(!data.turnover&&recentDashboard()?.turnover)data.turnover={...recentDashboard().turnover,stale:true};if(!data.gold&&recentDashboard()?.gold)data.gold={...recentDashboard().gold,stale:true};if(!data.bnb&&recentDashboard()?.bnb)data.bnb={...recentDashboard().bnb,stale:true};data.accounts=[];data.cacheRevision=initialSnapshot?.cacheRevision;const usable=data.stocks.some(s=>Number.isFinite(s.quote.price));if(!usable&&recentDashboard())return json({...recentDashboard(),gold:data.gold||goldLatest||recentDashboard().gold,stale:true,updateError:'线上来源暂不可用，显示最近核验数据'});if(usable)latestDashboard=data;return json(data);}catch(error){console.error('dashboard update failed',error?.message);if(recentDashboard())return json({...recentDashboard(),gold:goldLatest||recentDashboard().gold,stale:true,updateError:'更新失败，显示最近核验数据'});return json({error:'行情源暂不可用'},503);}}if(url.pathname!=='/')return new Response('Not found',{status:404});const seed=recentDashboard()?'<script>window.initialDashboard='+JSON.stringify({...recentDashboard(),gold:goldLatest||recentDashboard().gold,stale:true}).replaceAll('<','\u003c')+';</script>':'';return new Response(page.replace('<script>',seed+'<script>'),{headers:{'content-type':'text/html; charset=utf-8','x-content-type-options':'nosniff','cache-control':'no-store'}});}};
 export {parseBnbQuote,parseBnbAlternative,parseBnbYahoo,parseBnbCryptoCompare,bnbQuote,evaluateMarketGate,currentMarketGate,history,amountSummary,normalizeAnnouncements,parseGold,goldLevelReview,parseGoldQuote,parseGoldAlternative,parseGoldSina,goldReferenceClose,goldDashboard,accessGate,digest,publicAccounts,stocks,distance,technical,candidates,swingCandidates,completedDailyRows,parseQuotes};
 

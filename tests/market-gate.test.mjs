@@ -24,8 +24,8 @@ assert.equal(weekly(weeks.map((r,i)=>i===20?[r[0],'0',1000]:r),now).passed,false
 assert.equal(weekly(weeks.slice(0,-1),now).passed,null);
 const page=readFileSync(new URL('../worker/page.html',import.meta.url),'utf8');
 const labels=new Function('esc','num',page.slice(page.indexOf('function marketGateLabel('),page.indexOf('function buyTierStatus('))+';return marketGateHTML;')(s=>String(s??''),n=>String(n));
-const model={marketGate:{asOf:'2026-10-20',frozen:false,weekly:{asOf:'2026-10-20',passed:true}}};
+const model={marketGate:{asOf:'2026-10-20',frozen:false,weekly:{asOf:'2026-10-20',status:'strong',passed:true}}};
 assert(labels(model,now).includes('class="up"'));
-model.marketGate.weekly.passed=false;assert(!labels(model,now).includes('class="up"'));
+model.marketGate.weekly.status='weak';model.marketGate.weekly.passed=false;assert(!labels(model,now).includes('class="up"'));
 new Function(page.slice(page.indexOf('<script>')+8,page.lastIndexOf('</script>')));
 console.log('PASS: complete weekly signals and red styling only for verified weekly pass');

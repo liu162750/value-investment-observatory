@@ -28,8 +28,8 @@ console.log('PASS: refresh restores latest success; cached signals stale; new ru
 let source=readFileSync(new URL('../worker/dashboard.js',import.meta.url),'utf8');
 source=source.replace('const initialSnapshot = null;','const initialSnapshot = '+JSON.stringify(seed)+';')
  .replace('const page = "__PAGE__";', 'const page = "<script></script>";')
- .replace('async function dashboard(){','async function unusedDashboard(){');
-source+='\nasync function dashboard(){if(globalThis.__dashboardFailure)throw Error("Test outage");return structuredClone(globalThis.__dashboardFixture);}';
+ .replace('async function dashboardNew(){','async function unusedDashboardNew(){');
+source+='\nasync function dashboardNew(){if(globalThis.__dashboardFailure)throw Error("Test outage");return structuredClone(globalThis.__dashboardFixture);}';
 const worker=(await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'))).default;
 globalThis.__dashboardFixture=fresh;
 try{
@@ -40,7 +40,8 @@ try{
  const failed=await(await worker.fetch(new Request('https://test/api/dashboard'),{})).json();
  assert.equal(failed.stocks[0].quote.price,2,'Server outage must preserve the last successful response');
  assert.equal(failed.stale,true);
- const denied=await worker.fetch(new Request('https://test/api/dashboard'),{PHONE_GATE_ENABLED:'1'});
- assert.equal(denied.status,503,'Cached responses must remain behind access protection');
+ const publicResponse=await worker.fetch(new Request('https://test/api/dashboard'),{PHONE_GATE_ENABLED:'1'});
+ assert.equal(publicResponse.status,200,'Public page must not request phone verification');
+ assert(!('accounts' in failed)||!failed.accounts?.length,'Public fallback must not expose account holdings');
 }finally{delete globalThis.__dashboardFixture;delete globalThis.__dashboardFailure;}
-console.log('PASS: server reload and outage retain latest data; access protection remains enforced');
+console.log('PASS: public server reload and outage retain latest data without account holdings');
