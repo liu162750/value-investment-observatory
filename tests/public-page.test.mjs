@@ -18,7 +18,8 @@ context.data={generated:'2026-11-04T03:00:00Z',date:'2026-11-04',accounts:[{name
 vm.runInContext('render(data)',context);
 assert(elements.get('tier-grid').innerHTML.includes('基准 2026-11-02'));
 assert(elements.get('tier-grid').innerHTML.includes('不可买 · 周线弱势'));
-assert(elements.get('tier-grid').innerHTML.includes('还差涨 ¥3.00 / 15.0%'));
+assert(elements.get('tier-grid').innerHTML.includes('还差涨 15.0%'));
+assert(!elements.get('tier-grid').innerHTML.includes('还差涨 ¥'));
 assert(elements.get('watch-grid').innerHTML.includes('当前持仓 28.50%'));
 assert(elements.get('header-pnl').textContent.includes('-4.00%'));
 assert(![...elements.values()].some(x=>String(x.innerHTML).includes('12345')||String(x.innerHTML).includes('private')));
