@@ -159,7 +159,7 @@ const investmentReviews = "__REVIEWS__";
 const eventCalendar = "__EVENTS__";
 const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}});
 async function get(url,encoding){let last;for(let attempt=0;attempt<2;attempt++){try{const r=await fetch(url,{signal:AbortSignal.timeout(8000),headers:{'User-Agent':'Mozilla/5.0'}});if(!r.ok)throw Error('来源HTTP '+r.status);if(!encoding)return await r.json();const bytes=await r.arrayBuffer();return new TextDecoder(encoding).decode(bytes);}catch(error){last=error;if(attempt===0)await new Promise(resolve=>setTimeout(resolve,250));}}throw last;}
-function parseQuotes(raw){const out={};for(const m of raw.matchAll(/v_([a-z0-9]+)="([^"]*)"/g)){const p=m[2].split('~'),t=p[30];if(p.length>32&&+p[3]>0)out[m[1]]={price:+p[3],change:+p[32],time:/^\d{14}$/.test(t)?t.slice(0,4)+'-'+t.slice(4,6)+'-'+t.slice(6,8)+' '+t.slice(8,10)+':'+t.slice(10,12)+':'+t.slice(12,14):null,source:'腾讯财经',amount:p[35]?.split('/').length===3?Number(p[35].split('/')[2]):null};}return out;}
+function parseQuotes(raw){const out={};for(const m of raw.matchAll(/v_([a-z0-9]+)="([^"]*)"/g)){const p=m[2].split('~'),t=p[30];if(p.length>32&&+p[3]>0)out[m[1]]={price:+p[3],previousClose:+p[4]||null,change:+p[32],time:/^\d{14}$/.test(t)?t.slice(0,4)+'-'+t.slice(4,6)+'-'+t.slice(6,8)+' '+t.slice(8,10)+':'+t.slice(10,12)+':'+t.slice(12,14):null,source:'腾讯财经',amount:p[35]?.split('/').length===3?Number(p[35].split('/')[2]):null};}return out;}
 function completedDailyRows(rows,now=Date.now(),closeMinute=905){
  const date=new Date(now).toLocaleDateString('sv-SE',{timeZone:'Asia/Shanghai'});
  const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date(now));
@@ -463,8 +463,17 @@ function publicPortfolio(stockData,account){
  const costs=positions.map(({position:p})=>Number.isFinite(p.costBasis)?p.costBasis:Number.isFinite(p.costPrice)?p.costPrice*p.shares:null);
  const costTotal=Number.isFinite(a.costBasisTotal)&&a.costBasisTotal>0?a.costBasisTotal:costs.every(x=>Number.isFinite(x)&&x>=0)?costs.reduce((x,y)=>x+y,0):null;
  const quoteTime=positions.map(({stock:s})=>s.quote.time).filter(Boolean).sort().at(0)||null;
- const dayReference=a.dayReference,dayPnlRatio=dayReference?.date===quoteTime?.slice(0,10)&&Number.isFinite(dayReference.previousAssets)&&dayReference.previousAssets>0?total/dayReference.previousAssets-1:null;
- return {status:'ok',holdingsAsOf:a.holdingsAsOf||null,holdingsDateVerified:a.holdingsDateVerified===true,quoteTime,positions:positions.map(({position:p,stock:s})=>({symbol:p.symbol,name:s.name,weight:p.shares*s.quote.price/total})),cashWeight:a.cash/total,investedWeight:1-a.cash/total,floatingPnlRatio:costTotal>0?(total-a.cash-costTotal)/costTotal:null,dayPnlRatio,dayPnlDate:dayPnlRatio===null?null:dayReference.date};
+ const dayReference=a.dayReference;
+ const quoteDate=quoteTime?.slice(0,10);
+ const sameDay=quoteDate&&positions.every(({stock:s})=>s.quote.time?.slice(0,10)===quoteDate);
+ let previousAssets=null;
+ if(sameDay&&dayReference?.date===quoteDate&&Number.isFinite(dayReference.previousAssets)&&dayReference.previousAssets>0){
+  previousAssets=dayReference.previousAssets;
+ }else if(sameDay&&positions.every(({stock:s})=>Number.isFinite(s.quote.previousClose)&&s.quote.previousClose>0)){
+  previousAssets=positions.reduce((value,{position:p,stock:s})=>value+p.shares*s.quote.previousClose,a.cash);
+ }
+ const dayPnlRatio=previousAssets>0?total/previousAssets-1:null;
+ return {status:'ok',holdingsAsOf:a.holdingsAsOf||null,holdingsDateVerified:a.holdingsDateVerified===true,quoteTime,positions:positions.map(({position:p,stock:s})=>({symbol:p.symbol,name:s.name,weight:p.shares*s.quote.price/total})),cashWeight:a.cash/total,investedWeight:1-a.cash/total,floatingPnlRatio:costTotal>0?(total-a.cash-costTotal)/costTotal:null,dayPnlRatio,dayPnlDate:dayPnlRatio===null?null:quoteDate};
 }
 
 const gatePage='<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>授权访问</title><style>body{margin:0;min-height:100dvh;display:grid;place-items:center;background:#0b1421;color:#dfebf8;font:14px system-ui}main{width:min(320px,85vw);padding:25px;border:1px solid #37566f;border-radius:14px;background:#142235}h1{font-size:20px}input,button{box-sizing:border-box;width:100%;padding:12px;margin-top:12px;border-radius:7px;border:1px solid #3b526b;background:#1a2b40;color:inherit;font:inherit}button{background:#24645a;cursor:pointer}p{color:#9fb7ce;font-size:12px}#error{color:#ff9c9c}</style><main><h1>价值投资观察台</h1><p>输入授权手机号，同一浏览器记住30天</p><form id="form"><input id="phone" aria-label="授权手机号" inputmode="tel" autocomplete="tel" required maxlength="20" placeholder="授权手机号"><button>进入网页</button></form><p id="error" role="status"></p></main><script>document.getElementById("form").onsubmit=async e=>{e.preventDefault();const b=e.target.querySelector("button");b.disabled=true;try{const r=await fetch("/access/login",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({phone:document.getElementById("phone").value})});if(!r.ok)throw Error();location.reload();}catch{document.getElementById("error").textContent="号码未获授权，或暂时无法验证，请联系老刘。";}finally{b.disabled=false;}};</script></html>';
