@@ -14167,7 +14167,18 @@
         "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002463,day,,,320,qfq",
         "scope": "只读状态检查；未重算采用档位"
       },
-      "price": 85.95
+      "price": 85.95,
+      "longTermReview": {
+        "materialEvents": [
+          {
+            "title": "董事长提议回购股份（尚待审议）",
+            "officialDisclosureDate": "2026-11-07",
+            "checkedAt": "2026-11-07T08:35:24.000Z",
+            "source": "https://static.cninfo.com.cn/finalpage/2026-11-07/1225661967.PDF",
+            "summary": "公告事实：董事长于2026-11-06提议以集中竞价方式回购5亿至10亿元，资金来源可为自有或自筹；回购价格上限为董事会审议决议前30个交易日均价的150%，用途待后续方案确定。目前只是提议，尚待董事会/股东会审议，未获批、未实施。研究判断：该提议不是已发生的现金支出、经营改善或买回股份事实，不改变三季报中现金转化、营运资金占用、扩产回报和估值仍待核验的结论；不据此判定逻辑失效或恢复，也不构成交易许可。"
+          }
+        ]
+      }
     }
   ],
   "us": [
