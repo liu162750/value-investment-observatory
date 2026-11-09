@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {publicPortfolio} from '../worker/dashboard.js';
 
-const account={holdingsAsOf:'2026-11-04 14:00',cash:100,positions:[
+const account={holdingsAsOf:'2026-11-04 14:00',holdingsDateVerified:true,cash:100,positions:[
  {symbol:'sh600312',shares:1,costPrice:10},{symbol:'sh601138',shares:1,costPrice:20},
  {symbol:'sz002463',shares:1,costPrice:30},{symbol:'sz002156',shares:1,costPrice:40}
 ]};
@@ -16,9 +16,11 @@ assert(!JSON.stringify(result).includes('shares')&&!JSON.stringify(result).inclu
 assert.equal(publicPortfolio(stocks,{...account,positions:account.positions.map(({costPrice,...p})=>p)}).floatingPnlRatio,null);
 const aggregate=publicPortfolio(stocks,{...account,costBasisTotal:120,positions:account.positions.map(({costPrice,...p})=>p)});
 assert(Math.abs(aggregate.floatingPnlRatio-20/120)<1e-12);
-assert.equal(aggregate.holdingsDateVerified,false);
+assert.equal(aggregate.holdingsDateVerified,true);
+const unverified=publicPortfolio(stocks,{...account,holdingsDateVerified:false});
+assert.equal(unverified.status,'pending');assert(!('positions' in unverified)&&!('investedWeight' in unverified)&&!('floatingPnlRatio' in unverified));
 assert(!JSON.stringify(aggregate).includes('costBasisTotal'));
 const today=publicPortfolio(stocks,{...account,dayReference:{date:'2026-11-04',previousAssets:200}});
 assert(Math.abs(today.dayPnlRatio-.2)<1e-12);
 assert.equal(publicPortfolio(stocks,{...account,dayReference:{date:'2026-11-03',previousAssets:200}}).dayPnlRatio,null);
-console.log('PASS: public portfolio exposes ratios only and does not invent P/L without costs');
+console.log('PASS: only verified portfolio dates expose ratios; private amounts stay hidden');
