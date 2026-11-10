@@ -117,7 +117,10 @@ function renderPortfolioCharts(portfolio,stocks=[],weekly={},monthly={},stale=fa
  const currentWeight=verified&&Number.isFinite(portfolio.investedWeight)?weightPct(portfolio.investedWeight):'待核验';
  $('portfolio-target').innerHTML='<div class="portfolio-target"><div class="target-numbers"><div><span>底仓合计</span><strong>5.9层</strong></div><div><span>T1满足后目标总仓</span><strong class="gold">7.5层 <small>75%</small></strong></div><div><span>当前账户比例</span><strong>'+currentWeight+'</strong></div></div><p>账户上限：T1后≤85%，T2后≤100%。目标总仓与周线参考上限分别显示。</p><p>周线'+weeklyLabel+' · 参考上限 '+weeklyCap+'；月线闸门'+monthlyLabel+(monthly.lastCompleteMonth?' · 数据截至 '+esc(monthly.lastCompleteMonth):'')+'。市场条件不替代账户、企稳和其他执行核验。</p><p>目标不按个股拆分；底仓以上不代表应减仓。</p></div>';
  $('alloc-bar').innerHTML='<div class="empty">'+(verified?'当前股票总比例 '+currentWeight:'当前账户比例待核验')+'</div>';
- $('allocation-rows').innerHTML='';
+ $('allocation-rows').innerHTML=verified?(portfolio.positions||[])
+  .filter(position=>Number.isFinite(position.weight))
+  .map(position=>'<div class="portfolio-legend-row"><span>'+esc(position.name||position.symbol)+'</span><strong>'+weightPct(position.weight)+'</strong></div>')
+  .join(''):'';
  $('reduction-chart').innerHTML='<div class="empty">不按个股拆分账户目标。</div>';
 }
 function render(d){
