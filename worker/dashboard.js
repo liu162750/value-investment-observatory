@@ -167,6 +167,7 @@ function completedDailyRows(rows,now=Date.now(),closeMinute=905){
  return rows.filter(r=>r.date<date||(r.date===date&&hour*60+minute>=closeMinute));
 }
 const historyCache=new Map(),historyPending=new Map();
+const capitalFlowCache=new Map();
 function evaluateMarketGate(months,rows,quote,now=Date.now()){
  const today=new Date(now).toLocaleDateString('sv-SE',{timeZone:'Asia/Shanghai'}),month=today.slice(0,7);
  const checkedAt=new Date(now).toISOString(),source='https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,month,,,35,qfq';
@@ -222,6 +223,25 @@ async function history(symbol){
   const rows=completedDailyRows(saved||[]);console.warn('History source check:',JSON.stringify({symbol,error:error?.message,count:rows.length,date:rows.at(-1)?.date||null,fallback:rows.length>0}));
   if(!rows.length)throw error;rows.historyStale=true;return rows;
  }} )();historyPending.set(symbol,task);try{return await task;}finally{historyPending.delete(symbol);}
+}
+export function evaluateCapitalFlow(klines,expectedDates,checkedAt=new Date().toISOString()){
+ const source='https://push2his.eastmoney.com/api/qt/stock/fflow/daykline/get';
+ const pending=reason=>({status:'pending',reason,provider:'东方财富资金流估算',source,checkedAt});
+ if(!Array.isArray(expectedDates)||expectedDates.length!==3||new Set(expectedDates).size!==3)return pending('最近3个完整交易日行情日期不齐');
+ if(!Array.isArray(klines))return pending('资金流日线未返回');
+ const byDate=new Map();
+ for(const line of klines){const p=String(line).split(','),date=p[0],main=Number(p[1]);if(/^\d{4}-\d{2}-\d{2}$/.test(date)&&Number.isFinite(main))byDate.set(date,main);}
+ if(expectedDates.some(date=>!byDate.has(date)))return pending('资金流与最近3个完整交易日未对齐');
+ const rows=expectedDates.map(date=>({date,net:byDate.get(date)}));
+ return {status:'ok',provider:'东方财富资金流估算',classification:'按大单/超大单分类估算，非真实机构账户净流量',source,checkedAt,asOf:rows.at(-1).date,window:3,positiveDays:rows.filter(r=>r.net>0).length,consecutivePositive:rows.every(r=>r.net>0),rows};
+}
+async function capitalFlow(symbol,expectedDates=[]){
+ expectedDates=Array.isArray(expectedDates)?expectedDates:[];
+ const cacheKey=symbol+':'+expectedDates.join(',');const cached=capitalFlowCache.get(cacheKey);
+ if(cached&&Date.now()-cached.checked<60000)return cached.value;
+ const market=symbol.startsWith('sh')?'1':'0',code=symbol.slice(2),url='https://push2his.eastmoney.com/api/qt/stock/fflow/daykline/get?secid='+market+'.'+code+'&fields1=f1,f2,f3,f7&fields2=f51,f52,f53,f54,f55,f56,f57,f58&klt=101&lmt=10';
+ try{const d=await get(url),value=evaluateCapitalFlow(d.data?.klines,expectedDates,new Date().toISOString());capitalFlowCache.set(cacheKey,{checked:Date.now(),value});return value;}
+ catch{return {status:'pending',reason:'资金流来源暂不可用',provider:'东方财富资金流估算',source:url,checkedAt:new Date().toISOString()};}
 }
 function technical(rows){if(!rows?.length)return null;const mean=n=>rows.slice(-n).reduce((sum,r)=>sum+r.close,0)/n,done=rows.slice(-21);const atr20=done.length===21?done.slice(1).reduce((sum,b,i)=>sum+Math.max(b.high-b.low,Math.abs(b.high-done[i].close),Math.abs(b.low-done[i].close)),0)/20:null;const close=rows.at(-1).close,ma20=mean(20),ma60=mean(60);return {date:rows.at(-1).date,count:rows.length,ma20,ma60,atr20,state:close>=ma20&&close>=ma60?'????':close<ma20&&close<ma60?'??':'????',volumeRatio:rows.at(-1).volume/(rows.slice(-21,-1).reduce((sum,r)=>sum+r.volume,0)/20)};}
 // Daily refreshes display the last adopted review; they do not create new tiers.
@@ -431,8 +451,10 @@ async function fundamentalTrend(symbol){
 }
 async function dashboardNew(){
  const data=await dashboard();
+ const flows=await Promise.all(data.stocks.map(s=>capitalFlow(s.symbol,s.rows?.slice(-3).map(r=>r.date))));
  const financial=await Promise.all(data.stocks.map(s=>fundamentalTrend(s.symbol)));
  for(const [i,s] of data.stocks.entries()){
+  s.capitalFlow=flows[i];
   s.fundamentalReview=financial[i];
   try{
    if(s.historyStale)throw Error('日线来源未更新');
