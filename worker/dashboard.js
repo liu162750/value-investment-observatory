@@ -449,10 +449,32 @@ async function fundamentalTrend(symbol){
   financialTrendCache.set(symbol,{value,checked:Date.now(),ttl:value.status==='pending'?600000:3600000});return value;
  }catch(error){return {status:'pending',reason:'财务汇总来源暂不可用',checkedAt:new Date().toISOString()};}
 }
+let dashboardPending=null;
+let dashboardResult=null;
+let dashboardResultTime=0;
 async function dashboardNew(){
+ if(dashboardResult&&Date.now()-dashboardResultTime<10000)return structuredClone(dashboardResult);
+ if(!dashboardPending){
+  dashboardPending=loadDashboardNew().then(data=>{
+   dashboardResult=structuredClone(data);
+   dashboardResultTime=Date.now();
+   return data;
+  }).finally(()=>{dashboardPending=null;});
+ }
+ let timer;
+ try{
+  return structuredClone(await Promise.race([
+   dashboardPending,
+   new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('数据来源响应超过20秒，保留最近有效数据')),20000);})
+  ]));
+ }finally{clearTimeout(timer);}
+}
+async function loadDashboardNew(){
  const data=await dashboard();
- const flows=await Promise.all(data.stocks.map(s=>capitalFlow(s.symbol,s.rows?.slice(-3).map(r=>r.date))));
- const financial=await Promise.all(data.stocks.map(s=>fundamentalTrend(s.symbol)));
+ const [flows,financial]=await Promise.all([
+  Promise.all(data.stocks.map(s=>capitalFlow(s.symbol,s.rows?.slice(-3).map(r=>r.date)))),
+  Promise.all(data.stocks.map(s=>fundamentalTrend(s.symbol)))
+ ]);
  for(const [i,s] of data.stocks.entries()){
   s.capitalFlow=flows[i];
   s.fundamentalReview=financial[i];
