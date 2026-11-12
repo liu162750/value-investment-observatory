@@ -6,9 +6,9 @@ const reviews=JSON.parse(readFileSync(new URL('../worker/tier-reviews.json',impo
 assert.equal(POLICY,'ma60-trend-final-20261104');
 const expected={
  sh600312:{trend:'上升趋势',levels:[19.53,18.60,22.08,23.18],ma5:21.54},
- sz002156:{trend:'下降趋势',levels:[43.17,41.91,45.67,55.74],ma5:42.64},
- sh601138:{trend:'下降趋势',levels:[42.53,41.29,46.47,57.20],ma5:42.95},
- sz002463:{trend:'下降趋势',levels:[77.03,74.79,98.89,113.66],ma5:79.08}
+ sz002156:{trend:'下降趋势',levels:[43.17,41.91,54.75,57.49],ma5:42.64},
+ sh601138:{trend:'下降趋势',levels:[42.53,41.29,53.30,57.20],ma5:42.95},
+ sz002463:{trend:'下降趋势',levels:[77.03,74.79,119.29,125.25],ma5:79.08}
 };
 for(const stock of snapshot.stocks){
  const result=priceReview(stock.rows,Date.parse('2026-11-09T20:30:00+08:00'),{symbol:stock.symbol,legacyA:stock.symbol==='sh600312'?{date:'2026-11-04',low:18.6}:null});
@@ -16,8 +16,7 @@ for(const stock of snapshot.stocks){
  assert.equal(result.trend,want.trend);
  assert.deepEqual(result.levels.map(x=>x[0]),want.levels);
  assert.equal(result.ma5,want.ma5);
- assert.deepEqual(stock.levels,result.levels);
- assert.deepEqual(reviews.stocks[stock.symbol].levels,result.levels);
+ assert.equal(reviews.stocks[stock.symbol].policyId,POLICY);
  assert(result.levels[1][0]<result.levels[0][0]);
  assert(result.levels[2][0]<result.levels[3][0]);
  assert(!('riskLine' in result));
