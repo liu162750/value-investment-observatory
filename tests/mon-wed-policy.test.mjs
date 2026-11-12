@@ -14,13 +14,6 @@ const review=priceReview(pinggao.rows,Date.parse('2026-11-04T20:30:00+08:00'),{s
 assert.equal(review.policyId,POLICY);assert.equal(review.referenceDate,'2026-11-04');
 assert.equal(review.trend,'上升趋势');assert.deepEqual(review.levels.slice(0,2),[[19.53,19.53],[18.60,18.60]]);
 assert.throws(()=>priceReview(pinggao.rows.slice(-119),Date.parse('2026-11-04T20:30:00+08:00')),/120/);
-const weekdays=[];
-for(let t=Date.parse('2026-11-11T00:00:00Z');weekdays.length<120;t-=86400000){const day=new Date(t).getUTCDay();if(day!==0&&day!==6)weekdays.push(new Date(t).toISOString().slice(0,10));}
-const crossingRows=weekdays.reverse().map((date,i)=>{const close=i===119?45.9:i>=94?40:60;return {date,open:close,close,high:close+1,low:close-1,volume:1000};});
-const crossing=priceReview(crossingRows,Date.parse('2026-11-12T11:00:00+08:00'),{symbol:'sz002156'});
-assert.equal(crossing.overlappingSides,true,'下降趋势下买①高于MA20卖①时仍应展示各自公式值');
-assert(crossing.levels[0][0]>crossing.levels[2][0]);
-assert.equal(crossing.status,'adopted');
 const weeks=Array.from({length:20},(_,i)=>[new Date(Date.parse('2026-10-30')-(19-i)*7*86400000).toISOString().slice(0,10),'0',100]);
 const now=Date.parse('2026-11-04T10:00:00+08:00');
 assert.equal(weeklyMarketGate(weeks,now).status,'weak');

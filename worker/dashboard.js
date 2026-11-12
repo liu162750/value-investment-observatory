@@ -49,14 +49,13 @@ function priceReview(rows,now=Date.now(),options={}){
  const sell1=trend==='上升趋势'&&options.symbol==='sh600312'?high20:ma20;
  const sell2=trend==='上升趋势'&&options.symbol==='sh600312'?cents(sell1)*1.05:ma60;
  const levels=[buy1,buy2,sell1,sell2].map(value=>[cents(value),cents(value)]);
- if(levels.some(b=>b[0]<=0)||levels[1][0]>=levels[0][0]||levels[2][0]>=levels[3][0]||(trend==='上升趋势'&&levels[0][0]>=p))throw Error('同侧档位顺序不成立，停止展示');
- const overlappingSides=levels[0][0]>=levels[2][0];
+ if(levels.some(b=>b[0]<=0)||levels[1][0]>=levels[0][0]||levels[0][0]>=levels[2][0]||levels[2][0]>=levels[3][0]||(trend==='上升趋势'&&levels[0][0]>=p))throw Error('最终定稿四档顺序不成立，停止展示');
  const previousClose=bars.at(-2).close;
  const possibleLimitUp=options.symbol&&/^(sh60|sz00)/.test(options.symbol)&&p/previousClose-1>=.099;
  const nextComplete=daily.find(b=>b.date>last.date);
  const limitUpConfirmation=possibleLimitUp?(nextComplete?{status:nextComplete.close>=p*.97?'passed':'failed',date:nextComplete.date,close:nextComplete.close}: {status:'pending',date:null,close:null}):null;
  const latestClose=daily.at(-1).close,latestMA5=daily.slice(-5).reduce((sum,b)=>sum+b.close,0)/5;
- return {policyId:POLICY,asOf:new Date(now).toISOString(),dataDate:daily.at(-1).date,referenceDate:last.date,referencePrice:p,atr20:atr,trend,ma5:cents(ma5),ma20:cents(ma20),ma60:cents(ma60),overlappingSides,signalDate:daily.at(-1).date,signalClose:latestClose,signalMA5:cents(latestMA5),low60:cents(low60),lowAnchor:lowAnchor===null?null:cents(lowAnchor),anchorDate,high20:cents(high20),possibleLimitUp:Boolean(possibleLimitUp),limitUpConfirmation,levels,bands:levels.map((b,i)=>({low:b[0],high:b[1],note:i<2?trend==='上升趋势'?'确认前低计算':'近60日低点与复盘收盘计算':i===2?options.symbol==='sh600312'&&trend==='上升趋势'?'近20日最高价':'MA20':options.symbol==='sh600312'&&trend==='上升趋势'?'平高确认档':'MA60'})),status:'adopted',nextScheduled:nextReviewDay(now),source:'腾讯财经前复权日线',reason:'复盘收盘与MA60比较；下降趋势买①需完整收盘站上MA5，涨停次日复核；价格条件不等于成交或账户许可'};
+ return {policyId:POLICY,asOf:new Date(now).toISOString(),dataDate:daily.at(-1).date,referenceDate:last.date,referencePrice:p,atr20:atr,trend,ma5:cents(ma5),ma20:cents(ma20),ma60:cents(ma60),signalDate:daily.at(-1).date,signalClose:latestClose,signalMA5:cents(latestMA5),low60:cents(low60),lowAnchor:lowAnchor===null?null:cents(lowAnchor),anchorDate,high20:cents(high20),possibleLimitUp:Boolean(possibleLimitUp),limitUpConfirmation,levels,bands:levels.map((b,i)=>({low:b[0],high:b[1],note:i<2?trend==='上升趋势'?'确认前低计算':'近60日低点与复盘收盘计算':i===2?options.symbol==='sh600312'&&trend==='上升趋势'?'近20日最高价':'MA20':options.symbol==='sh600312'&&trend==='上升趋势'?'平高确认档':'MA60'})),status:'adopted',nextScheduled:nextReviewDay(now),source:'腾讯财经前复权日线',reason:'复盘收盘与MA60比较；下降趋势买①需完整收盘站上MA5，涨停次日复核；价格条件不等于成交或账户许可'};
 }
 function weeklyMarketGate(raw,now=Date.now()){
  const today=dateOf(now),local=new Date(now+8*3600000),weekday=local.getUTCDay();
