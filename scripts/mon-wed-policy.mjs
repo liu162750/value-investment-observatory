@@ -62,6 +62,6 @@ export function weeklyMarketGate(raw,now=Date.now()){
  const expected=new Date(Date.parse(monday+'T00:00:00Z')-(complete?0:7)*dayMs).toISOString().slice(0,10);
  if(rows.at(-1)[0]<expected)return pending('最新完整周线未齐');
  const close=Number(rows.at(-1)[2]),ma10=rows.slice(-10).reduce((s,r)=>s+Number(r[2]),0)/10,ma20=rows.reduce((s,r)=>s+Number(r[2]),0)/20;
- const status=close>ma10?'strong':close>ma20?'improving':'weak';
+ const status=close>Math.max(ma10,ma20)?'strong':close>Math.min(ma10,ma20)?'improving':'weak';
  return {policyId:'weekly-ma10-ma20-three-state-v1',status,passed:status!=='weak',asOf:today,checkedAt:new Date(now).toISOString(),dataDate:rows.at(-1)[0],indexClose:close,ma10,ma20,maxTotalWeight:{strong:.85,improving:.70,weak:.60}[status],maxSingleWeight:{strong:.25,improving:.21,weak:.18}[status],allowedBuyTiers:status==='weak'?[0]:[0,1],source:'https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,week,,,40,qfq'};
 }

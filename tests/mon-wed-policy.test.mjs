@@ -23,6 +23,8 @@ assert.deepEqual(weeklyMarketGate(improving,now).allowedBuyTiers,[0,1]);
 const between=weeks.map((r,i)=>[r[0],r[1],i<10?90:100]);between.at(-1)[2]=99;
 assert.equal(weeklyMarketGate(between,now).status,'improving');
 assert.deepEqual(weeklyMarketGate(between,now).allowedBuyTiers,[0,1]);
+const downCross=weeks.map((r,i)=>[r[0],r[1],i<10?110:90]);downCross.at(-1)[2]=98;
+assert.equal(weeklyMarketGate(downCross,now).status,'improving','MA10低于MA20时，两线之间仍应为转强');
 assert.deepEqual(weeklyMarketGate(weeks,now).allowedBuyTiers,[0]);
 assert.equal(weeklyMarketGate(weeks.slice(1),now).status,'pending');
 const backend=readFileSync(new URL('../worker/dashboard.js',import.meta.url),'utf8');
