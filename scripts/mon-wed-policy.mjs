@@ -1,4 +1,4 @@
-export const POLICY='swing-atr-two-tier-20261112';
+export const POLICY='swing-atr-four-tier-20261112';
 const dayMs=86400000;
 const dateOf=now=>new Date(now+8*3600000).toISOString().slice(0,10);
 const cents=n=>Math.round((n+Number.EPSILON)*100)/100;
@@ -40,8 +40,8 @@ export function priceReview(rows,now=Date.now(),options={}){
  const buy1=trend==='上升趋势'?low20:Math.max(low5,p-.5*atr);
  const buy2=trend==='上升趋势'?low20-atr:Math.max(low10,p-1.5*atr);
  const high20=Math.max(...bars.slice(-20).map(b=>b.high));
- const sell1=trend==='上升趋势'&&options.symbol==='sh600312'?high20:Math.max(ma20,high20);
- const sell2=trend==='上升趋势'&&options.symbol==='sh600312'?cents(sell1)*1.05:Math.max(ma60,cents(sell1)*1.05);
+ const sell1=trend==='上升趋势'?high20:Math.max(cents(buy1)+2*atr,p+atr);
+ const sell2=trend==='上升趋势'?Math.max(high20+atr,high20*1.05):Math.max(cents(buy2)+4*atr,sell1+1.5*atr);
  const levels=[buy1,buy2,sell1,sell2].map(value=>[cents(value),cents(value)]);
  if(levels.some(b=>b[0]<=0)||levels[1][0]>=levels[0][0]||levels[0][0]>=levels[2][0]||levels[2][0]>=levels[3][0]||(trend==='上升趋势'&&levels[0][0]>=p))throw Error('波段四档顺序不成立，停止展示');
  if(levels[0][0]-levels[1][0]<cents(.8*atr))throw Error('两买档距离不足0.8 ATR20，待复核');
@@ -50,7 +50,7 @@ export function priceReview(rows,now=Date.now(),options={}){
  const nextComplete=daily.find(b=>b.date>last.date);
  const limitUpConfirmation=possibleLimitUp?(nextComplete?{status:nextComplete.close>=p*.97?'passed':'failed',date:nextComplete.date,close:nextComplete.close}: {status:'pending',date:null,close:null}):null;
  const latestClose=daily.at(-1).close,latestMA5=daily.slice(-5).reduce((sum,b)=>sum+b.close,0)/5;
- return {policyId:POLICY,asOf:new Date(now).toISOString(),dataDate:daily.at(-1).date,referenceDate:last.date,referencePrice:p,atr20:atr,trend,ma5:cents(ma5),ma20:cents(ma20),ma60:cents(ma60),signalDate:daily.at(-1).date,signalClose:latestClose,signalMA5:cents(latestMA5),low5:cents(low5),low10:cents(low10),low20:cents(low20),low60:cents(low60),high20:cents(high20),possibleLimitUp:Boolean(possibleLimitUp),limitUpConfirmation,levels,bands:levels.map((b,i)=>({low:b[0],high:b[1],note:i===0?trend==='上升趋势'?'近20日低点':'近5日低点与复盘收盘减0.5ATR取较高':i===1?trend==='上升趋势'?'近20日低点减1ATR':'近10日低点与复盘收盘减1.5ATR取较高':i===2?'MA20与近20日高点取较高':'MA60与卖①上方5%取较高'})),status:'adopted',nextScheduled:nextReviewDay(now),source:'腾讯财经前复权日线',reason:'复盘收盘与MA60比较；技术触价、企稳、账户许可和实际成交分别核验'};
+ return {policyId:POLICY,asOf:new Date(now).toISOString(),dataDate:daily.at(-1).date,referenceDate:last.date,referencePrice:p,atr20:atr,trend,ma5:cents(ma5),ma20:cents(ma20),ma60:cents(ma60),signalDate:daily.at(-1).date,signalClose:latestClose,signalMA5:cents(latestMA5),low5:cents(low5),low10:cents(low10),low20:cents(low20),low60:cents(low60),high20:cents(high20),possibleLimitUp:Boolean(possibleLimitUp),limitUpConfirmation,levels,bands:levels.map((b,i)=>({low:b[0],high:b[1],note:i===0?trend==='上升趋势'?'近20日低点':'近5日低点与复盘收盘减0.5ATR取较高':i===1?trend==='上升趋势'?'近20日低点减1ATR':'近10日低点与复盘收盘减1.5ATR取较高':i===2?trend==='上升趋势'?'近20日高点':'买①加2ATR与复盘收盘加1ATR取较高':trend==='上升趋势'?'近20日高点加1ATR与上浮5%取较高':'买②加4ATR与卖①加1.5ATR取较高'})),status:'adopted',nextScheduled:nextReviewDay(now),source:'腾讯财经前复权日线',reason:'复盘收盘与MA60比较；技术触价、转弱、账户许可和实际成交分别核验'};
 }
 export function weeklyMarketGate(raw,now=Date.now()){
  const today=dateOf(now),local=new Date(now+8*3600000),weekday=local.getUTCDay();

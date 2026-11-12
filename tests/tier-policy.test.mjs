@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {priceReview,POLICY} from '../scripts/mon-wed-policy.mjs';
 const snapshot=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.meta.url),'utf8'));
-assert.equal(POLICY,'swing-atr-two-tier-20261112');
+assert.equal(POLICY,'swing-atr-four-tier-20261112');
 const recent={
  sh600312:[[21.25,21.23,21.35,20.95],[21.23,20.87,21.26,20.8]],
  sz002156:[[46.38,44.5,46.98,44.34],[44.48,45.9,46.15,44.11]],
@@ -11,9 +11,9 @@ const recent={
 };
 const expected={
  sh600312:{trend:'上升趋势',levels:[19.47,18.67,22.08,23.18],ma5:21.33},
- sz002156:{trend:'下降趋势',levels:[44.44,41.52,51.16,55.16],ma5:44.56},
- sh601138:{trend:'下降趋势',levels:[44.20,41.48,50.48,56.42],ma5:43.26},
- sz002463:{trend:'下降趋势',levels:[85.59,77.91,118.89,124.83],ma5:80.41}
+ sz002156:{trend:'下降趋势',levels:[44.44,41.52,50.28,54.65],ma5:44.56},
+ sh601138:{trend:'下降趋势',levels:[44.20,41.48,49.64,53.72],ma5:43.26},
+ sz002463:{trend:'下降趋势',levels:[85.59,77.91,100.95,112.48],ma5:80.41}
 };
 for(const stock of snapshot.stocks){
  const rows=[...stock.rows,...recent[stock.symbol].map((v,i)=>({date:'2026-11-'+(10+i),open:v[0],close:v[1],high:v[2],low:v[3]}))];
