@@ -482,7 +482,7 @@ async function loadDashboardNew(){
    if(data.market[0]?.historyStale!==true&&data.market[0]?.rows?.at(-1)?.date===reviewDay()&&review.referenceDate!==reviewDay())throw Error('复核日个股日线尚未更新');
    s.levelReview={...review,marketGate:data.marketGate};s.levels=review.levels;s.levelDate=review.referenceDate;
    s.levelType='上升趋势回踩 / 下降趋势收盘企稳 · 周一/周三复核 · 触价不等于成交';
-   s.sellReview={asOf:review.asOf,dataDate:review.referenceDate,policy:review.policyId,levels:review.levels.slice(2),status:review.status};
+   s.sellReview={asOf:review.asOf,dataDate:review.referenceDate,policy:review.policyId,levels:review.levels.slice(2),status:'pending',reason:'新卖档尚未与用户共同确认；旧公式仅作观察'};
    s.sellReference={price:review.referencePrice,asOf:review.referenceDate,source:'最近复核日收盘基准，非持仓成本'};
    s.distances=review.levels.map(v=>distance(s.quote.price,v));
   }catch(error){
