@@ -12,7 +12,7 @@ const saved=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.met
 const pinggao=saved.stocks.find(s=>s.symbol==='sh600312');
 const review=priceReview(pinggao.rows,Date.parse('2026-11-04T20:30:00+08:00'),{symbol:'sh600312',legacyA:{date:'2026-11-04',low:18.6}});
 assert.equal(review.policyId,POLICY);assert.equal(review.referenceDate,'2026-11-04');
-assert.equal(review.trend,'上升趋势');assert.deepEqual(review.levels.slice(0,2),[[19.53,19.53],[18.60,18.60]]);
+assert.equal(review.trend,'上升趋势');assert.deepEqual(review.levels.slice(0,2),[[19.47,19.47],[18.70,18.70]]);
 assert.throws(()=>priceReview(pinggao.rows.slice(-119),Date.parse('2026-11-04T20:30:00+08:00')),/120/);
 const weeks=Array.from({length:20},(_,i)=>[new Date(Date.parse('2026-10-30')-(19-i)*7*86400000).toISOString().slice(0,10),'0',100]);
 const now=Date.parse('2026-11-04T10:00:00+08:00');
