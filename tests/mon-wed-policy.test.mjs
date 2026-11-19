@@ -35,3 +35,7 @@ assert.equal(screen(finance).marginDecline,true,'毛利率下降幅度应为较�
 assert.equal(screen(finance.slice(1)).status,'pending');
 assert.equal(screen(finance.map((r,i)=>i===1?{...r,QDATE:'2025Q4'}:r)).status,'pending');
 console.log('PASS: final Mon/Wed review, Pinggao confirmed starting levels and completed-week gate');
+
+// A tier validation failure must preserve independently valid market metadata.
+const compressed=Array.from({length:150},(_,i)=>({date:new Date(Date.parse('2026-11-18')-(149-i)*86400000).toISOString().slice(0,10),open:i<140?120:90,close:i<140?120:90,high:i<140?125:100,low:i<140?115:i<145?88:89}));
+assert.throws(()=>priceReview(compressed,Date.parse('2026-11-19T09:30:00+08:00')),(error)=>{assert.match(error.message,/0.8 ATR20/);assert.equal(error.reviewContext.referenceDate,'2026-11-18');assert.equal(error.reviewContext.dataDate,'2026-11-18');assert(Number.isFinite(error.reviewContext.ma60));assert.equal(error.reviewContext.candidateLevels.length,4);assert(error.reviewContext.buyGap<error.reviewContext.minimumBuyGap);return true;});

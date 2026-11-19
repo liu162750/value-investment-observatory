@@ -43,8 +43,10 @@ function priceReview(rows,now=Date.now(),options={}){
  const sell1=trend==='上升趋势'?high20:Math.max(cents(buy1)+2*atr,p+atr);
  const sell2=trend==='上升趋势'?Math.max(high20+atr,high20*1.05):Math.max(cents(buy2)+4*atr,sell1+1.5*atr);
  const levels=[buy1,buy2,sell1,sell2].map(value=>[cents(value),cents(value)]);
- if(levels.some(b=>b[0]<=0)||levels[1][0]>=levels[0][0]||levels[0][0]>=levels[2][0]||levels[2][0]>=levels[3][0]||(trend==='上升趋势'&&levels[0][0]>=p))throw Error('波段四档顺序不成立，停止展示');
- if(levels[0][0]-levels[1][0]<cents(.8*atr))throw Error('两买档距离不足0.8 ATR20，待复核');
+ const context={policyId:POLICY,asOf:new Date(now).toISOString(),dataDate:daily.at(-1).date,referenceDate:last.date,referencePrice:p,atr20:atr,trend,ma5:cents(ma5),ma20:cents(ma20),ma60:cents(ma60),nextScheduled:nextReviewDay(now),source:'腾讯财经前复权日线',candidateLevels:levels,buyGap:cents(buy1)-cents(buy2),minimumBuyGap:cents(.8*atr)};
+ const reject=message=>{const error=new Error(message);error.reviewContext=context;throw error;};
+ if(levels.some(b=>b[0]<=0)||levels[1][0]>=levels[0][0]||levels[0][0]>=levels[2][0]||levels[2][0]>=levels[3][0]||(trend==='上升趋势'&&levels[0][0]>=p))reject('波段四档顺序不成立，停止展示');
+ if(levels[0][0]-levels[1][0]<cents(.8*atr))reject('两买档距离不足0.8 ATR20，待复核');
  const previousClose=bars.at(-2).close;
  const possibleLimitUp=options.symbol&&/^(sh60|sz00)/.test(options.symbol)&&p/previousClose-1>=.099;
  const nextComplete=daily.find(b=>b.date>last.date);
@@ -486,7 +488,8 @@ async function loadDashboardNew(){
    s.sellReference={price:review.referencePrice,asOf:review.referenceDate,source:'最近复核日收盘基准，非持仓成本'};
    s.distances=review.levels.map(v=>distance(s.quote.price,v));
   }catch(error){
-   s.levelReview={policyId:POLICY,status:'pending',reason:error.message,marketGate:data.marketGate};
+   s.levelReview={...error.reviewContext,policyId:POLICY,status:'pending',reason:error.message,marketGate:data.marketGate};
+   s.sellReview={status:'pending',levels:[null,null]};
    s.levels=[null,null,null,null];s.distances=[null,null,null,null];s.levelDate='待核验';
    s.levelType='新规则档位待核验，旧档停止使用';s.sellReference=null;
   }
