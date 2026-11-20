@@ -3,7 +3,7 @@ import {readFileSync} from 'node:fs';
 import {stocks,completedDailyRows,technical,swingCandidates,parseGold} from '../worker/dashboard.js';
 const fixture=JSON.parse(readFileSync(new URL('./fixtures/daily-audit.json',import.meta.url),'utf8'));
 const at=time=>Date.parse('2026-10-08T'+time+'+08:00');
-for(const stock of stocks){
+for(const stock of stocks.filter(s=>s.symbol!=='sz002371')){
  const rows=fixture.stocks[stock.symbol].map(r=>({date:r[0],open:+r[1],close:+r[2],high:+r[3],low:+r[4],volume:+r[5]}));
  for(const time of ['00:01:00','09:50:00','12:00:00','15:04:59']){
   const done=completedDailyRows(rows,at(time));
@@ -34,7 +34,9 @@ console.log('PASS: all four stocks, baseline buys, all tiers, intraday isolation
 
 assert(readFileSync(new URL('../worker/dashboard.js',import.meta.url),'utf8').includes('...(s.sellReview?.levels||'),'Dashboard must use confirmed buys');
 
-for(const stock of stocks){const saved=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.meta.url),'utf8')).stocks.find(s=>s.symbol===stock.symbol);assert.equal(stock.levelReview?.policyId,'ma60-trend-final-20261104');assert.deepEqual(saved.levels,stock.levels);assert.deepEqual(saved.sellReview.levels,stock.sellReview.levels,'Seed and fetched levels must share one saved review');assert(stock.levels[1][0]<stock.levels[0][0]);assert(stock.levels[0][0]<stock.levels[2][0]);assert(stock.levels[2][0]<stock.levels[3][0]);}
+for(const stock of stocks.filter(s=>s.symbol!=='sz002371')){const saved=JSON.parse(readFileSync(new URL('../worker/snapshot.json',import.meta.url),'utf8')).stocks.find(s=>s.symbol===stock.symbol);assert.equal(stock.levelReview?.policyId,'ma60-trend-final-20261104');assert.deepEqual(saved.levels,stock.levels);assert.deepEqual(saved.sellReview.levels,stock.sellReview.levels,'Seed and fetched levels must share one saved review');assert(stock.levels[1][0]<stock.levels[0][0]);assert(stock.levels[0][0]<stock.levels[2][0]);assert(stock.levels[2][0]<stock.levels[3][0]);}
 
-for(const stock of stocks){assert.equal(stock.levelReview?.dataDate,'2026-11-09');assert.match(stock.levelReview?.nextScheduled||'',/^\d{4}-\d{2}-\d{2} 16:30$/,'Next review must be explicitly scheduled at 16:30');}
+for(const stock of stocks.filter(s=>s.symbol!=='sz002371')){assert.equal(stock.levelReview?.dataDate,'2026-11-09');assert.match(stock.levelReview?.nextScheduled||'',/^\d{4}-\d{2}-\d{2} 16:30$/,'Next review must be explicitly scheduled at 16:30');}
 
+
+assert.deepEqual(stocks.find(s=>s.symbol==='sz002371').levels,[null,null,null,null]);

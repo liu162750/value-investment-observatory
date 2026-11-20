@@ -43,7 +43,7 @@ for(const patch of overrides){
 const laoliuSnapshot=process.env.PUBLIC_LAOLIU_SNAPSHOT_JSON?JSON.parse(process.env.PUBLIC_LAOLIU_SNAPSHOT_JSON):null;
 if(laoliuSnapshot){
  const account=accounts.find(a=>a.id==='laoliu');
- if(!account||!Number.isFinite(laoliuSnapshot.cash)||laoliuSnapshot.cash<0||!Number.isFinite(laoliuSnapshot.costBasisTotal)||laoliuSnapshot.costBasisTotal<=0||!Array.isArray(laoliuSnapshot.positions)||laoliuSnapshot.positions.length!==4||laoliuSnapshot.positions.some(p=>!p.symbol||!Number.isInteger(p.shares)||p.shares<0))throw new Error('Invalid Lao Liu snapshot configuration');
+ if(!account||!Number.isFinite(laoliuSnapshot.cash)||laoliuSnapshot.cash<0||!Number.isFinite(laoliuSnapshot.costBasisTotal)||laoliuSnapshot.costBasisTotal<=0||!Array.isArray(laoliuSnapshot.positions)||!laoliuSnapshot.positions.length||laoliuSnapshot.positions.some(p=>!p.symbol||!Number.isInteger(p.shares)||p.shares<0))throw new Error('Invalid Lao Liu snapshot configuration');
  Object.assign(account,laoliuSnapshot,{allocationConfirmed:false,stageBudgets:{},sellableShares:{}});
  const dayReference=process.env.PUBLIC_LAOLIU_DAY_REFERENCE_JSON?JSON.parse(process.env.PUBLIC_LAOLIU_DAY_REFERENCE_JSON):null;
  if(dayReference&&/^\d{4}-\d{2}-\d{2}$/.test(dayReference.date)&&Number.isFinite(dayReference.previousAssets)&&dayReference.previousAssets>0)account.dayReference=dayReference;
