@@ -539,6 +539,17 @@
           }
         ]
       }
+    },
+    "sz002371": {
+      "longTermReview": {
+        "status": "pending",
+        "shortReason": "设备需求与回款有经营证据，正常化盈利和估值待复核。",
+        "reason": "2026年前三季度收入同比增长15.26%，扣非净利润同比增长4.28%，经营现金流55.91亿元。继续跟踪订单、交付和回款。",
+        "source": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-10-30/9c7b26ce-8152-48ac-ace6-9b7d4e7ad0b9.PDF"
+      },
+      "replacementReview": {
+        "status": "pending"
+      }
     }
   },
   "lastEventCheck": {

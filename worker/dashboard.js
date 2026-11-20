@@ -424,7 +424,7 @@ async function earningsEvents(){
  const url='https://datacenter-web.eastmoney.com/api/data/v1/get?reportName=RPT_PUBLIC_BS_APPOIN&columns=ALL&pageSize=50&pageNumber=1&filter='+encodeURIComponent(filter);
  try{const data=await get(url);if(!data.success||!Array.isArray(data.result?.data))throw Error('预约数据不可用');
  const events=data.result.data.map(r=>{const stock=stocks.find(s=>s.symbol.slice(2)===r.SECURITY_CODE);const date=r.APPOINT_PUBLISH_DATE?.slice(0,10);return stock&&/^\d{4}-\d{2}-\d{2}$/.test(date)?{symbol:stock.symbol,name:stock.name,title:r.REPORT_TYPE_NAME+'预约披露',date,actualDate:r.ACTUAL_PUBLISH_DATE?.slice(0,10)||null,type:'earnings',source:'东方财富预约披露汇总',sourceUrl:'https://data.eastmoney.com/bbsj/'+period.slice(0,7).replace('-','')+'/yysj.html'}:null;}).filter(Boolean);
- if(events.length!==stocks.length)throw Error('四股预约数据不全');
+ if(new Set(events.map(e=>e.symbol)).size!==stocks.length)throw Error('观察股预约数据不全');
  appointmentCache={events:[...events,...(eventCalendar?.events||[]).filter(e=>e.type!=='earnings')],checkedAt:new Date().toISOString(),stale:false};appointmentChecked=Date.now();return appointmentCache;
  }catch{return {events:eventCalendar?.events||[],checkedAt:eventCalendar?.checkedAt||null,stale:true};}
 }

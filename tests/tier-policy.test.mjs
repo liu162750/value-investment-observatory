@@ -15,7 +15,7 @@ const expected={
  sh601138:{trend:'下降趋势',levels:[44.20,41.48,49.64,53.72],ma5:43.26},
  sz002463:{trend:'下降趋势',levels:[85.59,77.91,100.95,112.48],ma5:80.41}
 };
-for(const stock of snapshot.stocks){
+for(const stock of snapshot.stocks.filter(s=>recent[s.symbol])){
  const rows=[...stock.rows,...recent[stock.symbol].map((v,i)=>({date:'2026-11-'+(10+i),open:v[0],close:v[1],high:v[2],low:v[3]}))];
  const result=priceReview(rows,Date.parse('2026-11-12T12:00:00+08:00'),{symbol:stock.symbol});
  const want=expected[stock.symbol];assert(want);
